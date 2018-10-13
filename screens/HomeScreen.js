@@ -25,7 +25,7 @@ export default class HomeScreen extends React.Component {
         {/*<ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>*/}
             {/*<Text> this is Home Screen </Text>*/}
         {/*</ScrollView>*/}
-          <Text> this is Home Screen </Text>*
+          <Text> this is Home Screen </Text>
       </View>
     );
   }
