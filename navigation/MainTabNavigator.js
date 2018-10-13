@@ -1,60 +1,106 @@
+//react imports
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, StyleSheet, Image} from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
+//Components imports
+import { AddButton_ios } from '../components/AddButton_ios';
+import { AddButton_android } from '../components/AddButton_android';
 import TabBarIcon from '../components/TabBarIcon';
+
+//screen imports
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import MessageScreen from '../screens/MessageScreen';
+import AddAnnonceScreen from '../screens/AddAnnonceScreen';
+import ProfilScreen from '../screens/ProfilScreen';
+import MapScreen from '../screens/MapScreen';
+
+
+
+//Stack-Navigator creation with navigationOptions
 
 const HomeStack = createStackNavigator({
-  Home: HomeScreen,
+    Home: HomeScreen,
+
+
 });
 
 HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
+    tabBarIcon: ({ focused }) => (
+        <TabBarIcon
+            focused={focused}
+            name={Platform.OS === 'ios' ? `ios-home${focused ? '' : '-outline'}` : 'md-home'}
+        />
+    ),
 };
 
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
+const MessageStack = createStackNavigator({
+  Message: MessageScreen,
 });
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+MessageStack.navigationOptions = {
+  tabBarLabel: 'Message',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? `ios-link${focused ? '' : '-outline'}` : 'md-link'}
+      name={Platform.OS === 'ios' ? `ios-chatbubbles${focused ? '' : '-outline'}` : 'md-chatbubbles'}
     />
   ),
-};
+   };
 
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
+const AddAnnonceStack = createStackNavigator({
+  Plus: AddAnnonceScreen,
 });
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? `ios-options${focused ? '' : '-outline'}` : 'md-options'}
-    />
-  ),
+AddAnnonceStack.navigationOptions = {
+        tabBarIcon: ({focused}) => (
+            Platform.OS === 'ios' ? <AddButton_ios focused={focused}/> : <AddButton_android focused={focused} />
+        ),
+
 };
 
-export default createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
+const ProfilStack = createStackNavigator({
+    Profil: ProfilScreen,
+});
+
+ProfilStack.navigationOptions = {
+    tabBarIcon: ({ focused }) => (
+        <TabBarIcon
+            focused={focused}
+            name={Platform.OS === 'ios' ? `ios-person${focused ? '' : '-outline'}` : 'md-person'}
+        />
+    ),
+};
+
+const MapScreenStack = createStackNavigator({
+    Map: MapScreen,
+});
+
+MapScreenStack.navigationOptions = {
+    tabBarIcon: ({ focused }) => (
+        <TabBarIcon
+            focused={focused}
+            name={Platform.OS === 'ios' ? `ios-map${focused ? '' : '-outline'}` : 'md-map'}
+        />
+    ),
+};
+
+//Creation of Bottom tab navigator and push to it our Stack
+export default createBottomTabNavigator(
+    {
+        HomeStack,
+        MessageStack,
+        AddAnnonceStack,
+        MapScreenStack,
+        ProfilStack
+    },
+    {
+        tabBarOptions: {
+        showLabel:false,
+    },
+        style: {
+        alignItems: 'center',
+    },
+
 });
