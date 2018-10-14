@@ -13,12 +13,13 @@ export default class HomeScreen extends React.Component {
     };
 
 
-    constructor(props) {
+  constructor(props) {
         super(props);
         this.state = {
             query: "",
         };
     }
+
 
     getInput = (query) => {
         console.log(query);
