@@ -1,39 +1,35 @@
 import React from 'react';
 import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+    View,
+    StyleSheet,
+    Text
+} from "react-native";
+
+import Searchbar from "../components/SearchBar";
+
 export default class HomeScreen extends React.Component {
-  static navigationOptions = {
-      headerTitleStyle: {
-          textAlign:"center",
-          flex:1
-      },
-      title: 'Home',
-      headerStyle: {
-          elevation: 1, //remove shadow on Android
-          shadowOpacity: 0, //remove shadow on iOS
-      },
+    static navigationOptions = {
+        header: null,
+    };
 
-  };
 
-  render() {
-    return (
-      <View style={styles.container}>
-        {/*<ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>*/}
-            {/*<Text> this is Home Screen </Text>*/}
-        {/*</ScrollView>*/}
-          <Text> this is Home Screen </Text>*
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
+    constructor(props) {
+        super(props);
+        this.state = {
+            query: "",
+        };
     }
-});
+
+    getInput = (query) => {
+        console.log(query);
+        this.setState(state => ({ ...state, query: query || "" }));
+    }
+    render() {
+        return (
+            <View>
+            <Searchbar submitSearch={this.getInput}/>
+                <Text>{this.state.query}</Text>
+            </View>
+        );
+    }
+}

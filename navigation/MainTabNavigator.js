@@ -100,7 +100,9 @@ export default createBottomTabNavigator(
         showLabel:false,
     },
         style: {
-        alignItems: 'center',
+            alignItems: 'center',
+            borderTopWidth: 0,
+
     },
 
 });

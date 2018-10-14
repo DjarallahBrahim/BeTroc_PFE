@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { View} from "react-native";
 import Icon from '@expo/vector-icons/FontAwesome';
-import Colors from "../constants/Colors";
 
 const SIZE = 70;
 
