@@ -3,7 +3,8 @@ import {
     View,
     SafeAreaView,
     Platform,
- } from "react-native";
+    Text, StyleSheet
+} from "react-native";
 import { Icon } from 'react-native-elements'
 import { SearchBar } from 'react-native-elements'
 
@@ -36,22 +37,24 @@ export default class Searchbar extends React.Component {
 
     render() {
         return (
-            <SafeAreaView>
-                <View  style={{marginTop: Platform.OS === 'android' ? 30 : null,
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                        alignItems: 'center'}} >
+            <SafeAreaView style={styles.safeAreaw}>
+                <View  style={styles.container}>
+                    <View style={styles.viewIcon}>
                     <Icon
-                        iconStyle={{marginRight:8}}
                         size={24}
                         name='feedback'
                         color='#ef345f'
                         underlayColor={'#00000000'}
                         onPress={() => {}}
                     />
+                        {/*<Text style={styles.textIcon}>icon</Text>*/}
+                    </View>
                     <SearchBar
-                        containerStyle={{width:"80%"}}
+                        containerStyle={{width:"80%", height: 50, borderRadius: 10,}}
+                        inputContainerStyle={{height: '100%', }}
+                        inputStyle={{ fontSize: 11}}
                         lightTheme
+                        placeholder='Trouvez une annonce !'
                         searchIcon={<Icon
                             size={24}
                             name='done'
@@ -69,16 +72,41 @@ export default class Searchbar extends React.Component {
                         keyboardType="default"
                         returnKeyType="done"
                     />
-                    <Icon
-                        iconStyle={{marginLeft:8}}
-                        size={26}
-                        name='filter-list'
-                        color={'#ef345f'}
-                        underlayColor={'#00000000'}
-                        onPress={() => this.Onsubmit()}
-                    />
+                    <View style={styles.viewIcon}>
+                        <Icon
+                            iconStyle={{marginLeft:8}}
+                            size={26}
+                            name='filter-list'
+                            color={'#ef345f'}
+                            underlayColor={'#00000000'}
+                            onPress={() => this.Onsubmit()}
+                        />
+                        {/*<Text style={styles.textIcon}>icon</Text>*/}
+                    </View>
                 </View>
             </SafeAreaView>
         );
     }
 }
+const styles = StyleSheet.create({
+    container: {
+        marginTop: Platform.OS === 'android' ? 30 : 10,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    safeArea: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    viewIcon: {
+        flex:1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    textIcon: {
+        fontSize:9,
+        color: '#95a5a6'
+    },
+
+});

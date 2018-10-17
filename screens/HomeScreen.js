@@ -1,11 +1,13 @@
 import React from 'react';
 import {
     View,
-    StyleSheet,
-    Text
+    Text, StyleSheet
 } from "react-native";
 
 import Searchbar from "../components/SearchBar";
+import { Divider } from 'react-native-elements'
+import TabsBarView from "../components/TabsBarView";
+
 
 export default class HomeScreen extends React.Component {
     static navigationOptions = {
@@ -27,10 +29,20 @@ export default class HomeScreen extends React.Component {
     }
     render() {
         return (
-            <View>
-            <Searchbar submitSearch={this.getInput}/>
-                <Text>{this.state.query}</Text>
+            <View style={styles.container}>
+                <React.Fragment>
+                    <Searchbar submitSearch={this.getInput}/>
+                    <Divider style={{ backgroundColor: '#95a5a6', marginTop:2 }} />
+                </React.Fragment>
+
+                <TabsBarView/>
             </View>
         );
     }
 }
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+    }
+});
