@@ -6,8 +6,48 @@ import {
     View,
 } from 'react-native';
 import Tabs from './tabs';
+import CardList from "./CardList";
+import Categorie from "./Categorie";
 
 export default class TabsBarView extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            annonces: [
+                {
+                    title: 'Image Title',
+                    image: 'https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/6/image.jpeg'
+                },
+                {
+                    title: 'Image Title',
+                    image: 'https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/6/image.jpeg'
+                },
+                {
+                    title: 'Image Title',
+                    image: 'https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/6/image.jpeg'
+                }
+            ],
+            annonces2: [
+                {
+                    title: 'Image Title 2',
+                    image: 'https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg'
+                },
+                {
+                    title: 'Image Title 2',
+                    image: 'https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg'
+                },
+                {
+                    title: 'Image Title 2',
+                    image: 'https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg'
+                }
+            ]
+
+        }
+    }
+
+
+
+
 
     render() {
         return (
@@ -15,30 +55,24 @@ export default class TabsBarView extends React.Component {
                 <Tabs>
                     {/* First tab */}
                     <View title="Èchange" style={styles.content}>
-                        <Text style={styles.header}>
-                            Welcome to React Native
-                        </Text>
-                        <Text style={styles.text}>
-                            The best technology to build cross platform mobile apps with
-                        </Text>
+                        <ScrollView>
+                            <Categorie data={ this.state.annonces} />
+                            <Categorie data={ this.state.annonces} />
+                            <Categorie data={ this.state.annonces} />
+
+                        </ScrollView>
                     </View>
                     {/* Second tab */}
                     <View title="Demande" style={styles.content}>
-                        <Text style={styles.header}>
-                            Truly Native
-                        </Text>
-                        <Text style={styles.text}>
-                            Components you define will end up rendering as native platform widgets
-                        </Text>
+                        <ScrollView>
+                            <Categorie data={ this.state.annonces2}/>
+                        </ScrollView>
                     </View>
                     {/* Third tab */}
                     <View title="Don" style={styles.content}>
-                        <Text style={styles.header}>
-                            Ease of Learning
-                        </Text>
-                        <Text style={styles.text}>
-                            It’s much easier to read and write comparing to native platform’s code
-                        </Text>
+                        <ScrollView>
+                            <Categorie data={ this.state.annonces} />
+                        </ScrollView>
                     </View>
 
                 </Tabs>

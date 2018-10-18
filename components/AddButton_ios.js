@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import { View} from "react-native";
-import Icon from '@expo/vector-icons/FontAwesome';
-
-const SIZE = 70;
+import { Icon } from 'react-native-elements'
+const SIZE = 50;
 
 class AddButton_ios extends Component {
     constructor(props) {
@@ -22,9 +21,9 @@ class AddButton_ios extends Component {
                      height: SIZE,
                      borderRadius: SIZE / 2,
                      backgroundColor: !this.props.focused ? '#ecc30b' : '#ef345f',
-                     top: -20
+
              }}>
-                    <Icon name="plus" size={40} color="#F8F8F8"/>
+                    <Icon name='add' size={40} color="#F8F8F8"/>
              </View>
         );
     }
