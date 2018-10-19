@@ -55,7 +55,7 @@ const AddAnnonceStack = createStackNavigator({
 
 AddAnnonceStack.navigationOptions = {
         tabBarIcon: ({focused}) => (
-            Platform.OS === 'ios' ? <AddButton_ios focused={focused}/> : <AddButton_android focused={focused} />
+            Platform.OS === 'ios' ? <AddButton_ios focused={focused}/> : <AddButton_android focused={focused}/>
         ),
 
 };
