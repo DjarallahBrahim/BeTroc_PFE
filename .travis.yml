@@ -1,0 +1,13 @@
+language: node_js
+node_js: lts/*
+sudo: true
+before_install:
+  - npm install -g npm@5.6.0
+  - sudo npm install -g expo-cli@2.2.0
+  - expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
+cache:
+  yarn: true
+install:
+  - npm install
+script:
+- expo publish --release-channel $TRAVIS_PULL_REQUEST
