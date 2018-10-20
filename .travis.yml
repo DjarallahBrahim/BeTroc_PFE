@@ -11,3 +11,13 @@ install:
   - npm install
 script:
 - expo publish --release-channel $TRAVIS_PULL_REQUEST
+
+deploy:
+  provider: releases
+  file_glob: true
+  file:
+    - exp url:apk
+  skip_cleanup: true
+  on:
+      all_branches: true
+      master: false
