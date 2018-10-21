@@ -4,9 +4,9 @@ import {
     Text, StyleSheet
 } from "react-native";
 
-import Searchbar from "../components/SearchBar";
+import Searchbar from "../components/Components_Home/SearchBar";
 import { Divider } from 'react-native-elements'
-import TabsBarView from "../components/TabsBarView";
+import TabsBarView from "../components/Components_Home/TabsBarView";
 
 
 export default class HomeScreen extends React.Component {
