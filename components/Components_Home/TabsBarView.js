@@ -5,7 +5,7 @@ import {
     Text,
     View,
 } from 'react-native';
-import Tabs from '../tabs';
+import Tabs from './tabs';
 import CardList from "./CardList";
 import Categorie from "./Categorie";
 

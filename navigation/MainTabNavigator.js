@@ -4,9 +4,9 @@ import { Platform, StyleSheet, Image} from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 //Components imports
-import { AddButton_ios } from '../components/AddButton_ios';
-import { AddButton_android } from '../components/AddButton_android';
-import TabBarIcon from '../components/TabBarIcon';
+import { AddButton_ios } from '../components/Components_TabBar/AddButton_ios';
+import { AddButton_android } from '../components/Components_TabBar/AddButton_android';
+import TabBarIcon from '../components/Components_TabBar/TabBarIcon';
 
 //screen imports
 import HomeScreen from '../screens/HomeScreen';
