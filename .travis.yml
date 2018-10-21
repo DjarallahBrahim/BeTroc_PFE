@@ -18,3 +18,5 @@ deploy:
   file: exp url:apk
   on:
     repo: DjarallahBrahim/BeTroc_PLATINE
+    tags: true
+
