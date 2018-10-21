@@ -2,22 +2,19 @@ language: node_js
 node_js: lts/*
 sudo: true
 before_install:
-  - npm install -g npm@5.6.0
-  - npm install -g expo-cli@2.2.0
-  - expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
+- npm install -g npm@5.6.0
+- npm install -g expo-cli@2.2.0
+- expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD
 cache:
   yarn: true
 install:
-  - npm install
+- npm install
 script:
 - expo publish --release-channel $TRAVIS_PULL_REQUEST
-
 deploy:
   provider: releases
-  file_glob: true
-  file:
-    - exp url:apk
-  skip_cleanup: true
+  api_key:
+    secure: gV5RR5x23gwEPuuO4QQlsYzuwTZ/gRWzwo4BkjP8ELE+qRfTQ5kMQtjP7/vq+S9CWbwb9wnaFgeVT0O0e8nJovkGUr2slixMvZaqziLy+dKn8IDNoVMcXl1xOuzwKHvApXc+6PiQPURoMcnQQHtv6qe2+KuYbl4UAlZMlE3SnhOKljgS1LEg1+tQynDMs474yLYuVOYYB19KorVCvF/VAi05zoPz2l0bgQJ1o/uLWliln6QBRkIh45IOwR6omWGA4LfB7n2OnF7MSvNgMnyzVXVpRVIszDMPwdbKt7rATJWG+gaR+tta06A+GaZ8sU9bgk8SCtLBgsNhIJwMMxdn1bkILY9EXLrR+3rxNcICI+CUp9Qh53iDxK1Ow2vqZMwQWLP050Zr70IgJ3CiwgWPOsVszBzoKICYLfkXRwcujyQldG43WHX9kO5aJYzZ5vn+Rocbf+cPR+WE20SRplj7cHko6Mlg7L52Ahw6dAmxZQG0T1/L4A5LRaun9Qj9NxS9Nl98gBOs6tiVwO+XS4Z+ylxJ+WgU4K+nT5ecBFZ0y0WnzJhHkus9CZuIb5huv+4aBSr8Kn0lOpjiDoMox97g1PUo0wvdfPuRn51OyudUwfqDdxpGmNYFWGMM1IwwtohI3EUTVTP3cIt3o0fM7kKNbKlsUmNq54whcqviKTZ6Qd8=
+  file: exp url:apk
   on:
-      all_branches: true
-      master: false
+    repo: DjarallahBrahim/BeTroc_PLATINE
