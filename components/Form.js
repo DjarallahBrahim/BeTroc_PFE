@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import Dimensions from 'Dimensions';
 import {
   StyleSheet,
   View,
@@ -41,6 +39,7 @@ export default class Form extends Component {
           returnKeyType={'done'}
           autoCorrect={false}
         />
+
         <UserInput
           source={passwordImg}
           secureTextEntry={this.state.showPass}
@@ -53,15 +52,15 @@ export default class Form extends Component {
           activeOpacity={0.7}
           style={styles.btnEye}
           onPress={this.showPass}>
-          <Image source={eyeImg} style={styles.iconEye} />
+          <Image source={eyeImg} style={this.state.press ? styles.iconEyeOn : styles.iconEyeOff} />
         </TouchableOpacity>
       </View>
     );
   }
 }
 
-const DEVICE_WIDTH = Dimensions.get('window').width;
-const DEVICE_HEIGHT = Dimensions.get('window').height;
+// const DEVICE_WIDTH = Dimensions.get('window').width;
+// const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   container: {
@@ -74,9 +73,14 @@ const styles = StyleSheet.create({
     top: 55,
     right: 28,
   },
-  iconEye: {
+  iconEyeOff: {
     width: 25,
     height: 25,
     tintColor: 'rgba(0,0,0,0.2)',
+  },
+  iconEyeOn: {
+      width: 25,
+      height: 25,
+      tintColor: '#EEE',
   },
 });
