@@ -4,24 +4,18 @@ import {
     StyleSheet,
     Text,
     View,
-    Button
 } from 'react-native';
 import Main from "../components/Main";
 
-export default class ProfilScreen extends React.Component {
+export default class AuthentificationScreen extends React.Component {
     static navigationOptions = {
-        title: "Profil",
+        header: null,
     };
 
     render() {
         return (
             <View style={styles.container}>
-                <Button
-                    onPress={() => {
-                        this.props.navigation.navigate('Auth')
-                    }}
-                    title="Auth-Screen"
-                />
+                <Main/>
             </View>
         );
     }
@@ -33,4 +27,3 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     }
 });
-

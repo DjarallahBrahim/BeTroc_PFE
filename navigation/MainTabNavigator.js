@@ -14,6 +14,7 @@ import MessageScreen from '../screens/MessageScreen';
 import AddAnnonceScreen from '../screens/AddAnnonceScreen';
 import ProfilScreen from '../screens/ProfilScreen';
 import MapScreen from '../screens/MapScreen';
+import AuthentificationScreen from "../screens/AuthentificationScreen";
 
 
 
