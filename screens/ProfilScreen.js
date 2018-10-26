@@ -6,7 +6,7 @@ import {
     View,
     Button
 } from 'react-native';
-import Main from "../components/Main";
+import Main from "../components/Components_Auth/Components_Login/Main";
 
 export default class ProfilScreen extends React.Component {
     static navigationOptions = {

@@ -9,9 +9,9 @@ import {
 import UserInput from './UserInput';
 
 
-import usernameImg from '../assets/images/username.png';
-import passwordImg from '../assets/images/password.png';
-import eyeImg from '../assets/images/eye_black.png';
+import usernameImg from '../../../assets/images/username.png';
+import passwordImg from '../../../assets/images/password.png';
+import eyeImg from '../../../assets/images/eye_black.png';
 
 export default class Form extends Component {
   constructor(props) {
@@ -38,6 +38,7 @@ export default class Form extends Component {
           autoCapitalize={'none'}
           returnKeyType={'done'}
           autoCorrect={false}
+          handlerInput={this.props.handlerUserName}
         />
 
         <UserInput
@@ -47,6 +48,7 @@ export default class Form extends Component {
           returnKeyType={'done'}
           autoCapitalize={'none'}
           autoCorrect={false}
+          handlerInput={this.props.handlerUserPassword}
         />
         <TouchableOpacity
           activeOpacity={0.7}
