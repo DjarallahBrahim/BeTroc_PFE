@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import { View} from "react-native";
-import { Icon } from 'react-native-elements'
+import Icon from '@expo/vector-icons/FontAwesome';
 
 
 const SIZE = 45;
 
-class AddButton_android extends Component {
+class AddButton_ios extends Component {
 
     render() {
         return (
@@ -19,10 +19,10 @@ class AddButton_android extends Component {
                     borderRadius: SIZE / 2,
                     backgroundColor: !this.props.focused ? '#ecc30b' : '#ef345f',
                 }}>
-                <Icon name="plus" size={30} color="#F8F8F8"/>
+                <Icon name="plus" size={26} color="#F8F8F8"/>
             </View>
         );
     }
 }
 
-export {AddButton_android};
+export {AddButton_ios};
