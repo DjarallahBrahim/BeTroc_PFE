@@ -4,7 +4,7 @@ import Form from './Form';
 import Wallpaper from './Wallpaper';
 import ButtonSubmit from './ButtonSubmit';
 import SignupSection from './SignupSection';
-import {StyleSheet, KeyboardAvoidingView, TouchableOpacity, Keyboard} from "react-native";
+import {StyleSheet, KeyboardAvoidingView, TouchableOpacity, Keyboard, SafeAreaView, Platform} from "react-native";
 import Login_service from "../../../Services/Auth_Service/Login_service";
 import {Actions} from "react-native-router-flux/index";
 
@@ -64,17 +64,17 @@ export default class LoginScreen extends Component {
 
 render() {
     return (
-        <TouchableOpacity activeOpacity={1} onPress={Keyboard.dismiss}>
-          <Wallpaper>
-              <KeyboardAvoidingView behavior="padding" style={styles.container}>
-                    <Logo />
-                    <Form handlerUserName={this.handlerUserName} handlerUserPassword={this.handlerUserPassword}/>
-                    <SignupSection />
-                    <ButtonSubmit submit={this.submit} />
-              </KeyboardAvoidingView>
+            <TouchableOpacity activeOpacity={1} onPress={Keyboard.dismiss}>
+              <Wallpaper>
+                  <KeyboardAvoidingView behavior="padding" style={styles.container}>
+                        <Logo />
+                        <Form handlerUserName={this.handlerUserName} handlerUserPassword={this.handlerUserPassword}/>
+                        <SignupSection />
+                        <ButtonSubmit submit={this.submit} />
+                  </KeyboardAvoidingView>
 
-          </Wallpaper>
-        </TouchableOpacity>
+              </Wallpaper>
+            </TouchableOpacity>
     );
   }
 }
@@ -83,6 +83,6 @@ render() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-
+        marginTop: Platform.OS === 'android' ? 30 : 10,
     }
 });

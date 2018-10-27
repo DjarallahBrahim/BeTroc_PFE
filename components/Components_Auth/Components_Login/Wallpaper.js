@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet, ImageBackground, View} from 'react-native';
 import Dimensions from "Dimensions";
 
-import bgSrc from '../../../assets/images/wallpaper.png';
+import bgSrc from '../../../assets/images/back111.png';
 
 export default class Wallpaper extends Component {
     render() {
@@ -23,9 +23,5 @@ const styles = StyleSheet.create({
         height: '100%',
         //resizeMode: 'cover',
     },
-    whiteLayer:{
-        backgroundColor: 'rgba(0, 0, 0, 0.0)',
-        width: Dimensions.get('window').width,
-        height:Dimensions.get('window').height
-    }
+
 });

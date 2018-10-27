@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     button: {
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#F035E0',
+        backgroundColor: '#EEE',
         height: MARGIN,
         borderRadius: 20,
         zIndex: 100,
@@ -108,14 +108,14 @@ const styles = StyleSheet.create({
         width: MARGIN,
         marginTop: -MARGIN,
         borderWidth: 1,
-        borderColor: '#F035E0',
+        borderColor: '#EEE',
         borderRadius: 100,
         alignSelf: 'center',
         zIndex: 99,
         backgroundColor: '#F035E0',
     },
     text: {
-        color: 'white',
+        color: 'black',
         backgroundColor: 'transparent',
     },
     image: {

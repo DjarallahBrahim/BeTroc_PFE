@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   container: {
       //flex: 1,
       height:100,
-      alignItems: 'center'
+      alignItems: 'center',
   },
   btnEye: {
     position: 'absolute',
@@ -85,4 +85,5 @@ const styles = StyleSheet.create({
       height: 25,
       tintColor: '#EEE',
   },
+
 });

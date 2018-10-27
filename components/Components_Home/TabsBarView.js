@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     // Content header
     header: {
         margin: 10,                         // Add margin
-        color: '#ef345d',                   // White color
+        color: '#F07818',                   // White color
         // fontFamily: 'Avenir',            // Change font family
         fontSize: 26,                       // Bigger font size
     },

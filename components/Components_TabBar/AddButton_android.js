@@ -16,7 +16,7 @@ class AddButton_android extends Component {
                     width: SIZE,
                     height: SIZE,
                     borderRadius: SIZE / 2,
-                    backgroundColor: !this.props.focused ? '#ecc30b' : '#ef345f',
+                    backgroundColor: !this.props.focused ? '#f9c62a' : '#F07818',
                 }}>
                 <Icon name="plus" size={30} color="#F8F8F8"/>
             </View>
