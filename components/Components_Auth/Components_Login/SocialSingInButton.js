@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, TouchableHighlight, Text} from 'react-native';
+import {StyleSheet, View,Image, TouchableHighlight, Text} from 'react-native';
 import Login_service from "../../../Services/Auth_Service/Login_service";
 
-
+import logoImg from '../../../assets/images/logo.png';
 
 export default class SocialSingInButton extends Component {
     render() {
@@ -30,9 +30,9 @@ export default class SocialSingInButton extends Component {
 const styles = StyleSheet.create({
     container: {
 
-        flex: 3,
+        flex: 1,
         flexDirection: "row",
-        alignItems: 'flex-end',
+        alignItems: 'flex-start',
         justifyContent: 'space-around',
         marginLeft:25,
         marginRight:25

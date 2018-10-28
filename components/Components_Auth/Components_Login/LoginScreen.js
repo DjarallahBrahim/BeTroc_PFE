@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import SocialSingInButton from './SocialSingInButton';
+import EmptySpace from './EmptySpace';
 import Form from './Form';
 import Wallpaper from './Wallpaper';
 import ButtonSubmit from './ButtonSubmit';
 import SignupSection from './SignupSection';
 import {StyleSheet, KeyboardAvoidingView, TouchableOpacity, Keyboard} from "react-native";
 import Login_service from "../../../Services/Auth_Service/Login_service";
+import SocialSingInButton from "./SocialSingInButton";
 
 export default class LoginScreen extends Component {
 
@@ -52,9 +53,10 @@ render() {
             <TouchableOpacity activeOpacity={1} onPress={Keyboard.dismiss}>
               <Wallpaper>
                   <KeyboardAvoidingView behavior="padding" style={styles.container}>
-                        <SocialSingInButton />
+                        <EmptySpace />
                         <Form handlerUserName={this.handlerUserName} handlerUserPassword={this.handlerUserPassword}/>
                         <SignupSection />
+                      <SocialSingInButton/>
                         <ButtonSubmit submit={this.submit} />
                   </KeyboardAvoidingView>
 
