@@ -39,6 +39,7 @@ export default class LoginScreen extends Component {
             Login_service.loginUser2 (userName, password).then((status) => doneLoading(status)); //TODO: creat user model and save his data
         }else{
             alert('Veuillez saisir votre username/email et mot de passe')
+            doneLoading(false)
         }
     }
 
