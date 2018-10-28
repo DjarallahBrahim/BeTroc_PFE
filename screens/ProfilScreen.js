@@ -6,7 +6,7 @@ import {
     View,
     Button
 } from 'react-native';
-import Main from "../components/Components_Auth/Components_Login/Main";
+import MainLogin from "../components/Components_Auth/Components_Login/MainLogin";
 import {Actions} from "react-native-router-flux/index";
 
 export default class ProfilScreen extends React.Component {
@@ -22,7 +22,13 @@ export default class ProfilScreen extends React.Component {
                     onPress={() => {
                         this.props.navigation.navigate('Auth')
                     }}
-                    title="Auth-Screen"
+                    title="Login-Screen"
+                />
+                <Button
+                    onPress={() => {
+                        this.props.navigation.navigate('Singup')
+                    }}
+                    title="Singup-Screen"
                 />
             </View>
         );

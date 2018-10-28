@@ -5,7 +5,7 @@ import {
     Text,
     View,
 } from 'react-native';
-import Main from "../components/Components_Auth/Components_Login/Main";
+import MainLogin from "../components/Components_Auth/Components_Login/MainLogin";
 
 export default class AuthentificationScreen extends React.Component {
     static navigationOptions = {
@@ -15,7 +15,7 @@ export default class AuthentificationScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Main/>
+                <MainLogin/>
             </View>
         );
     }
