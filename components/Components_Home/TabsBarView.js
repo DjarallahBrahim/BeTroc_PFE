@@ -85,19 +85,20 @@ const styles = StyleSheet.create({
     // App container
     container: {
         flex: 1,                            // Take up all screen
-        backgroundColor: '#e8e8e8',         // Background color
+        backgroundColor: '#fff',         // Background color
+
     },
     // Tab content container
     content: {
         flex: 1,                            // Take up all available space
         justifyContent: 'center',           // Center vertically
         alignItems: 'center',               // Center horizontally
-        backgroundColor: '#e8e8e8',         // Darker background for content area
+        backgroundColor: '#fff',         // Darker background for content area
     },
     // Content header
     header: {
         margin: 10,                         // Add margin
-        color: '#ef345d',                   // White color
+        color: '#F07818',                   // White color
         // fontFamily: 'Avenir',            // Change font family
         fontSize: 26,                       // Bigger font size
     },
