@@ -85,14 +85,15 @@ const styles = StyleSheet.create({
     // App container
     container: {
         flex: 1,                            // Take up all screen
-        backgroundColor: '#e8e8e8',         // Background color
+        backgroundColor: '#fff',         // Background color
+        
     },
     // Tab content container
     content: {
         flex: 1,                            // Take up all available space
         justifyContent: 'center',           // Center vertically
         alignItems: 'center',               // Center horizontally
-        backgroundColor: '#e8e8e8',         // Darker background for content area
+        backgroundColor: '#fff',         // Darker background for content area
     },
     // Content header
     header: {
