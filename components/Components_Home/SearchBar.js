@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import { Icon } from 'react-native-elements'
 import { SearchBar } from 'react-native-elements'
+import Colors from '../../constants/Colors';
 
 export default class Searchbar extends React.Component {
 
@@ -43,7 +44,7 @@ export default class Searchbar extends React.Component {
                     <Icon
                         size={24}
                         name='feedback'
-                        color='#ef345f'
+                        color={Colors.tintColor}
                         underlayColor={'#00000000'}
                         onPress={() => {}}
                     />
@@ -77,7 +78,7 @@ export default class Searchbar extends React.Component {
                             iconStyle={{marginLeft:8}}
                             size={26}
                             name='filter-list'
-                            color={'#ef345f'}
+                            color={Colors.tintColor}
                             underlayColor={'#00000000'}
                             onPress={() => this.Onsubmit()}
                         />

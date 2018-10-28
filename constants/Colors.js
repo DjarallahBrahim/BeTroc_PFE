@@ -1,7 +1,8 @@
 export default {
-  tintColor: '#ef345d',
+  tintColor: '#F07818',
+    // e59c28
   tabIconDefault: '#ccc',
-  tabIconSelected: '#ef345d',
+  tabIconSelected: '#F07818',
   tabBar: '#fefefe',
   errorBackground: 'red',
   errorText: '#fff',

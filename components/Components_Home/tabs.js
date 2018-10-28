@@ -39,7 +39,7 @@ export default class Tabs extends Component {
                                 <Icon
                                     size={26}
                                     name= {index=== 0 ?'swap-vert': index=== 2 ? 'favorite-border' : 'playlist-add'}
-                                    color={ index === this.state.activeTab ? '#FFFFFF' : '#ef345f'}
+                                    color={ index === this.state.activeTab ? '#FFFFFF' : '#F07818'}
                                     underlayColor={'#00000000'}
 
                                 />
@@ -93,11 +93,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor:'#ef345d',
+        backgroundColor:'#F07818',
     },
     // Tab text default
     tabText: {
-        color: '#ef345d',
+        color: '#F07818',
         textAlign: 'center',
         fontSize: 10,
         fontWeight: 'bold',

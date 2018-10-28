@@ -4,9 +4,10 @@ import { Platform, StyleSheet, Image} from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 //Components imports
-import { AddButton_ios } from '../components/AddButton_ios';
-import { AddButton_android } from '../components/AddButton_android';
-import TabBarIcon from '../components/TabBarIcon';
+import { AddButton_android } from '../components/Components_TabBar/AddButton_android';
+import { AddButton_ios } from '../components/Components_TabBar/AddButton_ios';
+
+import TabBarIcon from '../components/Components_TabBar/TabBarIcon';
 
 //screen imports
 import HomeScreen from '../screens/HomeScreen';
@@ -14,6 +15,7 @@ import MessageScreen from '../screens/MessageScreen';
 import AddAnnonceScreen from '../screens/AddAnnonceScreen';
 import ProfilScreen from '../screens/ProfilScreen';
 import MapScreen from '../screens/MapScreen';
+import AuthentificationScreen from "../screens/AuthentificationScreen";
 
 
 
@@ -62,15 +64,24 @@ AddAnnonceStack.navigationOptions = {
 
 const ProfilStack = createStackNavigator({
     Profil: ProfilScreen,
+    Auth: AuthentificationScreen
 });
 
-ProfilStack.navigationOptions = {
-    tabBarIcon: ({ focused }) => (
+ProfilStack.navigationOptions =({ navigation }) => {
+    let { routeName } = navigation.state.routes[navigation.state.index];
+    let navigationOptions = {};
+
+    if (routeName === 'Auth') {
+        navigationOptions.tabBarVisible = false;
+    }
+    navigationOptions.tabBarIcon= ({ focused }) => (
         <TabBarIcon
             focused={focused}
             name={Platform.OS === 'ios' ? `ios-person${focused ? '' : '-outline'}` : 'md-person'}
         />
-    ),
+    );
+
+    return navigationOptions;
 };
 
 const MapScreenStack = createStackNavigator({

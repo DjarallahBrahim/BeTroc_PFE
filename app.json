@@ -9,6 +9,9 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
+    "facebookAppId":"255796728390540",
+    "facebookScheme":"fb255796728390540",
+    "facebookDisplayName":"facebookDisplayName",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
