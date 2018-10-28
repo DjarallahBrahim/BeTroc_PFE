@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   },
   btnEye: {
     position: 'absolute',
-    top: 55,
+    top: 57,
     right: 28,
   },
   iconEyeOff: {
