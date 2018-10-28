@@ -10,8 +10,9 @@ import {
     Alert,
     View,
 } from 'react-native';
+import {Actions} from "react-native-router-flux/index";
 
-import spinner from '../../../assets/images/loading.gif';
+import spinner from '../../../assets/images/loading2.gif';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 // const DEVICE_HEIGHT = Dimensions.get('window').height;
@@ -31,13 +32,17 @@ export default class ButtonSubmit extends Component {
         this.doneLoading = this.doneLoading.bind(this);
     }
 
-    doneLoading() {
+    doneLoading(status) {
+
         this.setState({isLoading: false});
         Animated.timing(this.buttonAnimated, {
             toValue: 0,
             duration: 200,
             easing: Easing.linear,
         }).start();
+
+        status ? this._onGrow() : null;
+
     }
 
     _onPress() {
@@ -55,7 +60,20 @@ export default class ButtonSubmit extends Component {
 
     }
 
+    _onGrow() {
+        Animated.timing(this.growAnimated, {
+            toValue: 1,
+            duration: 200,
+            easing: Easing.linear,
+        }).start();
 
+        setTimeout(() => {
+            this.setState({isLoading: false});
+            this.buttonAnimated.setValue(0);
+            this.growAnimated.setValue(0);
+            Actions.secondScreen();
+        }, 600);
+    }
     render() {
         const changeWidth = this.buttonAnimated.interpolate({
             inputRange: [0, 1],
@@ -108,18 +126,18 @@ const styles = StyleSheet.create({
         width: MARGIN,
         marginTop: -MARGIN,
         borderWidth: 1,
-        borderColor: '#EEE',
+        borderColor: '#efefef',
         borderRadius: 100,
         alignSelf: 'center',
         zIndex: 99,
-        backgroundColor: '#F035E0',
+        backgroundColor: '#efefef',
     },
     text: {
         color: 'black',
         backgroundColor: 'transparent',
     },
     image: {
-        width: 24,
-        height: 24,
+        width: 40,
+        height: 40,
     },
 });

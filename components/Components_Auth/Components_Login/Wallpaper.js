@@ -23,5 +23,9 @@ const styles = StyleSheet.create({
         height: '100%',
         //resizeMode: 'cover',
     },
-
+    whiteLayer:{
+        backgroundColor: 'rgba(0, 0, 0, 0.0)',
+        width: Dimensions.get('window').width,
+        height:Dimensions.get('window').height
+    }
 });

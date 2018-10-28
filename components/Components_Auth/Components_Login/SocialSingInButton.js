@@ -1,39 +1,24 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, TouchableHighlight, Text} from 'react-native';
+import Login_service from "../../../Services/Auth_Service/Login_service";
 
-import logoImg from '../../../assets/images/logo.png';
-import SocialIcon from "react-native-elements/src/social/SocialIcon";
 
-export default class Logo extends Component {
+
+export default class SocialSingInButton extends Component {
     render() {
         return (
             <View style={styles.container}>
-                {/*<SocialIcon*/}
-                    {/*title='Facebook SingIn'*/}
-                    {/*button*/}
-                    {/*type='facebook'*/}
-                    {/*iconSize={15}*/}
-                    {/*style={{width: 160, fontSize:10}}*/}
-
-                {/*/>*/}
-                {/*<SocialIcon*/}
-                    {/*title='Gmail SingIn'*/}
-                    {/*button*/}
-                    {/*type='google-plus-official'*/}
-                    {/*iconSize={15}*/}
-                    {/*style={{width: 160}}*/}
-                {/*/>*/}
 
                 <TouchableHighlight
                     style={styles.buttonFacebook}
-                    onPress={this.onPress}
+                    onPress={Login_service.logIn}
                 >
                     <Text style={styles.text}> Facebook Login </Text>
                 </TouchableHighlight>
 
                 <TouchableHighlight
                     style={styles.buttonGoogle}
-                    onPress={this.onPress}
+                    onPress={Login_service.signInWithGoogleAsync}
                 >
                     <Text style={styles.text}> Gmail Login </Text>
                 </TouchableHighlight>

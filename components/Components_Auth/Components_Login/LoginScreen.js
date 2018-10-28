@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
-import Logo from './Logo';
+import SocialSingInButton from './SocialSingInButton';
 import Form from './Form';
 import Wallpaper from './Wallpaper';
 import ButtonSubmit from './ButtonSubmit';
 import SignupSection from './SignupSection';
-import {StyleSheet, KeyboardAvoidingView, TouchableOpacity, Keyboard, SafeAreaView, Platform} from "react-native";
+import {StyleSheet, KeyboardAvoidingView, TouchableOpacity, Keyboard} from "react-native";
 import Login_service from "../../../Services/Auth_Service/Login_service";
-import {Actions} from "react-native-router-flux/index";
 
 export default class LoginScreen extends Component {
 
@@ -36,10 +35,10 @@ export default class LoginScreen extends Component {
         const password = this.state.userPassword;
 
         if(LoginScreen.checkInput(userName, password)){
-            Login_service.loginUser (userName, password, LoginScreen.loginResolve, LoginScreen.loginReject, LoginScreen.handlerError).then(() => doneLoading());
+            //Login_service.loginUser (userName, password, LoginScreen.loginResolve, LoginScreen.loginReject, LoginScreen.handlerError).then(() => doneLoading());
+            Login_service.loginUser2 (userName, password).then((status) => doneLoading(status)); //TODO: creat user model and save his data
         }else{
             alert('Veuillez saisir votre username/email et mot de passe')
-            doneLoading()
         }
     }
 
@@ -47,27 +46,12 @@ export default class LoginScreen extends Component {
         return username && password;
     }
 
-    static loginResolve(res ){
-        // alert( res )
-
-        Actions.secondScreen() //TODO GO to ex Screen
-    }
-
-    static loginReject(err ){
-        alert( "username/mot de passe:  incorrect " )
-    }
-
-    static handlerError(err ){
-        alert("Connexion failed" + JSON.stringify(err));
-    }
-
-
 render() {
     return (
             <TouchableOpacity activeOpacity={1} onPress={Keyboard.dismiss}>
               <Wallpaper>
                   <KeyboardAvoidingView behavior="padding" style={styles.container}>
-                        <Logo />
+                        <SocialSingInButton />
                         <Form handlerUserName={this.handlerUserName} handlerUserPassword={this.handlerUserPassword}/>
                         <SignupSection />
                         <ButtonSubmit submit={this.submit} />
@@ -83,6 +67,6 @@ render() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: Platform.OS === 'android' ? 30 : 10,
+
     }
 });
