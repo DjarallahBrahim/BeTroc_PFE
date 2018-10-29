@@ -11,7 +11,7 @@ export default class SocialSingInButton extends Component {
 
                 <TouchableHighlight
                     style={styles.buttonFacebook}
-                    onPress={Login_service.logIn}
+                    onPress={Login_service.singInWithFacebookAsync}
                 >
                     <Text style={styles.text}> Facebook Login </Text>
                 </TouchableHighlight>

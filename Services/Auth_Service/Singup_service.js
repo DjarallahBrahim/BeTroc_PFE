@@ -3,34 +3,34 @@ import {AsyncStorage} from "react-native";
 import jwt_decode from "jwt-decode";
 
 
-export default class Login_service {
-
+export default class Singup_service {
     /**
-     * function to handling login operation
+     * function to handling singup operation
      * @param userName
+     * @param email
      * @param password
      * @returns {Promise<any>}
-     * //TODO Change get method to post and send information
      */
+    static singupHandler(userName, email, password) {
 
-    static loginHandler(userName, password) {
-
-       return new Promise((resolve, reject) => {
-           setTimeout(() => {
-               axios.get("http://192.168.43.236:3001/posts/signup", {
-                   // name: userName,
-                   // password: password //TODO send userName password
-               })
-                   .then((response) => {
-                       Login_service._loginResolve(response.data);
-                       resolve(true)
-                   })
-                   .catch((error) => {
-                       Login_service._handlerErrorLogin(error);
-                       resolve(false)
-                   });
-           }, 2000);
-       });
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                axios.post("http://192.168.43.236:3001/posts/signup", {
+                     name: userName,
+                     email: email,
+                     password: password
+                    //TODO send userName password
+                })
+                    .then((response) => {
+                        Singup_service._loginResolve(response.data);
+                        //resolve(true)
+                    })
+                    .catch((error) => {
+                        Singup_service._handlerErrorLogin(error);
+                        //resolve(false)
+                    });
+            }, 2000);
+        });
     }
 
     /**
@@ -47,7 +47,7 @@ export default class Login_service {
     }
 
     /**
-     * callback404+ to handler any exception for login operation
+     * callback404+ to handler any exception for singup operation
      * @param err
      * @private
      */
@@ -56,7 +56,7 @@ export default class Login_service {
     }
 
     /**
-     * callbackReject when the login is rejected
+     * callbackReject when the singup is rejected
      * @param err
      */
     static loginReject(err ){
@@ -67,7 +67,7 @@ export default class Login_service {
     //TODO GET user FB/GOOGLE+ ID and send it to our server
 
     /**
-     * Sing in with facebook SDK
+     * Singup with facebook SDK
      * @returns {Promise<void>}
      */
     static async singInWithFacebookAsync() {
@@ -91,7 +91,7 @@ export default class Login_service {
     }
 
     /**
-     * SingIn with Google+ SDK
+     * Singup with Google+ SDK
      * @returns {Promise<*>}
      */
     static async signInWithGoogleAsync() {

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Dimensions from 'Dimensions';
 import {StyleSheet, View, Text, Button} from 'react-native';
-import SocialIcon from "react-native-elements/src/social/SocialIcon";
 
 export default class SignupSection extends Component {
     render() {
@@ -15,7 +14,6 @@ export default class SignupSection extends Component {
 }
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
-// const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
 

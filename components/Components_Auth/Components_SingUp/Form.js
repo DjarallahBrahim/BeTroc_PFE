@@ -47,7 +47,7 @@ export default class Form extends Component {
           autoCapitalize={'none'}
           returnKeyType={'done'}
           autoCorrect={false}
-          handlerInput={this.props.handlerUserName}
+          handlerInput={this.props.handlerUserMail}
           keyboardType="email-address"
           textContentType="emailAddress"
         />
@@ -71,9 +71,6 @@ export default class Form extends Component {
     );
   }
 }
-
-// const DEVICE_WIDTH = Dimensions.get('window').width;
-// const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   container: {

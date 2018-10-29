@@ -5,8 +5,8 @@ import Wallpaper from './Wallpaper';
 import ButtonSubmit from './ButtonSubmit';
 import SignupSection from './SignupSection';
 import {StyleSheet, KeyboardAvoidingView, TouchableOpacity, Keyboard} from "react-native";
-import Login_service from "../../../Services/Auth_Service/Login_service";
 import SocialSingInButton from "./SocialSingInButton";
+import Singup_service from "../../../Services/Auth_Service/Singup_service";
 
 export default class SingupScreen extends Component {
 
@@ -15,9 +15,11 @@ export default class SingupScreen extends Component {
         super(props);
         this.state = {
             userName: "",
+            userMail: "",
             userPassword:""
         };
         this.handlerUserName = this.handlerUserName.bind(this);
+        this.handlerUserMail = this.handlerUserMail.bind(this);
         this.handlerUserPassword = this.handlerUserPassword.bind(this);
         this.submit = this.submit.bind(this);
     }
@@ -26,26 +28,30 @@ export default class SingupScreen extends Component {
         this.setState({userName:username});
     }
 
+    handlerUserMail(email){
+        this.setState({userMail:email});
+    }
+
     handlerUserPassword(password){
         this.setState({userPassword:password});
     }
 
-
     submit(doneLoading){
         const userName = this.state.userName;
+        const userMail = this.state.userMail;
         const password = this.state.userPassword;
 
-        if(SingupScreen.checkInput(userName, password)){
+        if(SingupScreen.checkInput(userName, userMail, password)){
             //Login_service.loginUser (userName, password, LoginScreen.loginResolve, LoginScreen.loginReject, LoginScreen.handlerError).then(() => doneLoading());
-            Login_service.loginUser2 (userName, password).then((status) => doneLoading(status)); //TODO: creat user model and save his data
+            Singup_service.singupHandler(userName, userMail, password).then((status) => doneLoading(status)); //TODO: create user model and save his data
         }else{
             alert('Veuillez saisir votre username/email et mot de passe')
             doneLoading(false)
         }
     }
 
-    static checkInput(username, password){
-        return username && password;
+    static checkInput(username, password, userMail){
+        return username && password && userMail;
     }
 
 render() {
@@ -54,7 +60,9 @@ render() {
               <Wallpaper>
                   <KeyboardAvoidingView behavior="padding" style={styles.container}>
                         <EmptySpace />
-                        <Form handlerUserName={this.handlerUserName} handlerUserPassword={this.handlerUserPassword}/>
+                        <Form handlerUserName={this.handlerUserName}
+                              handlerUserMail={this.handlerUserMail}
+                              handlerUserPassword={this.handlerUserPassword}/>
                         <SignupSection />
                       <SocialSingInButton/>
                         <ButtonSubmit submit={this.submit} />

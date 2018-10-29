@@ -7,7 +7,6 @@ import {
     Animated,
     Easing,
     Image,
-    Alert,
     View,
 } from 'react-native';
 import {Actions} from "react-native-router-flux/index";
@@ -15,7 +14,6 @@ import {Actions} from "react-native-router-flux/index";
 import spinner from '../../../assets/images/loading2.gif';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
-// const DEVICE_HEIGHT = Dimensions.get('window').height;
 const MARGIN = 40;
 
 export default class ButtonSubmit extends Component {
