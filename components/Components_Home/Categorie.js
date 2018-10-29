@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import {
     View,
     Text,
@@ -15,16 +15,16 @@ export default class Categorie extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1, backgroundColor: 'white', paddingTop: 20, paddingBottom:10, marginBottom:15}}>
-                <Text style={{ fontSize: 24, fontWeight: '700', paddingHorizontal: 20 }}>
+            <View style={styles.container}>
+                <Text style={{fontSize: 24, fontWeight: '700', paddingHorizontal: 10}}>
                     One Category for you !
                 </Text>
 
-                <View style={{ height: 130, marginTop: 20 }}>
+                <View style={{height: 130, marginTop: 13}}>
                     <FlatList
                         horizontal={true}
-                        data= {this.props.data}
-                        renderItem={({item}) => <CardList data = {item} />}
+                        data={this.props.data}
+                        renderItem={({item}) => <CardList data={item}/>}
                         keyExtractor={(item, index) => index.toString()}
                         showsHorizontalScrollIndicator={false}>
 
@@ -38,13 +38,25 @@ export default class Categorie extends Component {
 }
 
 
-
-
-
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    }
+    container:
+        {
+            flex: 1,
+            backgroundColor: 'white',
+            paddingTop: 10,
+            paddingBottom: 10,
+            marginBottom: 15,
+            marginRight:10,
+            marginLeft:10,
+            marginTop:5,
+            shadowColor: '#000000',
+            shadowOffset: {
+                width: 0,
+                height: 3
+            },
+            shadowRadius: 5,
+            shadowOpacity: 1.0,
+            elevation: 3
+        }
+
 });

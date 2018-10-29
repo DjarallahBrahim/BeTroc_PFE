@@ -39,7 +39,7 @@ export default class Searchbar extends React.Component {
 
     render() {
         return (
-            <SafeAreaView style={styles.safeAreaw}>
+            <SafeAreaView style={styles.safeArea}>
                 <View  style={styles.container}>
 
                     <View style={{
@@ -50,8 +50,6 @@ export default class Searchbar extends React.Component {
                         padding: 10,
                         height:50,
                         backgroundColor: 'white',
-
-                        marginTop: Platform.OS === 'android' ? 30 : null
                     }}>
                         <Icon name="search"
                               size={20}

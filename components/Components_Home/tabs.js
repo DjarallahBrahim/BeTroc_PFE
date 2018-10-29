@@ -10,30 +10,21 @@ import { Icon } from 'react-native-elements'
 
 export default class Tabs extends Component {
 
-    // Initialize State
     state = {
-        // First tab is active by default
         activeTab: 0
     }
 
-    // Pull children out of props passed from App component
     render({ children } = this.props) {
         return (
             <View style={styles.container}>
-                {/* Tabs row */}
                 <View style={styles.tabsContainer}>
-                    {/* Pull props out of children, and pull title out of props */}
                         {children.map(({ props: { title } }, index) =>
                             <TouchableOpacity
                                 style={[
-                                    // Default style for every tab
                                     styles.tabContainer,
-                                    // Merge default style with styles.tabContainerActive for active tab
                                     index === this.state.activeTab ? styles.tabContainerActive : []
                                 ]}
-                                // Change active tab
                                 onPress={() => this.setState({ activeTab: index }) }
-                                // Required key prop for components generated returned by map iterator
                                 key={index}>
 
                                 <Icon
@@ -44,21 +35,16 @@ export default class Tabs extends Component {
 
                                 />
                                 <Text  style={[
-                                            // Default style for every tab
                                             styles.tabText,
-                                            // Merge default style with styles.tabContainerActive for active tab
                                             index === this.state.activeTab ? styles.tabTextSelected : []
                                         ]}
-                                            // Change active tab
                                                onPress={() => this.setState({ activeTab: index }) }
-                                            // Required key prop for components generated returned by map iterator
                                                key={index}>
                                     {title}</Text>
 
                             </TouchableOpacity>
                         )}
                 </View>
-                        {/* Content */}
                 <View style={styles.contentContainer}>
                     {children[this.state.activeTab]}
                 </View>
@@ -71,6 +57,7 @@ const styles = StyleSheet.create({
     // Component container
     container: {
         flex: 1,                            // Take up all available space
+        elevation: 3
     },
     // Tabs row container
     tabsContainer: {
@@ -85,8 +72,15 @@ const styles = StyleSheet.create({
         paddingVertical: 3,                  // Vertical padding
         backgroundColor:'#FFFFFF',           // BackGround color for the tab button
         margin:8,                            // Margin for each button
-        borderRadius:15                      // Radius for each button
-
+        borderRadius:15,                      // Radius for each button
+        shadowColor: '#000000',
+        shadowOffset: {
+            width: 0,
+            height: 3
+        },
+        shadowRadius: 5,
+        shadowOpacity: 1.0,
+        elevation: 3
     },
     // Active tab container ===> changin the colro
     tabContainerActive: {
