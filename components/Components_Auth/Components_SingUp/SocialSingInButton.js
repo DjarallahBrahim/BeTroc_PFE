@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import {StyleSheet, View,Image, TouchableHighlight, Text} from 'react-native';
-import Login_service from "../../../Services/Auth_Service/Login_service";
+import {StyleSheet, View, TouchableHighlight, Text} from 'react-native';
 
-import logoImg from '../../../assets/images/logo.png';
+import Singup_service from "../../../Services/Auth_Service/Singup_service";
 
 export default class SocialSingInButton extends Component {
     render() {
@@ -11,14 +10,14 @@ export default class SocialSingInButton extends Component {
 
                 <TouchableHighlight
                     style={styles.buttonFacebook}
-                    onPress={Login_service.singInWithFacebookAsync}
+                    onPress={Singup_service.singInWithFacebookAsync}
                 >
                     <Text style={styles.text}> Facebook Login </Text>
                 </TouchableHighlight>
 
                 <TouchableHighlight
                     style={styles.buttonGoogle}
-                    onPress={Login_service.signInWithGoogleAsync}
+                    onPress={Singup_service.signInWithGoogleAsync}
                 >
                     <Text style={styles.text}> Gmail Login </Text>
                 </TouchableHighlight>
