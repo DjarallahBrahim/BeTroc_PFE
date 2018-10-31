@@ -34,12 +34,12 @@ export default class HomeScreen extends React.Component {
                     <Searchbar submitSearch={this.getInput}/>
                     <Divider style={{ backgroundColor: '#95a5a6', marginTop:2 }} />
                 </React.Fragment>
-                {/*<Button*/}
-                    {/*onPress={() => {*/}
-                        {/*this.props.navigation.navigate('AnnonceDetail')*/}
-                    {/*}}*/}
-                    {/*title="Detail screen"*/}
-                {/*/>*/}
+                <Button
+                    onPress={() => {
+                        this.props.navigation.navigate('AnnonceDetail')
+                    }}
+                    title="Detail screen"
+                />
                 <TabsBarView/>
             </View>
         );

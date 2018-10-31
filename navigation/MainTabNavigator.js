@@ -25,7 +25,7 @@ import SingupScreen from "../components/Components_Auth/Components_SingUp/Singup
 
 const HomeStack = createStackNavigator({
     Home: HomeScreen,
-    AnnonceDetail: 'Annoncedetailscreen',
+    AnnonceDetail: Annoncedetailscreen,
 
 
 

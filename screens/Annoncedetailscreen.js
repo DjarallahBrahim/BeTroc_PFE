@@ -5,7 +5,7 @@ import {
     Text,
     View,
 } from 'react-native';
-import ImageProduit from "../components/Components_Annonce/Components_Detail/ImageProduit";
+import Main from "../components/Components_Annonce/Components_Detail/Main";
 
 export default class Annoncedetailscreen extends React.Component {
     static navigationOptions = {
@@ -15,7 +15,7 @@ export default class Annoncedetailscreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-               <ImageProduit/>
+               <Main/>
             </View>
         );
     }

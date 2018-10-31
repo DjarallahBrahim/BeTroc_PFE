@@ -5,6 +5,8 @@ import {
     Text,
     View,
 } from 'react-native';
+import ImageProduit from "./ImageProduit";
+import AnnonceDetailBar from "./AnnonceDetailBar";
 
 export default class Main extends React.Component {
     static navigationOptions = {
@@ -14,10 +16,10 @@ export default class Main extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                {/*<ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>*/}
-                {/*<Text> this is Profil Screen </Text>*/}
-                {/*</ScrollView>*/}
-                <Text> this is Main Screen </Text>
+                <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+                    <ImageProduit/>
+                    <AnnonceDetailBar/>
+                </ScrollView>
             </View>
         );
     }
