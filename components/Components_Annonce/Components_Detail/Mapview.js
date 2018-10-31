@@ -22,7 +22,7 @@ export default class Mapview extends React.Component {
                         zoomEnabled={true}
                         zoomControlEnabled={false}
                         scrollEnabled={false}
-                        style={{alignSelf: 'stretch', height: 400}}
+                        style={{alignSelf: 'stretch', height: 300}}
                         region={this.state.mapRegion}
                         //onRegionChange={this._handleMapRegionChange}
                     >

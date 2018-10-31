@@ -4,8 +4,11 @@ import {
     StyleSheet,
     Text,
     View,
+    Dimensions
 } from 'react-native';
-import {Icon} from "react-native-elements";
+import {Divider, Icon} from "react-native-elements";
+import Adresselocation from "./Adresselocation";
+
 
 export default class FormDetail extends React.Component {
     static navigationOptions = {
@@ -15,24 +18,14 @@ export default class FormDetail extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={{fontSize: 24, fontWeight: '700', paddingHorizontal: 10, color:'black', marginTop:10}}>
-                    {this.props.title}
-                </Text>
-                <Text style={{fontSize: 15, fontWeight: '700', paddingHorizontal: 10, color:'#6f6f6f', marginTop:20,}}>
-                    One Description for you ! One Description for you ! One Description for you ! One Description for you !
-                    One Description for you ! One Description for you !
-                </Text>
-                <View
-                    style={styles.tabContainer}>
-                    <Icon
-                        size={26}
-                        name= 'location-on'
-                        color='#F07818'
-                        underlayColor={'#00000000'}
-
-                    />
-                    <Text  style={styles.tabText}>
-                        20min
+                <View style={styles.information}>
+                    <Text style={{fontSize: 24, fontWeight: '700', paddingHorizontal: 10, color:'black', marginTop:10}}>
+                        {this.props.title}
+                    </Text>
+                    <Divider style={{ backgroundColor: '#95a5a6', marginTop:10,marginBottom:10 }} />
+                    <Text style={{fontSize: 15, fontWeight: '300', paddingHorizontal: 10, color:'#6f6f6f', }}>
+                        One Description for you ! One Description for you ! One Description for you ! One Description for you !
+                        One Description for you ! One Description for you !
                     </Text>
                 </View>
             </View>
@@ -44,22 +37,18 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+        marginBottom:25
     },
-    tabContainer: {
-        width:"100%",
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingVertical: 3,
-        backgroundColor:'#FFFFFF',
-        marginTop: 20,
+    information:{
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        // borderRadius: 10,
+        // backgroundColor:'#f0f0f0',
+        margin:10,
+        paddingBottom:30,
+        marginLeft:10,
 
 
-    },
-    tabText: {
-        color: '#1b1b1b',
-        textAlign: 'center',
-        fontSize: 13,
-        marginLeft:8
-    },
+    }
 });
