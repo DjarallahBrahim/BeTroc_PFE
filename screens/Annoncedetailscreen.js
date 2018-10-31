@@ -5,6 +5,7 @@ import {
     Text,
     View,
 } from 'react-native';
+import ImageProduit from "../components/Components_Annonce/Components_Detail/ImageProduit";
 
 export default class AnnonceDetailScreen extends React.Component {
     static navigationOptions = {
@@ -14,10 +15,7 @@ export default class AnnonceDetailScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                {/*<ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>*/}
-                {/*<Text> this is Profil Screen </Text>*/}
-                {/*</ScrollView>*/}
-                <Text> this is AnnonceDetailScreen Screen </Text>
+               <ImageProduit/>
             </View>
         );
     }
