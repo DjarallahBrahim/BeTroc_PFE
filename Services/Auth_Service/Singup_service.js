@@ -15,14 +15,15 @@ export default class Singup_service {
 
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                axios.post("http://192.168.43.236:3001/posts/signup", {
-                     name: userName,
+                axios.post("http://172.20.10.5:5000/api/auth/signup", {
+                     name: "namename",
+                     username: userName,
                      email: email,
                      password: password
-                    //TODO send userName password
                 })
                     .then((response) => {
-                        Singup_service._loginResolve(response.data);
+                        console.log(response.status);
+                        Singup_service._loginResolve(response);
                         //resolve(true)
                     })
                     .catch((error) => {
@@ -39,11 +40,11 @@ export default class Singup_service {
      * @private
      */
     static _loginResolve(res ){
-        //alert( res.token ) //TODO save token
-        const decodedToken = jwt_decode(res.token);
+        alert( res.data.success ) //TODO save token
+        //const decodedToken = jwt_decode(res.token);
         //alert(JSON.stringify(decodedToken))
-        AsyncStorage.setItem('token', res.token);
-        AsyncStorage.setItem('tokendecode', decodedToken)
+        // AsyncStorage.setItem('token', res.token);
+        // AsyncStorage.setItem('tokendecode', decodedToken)
     }
 
     /**
@@ -72,20 +73,19 @@ export default class Singup_service {
      */
     static async singInWithFacebookAsync() {
         const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('255796728390540', {
-            permissions: ['public_profile'],
+            permissions: ['public_profile','email'],
         });
         if (type === 'success') {
             // Get the user's name using Facebook's Graph API
             const response = await fetch(
-                `https://graph.facebook.com/me?access_token=${token}&fields=id,name,birthday,picture.type(large)`).then();
-            const { id, picture, name, birthday } = await response.json();
+                `https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture.type(large),email`).then();
+            const { id, picture, name, email } = await response.json();
 
             setTimeout(() => {
                 alert(
-                    name + ' ' + id
+                    name + ' ' + id + ' ' + email
                 );
             }, 2000);
-
 
         }
     }
@@ -103,6 +103,7 @@ export default class Singup_service {
             });
 
             if (result.type === 'success') {
+                console.log(result)
                 return alert(result.accessToken);
             } else {
                 return {cancelled: true};
