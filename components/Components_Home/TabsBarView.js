@@ -50,13 +50,15 @@ export default class TabsBarView extends React.Component {
 
 
     render() {
+        const {navigation} = this.props;
+        console.log(navigation)
         return (
             <View style={styles.container}>
                 <Tabs>
                     {/* First tab */}
                     <View title="Èchange" style={styles.content}>
                         <ScrollView>
-                            <Categorie data={ this.state.annonces} />
+                            <Categorie navigation={navigation} data={ this.state.annonces} />
                             <Categorie data={ this.state.annonces} />
                             <Categorie data={ this.state.annonces} />
 

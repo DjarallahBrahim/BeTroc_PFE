@@ -14,6 +14,8 @@ export default class Categorie extends Component {
     }
 
     render() {
+        const {navigation} = this.props;
+
         return (
             <View style={styles.container}>
                 <Text style={{fontSize: 24, fontWeight: '700', paddingHorizontal: 10}}>
@@ -24,7 +26,7 @@ export default class Categorie extends Component {
                     <FlatList
                         horizontal={true}
                         data={this.props.data}
-                        renderItem={({item}) => <CardList data={item}/>}
+                        renderItem={({item}) => <CardList navigation={navigation} data={item}/>}
                         keyExtractor={(item, index) => index.toString()}
                         showsHorizontalScrollIndicator={false}>
 

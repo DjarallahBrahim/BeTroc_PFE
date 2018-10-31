@@ -40,7 +40,7 @@ export default class HomeScreen extends React.Component {
                     }}
                     title="Detail screen"
                 />
-                <TabsBarView/>
+                <TabsBarView navigation={this.props.navigation} />
             </View>
         );
     }
