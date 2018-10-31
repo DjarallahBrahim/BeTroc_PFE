@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
             height: 2
         },
         shadowRadius: 5,
-        shadowOpacity: 0.5,
+        shadowOpacity: 0.2,
         elevation: 3
     },
     // Active tab container ===> changin the colro
