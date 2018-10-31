@@ -7,6 +7,8 @@ import {
 } from 'react-native';
 import ImageProduit from "./ImageProduit";
 import AnnonceDetailBar from "./AnnonceDetailBar";
+import FormDetail from "./FormDetail";
+import {Divider} from "react-native-elements";
 
 export default class Main extends React.Component {
     static navigationOptions = {
@@ -19,6 +21,9 @@ export default class Main extends React.Component {
                 <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
                     <ImageProduit/>
                     <AnnonceDetailBar/>
+                    <FormDetail/>
+                    <Divider style={{ backgroundColor: '#95a5a6', marginTop:2 }} />
+
                 </ScrollView>
             </View>
         );
