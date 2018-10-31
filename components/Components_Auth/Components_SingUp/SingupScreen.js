@@ -9,7 +9,9 @@ import SocialSingInButton from "./SocialSingInButton";
 import Singup_service from "../../../Services/Auth_Service/Singup_service";
 
 export default class SingupScreen extends Component {
-
+    static navigationOptions = {
+        header: null,
+    };
 
     constructor(props) {
         super(props);
