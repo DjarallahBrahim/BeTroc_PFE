@@ -7,9 +7,9 @@ import {
 } from 'react-native';
 import ImageProduit from "../components/Components_Annonce/Components_Detail/ImageProduit";
 
-export default class AnnonceDetailScreen extends React.Component {
+export default class Annoncedetailscreen extends React.Component {
     static navigationOptions = {
-        title: 'AnnonceDetailScreen',
+        title: 'Annoncedetailscreen',
     };
 
     render() {
