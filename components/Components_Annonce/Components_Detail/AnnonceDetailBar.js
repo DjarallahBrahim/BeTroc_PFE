@@ -30,15 +30,15 @@ export default class AnnonceDetailBar extends React.Component {
                             </Text>
 
                         </View>
-                        <View
-                            style={{
-                                borderWidth:1,
-                                borderBottomColor: '#6e6e6e',
-                                borderBottomWidth: 1,
-                                height: 25,
-                                opacity:0.4
-                            }}
-                        />
+                        {/*<View*/}
+                            {/*style={{*/}
+                                {/*borderWidth:1,*/}
+                                {/*borderBottomColor: '#6e6e6e',*/}
+                                {/*borderBottomWidth: 1,*/}
+                                {/*height: 25,*/}
+                                {/*opacity:0.4*/}
+                            {/*}}*/}
+                        {/*/>*/}
                         <View
                             style={[
                                 styles.tabContainer,
@@ -57,15 +57,15 @@ export default class AnnonceDetailBar extends React.Component {
                             </Text>
 
                         </View>
-                        <View
-                            style={{
-                                borderWidth:1,
-                                borderBottomColor: '#6e6e6e',
-                                borderBottomWidth: 1,
-                                height: 25,
-                                opacity:0.4
-                            }}
-                        />
+                        {/*<View*/}
+                            {/*style={{*/}
+                                {/*borderWidth:1,*/}
+                                {/*borderBottomColor: '#6e6e6e',*/}
+                                {/*borderBottomWidth: 1,*/}
+                                {/*height: 25,*/}
+                                {/*opacity:0.4*/}
+                            {/*}}*/}
+                        {/*/>*/}
                         <View
                             style={[
                                 styles.tabContainer,

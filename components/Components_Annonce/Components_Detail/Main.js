@@ -9,6 +9,7 @@ import ImageProduit from "./ImageProduit";
 import AnnonceDetailBar from "./AnnonceDetailBar";
 import FormDetail from "./FormDetail";
 import {Divider} from "react-native-elements";
+import Mapview from "./Mapview";
 
 export default class Main extends React.Component {
     static navigationOptions = {
@@ -23,7 +24,7 @@ export default class Main extends React.Component {
                     <AnnonceDetailBar/>
                     <FormDetail/>
                     <Divider style={{ backgroundColor: '#95a5a6', marginTop:2 }} />
-
+                    <Mapview/>
                 </ScrollView>
             </View>
         );
