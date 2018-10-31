@@ -16,6 +16,8 @@ import AddAnnonceScreen from '../screens/AddAnnonceScreen';
 import ProfilScreen from '../screens/ProfilScreen';
 import MapScreen from '../screens/MapScreen';
 import AuthentificationScreen from "../screens/AuthentificationScreen";
+import Annoncedetailscreen from "../screens/Annoncedetailscreen";
+import SingupScreen from "../components/Components_Auth/Components_SingUp/SingupScreen";
 
 
 
@@ -23,6 +25,8 @@ import AuthentificationScreen from "../screens/AuthentificationScreen";
 
 const HomeStack = createStackNavigator({
     Home: HomeScreen,
+    AnnonceDetail: 'Annoncedetailscreen',
+
 
 
 });
@@ -64,14 +68,15 @@ AddAnnonceStack.navigationOptions = {
 
 const ProfilStack = createStackNavigator({
     Profil: ProfilScreen,
-    Auth: AuthentificationScreen
+    Auth: AuthentificationScreen,
+    Singup: SingupScreen,
 });
 
 ProfilStack.navigationOptions =({ navigation }) => {
     let { routeName } = navigation.state.routes[navigation.state.index];
     let navigationOptions = {};
 
-    if (routeName === 'Auth') {
+    if (routeName !== 'Profil') {
         navigationOptions.tabBarVisible = false;
     }
     navigationOptions.tabBarIcon= ({ focused }) => (
