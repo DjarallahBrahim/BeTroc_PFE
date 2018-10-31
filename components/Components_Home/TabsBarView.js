@@ -16,11 +16,11 @@ export default class TabsBarView extends React.Component {
             annonces: [
                 {
                     title: 'Image Title',
-                    image: 'https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/6/image.jpeg'
+                    image: 'https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/2/image.jpeg'
                 },
                 {
                     title: 'Image Title',
-                    image: 'https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/6/image.jpeg'
+                    image: 'https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/2/image.jpeg'
                 },
                 {
                     title: 'Image Title',
@@ -51,7 +51,6 @@ export default class TabsBarView extends React.Component {
 
     render() {
         const {navigation} = this.props;
-        console.log(navigation)
         return (
             <View style={styles.container}>
                 <Tabs>

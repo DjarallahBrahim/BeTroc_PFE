@@ -26,7 +26,7 @@ export default class Categorie extends Component {
                     <FlatList
                         horizontal={true}
                         data={this.props.data}
-                        renderItem={({item}) => <CardList navigation={navigation} data={item}/>}
+                        renderItem={({item,index}) => <CardList navigation={navigation} data={item}/>}
                         keyExtractor={(item, index) => index.toString()}
                         showsHorizontalScrollIndicator={false}>
 

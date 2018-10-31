@@ -16,7 +16,7 @@ export default class FormDetail extends React.Component {
         return (
             <View style={styles.container}>
                 <Text style={{fontSize: 24, fontWeight: '700', paddingHorizontal: 10, color:'black', marginTop:10}}>
-                    One Title for you !
+                    {this.props.title}
                 </Text>
                 <Text style={{fontSize: 15, fontWeight: '700', paddingHorizontal: 10, color:'#6f6f6f', marginTop:20,}}>
                     One Description for you ! One Description for you ! One Description for you ! One Description for you !

@@ -10,7 +10,7 @@ export default class ImageProduit extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Image source={{uri: 'https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/6/image.jpeg'}}
+                <Image source={{uri: this.props.imgUrl}}
                        style={{  width: '100%', height: 270, resizeMode: 'cover' }}/>
             </View>
         );

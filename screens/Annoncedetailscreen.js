@@ -13,9 +13,11 @@ export default class Annoncedetailscreen extends React.Component {
     };
 
     render() {
+        const data = this.props.navigation.getParam("data", {});
+        console.log(data);
         return (
             <View style={styles.container}>
-               <Main/>
+               <Main data={data}/>
             </View>
         );
     }

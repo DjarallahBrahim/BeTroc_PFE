@@ -13,10 +13,11 @@ export default class CardList extends React.Component {
 
     renderCategorie() {
         const {data} = this.props;
+        console.log(data);
         const { navigation } = this.props;
         return (
             <View style={styles.container} >
-                    <TouchableHighlight  onPress={() => navigation.navigate("AnnonceDetail")}style={{flex: 2}}>
+                    <TouchableHighlight  onPress={() => navigation.navigate("AnnonceDetail", {data: data})} style={{flex: 2}}>
                         <Image source={{uri: data.image}}
                                style={{flex: 1, width: null, height: null, resizeMode: 'cover'}}/>
                     </TouchableHighlight>

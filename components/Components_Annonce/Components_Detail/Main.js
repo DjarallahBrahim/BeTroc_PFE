@@ -20,9 +20,9 @@ export default class Main extends React.Component {
         return (
             <View style={styles.container}>
                 <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-                    <ImageProduit/>
-                    <AnnonceDetailBar/>
-                    <FormDetail/>
+                    <ImageProduit imgUrl={this.props.data["image"]}  />
+                    <AnnonceDetailBar />
+                    <FormDetail title={this.props.data["title"]}/>
                     <Divider style={{ backgroundColor: '#95a5a6', marginTop:2 }} />
                     <Mapview/>
                 </ScrollView>
