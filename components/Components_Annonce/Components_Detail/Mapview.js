@@ -24,7 +24,6 @@ export default class Mapview extends React.Component {
                         scrollEnabled={false}
                         style={{alignSelf: 'stretch', height: 300}}
                         region={this.state.mapRegion}
-                        //onRegionChange={this._handleMapRegionChange}
                     >
                         <MapView.Marker
                             coordinate={{latitude: 37.78825, longitude: -122.4324}}
