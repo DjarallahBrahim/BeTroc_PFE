@@ -16,11 +16,11 @@ export default class TabsBarView extends React.Component {
             annonces: [
                 {
                     title: 'Image Title',
-                    image: 'https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/6/image.jpeg'
+                    image: 'https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/2/image.jpeg'
                 },
                 {
                     title: 'Image Title',
-                    image: 'https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/6/image.jpeg'
+                    image: 'https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/2/image.jpeg'
                 },
                 {
                     title: 'Image Title',
@@ -50,13 +50,14 @@ export default class TabsBarView extends React.Component {
 
 
     render() {
+        const {navigation} = this.props;
         return (
             <View style={styles.container}>
                 <Tabs>
                     {/* First tab */}
                     <View title="Èchange" style={styles.content}>
                         <ScrollView>
-                            <Categorie data={ this.state.annonces} />
+                            <Categorie navigation={navigation} data={ this.state.annonces} />
                             <Categorie data={ this.state.annonces} />
                             <Categorie data={ this.state.annonces} />
 

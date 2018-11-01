@@ -4,7 +4,7 @@ import {
     StyleSheet,
     Text,
     View,
-    Button
+    Button, TouchableHighlight
 } from 'react-native';
 import MainLogin from "../components/Components_Auth/Components_Login/MainLogin";
 import {Actions} from "react-native-router-flux/index";
@@ -23,13 +23,17 @@ export default class ProfilScreen extends React.Component {
                         this.props.navigation.navigate('Auth')
                     }}
                     title="Login-Screen"
+                    style={{"marginTop": 10}}
                 />
+                <TouchableHighlight style={{"marginTop": 10}}>
                 <Button
                     onPress={() => {
                         this.props.navigation.navigate('Singup')
                     }}
                     title="Singup-Screen"
+
                 />
+                </TouchableHighlight>
             </View>
         );
     }

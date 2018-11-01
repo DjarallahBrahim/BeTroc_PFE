@@ -1,23 +1,17 @@
 import React from 'react';
 import {
-    ScrollView,
     StyleSheet,
-    Text,
     View,
+    Image,
 } from 'react-native';
 
 export default class ImageProduit extends React.Component {
-    static navigationOptions = {
-        title: 'ImageProduit',
-    };
 
     render() {
         return (
             <View style={styles.container}>
-                {/*<ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>*/}
-                {/*<Text> this is Profil Screen </Text>*/}
-                {/*</ScrollView>*/}
-                <Text> this is ImageProduit Screen </Text>
+                <Image source={{uri: this.props.imgUrl}}
+                       style={{  width: '100%', height: 270, resizeMode: 'cover' }}/>
             </View>
         );
     }
@@ -27,5 +21,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-    }
+
+    },
+
 });
+
+

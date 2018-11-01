@@ -17,12 +17,13 @@ export default class Login_service {
 
        return new Promise((resolve, reject) => {
            setTimeout(() => {
-               axios.get("http://192.168.43.236:3001/posts/signup", {
-                   // name: userName,
-                   // password: password //TODO send userName password
+               axios.post("http://172.20.10.5:5000/api/auth/signin", {
+                   usernameOrEmail: userName,
+                   password: password
                })
                    .then((response) => {
-                       Login_service._loginResolve(response.data);
+                       console.log(response.status);
+                       Login_service._loginResolve(response);
                        resolve(true)
                    })
                    .catch((error) => {
@@ -39,11 +40,11 @@ export default class Login_service {
      * @private
      */
     static _loginResolve(res ){
-        //alert( res.token ) //TODO save token
-        const decodedToken = jwt_decode(res.token);
+        alert( res.data.accessToken ) //TODO save token
+        //const decodedToken = jwt_decode(res.token);
         //alert(JSON.stringify(decodedToken))
-        AsyncStorage.setItem('token', res.token);
-        AsyncStorage.setItem('tokendecode', decodedToken)
+        // AsyncStorage.setItem('token', res.token);
+        // AsyncStorage.setItem('tokendecode', decodedToken)
     }
 
     /**

@@ -41,7 +41,7 @@ export default class ButtonSubmit extends Component {
             easing: Easing.linear,
         }).start();
 
-        status ? this._onGrow() : null;
+       // status ? this._onGrow() : null;
 
     }
 

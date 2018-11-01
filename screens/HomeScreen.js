@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     View,
-    Text, StyleSheet
+    Text, StyleSheet, Button
 } from "react-native";
 
 import Searchbar from "../components/Components_Home/SearchBar";
@@ -34,8 +34,13 @@ export default class HomeScreen extends React.Component {
                     <Searchbar submitSearch={this.getInput}/>
                     <Divider style={{ backgroundColor: '#95a5a6', marginTop:2 }} />
                 </React.Fragment>
-
-                <TabsBarView/>
+                <Button
+                    onPress={() => {
+                        this.props.navigation.navigate('AnnonceDetail')
+                    }}
+                    title="Detail screen"
+                />
+                <TabsBarView navigation={this.props.navigation} />
             </View>
         );
     }

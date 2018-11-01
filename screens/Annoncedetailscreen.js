@@ -5,19 +5,19 @@ import {
     Text,
     View,
 } from 'react-native';
+import Main from "../components/Components_Annonce/Components_Detail/Main";
 
-export default class AnnonceDetailScreen extends React.Component {
+export default class Annoncedetailscreen extends React.Component {
     static navigationOptions = {
-        title: 'AnnonceDetailScreen',
+        title: 'Annoncedetailscreen',
     };
 
     render() {
+        const data = this.props.navigation.getParam("data", {});
+        console.log(data);
         return (
             <View style={styles.container}>
-                {/*<ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>*/}
-                {/*<Text> this is Profil Screen </Text>*/}
-                {/*</ScrollView>*/}
-                <Text> this is AnnonceDetailScreen Screen </Text>
+               <Main data={data}/>
             </View>
         );
     }
