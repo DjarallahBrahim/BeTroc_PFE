@@ -31,15 +31,23 @@ const HomeStack = createStackNavigator({
 
 });
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
-    tabBarIcon: ({ focused }) => (
+HomeStack.navigationOptions = ({ navigation }) => {
+    let { routeName } = navigation.state.routes[navigation.state.index];
+    let navigationOptions = {};
+
+    if (routeName !== 'Home') {
+        navigationOptions.tabBarVisible = false;
+    }
+    navigationOptions.tabBarIcon= ({ focused }) => (
         <TabBarIcon
             focused={focused}
             name={Platform.OS === 'ios' ? `ios-home${focused ? '' : '-outline'}` : 'md-home'}
         />
-    ),
+    );
+
+    return navigationOptions;
 };
+
 
 const MessageStack = createStackNavigator({
   Message: MessageScreen,
