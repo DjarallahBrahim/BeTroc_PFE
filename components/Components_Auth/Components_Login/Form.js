@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   iconEyeOn: {
       width: 25,
       height: 25,
-      tintColor: '#EEE',
+      tintColor: '#bd1115',
   },
 
 });
