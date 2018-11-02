@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        marginBottom:25
     },
     information:{
         flex: 1,
@@ -46,7 +45,6 @@ const styles = StyleSheet.create({
         // borderRadius: 10,
         // backgroundColor:'#f0f0f0',
         margin:10,
-        paddingBottom:30,
         marginLeft:10,
 
 

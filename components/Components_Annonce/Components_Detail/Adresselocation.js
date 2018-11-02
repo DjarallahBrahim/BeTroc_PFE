@@ -12,10 +12,13 @@ export default class Adresselocation extends React.Component {
 
     render() {
         return (
-            <View style={styles.location}>
-                <Text
-                    style={styles.input}> 30A chemin valois; Harnes, France
-                </Text>
+            <View style={{flex:1, flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: 50,
+                backgroundColor:'#f0f0f0',
+                padding:10,
+                marginHorizontal:10}}>
                 <Icon
                     size={26}
                     name= 'location-on'
@@ -23,8 +26,14 @@ export default class Adresselocation extends React.Component {
                     underlayColor={'#00000000'}
                 />
                 <Text  style={styles.tabText}>
-                    20min
+                    20min :
                 </Text>
+            <View style={styles.location}>
+                <Text
+                    style={styles.input}> 30A chemin valois; Harnes, France
+                </Text>
+
+            </View>
             </View>
         );
     }
@@ -35,20 +44,14 @@ const styles = StyleSheet.create({
         color: '#1b1b1b',
         textAlign: 'center',
         fontSize: 13,
-        left:-15
+        marginRight:10
     },
     input: {
-        color: 'black',
+        color: '#6f6f6f',
     },
     location:{
         flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        borderRadius: 10,
-        backgroundColor:'#f0f0f0',
-        padding:10,
-        margin:10
+
 
     }
 });
