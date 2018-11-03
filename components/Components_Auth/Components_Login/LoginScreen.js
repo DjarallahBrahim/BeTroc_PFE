@@ -4,10 +4,11 @@ import Form from './Form';
 import Wallpaper from './Wallpaper';
 import ButtonSubmit from './ButtonSubmit';
 import SignupSection from './SignupSection';
-import {StyleSheet, KeyboardAvoidingView, TouchableOpacity, Keyboard} from "react-native";
+import {StyleSheet, KeyboardAvoidingView, TouchableOpacity, Keyboard, Image, SafeAreaView} from "react-native";
 import Login_service from "../../../Services/Auth_Service/Login_service";
 import SocialSingInButton from "./SocialSingInButton";
 
+import backButtonimg from "../../../assets/images/left-arrow.png";
 export default class LoginScreen extends Component {
 
 
@@ -53,6 +54,7 @@ render() {
             <TouchableOpacity activeOpacity={1} onPress={Keyboard.dismiss}>
               <Wallpaper>
                   <KeyboardAvoidingView behavior="padding" style={styles.container}>
+                        <Image source={backButtonimg} style={{top:25, left: 10, width:30, height:30}} onPress = {()=>{}}/>
                         <EmptySpace />
                         <Form handlerUserName={this.handlerUserName} handlerUserPassword={this.handlerUserPassword}/>
                         <SignupSection />
@@ -70,6 +72,5 @@ render() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-
     }
 });
