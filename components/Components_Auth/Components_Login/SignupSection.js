@@ -5,9 +5,10 @@ import SocialIcon from "react-native-elements/src/social/SocialIcon";
 
 export default class SignupSection extends Component {
     render() {
+        const { navigation } = this.props;
         return (
                 <View style={styles.textOption}>
-                    <Text style={styles.text}>Create Account</Text>
+                    <Text style={styles.text} onPress = {() => navigation.replace("Singup")}>Create Account</Text>
                     <Text style={styles.text}>Forgot Password?</Text>
                 </View>
         );

@@ -55,8 +55,8 @@ render() {
                   <KeyboardAvoidingView behavior="padding" style={styles.container}>
                         <EmptySpace />
                         <Form handlerUserName={this.handlerUserName} handlerUserPassword={this.handlerUserPassword}/>
-                        <SignupSection />
-                      <SocialSingInButton/>
+                        <SignupSection navigation={this.props.navigation} />
+                        <SocialSingInButton/>
                         <ButtonSubmit submit={this.submit} />
                   </KeyboardAvoidingView>
 
