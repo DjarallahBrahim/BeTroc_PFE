@@ -17,7 +17,7 @@ export default class Mapview extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                {
+
                     <MapView
                         zoomEnabled={true}
                         zoomControlEnabled={false}
@@ -36,7 +36,6 @@ export default class Mapview extends React.Component {
                             strokeColor="red"
                             fillColor='rgba(225, 8, 14, 0.2)'/>
                     </MapView>
-                }
             </View>
         );
     }
