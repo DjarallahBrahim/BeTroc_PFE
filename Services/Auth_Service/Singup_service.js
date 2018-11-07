@@ -14,8 +14,7 @@ export default class Singup_service {
     static singupHandler(userName, email, password) {
 
         return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                axios.post("http://172.20.10.5:5000/api/auth/signup", {
+                axios.post("http://192.168.1.46:5000/api/auth/signup", {
                      name: "namename",
                      username: userName,
                      email: email,
@@ -23,13 +22,12 @@ export default class Singup_service {
                 })
                     .then((response) => {
                         Singup_service._loginResolve(response);
-                        //resolve(true)
+                        resolve()
                     })
                     .catch((error) => {
                         Singup_service._handlerErrorLogin(error);
-                        //resolve(false)
+                        resolve()
                     });
-            }, 2000);
         });
     }
 

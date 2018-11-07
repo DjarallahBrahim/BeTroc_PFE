@@ -51,9 +51,9 @@ export default class LoginScreen extends Component {
         const password = this.state.userPassword;
 
         if (LoginScreen.checkInput(userName, password)) {
-            Login_service.loginHandler(userName, password).then((status) => doneLoading(status)); //TODO: creat user model and save his data
+            Login_service.loginHandler(userName, password).then((status) => doneLoading()); //TODO: creat user model and save his data
         } else {
-            doneLoading(false)
+            doneLoading()
         }
     }
 

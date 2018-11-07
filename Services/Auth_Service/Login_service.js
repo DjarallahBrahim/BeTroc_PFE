@@ -16,20 +16,18 @@ export default class Login_service {
     static loginHandler(userName, password) {
 
        return new Promise((resolve, reject) => {
-           setTimeout(() => {
-               axios.post("http://172.20.10.5:5000/api/auth/signin", {
+               axios.post("http://192.168.1.46:5000/api/auth/signin", {
                    usernameOrEmail: userName,
                    password: password
                })
                    .then((response) => {
                        Login_service._loginResolve(response);
-                       resolve(true)
+                       resolve()
                    })
                    .catch((error) => {
                        Login_service._handlerErrorLogin(error);
-                       resolve(false)
+                       resolve()
                    });
-           }, 2000);
        });
     }
 
@@ -70,7 +68,7 @@ export default class Login_service {
      * Sing in with facebook SDK
      * @returns {Promise<void>}
      */
-    static async singInWithFacebookAsync() {
+    static async authWithFacebookAsync() {
         const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('255796728390540', {
             permissions: ['public_profile'],
         });
@@ -94,7 +92,7 @@ export default class Login_service {
      * SingIn with Google+ SDK
      * @returns {Promise<*>}
      */
-    static async signInWithGoogleAsync() {
+    static async authWithGoogleAsync() {
         try {
             const result = await Expo.Google.logInAsync({
                 androidClientId: "299540432340-nfb0n0fpjkl1b18png98ufi4d1sr59f1.apps.googleusercontent.com",
