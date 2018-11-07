@@ -74,6 +74,6 @@ const styles = StyleSheet.create({
         //flex: 1,
         height: 200,
         alignItems: 'center',
-        marginBottom:30
+        //marginBottom:30
     },
 });

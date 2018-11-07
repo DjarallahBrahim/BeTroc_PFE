@@ -39,11 +39,11 @@ export default class UserInput extends Component {
                 <TextInput
                     style={styles.input}
                     placeholder={this.props.placeholder}
+                    placeholderTextColor={"rgba(0, 0, 0, 0.5)"}
                     secureTextEntry={this.state.showPass}
                     autoCorrect={this.props.autoCorrect}
                     autoCapitalize={this.props.autoCapitalize}
                     returnKeyType={this.props.returnKeyType}
-                    placeholderTextColor="white"
                     underlineColorAndroid='transparent'
                     onChangeText={this.props.handler}
                 />
@@ -68,13 +68,13 @@ const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
     input: {
-        backgroundColor: 'rgba(255, 255, 255, 0.4)',
+        backgroundColor: 'rgba(255, 255, 255, 0.8)',
         width: DEVICE_WIDTH - 40,
         height: 40,
         marginHorizontal: 20,
         paddingLeft: 45,
-        borderRadius: 20,
-        color: 'white',
+        borderRadius: 10,
+        color: 'black',
     },
     inputWrapper: {
         width: DEVICE_WIDTH,
@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
         height: 22,
         left: 35,
         top: 9,
+        tintColor:'black'
     },inlineImgOn: {
         position: 'absolute',
         zIndex: 99,

@@ -18,7 +18,7 @@ const MIN_PASS_LENGTH = 6;
 export default class SignupScreen extends Component {
     static navigationOptions = {
         header: null,
-        gesturesEnabled : false,
+        gesturesEnabled: false,
     };
 
     constructor(props) {
@@ -26,8 +26,9 @@ export default class SignupScreen extends Component {
         this.state = {
             userName: "",
             userMail: "",
-            userPassword:"",
-            userPasswordConfirmation:""
+            userPassword: "",
+            userPasswordConfirmation: "",
+            socialAuthButtonStatu: true
         };
         this.handlerUserName = this.handlerUserName.bind(this);
         this.handlerUserMail = this.handlerUserMail.bind(this);
@@ -35,36 +36,39 @@ export default class SignupScreen extends Component {
         this.handlerPasswordConfirmation = this.handlerPasswordConfirmation.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
+        this.keyboardDidShow = this.keyboardDidShow.bind(this);
+        this.keyboardDidHide = this.keyboardDidHide.bind(this);
+
         //Get navigation props
         this.navigation = this.props.navigation;
     }
 
-    handlerUserName(username){
-        this.setState({userName:username});
+    handlerUserName(username) {
+        this.setState({userName: username});
     }
 
-    handlerUserMail(email){
-        this.setState({userMail:email});
+    handlerUserMail(email) {
+        this.setState({userMail: email});
     }
 
-    handlerUserPassword(password){
-        this.setState({userPassword:password});
+    handlerUserPassword(password) {
+        this.setState({userPassword: password});
     }
 
-    handlerPasswordConfirmation(password){
-        this.setState({userPasswordConfirmation:password});
+    handlerPasswordConfirmation(password) {
+        this.setState({userPasswordConfirmation: password});
     }
 
-    handleSubmit(doneLoading){
+    handleSubmit(doneLoading) {
         const userName = this.state.userName;
         const userMail = this.state.userMail;
         const password = this.state.userPassword;
         const passwordConfirmation = this.state.userPasswordConfirmation;
 
 
-        if(SignupScreen.checkInput(userName, userMail, password,passwordConfirmation)){
+        if (SignupScreen.checkInput(userName, userMail, password, passwordConfirmation)) {
             Singup_service.singupHandler(userName, userMail, password).then(() => doneLoading()); //TODO: create user model and save his data
-        }else{
+        } else {
             //alert('Veuillez saisir votre username/email et mot de passe')
             doneLoading()
         }
@@ -79,16 +83,15 @@ export default class SignupScreen extends Component {
     }
 
     static checkInput(...argument) {
-        if(argument.includes("")) {
+        if (argument.includes("")) {
             alert("Veuillez saisir votre username/email et mot de passe");
         }
         else if (!SignupScreen.checkPasswordLength(argument[2].toString())) {
             alert("Password must have at least 6 caracters");
         }
-        else if (!SignupScreen.checkPasswordConfirm(argument[2], argument[3]))
-        {
+        else if (!SignupScreen.checkPasswordConfirm(argument[2], argument[3])) {
             alert("Password's confirmation doesn't match");
-        }else
+        } else
             return true;
     }
 
@@ -97,40 +100,63 @@ export default class SignupScreen extends Component {
         this.navigation.navigate('Profil');
     }
 
-render() {
-    const config = {
-        velocityThreshold: 1,
-        directionalOffsetThreshold: 80
-    };
-    return (
-        <GestureRecognizer onSwipeDown={() => this.onSwipeDown()}
-                           config={config}
-                           style={{
-                               flex: 1,
-                           }}
-        >
-            <TouchableOpacity activeOpacity={1} onPress={Keyboard.dismiss}>
-              <Wallpaper typescreen="Singup">
-                  <KeyboardAvoidingView behavior="padding" style={styles.container}>
-                      <TouchableHighlight underlayColor="transparent"
-                                          style={{flex: 1}}
-                                          onPress={() => this.navigation.navigate('Profil')}>
-                          <Image source={backbuttonimg} style={{top: 25, left: 10, width: 30, height: 30}}/>
-                      </TouchableHighlight>
-                      <EmptySpace />
-                        <Form handlerUserName={this.handlerUserName}
-                              handlerUserMail={this.handlerUserMail}
-                              handlerUserPassword={this.handlerUserPassword}
-                              handlerPasswordConfirmation={this.handlerPasswordConfirmation}/>
-                      <SocialAuthButton service={Singup_service}/>
-                        <ButtonSubmit text="Login" handleSubmit={this.handleSubmit} />
-                  </KeyboardAvoidingView>
+    componentDidMount () {
+        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
+        this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
+    }
 
-              </Wallpaper>
-            </TouchableOpacity>
-        </GestureRecognizer>
-    );
-  }
+    componentWillUnmount () {
+        this.keyboardDidShowListener.remove();
+        this.keyboardDidHideListener.remove();
+    }
+
+     keyboardDidShow () {
+         this.setState({socialAuthButtonStatu:false})
+    }
+     keyboardDidHide () {
+         this.setState({socialAuthButtonStatu:true})
+    }
+
+    render() {
+        let SocialAuthButtonView;
+        if (this.state.socialAuthButtonStatu)
+            SocialAuthButtonView = <SocialAuthButton service={Singup_service}/>;
+
+        const config = {
+            velocityThreshold: 1,
+            directionalOffsetThreshold: 80
+        };
+        return (
+            <GestureRecognizer onSwipeDown={() => this.onSwipeDown()}
+                               config={config}
+                               style={{
+                                   flex: 1,
+                               }}
+            >
+                <TouchableOpacity activeOpacity={1} onPress={Keyboard.dismiss}>
+                    <Wallpaper typescreen="Singup">
+                        <KeyboardAvoidingView behavior="padding" style={styles.container}>
+                            <TouchableHighlight underlayColor="transparent"
+                                                style={{flex: 1}}
+                                                onPress={() => this.navigation.navigate('Profil')}>
+                                <Image source={backbuttonimg} style={{top: 25, left: 10, width: 30, height: 30}}/>
+                            </TouchableHighlight>
+                            <EmptySpace/>
+                            <Form handlerUserName={this.handlerUserName}
+                                  handlerUserMail={this.handlerUserMail}
+                                  handlerUserPassword={this.handlerUserPassword}
+                                  handlerPasswordConfirmation={this.handlerPasswordConfirmation}/>
+
+                            )}
+                            {SocialAuthButtonView}
+                            <ButtonSubmit text="Register" handleSubmit={this.handleSubmit}/>
+                        </KeyboardAvoidingView>
+
+                    </Wallpaper>
+                </TouchableOpacity>
+            </GestureRecognizer>
+        );
+    }
 }
 
 

@@ -1,5 +1,13 @@
 import React, {Component} from 'react';
-import {StyleSheet, KeyboardAvoidingView, TouchableOpacity, Keyboard, Image, TouchableHighlight} from "react-native";
+import {
+    StyleSheet,
+    KeyboardAvoidingView,
+    TouchableOpacity,
+    Keyboard,
+    Image,
+    TouchableHighlight,
+    View
+} from "react-native";
 import GestureRecognizer from 'react-native-swipe-gestures';
 
 import EmptySpace from '../components/Components_Auth/Commun/EmptySpace';
@@ -95,10 +103,21 @@ export default class LoginScreen extends Component {
                                 <Image source={backbuttonimg} style={{top: 25, left: 10, width: 30, height: 30}}/>
                             </TouchableHighlight>
                             <EmptySpace/>
-                            <Form handlerUserName={this.handlerUserName}
-                                  handlerUserPassword={this.handlerUserPassword}/>
-                            <SignupSection navigation={this.props.navigation}/>
-                            <SocialAuthButton service={Login_service}/>
+                            {/*<View style={{*/}
+                                {/*flexDirection: "column",*/}
+                                {/*alignItems: 'center',*/}
+                                {/*justifyContent: 'center',*/}
+                                {/*backgroundColor: 'rgba(255, 255, 255, 0.3)',*/}
+                                {/*height:200,*/}
+                                {/*padding: 10,*/}
+                                {/*margin: 10,*/}
+                                {/*borderRadius: 20,*/}
+                                {/*}}>*/}
+                                <Form handlerUserName={this.handlerUserName}
+                                      handlerUserPassword={this.handlerUserPassword}/>
+                                <SignupSection navigation={this.props.navigation}/>
+                                <SocialAuthButton service={Login_service}/>
+                            {/*</View>*/}
                             <ButtonSubmit text="Login" handleSubmit={this.handleSubmit} />
                         </KeyboardAvoidingView>
 

@@ -3,6 +3,7 @@ import {StyleSheet, View,Image, TouchableHighlight, Text} from 'react-native';
 import Login_service from "../../../Services/Auth_Service/Login_service";
 
 import logoImg from '../../../assets/images/logo.png';
+import Singup_service from "../../../Services/Auth_Service/Singup_service";
 
 export default class SocialAuthButton extends Component {
     render() {
@@ -13,20 +14,19 @@ export default class SocialAuthButton extends Component {
                     style={styles.buttonFacebook}
                     onPress={this.props.service.authWithFacebookAsync}
                 >
-                    <Text style={styles.text}> Facebook Login </Text>
+                    <Text style={styles.text}> Use Facebook </Text>
                 </TouchableHighlight>
 
                 <TouchableHighlight
                     style={styles.buttonGoogle}
                     onPress={this.props.service.authWithGoogleAsync}
                 >
-                    <Text style={styles.text}> Gmail Login </Text>
+                    <Text style={styles.text}> Use Gmail </Text>
                 </TouchableHighlight>
             </View>
         );
     }
 }
-
 const styles = StyleSheet.create({
     container: {
 
@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent: 'space-around',
         marginLeft:25,
-        marginRight:25
-
+        marginRight:25,
+        marginTop: 20,
     },
     image: {
         width: 80,
