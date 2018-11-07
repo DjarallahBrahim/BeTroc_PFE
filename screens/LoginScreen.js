@@ -1,15 +1,19 @@
 import React, {Component} from 'react';
-import EmptySpace from '../components/Components_Auth/Components_Login/EmptySpace';
-import Form from '../components/Components_Auth/Components_Login/Form';
-import Wallpaper from '../components/Components_Auth/Components_Login/Wallpaper';
-import ButtonSubmit from '../components/Components_Auth/Components_Login/ButtonSubmit';
-import SignupSection from '../components/Components_Auth/Components_Login/SignupSection';
 import {StyleSheet, KeyboardAvoidingView, TouchableOpacity, Keyboard, Image, TouchableHighlight} from "react-native";
+import GestureRecognizer from 'react-native-swipe-gestures';
+
+import EmptySpace from '../components/Components_Auth/Commun/EmptySpace';
+import ButtonSubmit from '../components/Components_Auth/Commun/ButtonSubmit';
+import SocialAuthButton from "../components/Components_Auth/Commun/SocialAuthButton";
+
+import Form from '../components/Components_Auth/Components_Login/Form';
+import Wallpaper from '../components/Components_Auth/Commun/Wallpaper';
+import SignupSection from '../components/Components_Auth/Components_Login/SignupSection';
 import Login_service from "../Services/Auth_Service/Login_service";
-import SocialSingInButton from "../components/Components_Auth/Components_Login/SocialSingInButton";
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+
 
 import backbuttonimg from "../assets/images/left-arrow.png";
+const MIN_PASS_LENGTH = 6;
 
 export default class LoginScreen extends Component {
     static navigationOptions = {
@@ -26,7 +30,7 @@ export default class LoginScreen extends Component {
         //Bind the handlers
         this.handlerUserName = this.handlerUserName.bind(this);
         this.handlerUserPassword = this.handlerUserPassword.bind(this);
-        this.submit = this.submit.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
 
         //Get navigation props
         this.navigation = this.props.navigation;
@@ -42,21 +46,28 @@ export default class LoginScreen extends Component {
     }
 
 
-    submit(doneLoading) {
+    handleSubmit(doneLoading) {
         const userName = this.state.userName;
         const password = this.state.userPassword;
 
         if (LoginScreen.checkInput(userName, password)) {
-            //Login_service.loginUser (userName, password, LoginScreen.loginResolve, LoginScreen.loginReject, LoginScreen.handlerError).then(() => doneLoading());
             Login_service.loginHandler(userName, password).then((status) => doneLoading(status)); //TODO: creat user model and save his data
         } else {
-            alert('Veuillez saisir votre username/email et mot de passe')
             doneLoading(false)
         }
     }
 
-    static checkInput(username, password) {
-        return username && password;
+    static checkPasswordLength(pass) {
+        return pass.length >= MIN_PASS_LENGTH;
+    }
+
+    static checkInput(...argument) {
+        if(argument.includes(""))
+            alert('Veuillez saisir votre identifiants')
+        else if(!LoginScreen.checkPasswordLength(argument[1]))
+            alert("Password must have at least 6 caracters");
+        else
+            return true;
     }
 
     onSwipeDown() {
@@ -76,7 +87,7 @@ export default class LoginScreen extends Component {
                                }}
             >
                 <TouchableOpacity activeOpacity={1} onPress={Keyboard.dismiss}>
-                    <Wallpaper>
+                    <Wallpaper typescreen="Login">
                         <KeyboardAvoidingView behavior="padding" style={styles.container}>
                             <TouchableHighlight underlayColor="transparent"
                                                 style={{flex: 1}}
@@ -87,8 +98,8 @@ export default class LoginScreen extends Component {
                             <Form handlerUserName={this.handlerUserName}
                                   handlerUserPassword={this.handlerUserPassword}/>
                             <SignupSection navigation={this.props.navigation}/>
-                            <SocialSingInButton/>
-                            <ButtonSubmit submit={this.submit}/>
+                            <SocialAuthButton service={Login_service}/>
+                            <ButtonSubmit text="Login" handleSubmit={this.handleSubmit} />
                         </KeyboardAvoidingView>
 
                     </Wallpaper>

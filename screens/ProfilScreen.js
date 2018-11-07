@@ -6,8 +6,6 @@ import {
     View,
     Button, TouchableHighlight
 } from 'react-native';
-import MainLogin from "../components/Components_Auth/Components_Login/MainLogin";
-import {Actions} from "react-native-router-flux/index";
 
 export default class ProfilScreen extends React.Component {
     static navigationOptions = {

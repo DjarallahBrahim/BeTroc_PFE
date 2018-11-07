@@ -3,10 +3,11 @@ import {StyleSheet, KeyboardAvoidingView, TouchableOpacity, Keyboard, TouchableH
 import GestureRecognizer from 'react-native-swipe-gestures';
 
 //Components
+import Wallpaper from '../components/Components_Auth/Commun/Wallpaper';
 import EmptySpace from '../components/Components_Auth/Commun/EmptySpace';
-import Form from '../components/Components_Auth/Components_SingUp/Form';
-import Wallpaper from '../components/Components_Auth/Components_SingUp/Wallpaper';
 import ButtonSubmit from '../components/Components_Auth/Commun/ButtonSubmit';
+
+import Form from '../components/Components_Auth/Components_SingUp/Form';
 import Singup_service from "../Services/Auth_Service/Singup_service";
 
 //images
@@ -109,7 +110,7 @@ render() {
                            }}
         >
             <TouchableOpacity activeOpacity={1} onPress={Keyboard.dismiss}>
-              <Wallpaper>
+              <Wallpaper typescreen="Singup">
                   <KeyboardAvoidingView behavior="padding" style={styles.container}>
                       <TouchableHighlight underlayColor="transparent"
                                           style={{flex: 1}}

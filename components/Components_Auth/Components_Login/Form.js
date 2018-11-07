@@ -2,16 +2,14 @@ import React, {Component} from 'react';
 import {
   StyleSheet,
   View,
-  TouchableOpacity,
-  Image,
+
 } from 'react-native';
 
-import UserInput from './UserInput';
+import UserInput from '../Commun/UserInput';
 
 
 import usernameImg from '../../../assets/images/username.png';
 import passwordImg from '../../../assets/images/password.png';
-import eyeImg from '../../../assets/images/eye_black.png';
 
 export default class Form extends Component {
   constructor(props) {
@@ -32,30 +30,23 @@ export default class Form extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <UserInput
-          source={usernameImg}
-          placeholder="Username"
-          autoCapitalize={'none'}
-          returnKeyType={'done'}
-          autoCorrect={false}
-          handlerInput={this.props.handlerUserName}
-        />
-
-        <UserInput
-          source={passwordImg}
-          secureTextEntry={this.state.showPass}
-          placeholder="Password"
-          returnKeyType={'done'}
-          autoCapitalize={'none'}
-          autoCorrect={false}
-          handlerInput={this.props.handlerUserPassword}
-        />
-        <TouchableOpacity
-          activeOpacity={0.7}
-          style={styles.btnEye}
-          onPress={this.showPass}>
-          <Image source={eyeImg} style={this.state.press ? styles.iconEyeOn : styles.iconEyeOff} />
-        </TouchableOpacity>
+          <UserInput
+              source={usernameImg} 
+              placeholder="username"
+              autoCapitalize={'none'}
+              returnKeyType={'done'}
+              autoCorrect={false}
+              handler={this.props.handlerUserName}
+          />
+          <UserInput
+              source={passwordImg}
+              placeholder="password"
+              secureTextEntry={true}
+              returnKeyType={'done'}
+              autoCapitalize={'none'}
+              autoCorrect={false}
+              handler={this.props.handlerUserPassword}
+          />
       </View>
     );
   }
