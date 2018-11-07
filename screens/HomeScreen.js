@@ -7,7 +7,7 @@ import {
 import Searchbar from "../components/Components_Home/SearchBar";
 import { Divider } from 'react-native-elements'
 import TabsBarView from "../components/Components_Home/TabsBarView";
-
+import * as apiData from "../ApiData/AnnonceData"
 
 export default class HomeScreen extends React.Component {
     static navigationOptions = {
@@ -24,17 +24,17 @@ export default class HomeScreen extends React.Component {
 
 
     getInput = (query) => {
-        console.log(query);
         this.setState(state => ({ ...state, query: query || "" }));
     }
     render() {
+
         return (
             <View style={styles.container}>
                 <React.Fragment>
                     <Searchbar submitSearch={this.getInput}/>
                     <Divider style={{ backgroundColor: '#95a5a6', marginTop:2 }} />
                 </React.Fragment>
-                <TabsBarView navigation={this.props.navigation} />
+                <TabsBarView data={apiData.annonceData} navigation={this.props.navigation} />
             </View>
         );
     }

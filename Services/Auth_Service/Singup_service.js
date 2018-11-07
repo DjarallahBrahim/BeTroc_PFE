@@ -22,7 +22,6 @@ export default class Singup_service {
                      password: password
                 })
                     .then((response) => {
-                        console.log(response.status);
                         Singup_service._loginResolve(response);
                         //resolve(true)
                     })
@@ -103,7 +102,6 @@ export default class Singup_service {
             });
 
             if (result.type === 'success') {
-                console.log(result)
                 return alert(result.accessToken);
             } else {
                 return {cancelled: true};

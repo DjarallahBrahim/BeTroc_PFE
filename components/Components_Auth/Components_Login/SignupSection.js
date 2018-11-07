@@ -8,7 +8,7 @@ export default class SignupSection extends Component {
         const { navigation } = this.props;
         return (
                 <View style={styles.textOption}>
-                    <Text style={styles.text} onPress = {() => navigation.replace("Singup")}>Create Account</Text>
+                    <Text style={styles.text} onPress = {() => navigation.navigate("Singup")}>Create Account</Text>
                     <Text style={styles.text}>Forgot Password?</Text>
                 </View>
         );

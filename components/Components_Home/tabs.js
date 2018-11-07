@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     // Component container
     container: {
         flex: 1,                            // Take up all available space
-        elevation: 3
+        // elevation: 3
     },
     // Tabs row container
     tabsContainer: {
@@ -73,14 +73,14 @@ const styles = StyleSheet.create({
         backgroundColor:'#FFFFFF',           // BackGround color for the tab button
         margin:8,                            // Margin for each button
         borderRadius:15,                      // Radius for each button
-        shadowColor: '#000000',
-        shadowOffset: {
-            width: 0,
-            height: 2
-        },
-        shadowRadius: 5,
-        shadowOpacity: 0.2,
-        elevation: 3
+        // shadowColor: '#000000',
+        // shadowOffset: {
+        //     width: 0,
+        //     height: 2
+        // },
+        // shadowRadius: 5,
+        // shadowOpacity: 0.2,
+        // elevation: 3
     },
     // Active tab container ===> changin the colro
     tabContainerActive: {

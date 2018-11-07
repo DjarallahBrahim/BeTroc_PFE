@@ -19,7 +19,31 @@ import AuthentificationScreen from "../screens/AuthentificationScreen";
 import Annoncedetailscreen from "../screens/Annoncedetailscreen";
 import SingupScreen from "../components/Components_Auth/Components_SingUp/SingupScreen";
 
+const BottomTransition = (index, position, height) => {
+    const sceneRange = [index -1, index, index + 1];
+    const outputHeight = [height, 0, 0];
+    const transition = position.interpolate({
+        inputRange: sceneRange,
+        outputRange: outputHeight
+    });
 
+    return{
+        transform: [{ translateY: transition }]
+    }
+}
+
+const NavigationConfig= () => {
+    return{
+        screenInterpolator: (sceneProps) => {
+            const position = sceneProps.position;
+            const scene = sceneProps.scene;
+            const index = scene.index;
+            const height = sceneProps.layout.initHeight;
+
+            return BottomTransition(index, position, height)
+        }
+    }
+}
 
 //Stack-Navigator creation with navigationOptions
 
@@ -78,7 +102,7 @@ const ProfilStack = createStackNavigator({
     Profil: ProfilScreen,
     Auth: AuthentificationScreen,
     Singup: SingupScreen,
-});
+}, { transitionConfig: NavigationConfig});
 
 ProfilStack.navigationOptions =({ navigation }) => {
     let { routeName } = navigation.state.routes[navigation.state.index];

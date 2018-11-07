@@ -51,14 +51,14 @@ const styles = StyleSheet.create({
             marginRight:10,
             marginLeft:10,
             marginTop:5,
-            shadowColor: '#000000',
-            shadowOffset: {
-                width: 0,
-                height: 2
-            },
-            shadowRadius: 5,
-            shadowOpacity: 0.1,
-            elevation: 3
+            // shadowColor: '#000000',
+            // shadowOffset: {
+            //     width: 0,
+            //     height: 2
+            // },
+            // shadowRadius: 5,
+            // shadowOpacity: 0.1,
+            // elevation: 3
         }
 
 });

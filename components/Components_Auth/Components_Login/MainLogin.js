@@ -14,6 +14,7 @@ export default class MainLogin extends Component {
 		      animation='fade'
 	          hideNavBar={true}
 	          initial={true}
+		      navigation={this.props.navigation}
 	        />
 	        <Scene key="secondScreen"
 	          component={SecondScreen}

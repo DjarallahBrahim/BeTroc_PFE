@@ -6,7 +6,6 @@ import {
     View,
 } from 'react-native';
 import MainLogin from "../components/Components_Auth/Components_Login/MainLogin";
-import LoginScreen from "../components/Components_Auth/Components_Login/LoginScreen";
 
 export default class AuthentificationScreen extends React.Component {
     static navigationOptions = {
@@ -16,7 +15,7 @@ export default class AuthentificationScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <LoginScreen navigation={this.props.navigation}/>
+                <MainLogin navigation={this.props.navigation}/>
             </View>
         );
     }

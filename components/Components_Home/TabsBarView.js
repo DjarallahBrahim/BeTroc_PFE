@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+    FlatList,
     ScrollView,
     StyleSheet,
     Text,
@@ -13,6 +14,7 @@ export default class TabsBarView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            annoncesData:this.props.data,
             annonces: [
                 {
                     title: 'Image Title',
@@ -41,20 +43,35 @@ export default class TabsBarView extends React.Component {
                     image: 'https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg'
                 }
             ]
-
         }
+
+
+
     }
 
 
-
-
+    componentDidMount(){
+      //  console.log(this.state.annoncesData.data)
+    }
+//TODO get data from Categories(categori(item,item)))
 
     render() {
+        const {data}= this.state.annoncesData;
+        setTimeout(()=>{
+            Object.values(data).map( (item, index)=> {
+                    console.log(`###########################index= ${index}###########################`);
+                    console.log(item);
+
+
+            });
+        },2000);
         const {navigation} = this.props;
         return (
             <View style={styles.container}>
                 <Tabs>
                     {/* First tab */}
+
+
                     <View title="Èchange" style={styles.content}>
                         <ScrollView>
                             <Categorie navigation={navigation} data={ this.state.annonces} />

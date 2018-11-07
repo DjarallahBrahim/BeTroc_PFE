@@ -50,6 +50,8 @@ export default class LoginScreen extends Component {
     }
 
 render() {
+    const { navigation } = this.props;
+
     return (
             <TouchableOpacity activeOpacity={1} onPress={Keyboard.dismiss}>
               <Wallpaper>

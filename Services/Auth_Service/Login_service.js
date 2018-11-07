@@ -22,7 +22,6 @@ export default class Login_service {
                    password: password
                })
                    .then((response) => {
-                       console.log(response.status);
                        Login_service._loginResolve(response);
                        resolve(true)
                    })

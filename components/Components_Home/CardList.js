@@ -13,7 +13,6 @@ export default class CardList extends React.Component {
 
     renderCategorie() {
         const {data} = this.props;
-        console.log(data);
         const { navigation } = this.props;
         return (
             <View style={styles.container} >

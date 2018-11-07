@@ -16,7 +16,7 @@ export default class Adresselocation extends React.Component {
                 alignItems: 'center',
                 justifyContent: 'center',
                 borderRadius: 50,
-                backgroundColor:'#f0f0f0',
+                backgroundColor:'#00000000',
                 padding:10,
                 marginHorizontal:10}}>
                 <Icon

@@ -66,7 +66,7 @@ render() {
                               handlerUserMail={this.handlerUserMail}
                               handlerUserPassword={this.handlerUserPassword}/>
                         <SignupSection />
-                      <SocialSingInButton/>
+                      {/*<SocialSingInButton/>*/}
                         <ButtonSubmit submit={this.submit} />
                   </KeyboardAvoidingView>
 
