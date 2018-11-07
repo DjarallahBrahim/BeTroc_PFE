@@ -20,7 +20,7 @@ export default class ProfilScreen extends React.Component {
             <View style={styles.container}>
                 <Button
                     onPress={() => {
-                        this.props.navigation.navigate('Auth')
+                        this.props.navigation.navigate('Auth',this.props.navigationOptions)
                     }}
                     title="Login-Screen"
                     style={{"marginTop": 10}}
@@ -28,7 +28,7 @@ export default class ProfilScreen extends React.Component {
                 <TouchableHighlight style={{"marginTop": 10}}>
                 <Button
                     onPress={() => {
-                        this.props.navigation.navigate('Singup')
+                        this.props.navigation.navigate('Singup', this.props.navigationOptions)
                     }}
                     title="Singup-Screen"
 

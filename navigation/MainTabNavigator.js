@@ -15,9 +15,9 @@ import MessageScreen from '../screens/MessageScreen';
 import AddAnnonceScreen from '../screens/AddAnnonceScreen';
 import ProfilScreen from '../screens/ProfilScreen';
 import MapScreen from '../screens/MapScreen';
-import AuthentificationScreen from "../screens/AuthentificationScreen";
 import Annoncedetailscreen from "../screens/Annoncedetailscreen";
-import SingupScreen from "../components/Components_Auth/Components_SingUp/SingupScreen";
+import SignupScreen from "../screens/SignupScreen";
+import LoginScreen from "../screens/LoginScreen";
 
 const BottomTransition = (index, position, height) => {
     const sceneRange = [index -1, index, index + 1];
@@ -100,8 +100,8 @@ AddAnnonceStack.navigationOptions = {
 
 const ProfilStack = createStackNavigator({
     Profil: ProfilScreen,
-    Auth: AuthentificationScreen,
-    Singup: SingupScreen,
+    Auth: LoginScreen,
+    Singup: SignupScreen,
 }, { transitionConfig: NavigationConfig});
 
 ProfilStack.navigationOptions =({ navigation }) => {

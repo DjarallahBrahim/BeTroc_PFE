@@ -1,23 +1,24 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, TouchableHighlight, Text} from 'react-native';
+import {StyleSheet, View,Image, TouchableHighlight, Text} from 'react-native';
+import Login_service from "../../../Services/Auth_Service/Login_service";
 
-import Singup_service from "../../../Services/Auth_Service/Singup_service";
+import logoImg from '../../../assets/images/logo.png';
 
-export default class SocialSingInButton extends Component {
+export default class SocialAuthButton extends Component {
     render() {
         return (
             <View style={styles.container}>
 
                 <TouchableHighlight
                     style={styles.buttonFacebook}
-                    onPress={Singup_service.singInWithFacebookAsync}
+                    onPress={this.props.service.authWithFacebookAsync}
                 >
                     <Text style={styles.text}> Facebook Login </Text>
                 </TouchableHighlight>
 
                 <TouchableHighlight
                     style={styles.buttonGoogle}
-                    onPress={Singup_service.signInWithGoogleAsync}
+                    onPress={this.props.service.authWithGoogleAsync}
                 >
                     <Text style={styles.text}> Gmail Login </Text>
                 </TouchableHighlight>

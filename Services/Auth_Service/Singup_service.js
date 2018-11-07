@@ -70,7 +70,7 @@ export default class Singup_service {
      * Singup with facebook SDK
      * @returns {Promise<void>}
      */
-    static async singInWithFacebookAsync() {
+    static async authWithFacebookAsync() {
         const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('255796728390540', {
             permissions: ['public_profile','email'],
         });
@@ -93,7 +93,7 @@ export default class Singup_service {
      * Singup with Google+ SDK
      * @returns {Promise<*>}
      */
-    static async signInWithGoogleAsync() {
+    static async authWithGoogleAsync() {
         try {
             const result = await Expo.Google.logInAsync({
                 androidClientId: "299540432340-nfb0n0fpjkl1b18png98ufi4d1sr59f1.apps.googleusercontent.com",

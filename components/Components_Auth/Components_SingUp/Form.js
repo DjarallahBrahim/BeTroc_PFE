@@ -1,97 +1,79 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  Image,
+    StyleSheet,
+    View,
+    Text,
 } from 'react-native';
 
-import UserInput from './UserInput';
-
+import UserInput from '../Commun/UserInput';
 
 import usernameImg from '../../../assets/images/username.png';
 import passwordImg from '../../../assets/images/password.png';
-import eyeImg from '../../../assets/images/eye_black.png';
 
 export default class Form extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showPass: true,
-      press: false,
-    };
-    this.showPass = this.showPass.bind(this);
-  }
+    constructor(props) {
+        super(props);
 
-  showPass() {
-    this.state.press === false
-      ? this.setState({showPass: false, press: true})
-      : this.setState({showPass: true, press: false});
-  }
+    }
 
-  render() {
-    return (
-      <View style={styles.container}>
-          <UserInput
-              source={usernameImg}
-              placeholder="Username"
-              autoCapitalize={'none'}
-              returnKeyType={'done'}
-              autoCorrect={false}
-              handlerInput={this.props.handlerUserName}
-          />
+    render() {
+        return (
+            <View style={styles.globalContainer}>
+                <UserInput
+                    source={usernameImg}
+                    placeholder="Username"
+                    autoCapitalize={'none'}
+                    returnKeyType={'done'}
+                    autoCorrect={false}
+                    handler={this.props.handlerUserName}
+                />
+                <UserInput
+                    source={usernameImg} //TODO change to email Image
+                    placeholder="Email"
+                    autoCapitalize={'none'}
+                    returnKeyType={'done'}
+                    autoCorrect={false}
+                    handler={this.props.handlerUserMail}
+                />
+                <UserInput
+                    source={passwordImg}
+                    placeholder="Password"
+                    secureTextEntry={true}
+                    returnKeyType={'done'}
+                    autoCapitalize={'none'}
+                    autoCorrect={false}
+                    handler={this.props.handlerUserPassword}
+                />
+                <UserInput
+                    source={passwordImg}
+                    secureTextEntry={true}
+                    placeholder="Confirm Password"
+                    returnKeyType={'done'}
+                    autoCapitalize={'none'}
+                    autoCorrect={false}
+                    handler={this.props.handlerPasswordConfirmation}
+                >
+                </UserInput>
 
-        <UserInput
-          source={usernameImg}
-          placeholder="Email"
-          autoCapitalize={'none'}
-          returnKeyType={'done'}
-          autoCorrect={false}
-          handlerInput={this.props.handlerUserMail}
-          keyboardType="email-address"
-          textContentType="emailAddress"
-        />
-
-        <UserInput
-          source={passwordImg}
-          secureTextEntry={this.state.showPass}
-          placeholder="Password"
-          returnKeyType={'done'}
-          autoCapitalize={'none'}
-          autoCorrect={false}
-          handlerInput={this.props.handlerUserPassword}
-        />
-        <TouchableOpacity
-          activeOpacity={0.7}
-          style={styles.btnEye}
-          onPress={this.showPass}>
-          <Image source={eyeImg} style={this.state.press ? styles.iconEyeOn : styles.iconEyeOff} />
-        </TouchableOpacity>
-      </View>
-    );
-  }
+            </View>
+        );
+    }
 }
 
-const styles = StyleSheet.create({
-  container: {
-      //flex: 1,
-      height:150,
-      alignItems: 'center',
-  },
-  btnEye: {
-    position: 'absolute',
-    top: 105,
-    right: 28,
-  },
-  iconEyeOff: {
-    width: 25,
-    height: 25,
-    tintColor: 'rgba(0,0,0,0.2)',
-  },
-  iconEyeOn: {
-      width: 25,
-      height: 25,
-      tintColor: '#EEE',
-  },
 
+Form.propTypes = {
+    handlerUserPassword: PropTypes.func.isRequired,
+    handlerUserName: PropTypes.func.isRequired,
+    handlerPasswordConfirmation: PropTypes.func.isRequired,
+    handlerUserMail: PropTypes.func.isRequired,
+};
+
+const styles = StyleSheet.create({
+    globalContainer: {
+        //flex: 1,
+        height: 200,
+        alignItems: 'center',
+        marginBottom:30
+    },
 });

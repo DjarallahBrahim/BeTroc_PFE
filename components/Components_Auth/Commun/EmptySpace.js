@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, View,Image, TouchableHighlight, Text} from 'react-native';
-import Login_service from "../../../Services/Auth_Service/Login_service";
-
-import logoImg from '../../../assets/images/logo.png';
+import {StyleSheet, View} from 'react-native';
 
 export default class EmptySpace extends Component {
     render() {
@@ -16,7 +13,7 @@ export default class EmptySpace extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 3,
+        flex: 2,
         alignItems: 'center',
         justifyContent: 'center',
     }

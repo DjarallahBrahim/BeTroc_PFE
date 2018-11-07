@@ -70,26 +70,24 @@ export default class TabsBarView extends React.Component {
             <View style={styles.container}>
                 <Tabs>
                     {/* First tab */}
-
-
                     <View title="Èchange" style={styles.content}>
                         <ScrollView>
                             <Categorie navigation={navigation} data={ this.state.annonces} />
-                            <Categorie data={ this.state.annonces} />
-                            <Categorie data={ this.state.annonces} />
+                            <Categorie navigation={navigation} data={ this.state.annonces} />
+                            <Categorie navigation={navigation} data={ this.state.annonces} />
 
                         </ScrollView>
                     </View>
                     {/* Second tab */}
                     <View title="Demande" style={styles.content}>
                         <ScrollView>
-                            <Categorie data={ this.state.annonces2}/>
+                            <Categorie navigation={navigation} data={ this.state.annonces2}/>
                         </ScrollView>
                     </View>
                     {/* Third tab */}
                     <View title="Don" style={styles.content}>
                         <ScrollView>
-                            <Categorie data={ this.state.annonces} />
+                            <Categorie navigation={navigation} data={ this.state.annonces} />
                         </ScrollView>
                     </View>
 
