@@ -3,12 +3,11 @@ import {
     View,
     SafeAreaView,
     Platform,
-    Text, StyleSheet
+    TextInput, StyleSheet
 } from "react-native";
 import { Icon } from 'react-native-elements'
 import { SearchBar } from 'react-native-elements'
 import Colors from '../../constants/Colors';
-import TextInput from "react-native-paper/src/components/TextInput";
 
 export default class Searchbar extends React.Component {
 
@@ -48,19 +47,22 @@ export default class Searchbar extends React.Component {
                         justifyContent: 'center',
                         alignItems: 'center',
                         padding: 10,
-                        height:50,
+                        height:40,
                         backgroundColor: 'white',
+                        borderRadius:20,
+                        marginBottom:5,
+                        marginTop:5
                     }}>
                         <Icon name="search"
-                              size={20}
-                              style={{ marginRight: 10 }}
+                              size={25}
+                              style={{ marginRight: 10, marginTop:5 }}
                               onPress={this.Onsubmit}/>
                         <TextInput
                             onChangeText={this.handleQueryChange}
                             underlineColorAndroid="transparent"
                             placeholder="Recherche"
-                            placeholderTextColor="grey"
-                            style={{ flex: 1,  backgroundColor: 'white' }}
+                            placeholderTextColor="rgba(0,0,0,0.5)"
+                            style={{ flex: 1, marginHorizontal: 15,fontSize:16,marginTop:5, backgroundColor: 'white' }}
                         />
                         <Icon name="filter-list"
                               size={20}
@@ -84,11 +86,13 @@ const styles = StyleSheet.create({
         marginTop: Platform.OS === 'android' ? 30 : null ,
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+
     },
     safeArea: {
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginHorizontal:5
     },
     viewIcon: {
         flex:1,

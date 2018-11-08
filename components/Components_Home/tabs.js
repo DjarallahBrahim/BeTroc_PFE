@@ -6,7 +6,8 @@ import {
     View,                // Container component
     Image
 } from 'react-native';
-import { Icon } from 'react-native-elements'
+import {Divider, Icon} from 'react-native-elements'
+import Colors from "../../constants/Colors";
 
 export default class Tabs extends Component {
 
@@ -28,9 +29,9 @@ export default class Tabs extends Component {
                                 key={index}>
 
                                 <Icon
-                                    size={26}
+                                    size={22}
                                     name= {index=== 0 ?'swap-vert': index=== 2 ? 'favorite-border' : 'playlist-add'}
-                                    color={ index === this.state.activeTab ? '#FFFFFF' : '#F07818'}
+                                    color={ index === this.state.activeTab ? Colors.tintColor : "white"}
                                     underlayColor={'#00000000'}
 
                                 />
@@ -45,6 +46,7 @@ export default class Tabs extends Component {
                             </TouchableOpacity>
                         )}
                 </View>
+                <Divider style={{ backgroundColor: 'rgba(0,0,0,0.3)' }} />
                 <View style={styles.contentContainer}>
                     {children[this.state.activeTab]}
                 </View>
@@ -57,11 +59,13 @@ const styles = StyleSheet.create({
     // Component container
     container: {
         flex: 1,                            // Take up all available space
-        // elevation: 3
+
     },
     // Tabs row container
     tabsContainer: {
         flexDirection: 'row',               // Arrange tabs in a row
+        backgroundColor:Colors.tintColor,           // BackGround color for the tab button
+
     },
     // Individual tab container
     tabContainer: {
@@ -70,9 +74,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',                // Center all the items tabs in a row
         justifyContent: 'center',            // Put all the item in one line
         paddingVertical: 3,                  // Vertical padding
-        backgroundColor:'#FFFFFF',           // BackGround color for the tab button
+        backgroundColor:Colors.tintColor,           // BackGround color for the tab button
         margin:8,                            // Margin for each button
         borderRadius:15,                      // Radius for each button
+        borderWidth:0.8,
+        borderColor:'white'
         // shadowColor: '#000000',
         // shadowOffset: {
         //     width: 0,
@@ -80,31 +86,26 @@ const styles = StyleSheet.create({
         // },
         // shadowRadius: 5,
         // shadowOpacity: 0.2,
-        // elevation: 3
+        //  elevation: 3
     },
-    // Active tab container ===> changin the colro
     tabContainerActive: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor:'#F07818',
+        backgroundColor:"white",
     },
-    // Tab text default
     tabText: {
-        color: '#F07818',
+        color: 'white',
         textAlign: 'center',
-        fontSize: 10,
+        fontSize: 11,
         fontWeight: 'bold',
     },
-    // Tab text Selected
     tabTextSelected: {
-        color: '#FFFFFF',
-        // fontFamily: 'Avenir',
+        color: Colors.tintColor,
         textAlign: 'center',
-        fontSize: 10,
+        fontSize: 11,
         fontWeight: 'bold',
     },
-    // Content container
     contentContainer: {
         flex: 1                             // Take up all available space
     }

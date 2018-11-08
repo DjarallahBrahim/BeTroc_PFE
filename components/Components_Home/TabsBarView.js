@@ -9,6 +9,7 @@ import {
 import Tabs from './tabs';
 import CardList from "./CardList";
 import Categorie from "./Categorie";
+import Colors from "../../constants/Colors";
 
 export default class TabsBarView extends React.Component {
     constructor(props) {
@@ -70,24 +71,26 @@ export default class TabsBarView extends React.Component {
             <View style={styles.container}>
                 <Tabs>
                     {/* First tab */}
+
+
                     <View title="Èchange" style={styles.content}>
                         <ScrollView>
                             <Categorie navigation={navigation} data={ this.state.annonces} />
-                            <Categorie navigation={navigation} data={ this.state.annonces} />
-                            <Categorie navigation={navigation} data={ this.state.annonces} />
+                            <Categorie data={ this.state.annonces} />
+                            <Categorie data={ this.state.annonces} />
 
                         </ScrollView>
                     </View>
                     {/* Second tab */}
                     <View title="Demande" style={styles.content}>
                         <ScrollView>
-                            <Categorie navigation={navigation} data={ this.state.annonces2}/>
+                            <Categorie data={ this.state.annonces2}/>
                         </ScrollView>
                     </View>
                     {/* Third tab */}
                     <View title="Don" style={styles.content}>
                         <ScrollView>
-                            <Categorie navigation={navigation} data={ this.state.annonces} />
+                            <Categorie data={ this.state.annonces} />
                         </ScrollView>
                     </View>
 
@@ -114,7 +117,7 @@ const styles = StyleSheet.create({
     // Content header
     header: {
         margin: 10,                         // Add margin
-        color: '#F07818',                   // White color
+        color: Colors.tintColor,                   // White color
         // fontFamily: 'Avenir',            // Change font family
         fontSize: 26,                       // Bigger font size
     },
