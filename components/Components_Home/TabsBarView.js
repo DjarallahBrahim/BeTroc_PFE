@@ -60,8 +60,8 @@ export default class TabsBarView extends React.Component {
         const {data}= this.state.annoncesData;
         setTimeout(()=>{
             Object.values(data).map( (item, index)=> {
-                    console.log(`###########################index= ${index}###########################`);
-                    console.log(item);
+                    //console.log(`###########################index= ${index}###########################`);
+                   // console.log(item);
 
 
             });

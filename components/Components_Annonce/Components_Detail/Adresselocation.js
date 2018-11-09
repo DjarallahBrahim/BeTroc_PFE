@@ -6,6 +6,7 @@ import {
     View,
 } from 'react-native';
 import {Icon} from "react-native-elements";
+import Colors from "../../../constants/Colors";
 
 export default class Adresselocation extends React.Component {
 
@@ -22,7 +23,7 @@ export default class Adresselocation extends React.Component {
                 <Icon
                     size={26}
                     name= 'location-on'
-                    color='#F07818'
+                    color={Colors.tintColor}
                     underlayColor={'#00000000'}
                 />
                 <Text  style={styles.tabText}>

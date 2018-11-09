@@ -29,9 +29,9 @@ export default class Tabs extends Component {
                                 key={index}>
 
                                 <Icon
-                                    size={22}
+                                    size={26}
                                     name= {index=== 0 ?'swap-vert': index=== 2 ? 'favorite-border' : 'playlist-add'}
-                                    color={ index === this.state.activeTab ? Colors.tintColor : "white"}
+                                    color={ index === this.state.activeTab ? '#FFFFFF' : Colors.tintColor}
                                     underlayColor={'#00000000'}
 
                                 />
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     // Tabs row container
     tabsContainer: {
         flexDirection: 'row',               // Arrange tabs in a row
-        backgroundColor:Colors.tintColor,           // BackGround color for the tab button
+        backgroundColor:'#FFFFFF',           // BackGround color for the tab button
 
     },
     // Individual tab container
@@ -74,36 +74,34 @@ const styles = StyleSheet.create({
         alignItems: 'center',                // Center all the items tabs in a row
         justifyContent: 'center',            // Put all the item in one line
         paddingVertical: 3,                  // Vertical padding
-        backgroundColor:Colors.tintColor,           // BackGround color for the tab button
+        backgroundColor:'#FFFFFF',           // BackGround color for the tab button
         margin:8,                            // Margin for each button
         borderRadius:15,                      // Radius for each button
-        borderWidth:0.8,
-        borderColor:'white'
         // shadowColor: '#000000',
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 2
-        // },
-        // shadowRadius: 5,
-        // shadowOpacity: 0.2,
-        //  elevation: 3
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowRadius: 5,
+        shadowOpacity: 0.2,
+         elevation: 3
     },
     tabContainerActive: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor:"white",
+        backgroundColor:Colors.tintColor,
     },
     tabText: {
-        color: 'white',
+        color: Colors.tintColor,
         textAlign: 'center',
-        fontSize: 11,
+        fontSize: 12,
         fontWeight: 'bold',
     },
     tabTextSelected: {
-        color: Colors.tintColor,
+        color: '#FFFFFF',
         textAlign: 'center',
-        fontSize: 11,
+        fontSize: 12,
         fontWeight: 'bold',
     },
     contentContainer: {

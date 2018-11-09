@@ -5,6 +5,7 @@ import {
     View,
 } from 'react-native';
 import {Icon} from "react-native-elements";
+import Colors from "../../../constants/Colors";
 
 export default class Contactbutton extends React.Component {
 
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
     },
     contact: {
         alignItems: 'center',
-        backgroundColor: '#F07818',
+        backgroundColor: Colors.tintColor,
         borderRadius: 5,
         flex:0.5,
         marginTop:20,

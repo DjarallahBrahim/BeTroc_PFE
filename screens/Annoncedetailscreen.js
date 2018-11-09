@@ -9,14 +9,16 @@ import Main from "../components/Components_Annonce/Components_Detail/Main";
 
 export default class Annoncedetailscreen extends React.Component {
     static navigationOptions = {
-        title: 'Annoncedetailscreen',
+        header: null,
     };
 
     render() {
         const data = this.props.navigation.getParam("data", {});
+        const navigation = this.props.navigation.getParam("navigation", {});
+        console.log(navigation)
         return (
             <View style={styles.container}>
-               <Main data={data}/>
+                <Main navigation={navigation} data={data}/>
             </View>
         );
     }

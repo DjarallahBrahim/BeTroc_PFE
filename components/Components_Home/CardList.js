@@ -16,7 +16,7 @@ export default class CardList extends React.Component {
         const { navigation } = this.props;
         return (
             <View style={styles.container} >
-                    <TouchableHighlight  onPress={() => navigation.navigate("AnnonceDetail", {data: data})} style={{flex: 2}}>
+                    <TouchableHighlight  onPress={() => navigation.navigate("AnnonceDetail", {data: data,navigation:navigation})} style={{flex: 2}}>
                         <Image source={{uri: data.image}}
                                style={{flex: 1, width: null, height: null, resizeMode: 'cover'}}/>
                     </TouchableHighlight>
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     container: {
         height: 130,
         width: 130,
-        marginLeft: 20,
+        marginLeft: 10,
         borderWidth: 0.5,
         borderColor: '#dddddd',
         shadowOffset: {width: 0, height: 0},

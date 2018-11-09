@@ -5,6 +5,7 @@ import {
     View,
 } from 'react-native';
 import {Icon} from "react-native-elements";
+import Colors from "../../../constants/Colors";
 
 export default class AnnonceDetailBar extends React.Component {
 
@@ -21,7 +22,7 @@ export default class AnnonceDetailBar extends React.Component {
                             <Icon
                                 size={26}
                                 name= 'subdirectory-arrow-right'
-                                color='#F07818'
+                                color={Colors.tintColor}
                                 underlayColor={'#00000000'}
 
                             />
@@ -48,7 +49,7 @@ export default class AnnonceDetailBar extends React.Component {
                             <Icon
                                 size={30}
                                 name= 'playlist-add'
-                                color='#F07818'
+                                color={Colors.tintColor}
                                 underlayColor={'#00000000'}
 
                             />
@@ -75,7 +76,7 @@ export default class AnnonceDetailBar extends React.Component {
                             <Icon
                                 size={26}
                                 name= 'access-time'
-                                color='#F07818'
+                                color={Colors.tintColor}
                                 underlayColor={'#00000000'}
 
                             />
@@ -92,6 +93,7 @@ export default class AnnonceDetailBar extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor:'white'
     },
     tabsContainer: {
         flex: 1,

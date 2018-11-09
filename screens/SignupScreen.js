@@ -147,7 +147,7 @@ export default class SignupScreen extends Component {
                                   handlerUserPassword={this.handlerUserPassword}
                                   handlerPasswordConfirmation={this.handlerPasswordConfirmation}/>
 
-                            )}
+
                             {SocialAuthButtonView}
                             <ButtonSubmit text="Register" handleSubmit={this.handleSubmit}/>
                         </KeyboardAvoidingView>

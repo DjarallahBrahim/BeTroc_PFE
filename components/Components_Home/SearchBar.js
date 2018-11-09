@@ -50,11 +50,11 @@ export default class Searchbar extends React.Component {
                         height:40,
                         backgroundColor: 'white',
                         borderRadius:20,
-                        marginBottom:5,
+                        marginBottom:10,
                         marginTop:5
                     }}>
                         <Icon name="search"
-                              size={25}
+                              size={23}
                               style={{ marginRight: 10, marginTop:5 }}
                               onPress={this.Onsubmit}/>
                         <TextInput
@@ -62,7 +62,7 @@ export default class Searchbar extends React.Component {
                             underlineColorAndroid="transparent"
                             placeholder="Recherche"
                             placeholderTextColor="rgba(0,0,0,0.5)"
-                            style={{ flex: 1, marginHorizontal: 15,fontSize:16,marginTop:5, backgroundColor: 'white' }}
+                            style={{ flex: 1, marginHorizontal: 15,fontSize:16,marginTop:2, backgroundColor: 'white' }}
                         />
                         <Icon name="filter-list"
                               size={20}

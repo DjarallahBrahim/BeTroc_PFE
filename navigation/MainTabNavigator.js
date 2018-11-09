@@ -4,9 +4,7 @@ import { Platform, StyleSheet, Image} from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 //Components imports
-import { AddButton_android } from '../components/Components_TabBar/AddButton_android';
-import { AddButton_ios } from '../components/Components_TabBar/AddButton_ios';
-
+import { Plusbutton } from '../components/Components_TabBar/Plusbutton';
 import TabBarIcon from '../components/Components_TabBar/TabBarIcon';
 
 //screen imports
@@ -93,7 +91,7 @@ const AddAnnonceStack = createStackNavigator({
 
 AddAnnonceStack.navigationOptions = {
         tabBarIcon: ({focused}) => (
-            Platform.OS === 'ios' ? <AddButton_ios focused={focused}/> : <AddButton_android focused={focused}/>
+            <Plusbutton focused={focused}/>
         ),
 
 };
