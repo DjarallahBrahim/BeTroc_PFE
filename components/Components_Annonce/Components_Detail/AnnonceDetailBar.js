@@ -18,7 +18,6 @@ export default class AnnonceDetailBar extends React.Component {
                                 styles.tabContainer,
                             ]}
                             >
-
                             <Icon
                                 size={26}
                                 name= 'subdirectory-arrow-right'
@@ -27,25 +26,15 @@ export default class AnnonceDetailBar extends React.Component {
 
                             />
                             <Text  style={styles.tabText}>
-                                Comme neuf
+                                {this.props.etat}
                             </Text>
 
                         </View>
-                        {/*<View*/}
-                            {/*style={{*/}
-                                {/*borderWidth:1,*/}
-                                {/*borderBottomColor: '#6e6e6e',*/}
-                                {/*borderBottomWidth: 1,*/}
-                                {/*height: 25,*/}
-                                {/*opacity:0.4*/}
-                            {/*}}*/}
-                        {/*/>*/}
                         <View
                             style={[
                                 styles.tabContainer,
                             ]}
                         >
-
                             <Icon
                                 size={30}
                                 name= 'playlist-add'
@@ -54,19 +43,10 @@ export default class AnnonceDetailBar extends React.Component {
 
                             />
                             <Text  style={styles.tabText}>
-                                Èchange
+                                {this.props.type}
                             </Text>
 
                         </View>
-                        {/*<View*/}
-                            {/*style={{*/}
-                                {/*borderWidth:1,*/}
-                                {/*borderBottomColor: '#6e6e6e',*/}
-                                {/*borderBottomWidth: 1,*/}
-                                {/*height: 25,*/}
-                                {/*opacity:0.4*/}
-                            {/*}}*/}
-                        {/*/>*/}
                         <View
                             style={[
                                 styles.tabContainer,
@@ -117,6 +97,4 @@ const styles = StyleSheet.create({
         fontSize: 13,
         marginLeft:8
     },
-
-
 });

@@ -10,29 +10,38 @@ import CardList from "./CardList";
 export default class Categorie extends Component {
     constructor(props) {
         super(props);
-        this.setState.annonces = this.props.data;
+        this.categorie = this.props.categorie;
+
     }
 
     render() {
-        const {navigation} = this.props;
-
+        // console.log("###########################################");
+        // console.log(this.props.categorie);
+        // console.log("###########################################");
+        const {navigation,typeAnnonce} = this.props;
         return (
             <View style={styles.container}>
-                <Text style={{fontSize: 24, fontWeight: '700', paddingHorizontal: 10}}>
-                    One Category for you !
-                </Text>
 
-                <View style={{height: 130, marginTop: 13}}>
-                    <FlatList
-                        horizontal={true}
-                        data={this.props.data}
-                        renderItem={({item,index}) => <CardList navigation={navigation} data={item}/>}
-                        keyExtractor={(item, index) => index.toString()}
-                        showsHorizontalScrollIndicator={false}>
+                {
+                    Object.keys(this.categorie).map((titel, index) =>
+                        <View key={index} style={{flex:1}}>
+                            <Text key={index} style={{fontSize: 24, fontWeight: '700', paddingHorizontal: 10, marginTop:10}}>
+                                {titel}
+                            </Text>
+                            <View style={{height: 130, marginTop: 13}}>
+                                <FlatList
+                                    horizontal={true}
+                                    data={this.categorie[titel]}
+                                    renderItem={({item,index}) => <CardList typeAnnonce={typeAnnonce} navigation={navigation} data={item}/>}
+                                    keyExtractor={(item, index) => index.toString()}
+                                    showsHorizontalScrollIndicator={false}>
+                                </FlatList>
+                            </View>
+                         </View>
 
-                    </FlatList>
-                </View>
+                    )
 
+                }
 
             </View>
         );

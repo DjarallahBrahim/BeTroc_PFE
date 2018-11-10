@@ -15,10 +15,10 @@ export default class Annoncedetailscreen extends React.Component {
     render() {
         const data = this.props.navigation.getParam("data", {});
         const navigation = this.props.navigation.getParam("navigation", {});
-        console.log(navigation)
+        const typeAnnonce = this.props.navigation.getParam("typeAnnonce", {});
         return (
             <View style={styles.container}>
-                <Main navigation={navigation} data={data}/>
+                <Main typeAnnonce={typeAnnonce} navigation={navigation} data={data}/>
             </View>
         );
     }

@@ -8,7 +8,6 @@ import {
 import {Icon} from 'react-native-elements'
 import Hr from "react-native-hr-component";
 
-import ImageProduit from "./ImageProduit";
 import AnnonceDetailBar from "./AnnonceDetailBar";
 import FormDetail from "./FormDetail";
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
@@ -22,6 +21,7 @@ export default class Main extends React.Component {
 
 
     render() {
+        const {data, typeAnnonce} = this.props;
         return (
             <ParallaxScrollView
                 onScroll={() => {
@@ -34,14 +34,18 @@ export default class Main extends React.Component {
                 renderBackground={() => (
 
                     <View key="background">
-                    <Image source={{uri: this.props.data["image"] ,
-                    width: window.width,
-                    height: PARALLAX_HEADER_HEIGHT}}/>
-                    <View style={{position: 'absolute',
-                        top: 0,
-                        width: window.width,
-                        backgroundColor: 'rgba(0,0,0,.4)',
-                        height: PARALLAX_HEADER_HEIGHT}}/>
+                        <Image source={{
+                            uri: data["imgUrl"],
+                            width: window.width,
+                            height: PARALLAX_HEADER_HEIGHT
+                        }}/>
+                        <View style={{
+                            position: 'absolute',
+                            top: 0,
+                            width: window.width,
+                            backgroundColor: 'rgba(0,0,0,.4)',
+                            height: PARALLAX_HEADER_HEIGHT
+                        }}/>
                     </View>
                 )}
 
@@ -51,7 +55,7 @@ export default class Main extends React.Component {
                         <View>
                         </View>
                         <View style={{height: 50}}>
-                            <AnnonceDetailBar/>
+                            <AnnonceDetailBar etat={data["etat"]} type={typeAnnonce} date={data['date']}/>
                         </View>
                     </View>
 
@@ -77,16 +81,16 @@ export default class Main extends React.Component {
             >
 
 
-                <FormDetail title={this.props.data["title"]}/>
+                <FormDetail description={data["description"]} title={data["title"]}/>
                 <Hr lineColor="#D1D1D1" width={1.3} text="Location" textStyles={{
                     color: '#D1D1D1',
                     fontSize: 18,
                     marginBottom: 10,
                     marginTop: 10
                 }}/>
-                <Mapview/>
-                <Adresselocation/>
-                <Contactbutton/>
+                <Mapview location={data['location']}/>
+                <Adresselocation time='25min' adresse={data['adresse']}/>//TODO Calculer le temps
+                <Contactbutton idUser={data['idUser']}/>
             </ParallaxScrollView>
         )
     }

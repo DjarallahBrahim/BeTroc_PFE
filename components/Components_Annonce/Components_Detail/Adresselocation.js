@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-    ScrollView,
     StyleSheet,
     Text,
     View,
@@ -12,14 +11,16 @@ export default class Adresselocation extends React.Component {
 
 
     render() {
+        const {adresse, time} = this.props;
         return (
             <View style={{flex:1, flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'center',
-                borderRadius: 50,
-                backgroundColor:'#00000000',
+                borderRadius: 10,
+                borderColor:'#bab9b0',
+                borderWidth:0.5,
                 padding:10,
-                marginHorizontal:10}}>
+                marginHorizontal:5}}>
                 <Icon
                     size={26}
                     name= 'location-on'
@@ -27,11 +28,11 @@ export default class Adresselocation extends React.Component {
                     underlayColor={'#00000000'}
                 />
                 <Text  style={styles.tabText}>
-                    20min :
+                    {time}
                 </Text>
             <View style={styles.location}>
                 <Text
-                    style={styles.input}> 30A chemin valois; Harnes, France
+                    style={styles.input}> {adresse}
                 </Text>
 
             </View>

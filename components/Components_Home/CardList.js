@@ -12,16 +12,18 @@ export default class CardList extends React.Component {
 
 
     renderCategorie() {
-        const {data} = this.props;
-        const { navigation } = this.props;
+        const {data, navigation, typeAnnonce} = this.props;
+
         return (
             <View style={styles.container} >
-                    <TouchableHighlight  onPress={() => navigation.navigate("AnnonceDetail", {data: data,navigation:navigation})} style={{flex: 2}}>
-                        <Image source={{uri: data.image}}
+                    <TouchableHighlight  onPress={() => navigation.navigate("AnnonceDetail",
+                                                        {data: data,navigation:navigation,typeAnnonce:typeAnnonce})}
+                                                        style={{flex: 2}}>
+                        <Image source={{uri: data.imgUrl}}
                                style={{flex: 1, width: null, height: null, resizeMode: 'cover'}}/>
                     </TouchableHighlight>
                 <View style={{
-                    flex: 1, alignItems: 'center',                // Center all the items tabs in a row
+                    flex: 1, alignItems: 'center',
                     justifyContent: 'center',
                 }}>
                     <Text>{data.title}</Text>
@@ -57,7 +59,7 @@ const styles = StyleSheet.create({
         width: 150
     },
     textStyle: {
-        alignItems: 'center',                // Center all the items tabs in a row
+        alignItems: 'center',
         justifyContent: 'center',
     }
 });

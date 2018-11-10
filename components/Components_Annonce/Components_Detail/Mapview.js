@@ -5,8 +5,8 @@ import {Constants, MapView, Permissions} from 'expo';
 export default class Mapview extends React.Component {
     state = {
         mapRegion: {
-            latitude: 37.78825,
-            longitude: -122.4324,
+            latitude: parseFloat(this.props.location.latitude),
+            longitude: parseFloat(this.props.location.longitude),
             latitudeDelta: 0.002,
             longitudeDelta: 0.001,
         },
@@ -26,12 +26,12 @@ export default class Mapview extends React.Component {
                         region={this.state.mapRegion}
                     >
                         <MapView.Marker
-                            coordinate={{latitude: 37.78825, longitude: -122.4324}}
+                            coordinate={this.state.mapRegion}
                             title="Marker"
                             description="Marker"
                         />
                         <MapView.Circle
-                            center={{latitude: 37.78825, longitude: -122.4324}}
+                            center={this.state.mapRegion}
                             radius={50}
                             strokeColor="red"
                             fillColor='rgba(225, 8, 14, 0.2)'/>

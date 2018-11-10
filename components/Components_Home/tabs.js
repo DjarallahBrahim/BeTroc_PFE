@@ -21,6 +21,7 @@ export default class Tabs extends Component {
                 <View style={styles.tabsContainer}>
                         {children.map(({ props: { title } }, index) =>
                             <TouchableOpacity
+
                                 style={[
                                     styles.tabContainer,
                                     index === this.state.activeTab ? styles.tabContainerActive : []
