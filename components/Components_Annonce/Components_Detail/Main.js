@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+    Image,
     StyleSheet,
     Text,
     View,
@@ -26,14 +27,21 @@ export default class Main extends React.Component {
                 onScroll={() => {
                 }}
 
-                headerBackgroundColor="#333"
+                headerBackgroundColor="#fff"
                 stickyHeaderHeight={STICKY_HEADER_HEIGHT}
                 parallaxHeaderHeight={PARALLAX_HEADER_HEIGHT}
                 backgroundSpeed={10}
                 renderBackground={() => (
-                    <View key="background" style={{flex: 1}}>
-                        <ImageProduit imgUrl={this.props.data["image"]}/>
 
+                    <View key="background">
+                    <Image source={{uri: this.props.data["image"] ,
+                    width: window.width,
+                    height: PARALLAX_HEADER_HEIGHT}}/>
+                    <View style={{position: 'absolute',
+                        top: 0,
+                        width: window.width,
+                        backgroundColor: 'rgba(0,0,0,.4)',
+                        height: PARALLAX_HEADER_HEIGHT}}/>
                     </View>
                 )}
 

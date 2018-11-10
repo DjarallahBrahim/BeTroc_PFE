@@ -108,7 +108,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
         paddingVertical: 3,
-        backgroundColor:'#FFFFFF',
         margin:8,
 
     },
