@@ -36,14 +36,14 @@ export default class Main extends React.Component {
                     <View key="background">
                         <Image source={{
                             uri: data["imgUrl"],
-                            width: window.width,
-                            height: PARALLAX_HEADER_HEIGHT
-                        }}/>
+                        }}
+                            style={{  width: '100%', height: 270, resizeMode: 'cover' }}
+                        />
                         <View style={{
                             position: 'absolute',
                             top: 0,
                             width: window.width,
-                            backgroundColor: 'rgba(0,0,0,.4)',
+                            backgroundColor: 'rgba(225,225,225,.4)',
                             height: PARALLAX_HEADER_HEIGHT
                         }}/>
                     </View>

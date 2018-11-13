@@ -6,6 +6,9 @@ import {
     FlatList,
 } from "react-native";
 import CardList from "./CardList";
+import {Divider} from "react-native-elements";
+import Colors from "../../constants/Colors";
+import { Dimensions } from 'react-native';
 
 export default class Categorie extends Component {
     constructor(props) {
@@ -15,20 +18,16 @@ export default class Categorie extends Component {
     }
 
     render() {
-        // console.log("###########################################");
-        // console.log(this.props.categorie);
-        // console.log("###########################################");
         const {navigation,typeAnnonce} = this.props;
         return (
             <View style={styles.container}>
-
                 {
                     Object.keys(this.categorie).map((titel, index) =>
                         <View key={index} style={{flex:1}}>
-                            <Text key={index} style={{fontSize: 24, fontWeight: '700', paddingHorizontal: 10, marginTop:10}}>
+                            <Text key={index} style={{fontSize: 24, fontWeight: '700', marginTop:10}}>
                                 {titel}
                             </Text>
-                            <View style={{height: 130, marginTop: 13}}>
+                            <View style={{height: 130 , marginTop: 8}}>
                                 <FlatList
                                     horizontal={true}
                                     data={this.categorie[titel]}
@@ -37,12 +36,10 @@ export default class Categorie extends Component {
                                     showsHorizontalScrollIndicator={false}>
                                 </FlatList>
                             </View>
-                         </View>
+                        </View>
 
                     )
-
                 }
-
             </View>
         );
     }
@@ -71,5 +68,6 @@ const styles = StyleSheet.create({
             // shadowOpacity: 0.1,
             // elevation: 3
         }
+
 
 });

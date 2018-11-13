@@ -48,7 +48,7 @@ export default class Searchbar extends React.Component {
                         alignItems: 'center',
                         padding: 10,
                         height:40,
-                        backgroundColor: 'white',
+                        backgroundColor: '#f88a87',
                         borderRadius:20,
                         marginBottom:10,
                         marginTop:5
@@ -56,17 +56,20 @@ export default class Searchbar extends React.Component {
                         <Icon name="search"
                               size={23}
                               style={{ marginRight: 10, marginTop:5 }}
+                              color={"white"}
                               onPress={this.Onsubmit}/>
                         <TextInput
                             onChangeText={this.handleQueryChange}
                             underlineColorAndroid="transparent"
                             placeholder="Recherche"
-                            placeholderTextColor="rgba(0,0,0,0.5)"
-                            style={{ flex: 1, marginHorizontal: 15,fontSize:16,marginTop:2, backgroundColor: 'white' }}
+                            placeholderTextColor="white"
+
+                            style={{ flex: 1, marginHorizontal: 15,fontSize:16,marginTop:2, backgroundColor: '#f88a87',color:"white" }}
                         />
                         <Icon name="filter-list"
                               size={20}
                               style={{ marginLeft: 10 }}
+                              color={"white"}
                               onPress={()=>{
 
                                    }
