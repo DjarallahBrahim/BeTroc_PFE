@@ -73,7 +73,9 @@ export default class AnnonceDetailBar extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor:'white'
+        backgroundColor:'white',
+        borderBottomWidth:0.5,
+        borderBottomColor:'#c6c6c6'
     },
     tabsContainer: {
         flex: 1,

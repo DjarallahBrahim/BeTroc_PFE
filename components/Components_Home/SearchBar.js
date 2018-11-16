@@ -46,30 +46,29 @@ export default class Searchbar extends React.Component {
                         flexDirection: 'row',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        padding: 10,
-                        height:40,
-                        backgroundColor: '#f88a87',
+                        paddingHorizontal: 10,
+                        height:30,
+                        backgroundColor: '#910d08',
                         borderRadius:20,
-                        marginBottom:10,
-                        marginTop:5
+                        marginHorizontal:7,
+                        marginVertical:5
                     }}>
                         <Icon name="search"
-                              size={23}
+                              size={18}
                               style={{ marginRight: 10, marginTop:5 }}
-                              color={"white"}
+                              color={"rgba(225,225,225,0.8)"}
                               onPress={this.Onsubmit}/>
                         <TextInput
                             onChangeText={this.handleQueryChange}
                             underlineColorAndroid="transparent"
                             placeholder="Recherche"
-                            placeholderTextColor="white"
+                            placeholderTextColor="rgba(225,225,225,0.8)"
 
-                            style={{ flex: 1, marginHorizontal: 15,fontSize:16,marginTop:2, backgroundColor: '#f88a87',color:"white" }}
+                            style={{height:30 ,flex: 1, marginHorizontal: 5,fontSize:13, backgroundColor: '#910d08',color:"white" }}
                         />
                         <Icon name="filter-list"
-                              size={20}
-                              style={{ marginLeft: 10 }}
-                              color={"white"}
+                              size={18}
+                              color={"rgba(225,225,225,0.8)"}
                               onPress={()=>{
 
                                    }

@@ -16,6 +16,7 @@ import MapScreen from '../screens/MapScreen';
 import Annoncedetailscreen from "../screens/Annoncedetailscreen";
 import SignupScreen from "../screens/SignupScreen";
 import LoginScreen from "../screens/LoginScreen";
+import PicDetail from "../components/Components_Annonce/Components_Detail/PicDetail";
 
 const BottomTransition = (index, position, height) => {
     const sceneRange = [index -1, index, index + 1];
@@ -48,6 +49,7 @@ const NavigationConfig= () => {
 const HomeStack = createStackNavigator({
     Home: HomeScreen,
     AnnonceDetail: Annoncedetailscreen,
+    PicDetail:PicDetail
 
 
 
