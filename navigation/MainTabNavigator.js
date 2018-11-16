@@ -14,7 +14,35 @@ import AddAnnonceScreen from '../screens/AddAnnonceScreen';
 import ProfilScreen from '../screens/ProfilScreen';
 import MapScreen from '../screens/MapScreen';
 import Annoncedetailscreen from "../screens/Annoncedetailscreen";
+import SignupScreen from "../screens/SignupScreen";
+import LoginScreen from "../screens/LoginScreen";
 import PicDetail from "../components/Components_Annonce/Components_Detail/PicDetail";
+
+const BottomTransition = (index, position, height) => {
+    const sceneRange = [index -1, index, index + 1];
+    const outputHeight = [height, 0, 0];
+    const transition = position.interpolate({
+        inputRange: sceneRange,
+        outputRange: outputHeight
+    });
+
+    return{
+        transform: [{ translateY: transition }]
+    }
+}
+
+const NavigationConfig= () => {
+    return{
+        screenInterpolator: (sceneProps) => {
+            const position = sceneProps.position;
+            const scene = sceneProps.scene;
+            const index = scene.index;
+            const height = sceneProps.layout.initHeight;
+
+            return BottomTransition(index, position, height)
+        }
+    }
+}
 
 //Stack-Navigator creation with navigationOptions
 
@@ -22,6 +50,9 @@ const HomeStack = createStackNavigator({
     Home: HomeScreen,
     AnnonceDetail: Annoncedetailscreen,
     PicDetail:PicDetail
+
+
+
 });
 
 HomeStack.navigationOptions = ({ navigation }) => {
@@ -69,8 +100,9 @@ AddAnnonceStack.navigationOptions = {
 
 const ProfilStack = createStackNavigator({
     Profil: ProfilScreen,
-
-});
+    Auth: LoginScreen,
+    Singup: SignupScreen,
+}, { transitionConfig: NavigationConfig});
 
 ProfilStack.navigationOptions =({ navigation }) => {
     let { routeName } = navigation.state.routes[navigation.state.index];
