@@ -22,9 +22,6 @@ const HomeStack = createStackNavigator({
     Home: HomeScreen,
     AnnonceDetail: Annoncedetailscreen,
     PicDetail:PicDetail
-
-
-
 });
 
 HomeStack.navigationOptions = ({ navigation }) => {
