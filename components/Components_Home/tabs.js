@@ -6,59 +6,48 @@ import {
     View,                // Container component
     Image
 } from 'react-native';
-import { Icon } from 'react-native-elements'
+import {Divider, Icon} from 'react-native-elements'
+import Colors from "../../constants/Colors";
 
 export default class Tabs extends Component {
 
-    // Initialize State
     state = {
-        // First tab is active by default
         activeTab: 0
     }
 
-    // Pull children out of props passed from App component
     render({ children } = this.props) {
         return (
             <View style={styles.container}>
-                {/* Tabs row */}
                 <View style={styles.tabsContainer}>
-                    {/* Pull props out of children, and pull title out of props */}
                         {children.map(({ props: { title } }, index) =>
                             <TouchableOpacity
+
                                 style={[
-                                    // Default style for every tab
                                     styles.tabContainer,
-                                    // Merge default style with styles.tabContainerActive for active tab
                                     index === this.state.activeTab ? styles.tabContainerActive : []
                                 ]}
-                                // Change active tab
                                 onPress={() => this.setState({ activeTab: index }) }
-                                // Required key prop for components generated returned by map iterator
                                 key={index}>
 
                                 <Icon
                                     size={26}
                                     name= {index=== 0 ?'swap-vert': index=== 2 ? 'favorite-border' : 'playlist-add'}
-                                    color={ index === this.state.activeTab ? '#FFFFFF' : '#ef345f'}
+                                    color={ index === this.state.activeTab ? '#FFFFFF' : Colors.tintColor}
                                     underlayColor={'#00000000'}
 
                                 />
                                 <Text  style={[
-                                            // Default style for every tab
                                             styles.tabText,
-                                            // Merge default style with styles.tabContainerActive for active tab
                                             index === this.state.activeTab ? styles.tabTextSelected : []
                                         ]}
-                                            // Change active tab
                                                onPress={() => this.setState({ activeTab: index }) }
-                                            // Required key prop for components generated returned by map iterator
                                                key={index}>
                                     {title}</Text>
 
                             </TouchableOpacity>
                         )}
                 </View>
-                        {/* Content */}
+                <Divider style={{ backgroundColor: 'rgba(0,0,0,0.3)' }} />
                 <View style={styles.contentContainer}>
                     {children[this.state.activeTab]}
                 </View>
@@ -71,10 +60,13 @@ const styles = StyleSheet.create({
     // Component container
     container: {
         flex: 1,                            // Take up all available space
+
     },
     // Tabs row container
     tabsContainer: {
         flexDirection: 'row',               // Arrange tabs in a row
+        backgroundColor:'#FFFFFF',           // BackGround color for the tab button
+
     },
     // Individual tab container
     tabContainer: {
@@ -85,32 +77,34 @@ const styles = StyleSheet.create({
         paddingVertical: 3,                  // Vertical padding
         backgroundColor:'#FFFFFF',           // BackGround color for the tab button
         margin:8,                            // Margin for each button
-        borderRadius:15                      // Radius for each button
-
+        borderRadius:15,                      // Radius for each button
+        // shadowColor: '#000000',
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowRadius: 5,
+        shadowOpacity: 0.2,
+         elevation: 3
     },
-    // Active tab container ===> changin the colro
     tabContainerActive: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor:'#ef345d',
+        backgroundColor:Colors.tintColor,
     },
-    // Tab text default
     tabText: {
-        color: '#ef345d',
+        color: Colors.tintColor,
         textAlign: 'center',
-        fontSize: 10,
+        fontSize: 12,
         fontWeight: 'bold',
     },
-    // Tab text Selected
     tabTextSelected: {
         color: '#FFFFFF',
-        // fontFamily: 'Avenir',
         textAlign: 'center',
-        fontSize: 10,
+        fontSize: 12,
         fontWeight: 'bold',
     },
-    // Content container
     contentContainer: {
         flex: 1                             // Take up all available space
     }

@@ -4,8 +4,7 @@ import { Platform, StyleSheet, Image} from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 //Components imports
-import { AddButton_ios } from '../components/Components_TabBar/AddButton_ios';
-import { AddButton_android } from '../components/Components_TabBar/AddButton_android';
+import { Plusbutton } from '../components/Components_TabBar/Plusbutton';
 import TabBarIcon from '../components/Components_TabBar/TabBarIcon';
 
 //screen imports
@@ -14,27 +13,65 @@ import MessageScreen from '../screens/MessageScreen';
 import AddAnnonceScreen from '../screens/AddAnnonceScreen';
 import ProfilScreen from '../screens/ProfilScreen';
 import MapScreen from '../screens/MapScreen';
-import AuthentificationScreen from "../screens/AuthentificationScreen";
+import Annoncedetailscreen from "../screens/Annoncedetailscreen";
+import SignupScreen from "../screens/SignupScreen";
+import LoginScreen from "../screens/LoginScreen";
+import PicDetail from "../components/Components_Annonce/Components_Detail/PicDetail";
 
+const BottomTransition = (index, position, height) => {
+    const sceneRange = [index -1, index, index + 1];
+    const outputHeight = [height, 0, 0];
+    const transition = position.interpolate({
+        inputRange: sceneRange,
+        outputRange: outputHeight
+    });
 
+    return{
+        transform: [{ translateY: transition }]
+    }
+}
+
+const NavigationConfig= () => {
+    return{
+        screenInterpolator: (sceneProps) => {
+            const position = sceneProps.position;
+            const scene = sceneProps.scene;
+            const index = scene.index;
+            const height = sceneProps.layout.initHeight;
+
+            return BottomTransition(index, position, height)
+        }
+    }
+}
 
 //Stack-Navigator creation with navigationOptions
 
 const HomeStack = createStackNavigator({
     Home: HomeScreen,
+    AnnonceDetail: Annoncedetailscreen,
+    PicDetail:PicDetail
+
 
 
 });
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
-    tabBarIcon: ({ focused }) => (
+HomeStack.navigationOptions = ({ navigation }) => {
+    let { routeName } = navigation.state.routes[navigation.state.index];
+    let navigationOptions = {};
+
+    if (routeName !== 'Home') {
+        navigationOptions.tabBarVisible = false;
+    }
+    navigationOptions.tabBarIcon= ({ focused }) => (
         <TabBarIcon
             focused={focused}
             name={Platform.OS === 'ios' ? `ios-home${focused ? '' : '-outline'}` : 'md-home'}
         />
-    ),
+    );
+
+    return navigationOptions;
 };
+
 
 const MessageStack = createStackNavigator({
   Message: MessageScreen,
@@ -56,22 +93,32 @@ const AddAnnonceStack = createStackNavigator({
 
 AddAnnonceStack.navigationOptions = {
         tabBarIcon: ({focused}) => (
-            Platform.OS === 'ios' ? <AddButton_ios focused={focused}/> : <AddButton_android focused={focused}/>
+            <Plusbutton focused={focused}/>
         ),
 
 };
 
 const ProfilStack = createStackNavigator({
     Profil: ProfilScreen,
-});
+    Auth: LoginScreen,
+    Singup: SignupScreen,
+}, { transitionConfig: NavigationConfig});
 
-ProfilStack.navigationOptions = {
-    tabBarIcon: ({ focused }) => (
+ProfilStack.navigationOptions =({ navigation }) => {
+    let { routeName } = navigation.state.routes[navigation.state.index];
+    let navigationOptions = {};
+
+    if (routeName !== 'Profil') {
+        navigationOptions.tabBarVisible = false;
+    }
+    navigationOptions.tabBarIcon= ({ focused }) => (
         <TabBarIcon
             focused={focused}
             name={Platform.OS === 'ios' ? `ios-person${focused ? '' : '-outline'}` : 'md-person'}
         />
-    ),
+    );
+
+    return navigationOptions;
 };
 
 const MapScreenStack = createStackNavigator({

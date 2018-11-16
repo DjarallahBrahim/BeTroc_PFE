@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { View} from "react-native";
 import Icon from '@expo/vector-icons/FontAwesome';
+import Colors from "../../constants/Colors";
 
 const SIZE = 45;
 
@@ -16,7 +17,7 @@ class AddButton_android extends Component {
                     width: SIZE,
                     height: SIZE,
                     borderRadius: SIZE / 2,
-                    backgroundColor: !this.props.focused ? '#ecc30b' : '#ef345f',
+                    backgroundColor: !this.props.focused ? Colors.tintColor : '#F07818',
                 }}>
                 <Icon name="plus" size={30} color="#F8F8F8"/>
             </View>

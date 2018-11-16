@@ -3,10 +3,11 @@ import {
     View,
     SafeAreaView,
     Platform,
-    Text, StyleSheet
+    TextInput, StyleSheet
 } from "react-native";
 import { Icon } from 'react-native-elements'
 import { SearchBar } from 'react-native-elements'
+import Colors from '../../constants/Colors';
 
 export default class Searchbar extends React.Component {
 
@@ -37,67 +38,63 @@ export default class Searchbar extends React.Component {
 
     render() {
         return (
-            <SafeAreaView style={styles.safeAreaw}>
+            <SafeAreaView style={styles.safeArea}>
                 <View  style={styles.container}>
-                    <View style={styles.viewIcon}>
-                    <Icon
-                        size={24}
-                        name='feedback'
-                        color='#ef345f'
-                        underlayColor={'#00000000'}
-                        onPress={() => {}}
-                    />
-                        {/*<Text style={styles.textIcon}>icon</Text>*/}
-                    </View>
-                    <SearchBar
-                        containerStyle={{width:"80%", height: 50, borderRadius: 10,}}
-                        inputContainerStyle={{height: '100%', }}
-                        inputStyle={{ fontSize: 11}}
-                        lightTheme
-                        placeholder='Trouvez une annonce !'
-                        searchIcon={<Icon
-                            size={24}
-                            name='done'
-                            color={this.state.query ==='' ? '#F8F8F8': '#f50'}
-                            underlayColor={'#00000000'}
-                            onPress={() => this.Onsubmit()}
-                            />
-                        }
-                        cancelIcon={{ type: 'font-awesome', name: 'chevron-left' }}
 
-                        onChangeText={this.handleQueryChange}
-                        onCancel={this.handleSearchCancel}
-                        onClear={this.handleSearchClear}
-                        value={this.state.query}
-                        keyboardType="default"
-                        returnKeyType="done"
-                    />
-                    <View style={styles.viewIcon}>
-                        <Icon
-                            iconStyle={{marginLeft:8}}
-                            size={26}
-                            name='filter-list'
-                            color={'#ef345f'}
-                            underlayColor={'#00000000'}
-                            onPress={() => this.Onsubmit()}
+                    <View style={{
+                        flex:1,
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        paddingHorizontal: 10,
+                        height:30,
+                        backgroundColor: '#910d08',
+                        borderRadius:20,
+                        marginHorizontal:7,
+                        marginVertical:5
+                    }}>
+                        <Icon name="search"
+                              size={18}
+                              style={{ marginRight: 10, marginTop:5 }}
+                              color={"rgba(225,225,225,0.8)"}
+                              onPress={this.Onsubmit}/>
+                        <TextInput
+                            onChangeText={this.handleQueryChange}
+                            underlineColorAndroid="transparent"
+                            placeholder="Recherche"
+                            placeholderTextColor="rgba(225,225,225,0.8)"
+
+                            style={{height:30 ,flex: 1, marginHorizontal: 5,fontSize:13, backgroundColor: '#910d08',color:"white" }}
                         />
-                        {/*<Text style={styles.textIcon}>icon</Text>*/}
+                        <Icon name="filter-list"
+                              size={18}
+                              color={"rgba(225,225,225,0.8)"}
+                              onPress={()=>{
+
+                                   }
+                              } //TODO add filter Screen
+                         />
                     </View>
+
                 </View>
             </SafeAreaView>
         );
     }
+
 }
+
 const styles = StyleSheet.create({
     container: {
-        marginTop: Platform.OS === 'android' ? 30 : 10,
+        marginTop: Platform.OS === 'android' ? 30 : null ,
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+
     },
     safeArea: {
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginHorizontal:5
     },
     viewIcon: {
         flex:1,

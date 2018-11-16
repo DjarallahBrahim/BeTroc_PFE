@@ -4,24 +4,34 @@ import {
     StyleSheet,
     Text,
     View,
-    Button
+    Button, TouchableHighlight
 } from 'react-native';
-import Main from "../components/Main";
 
 export default class ProfilScreen extends React.Component {
     static navigationOptions = {
         title: "Profil",
     };
 
+
     render() {
         return (
             <View style={styles.container}>
                 <Button
                     onPress={() => {
-                        this.props.navigation.navigate('Auth')
+                        this.props.navigation.navigate('Auth',this.props.navigationOptions)
                     }}
-                    title="Auth-Screen"
+                    title="Login-Screen"
+                    style={{"marginTop": 10}}
                 />
+                <TouchableHighlight style={{"marginTop": 10}}>
+                <Button
+                    onPress={() => {
+                        this.props.navigation.navigate('Singup', this.props.navigationOptions)
+                    }}
+                    title="Singup-Screen"
+
+                />
+                </TouchableHighlight>
             </View>
         );
     }

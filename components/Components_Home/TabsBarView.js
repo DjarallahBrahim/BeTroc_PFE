@@ -2,112 +2,65 @@ import React from 'react';
 import {
     ScrollView,
     StyleSheet,
-    Text,
     View,
 } from 'react-native';
 import Tabs from './tabs';
-import CardList from "./CardList";
 import Categorie from "./Categorie";
+import Colors from "../../constants/Colors";
 
 export default class TabsBarView extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            annonces: [
-                {
-                    title: 'Image Title',
-                    image: 'https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/6/image.jpeg'
-                },
-                {
-                    title: 'Image Title',
-                    image: 'https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/6/image.jpeg'
-                },
-                {
-                    title: 'Image Title',
-                    image: 'https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/6/image.jpeg'
-                }
-            ],
-            annonces2: [
-                {
-                    title: 'Image Title 2',
-                    image: 'https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg'
-                },
-                {
-                    title: 'Image Title 2',
-                    image: 'https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg'
-                },
-                {
-                    title: 'Image Title 2',
-                    image: 'https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg'
-                }
-            ]
-
-        }
+        this.categories = ["Echange", "Demande", "Don"]
     }
 
-
-
-
-
     render() {
+        const data= this.props.data;
+        const {navigation} = this.props;
         return (
             <View style={styles.container}>
                 <Tabs>
-                    {/* First tab */}
-                    <View title="Èchange" style={styles.content}>
-                        <ScrollView>
-                            <Categorie data={ this.state.annonces} />
-                            <Categorie data={ this.state.annonces} />
-                            <Categorie data={ this.state.annonces} />
+                    {
+                        this.categories.map( (typeAnnonce, index)=>
+                            <View key={index} title={typeAnnonce} style={styles.content}>
+                                <ScrollView>
+                                {Object.keys(data.type[typeAnnonce]).map((categorieX) =>
 
-                        </ScrollView>
-                    </View>
-                    {/* Second tab */}
-                    <View title="Demande" style={styles.content}>
-                        <ScrollView>
-                            <Categorie data={ this.state.annonces2}/>
-                        </ScrollView>
-                    </View>
-                    {/* Third tab */}
-                    <View title="Don" style={styles.content}>
-                        <ScrollView>
-                            <Categorie data={ this.state.annonces} />
-                        </ScrollView>
-                    </View>
-
-                </Tabs>
+                                    <Categorie typeAnnonce={typeAnnonce}
+                                               key={index}
+                                               navigation={navigation}
+                                               categorie={ data.type[typeAnnonce][categorieX]} />
+                                )}
+                                </ScrollView>
+                            </View>
+                         )
+                    }
+                    </Tabs>
             </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    // App container
     container: {
-        flex: 1,                            // Take up all screen
-        backgroundColor: '#fff',         // Background color
-
+        flex: 1,
+        backgroundColor: '#fff',
     },
-    // Tab content container
     content: {
-        flex: 1,                            // Take up all available space
-        justifyContent: 'center',           // Center vertically
-        alignItems: 'center',               // Center horizontally
-        backgroundColor: '#fff',         // Darker background for content area
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        backgroundColor: '#fff',
     },
-    // Content header
     header: {
-        margin: 10,                         // Add margin
-        color: '#F07818',                   // White color
-        // fontFamily: 'Avenir',            // Change font family
-        fontSize: 26,                       // Bigger font size
+        margin: 10,
+        color: Colors.tintColor,
+        fontSize: 26,
     },
-    // Content text
     text: {
-        marginHorizontal: 20,               // Add horizontal margin
-        color: '#e74c3c',                   // Text color
-        textAlign: 'center',                // Center
-        // fontFamily: 'Avenir',
+        marginHorizontal: 20,
+        color: '#e74c3c',
+        textAlign: 'center',
         fontSize: 18,
     },
 });
