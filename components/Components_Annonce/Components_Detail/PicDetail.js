@@ -1,51 +1,28 @@
 import React from 'react';
-import {View} from 'react-native';
-import ImageView from 'react-native-image-view';
-import ZoomImage from 'react-native-zoom-image';
-import {Easing} from 'react-native'; // import Easing if you want to customize easing function
-
-
+import {View, Dimensions, Image} from 'react-native';
+import ImageZoom from 'react-native-image-pan-zoom';
 export default class PicDetail extends React.Component {
     static navigationOptions = {
-        header: null
+        headerStyle: {
+            backgroundColor: '#000',
+        },
+
     };
 
     render() {
-        let styles = {
-            img: {} // custom styles of original image component
-        };
-        const navigation = this.props.navigation.getParam("navigation", {});
+              const navigation = this.props.navigation.getParam("navigation", {});
         const picDetail = this.props.navigation.getParam("picDetail", {});
         return (
-            <View style={{flex: 1, backgroundColor: '#000'}}>
-                {/*<ImageView*/}
-                    {/*images={[{*/}
-                        {/*source: {*/}
-                            {/*uri: picDetail,*/}
-                        {/*},*/}
-                        {/*title: 'Paris',*/}
-                        {/*width: 806,*/}
-                        {/*height: 720,*/}
-                        {/*backgroundColor: '#000'*/}
-
-                    {/*},]}*/}
-                    {/*imageIndex={0}*/}
-                    {/*isVisible={true}*/}
-                    {/*backgroundColor={'#000'}*/}
-                    {/*onClose={() => {*/}
-                        {/*navigation.pop()*/}
-                    {/*}}*/}
-                    {/*animationType={'fade'}*/}
-                {/*/>*/}
-
-                <ZoomImage
-                    source={{uri: picDetail}}
-                    imgStyle={{width: 250, height: 230}}
-                    style={styles.img}
-                    duration={200}
-                    enableScaling={false}
-                    easingFunc={Easing.ease}
-                />
+            <View style={{flex: 1, backgroundColor: '#000', alignItems:'center', justifyContent: 'center',}}>
+                <ImageZoom cropWidth={Dimensions.get('window').width}
+                           cropHeight={Dimensions.get('window').height}
+                           imageWidth={300}
+                           imageHeight={300}
+                           enableSwipeDown={true}
+                           onSwipeDown={() => {navigation.pop()}}>
+                    <Image style={{width:300, height:300,}}
+                           source={{uri: picDetail}}/>
+                </ImageZoom>
             </View>
         );
     }
