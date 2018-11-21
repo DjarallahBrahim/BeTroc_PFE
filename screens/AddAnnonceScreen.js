@@ -5,7 +5,7 @@ import {
     Text,
     View,
 } from 'react-native';
-
+import Main from '../components/Components_New_Annonce/main'
 export default class AddAnnonceScreen extends React.Component {
   static navigationOptions = {
     title: 'New annonce',
@@ -15,7 +15,7 @@ export default class AddAnnonceScreen extends React.Component {
     return (
         <View style={styles.container}>
             <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-                <Text> Add new Annonce </Text>
+                <Main/>
             </ScrollView>
         </View>
     );
