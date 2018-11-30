@@ -1,8 +1,10 @@
 import React from 'react';
 import {
+    Image,
     StyleSheet, Text, TouchableHighlight,
     View,
 } from 'react-native';
+import { Icon } from 'react-native-elements'
 
 export default class Imagefield extends React.Component {
 
@@ -10,8 +12,13 @@ export default class Imagefield extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.textStyle}>images: </Text>
-                <TouchableHighlight style={styles.viewStyle}><Text>dza</Text></TouchableHighlight>
+                <TouchableHighlight style={styles.viewStyle} onPress={()=> alert("Pic soon")}>
+                        <Icon
+                        name='camera'
+                        type='evilicon'
+                        size={60}
+                        color='#000'/>
+                </TouchableHighlight>
             </View>
         );
     }
@@ -20,7 +27,7 @@ export default class Imagefield extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: 'transparent',
         flexDirection:"row",
         alignItems:'center',
 
@@ -30,8 +37,10 @@ const styles = StyleSheet.create({
         color:'#a5a5a5'
     },
     viewStyle:{
-        height:40,
-        width:40,
-        backgroundColor:'#858585'
-    }
+        justifyContent: 'center',
+        alignItems:'center',
+        backgroundColor:"white",
+        height:80,
+        width:80,
+        borderRadius:12}
 });

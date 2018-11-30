@@ -25,7 +25,7 @@ export default class AddAnnonceScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#e8e8e8',
     }
 });
 
