@@ -15,7 +15,7 @@ export default class AddAnnonceScreen extends React.Component {
     return (
         <View style={styles.container}>
             <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-                <Main/>
+                <Main navigation={this.props.navigation}/>
             </ScrollView>
         </View>
     );

@@ -1,11 +1,14 @@
 import React from 'react';
 import {
+    Button, Picker,
     ScrollView,
     StyleSheet,
     Text,
     View,
 } from 'react-native';
 import Imagefield from "./Imagefield";
+import Categoriebutton from "./Categoriebutton";
+import TypeAnnonce from "./TypeAnnonce";
 
 export default class Main extends React.Component {
 
@@ -13,7 +16,9 @@ export default class Main extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-              <Imagefield/>
+                <TypeAnnonce/>
+                <Categoriebutton navigation={this.props.navigation}/>
+                <Imagefield/>
             </View>
         );
     }

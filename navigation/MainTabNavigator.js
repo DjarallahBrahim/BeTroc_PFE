@@ -13,6 +13,7 @@ import MessageScreen from '../screens/MessageScreen';
 import AddAnnonceScreen from '../screens/AddAnnonceScreen';
 import ProfilScreen from '../screens/ProfilScreen';
 import MapScreen from '../screens/MapScreen';
+import Categories from "../components/Components_New_Annonce/Categories";
 
 
 //Stack-Navigator creation with navigationOptions
@@ -57,6 +58,7 @@ MessageStack.navigationOptions = {
 
 const AddAnnonceStack = createStackNavigator({
   Plus: AddAnnonceScreen,
+  Categorie:Categories
 });
 
 AddAnnonceStack.navigationOptions = {
