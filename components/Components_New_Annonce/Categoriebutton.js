@@ -20,7 +20,7 @@ export default class Categoriebutton extends React.Component {
                     color={Colors.tintColor}
                     size={25}
                     onPress={() => this.props.navigation.navigate("Categorie")} />
-                <Text onPress={() => this.props.navigation.navigate("Categorie")} style={{fontSize:18}}> categorie </Text>
+                <Text onPress={() => this.props.navigation.navigate("Categorie")} style={{fontSize:19,fontWeight: '500', color: Colors.grey2}}> catégorie </Text>
                 <Icon
 
                     name='angle-right'
@@ -36,13 +36,12 @@ export default class Categoriebutton extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         flexDirection:"row",
         alignItems:"center",
         justifyContent: 'space-between',
         backgroundColor: '#fff',
         padding:5,
-        marginVertical:15,
+        marginTop:15,
         borderRadius:10
     }
 });

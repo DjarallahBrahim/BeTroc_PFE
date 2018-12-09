@@ -12,7 +12,7 @@ export default class TypeAnnonce extends React.Component {
     constructor() {
         super();
         this.state = {
-            selectedIndex: 2
+            selectedIndex: 0
         };
         this.updateIndex = this.updateIndex.bind(this)
     }
@@ -23,16 +23,19 @@ export default class TypeAnnonce extends React.Component {
 
     render() {
         const buttons = ['Don', 'Échange', 'Demande']
-        const {selectedIndex} = this.state;
+        const {selectedIndex} = this.state
 
         return (
             <View style={styles.container}>
-            <ButtonGroup
+                <Text style={{fontSize:15, color: Colors.grey1, marginBottom:5}}> Type: </Text>
+                <ButtonGroup
                 onPress={this.updateIndex}
                 selectedIndex={selectedIndex}
-                buttons={buttons}
-                containerStyle={{height: 40, borderRadius:20}}
                 selectedButtonStyle={{backgroundColor:Colors.tintColor}}
+                buttons={buttons}
+                containerStyle={{height: 40,  backgroundColor:"transparent", borderColor:'transparent', marginLeft:0, marginRight:0, marginBottom:0, marginTop:0}}
+                buttonStyle={{borderRadius:10, backgroundColor:'white',  marginHorizontal:3}}
+                innerBorderStyle={{width:0, color:"transparent"}}
             />
             </View>
         )
@@ -41,7 +44,7 @@ export default class TypeAnnonce extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginVertical:15
+        marginTop:15,
     },
 
 });

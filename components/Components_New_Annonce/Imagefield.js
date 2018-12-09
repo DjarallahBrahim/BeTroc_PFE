@@ -5,6 +5,7 @@ import {
     View,
 } from 'react-native';
 import { Icon } from 'react-native-elements'
+import Colors from "../../constants/Colors";
 
 export default class Imagefield extends React.Component {
 
@@ -12,6 +13,7 @@ export default class Imagefield extends React.Component {
     render() {
         return (
             <View style={styles.container}>
+                <Text style={{fontSize:15, color: Colors.grey1, marginBottom:5}}> Photos: </Text>
                 <TouchableHighlight style={styles.viewStyle} onPress={()=> alert("Pic soon")}>
                         <Icon
                         name='camera'
@@ -26,10 +28,9 @@ export default class Imagefield extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         backgroundColor: 'transparent',
-        flexDirection:"row",
-        alignItems:'center',
+        flexDirection:"column",
+        marginTop:15,
 
     },
     textStyle:{
