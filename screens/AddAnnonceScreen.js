@@ -21,9 +21,8 @@ export default class AddAnnonceScreen extends React.Component {
 
   render() {
     return (
-        <ScrollView
-            contentContainerStyle={styles.contentContainer}
-            style={styles.container}>
+
+        <ScrollView style={styles.container}>
             <KeyboardAvoidingView behavior="padding" style={styles.container}>
                     <Categoriebutton/>
                     <TypeAnnonce/>
@@ -42,7 +41,8 @@ export default class AddAnnonceScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#e8e8e8',
-        margin:5
+        margin:5,
+        flex:1
     }
 });
 
