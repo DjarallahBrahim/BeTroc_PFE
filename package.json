@@ -32,6 +32,7 @@
     "react-native-material-dropdown": "^0.11.1",
     "react-native-paper": "^2.1.3",
     "react-native-parallax-scroll-view": "^0.21.3",
+    "react-native-picker-select": "^5.1.1",
     "react-native-router-flux": "^3.37.0",
     "react-native-scrollviewtouchable-expo-paralaex": "^1.0.0",
     "react-native-search-bar": "^3.4.2",

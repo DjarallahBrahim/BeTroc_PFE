@@ -3,7 +3,7 @@ import {
     ScrollView,
     StyleSheet,
     KeyboardAvoidingView,
-    View,
+    View, Button,
 } from 'react-native';
 import Main from '../components/Components_New_Annonce/main'
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
@@ -23,16 +23,21 @@ export default class AddAnnonceScreen extends React.Component {
     return (
 
         <ScrollView style={styles.container}>
-            <KeyboardAvoidingView behavior="padding" style={styles.container}>
-                    <Categoriebutton/>
+            <KeyboardAwareScrollView
+                automaticallyAdjustContentInsets={false}
+                keyboardShouldPersistTaps='always'
+                scrollEventThrottle={10}
+                extraHeight={200}
+                resetScrollToCoords={{x: 0, y: 0}}
+                contentContainerStyle={styles.container}>
+                    <Categoriebutton navigation={this.props.navigation}/>
                     <TypeAnnonce/>
                     <EtatAnnonce/>
                     <Imagefield/>
                     <TitleDescription/>
                     <Adresseproduct/>
                     <Publierbutton/>
-
-                </KeyboardAvoidingView>
+                </KeyboardAwareScrollView>
         </ScrollView>
     );
   }
