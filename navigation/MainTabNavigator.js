@@ -1,10 +1,10 @@
 //react imports
 import React from 'react';
-import { Platform, StyleSheet, Image} from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import {Platform, StyleSheet, Image} from 'react-native';
+import {createStackNavigator, createBottomTabNavigator} from 'react-navigation';
 
 //Components imports
-import { Plusbutton } from '../components/Components_TabBar/Plusbutton';
+import {Plusbutton} from '../components/Components_TabBar/Plusbutton';
 import TabBarIcon from '../components/Components_TabBar/TabBarIcon';
 
 //screen imports
@@ -17,22 +17,23 @@ import Annoncedetailscreen from "../screens/Annoncedetailscreen";
 import SignupScreen from "../screens/SignupScreen";
 import LoginScreen from "../screens/LoginScreen";
 import PicDetail from "../components/Components_Annonce/Components_Detail/PicDetail";
+import Categories from "../components/Components_New_Annonce/Categories";
 
 const BottomTransition = (index, position, height) => {
-    const sceneRange = [index -1, index, index + 1];
+    const sceneRange = [index - 1, index, index + 1];
     const outputHeight = [height, 0, 0];
     const transition = position.interpolate({
         inputRange: sceneRange,
         outputRange: outputHeight
     });
 
-    return{
-        transform: [{ translateY: transition }]
+    return {
+        transform: [{translateY: transition}]
     }
 }
 
-const NavigationConfig= () => {
-    return{
+const NavigationConfig = () => {
+    return {
         screenInterpolator: (sceneProps) => {
             const position = sceneProps.position;
             const scene = sceneProps.scene;
@@ -49,20 +50,19 @@ const NavigationConfig= () => {
 const HomeStack = createStackNavigator({
     Home: HomeScreen,
     AnnonceDetail: Annoncedetailscreen,
-    PicDetail:PicDetail
-
+    PicDetail: PicDetail
 
 
 });
 
-HomeStack.navigationOptions = ({ navigation }) => {
-    let { routeName } = navigation.state.routes[navigation.state.index];
+HomeStack.navigationOptions = ({navigation}) => {
+    let {routeName} = navigation.state.routes[navigation.state.index];
     let navigationOptions = {};
 
     if (routeName !== 'Home') {
         navigationOptions.tabBarVisible = false;
     }
-    navigationOptions.tabBarIcon= ({ focused }) => (
+    navigationOptions.tabBarIcon = ({focused}) => (
         <TabBarIcon
             focused={focused}
             name={Platform.OS === 'ios' ? `ios-home${focused ? '' : '-outline'}` : 'md-home'}
@@ -74,27 +74,28 @@ HomeStack.navigationOptions = ({ navigation }) => {
 
 
 const MessageStack = createStackNavigator({
-  Message: MessageScreen,
+    Message: MessageScreen,
 });
 
 MessageStack.navigationOptions = {
-  tabBarLabel: 'Message',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? `ios-chatbubbles${focused ? '' : '-outline'}` : 'md-chatbubbles'}
-    />
-  ),
-   };
+    tabBarLabel: 'Message',
+    tabBarIcon: ({focused}) => (
+        <TabBarIcon
+            focused={focused}
+            name={Platform.OS === 'ios' ? `ios-chatbubbles${focused ? '' : '-outline'}` : 'md-chatbubbles'}
+        />
+    ),
+};
 
 const AddAnnonceStack = createStackNavigator({
-  Plus: AddAnnonceScreen,
+    Plus: AddAnnonceScreen,
+    Categorie: Categories
 });
 
 AddAnnonceStack.navigationOptions = {
-        tabBarIcon: ({focused}) => (
-            <Plusbutton focused={focused}/>
-        ),
+    tabBarIcon: ({focused}) => (
+        <Plusbutton focused={focused}/>
+    ),
 
 };
 
@@ -102,16 +103,16 @@ const ProfilStack = createStackNavigator({
     Profil: ProfilScreen,
     Auth: LoginScreen,
     Singup: SignupScreen,
-}, { transitionConfig: NavigationConfig});
+}, {transitionConfig: NavigationConfig});
 
-ProfilStack.navigationOptions =({ navigation }) => {
-    let { routeName } = navigation.state.routes[navigation.state.index];
+ProfilStack.navigationOptions = ({navigation}) => {
+    let {routeName} = navigation.state.routes[navigation.state.index];
     let navigationOptions = {};
 
     if (routeName !== 'Profil') {
         navigationOptions.tabBarVisible = false;
     }
-    navigationOptions.tabBarIcon= ({ focused }) => (
+    navigationOptions.tabBarIcon = ({focused}) => (
         <TabBarIcon
             focused={focused}
             name={Platform.OS === 'ios' ? `ios-person${focused ? '' : '-outline'}` : 'md-person'}
@@ -126,7 +127,7 @@ const MapScreenStack = createStackNavigator({
 });
 
 MapScreenStack.navigationOptions = {
-    tabBarIcon: ({ focused }) => (
+    tabBarIcon: ({focused}) => (
         <TabBarIcon
             focused={focused}
             name={Platform.OS === 'ios' ? `ios-map${focused ? '' : '-outline'}` : 'md-map'}
@@ -145,12 +146,12 @@ export default createBottomTabNavigator(
     },
     {
         tabBarOptions: {
-        showLabel:false,
-    },
+            showLabel: false,
+        },
         style: {
             alignItems: 'center',
             borderTopWidth: 0,
 
-    },
+        },
 
-});
+    });

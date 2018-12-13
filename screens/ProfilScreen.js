@@ -24,13 +24,13 @@ export default class ProfilScreen extends React.Component {
                     style={{"marginTop": 10}}
                 />
                 <TouchableHighlight style={{"marginTop": 10}}>
-                <Button
-                    onPress={() => {
-                        this.props.navigation.navigate('Singup', this.props.navigationOptions)
-                    }}
-                    title="Singup-Screen"
+                    <Button
+                        onPress={() => {
+                            this.props.navigation.navigate('Singup', this.props.navigationOptions)
+                        }}
+                        title="Singup-Screen"
 
-                />
+                    />
                 </TouchableHighlight>
             </View>
         );
@@ -43,4 +43,3 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     }
 });
-
