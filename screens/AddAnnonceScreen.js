@@ -5,7 +5,6 @@ import {
     KeyboardAvoidingView,
     View, Button,
 } from 'react-native';
-import Main from '../components/Components_New_Annonce/main'
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 import Categoriebutton from "../components/Components_New_Annonce/Categoriebutton";
 import TypeAnnonce from "../components/Components_New_Annonce/TypeAnnonce";
@@ -14,10 +13,13 @@ import Imagefield from "../components/Components_New_Annonce/Imagefield";
 import TitleDescription from "../components/Components_New_Annonce/TitleDescription";
 import Adresseproduct from "../components/Components_New_Annonce/Adresseproduct";
 import Publierbutton from "../components/Components_New_Annonce/Publierbutton";
+import {Camera} from "expo";
 export default class AddAnnonceScreen extends React.Component {
   static navigationOptions = {
-    title: 'New annonce',
+    title: 'Nouvelle annonce',
   };
+
+
 
   render() {
     return (
@@ -33,7 +35,7 @@ export default class AddAnnonceScreen extends React.Component {
                     <Categoriebutton navigation={this.props.navigation}/>
                     <TypeAnnonce/>
                     <EtatAnnonce/>
-                    <Imagefield/>
+                    <Imagefield navigation={this.props.navigation}/>
                     <TitleDescription/>
                     <Adresseproduct/>
                     <Publierbutton/>

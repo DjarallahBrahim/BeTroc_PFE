@@ -37,26 +37,34 @@ export default class EtatAnnonce extends React.Component {
 
                 <ModalSelector
                     data={data}
-                    onChange={(option)=>{ alert(`${option.label} (${option.key}) nom nom nom`) }} >
+                    onChange={(option)=>{
+                        this.setState({textInputValue:option.label});
+                    }} >
 
                     <View style={{
                         flexDirection:"row",
-                        alignItems:"center",
                         justifyContent: 'space-between',
                         backgroundColor: '#fff',
                     }}>
+                        <Icon
+
+                            name='cubes'
+                            type='font-awesome'
+                            color={Colors.tintColor}
+                            size={25}
+                        />
                     <TextInput
                         style={{fontSize:18,fontWeight: '500', color: Colors.grey1}}
                         editable={false}
                         placeholder="État du produit"
-                        value={"sam"}
+                        value={this.state.textInputValue}
                         underlineColorAndroid={"transparent"}/>
                     <Icon
 
-                        name='angle-right'
+                        name='cubes'
                         type='font-awesome'
-                        color={Colors.tintColor}
-                        size={30}
+                        color={'transparent'}
+                        size={25}
                     />
                     </View>
                 </ModalSelector>

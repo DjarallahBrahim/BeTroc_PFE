@@ -64,13 +64,13 @@ export default class Adresseproduct extends React.Component {
                         language: 'en', // language of the results
                         types: '(cities)' // default: 'geocode'
                     }}
-                    renderRightButton={()=> <Icon
+                    renderLeftButton={()=> <Icon
 
-                        name='angle-right'
+                        name='map-marker'
                         type='font-awesome'
                         color={Colors.tintColor}
-                        size={30}
-                        iconStyle={{marginHorizontal:5}}
+                        size={25}
+                        iconStyle={{marginHorizontal:10}}
                         onPress={() => this.props.navigation.navigate("Categorie")} />
                     }
                     enablePoweredByContainer={false}

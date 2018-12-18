@@ -18,6 +18,7 @@ import SignupScreen from "../screens/SignupScreen";
 import LoginScreen from "../screens/LoginScreen";
 import PicDetail from "../components/Components_Annonce/Components_Detail/PicDetail";
 import Categories from "../components/Components_New_Annonce/Categories";
+import CameraAdd from "../components/Components_New_Annonce/Camera";
 
 const BottomTransition = (index, position, height) => {
     const sceneRange = [index - 1, index, index + 1];
@@ -89,14 +90,21 @@ MessageStack.navigationOptions = {
 
 const AddAnnonceStack = createStackNavigator({
     Plus: AddAnnonceScreen,
-    Categorie: Categories
+    Categorie: Categories,
+    CameraAdd:CameraAdd
 });
 
-AddAnnonceStack.navigationOptions = {
-    tabBarIcon: ({focused}) => (
-        <Plusbutton focused={focused}/>
-    ),
+AddAnnonceStack.navigationOptions = ({navigation}) => {
+    let {routeName} = navigation.state.routes[navigation.state.index];
+    let navigationOptions = {};
 
+    if(routeName === 'CameraAdd')
+        navigationOptions.tabBarVisible = false;
+
+    navigationOptions.tabBarIcon = ({focused}) => (
+        <Plusbutton focused={focused}/>
+    );
+    return navigationOptions;
 };
 
 const ProfilStack = createStackNavigator({

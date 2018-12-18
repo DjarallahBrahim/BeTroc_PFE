@@ -1,25 +1,73 @@
 import React from 'react';
 import {
     Image,
-    StyleSheet, Text, TouchableHighlight,
+    StyleSheet, TouchableHighlight,
     View,
 } from 'react-native';
 import { Icon } from 'react-native-elements'
-import Colors from "../../constants/Colors";
+import renderIf from './renderif'
+import closeimg from '../../assets/images/close-icon.png'
 
 export default class Imagefield extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            imageURI : '',
+            takePic: true,
+            imagesTaked:[]
+        };
+        this.returnDataFromCamera=this.returnDataFromCamera.bind(this);
+    }
+
+
+    returnDataFromCamera(uri) {
+        if(this.state.imagesTaked.length<3) {
+            this.setState({imagesTaked: [...this.state.imagesTaked, uri]});
+        }if(this.state.imagesTaked.length === 2)
+            this.setState({takePic:false})
+    }
+
+    _deleteImg(key){
+        this.state.imagesTaked.splice(key,1);
+        this.setState({takePic:true});
+        this.forceUpdate();
+
+    }
+    _navigateToCamera(){
+        this.state.takePic ? this.props.navigation.navigate('CameraAdd',{
+            navigation:this.props.navigation,
+            returnDataFromCamera: this.returnDataFromCamera.bind(this)}): alert('Vous avez atteint le nombre maximum!')
+    }
 
     render() {
         return (
             <View style={styles.container}>
-                <Text style={{fontSize:15, color: Colors.grey1, marginBottom:5}}> Photos: </Text>
-                <TouchableHighlight style={styles.viewStyle} onPress={()=> alert("Pic soon")}>
+
+                {
+                    this.state.imagesTaked.map((imageURI,key)=>
+                            <View key={key} >
+                                <TouchableHighlight style={styles.imageStyle} >
+                                    <Image style={styles.imagetakedStyle}
+                                           source={{uri: imageURI}}/>
+                                </TouchableHighlight>
+
+                                <TouchableHighlight style={styles.viewIconCloseStyle}
+                                                    onPress={()=> this._deleteImg(key)}>
+                                        <Image style={styles.iconCloseStyle}
+                                               source={closeimg}/>
+                                </TouchableHighlight>
+                            </View>
+                        )
+
+                }
+
+                <TouchableHighlight style={this.state.takePic ? styles.viewStyle : styles.viewStyleDisable } onPress={()=>this._navigateToCamera()} >
                         <Icon
-                        name='camera'
-                        type='evilicon'
-                        size={60}
-                        color='#000'/>
+                            name='camera'
+                            type='evilicon'
+                            size={60}
+                            color='#000'/>
                 </TouchableHighlight>
             </View>
         );
@@ -29,9 +77,8 @@ export default class Imagefield extends React.Component {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'transparent',
-        flexDirection:"column",
+        flexDirection:"row",
         marginTop:15,
-
     },
     textStyle:{
         fontSize:18,
@@ -43,5 +90,36 @@ const styles = StyleSheet.create({
         backgroundColor:"white",
         height:80,
         width:80,
-        borderRadius:12}
+        borderRadius:12},
+    viewStyleDisable:{
+        justifyContent: 'center',
+        alignItems:'center',
+        backgroundColor:"#474747",
+        height:80,
+        width:80,
+        borderRadius:12},
+    imageStyle:{
+        justifyContent: 'center',
+        alignItems:'center',
+        backgroundColor:"white",
+        height:80,
+        width:80,
+        borderRadius:12,
+        marginHorizontal:5},
+    imagetakedStyle:{
+        height:80,
+        width:80,
+        borderRadius:12
+    },
+    viewIconCloseStyle:{
+        height:18,
+        width:18,
+        position: 'absolute',
+        right: 1,
+        bottom: 69,
+        borderRadius:15},
+    iconCloseStyle:{
+        height:18,
+        width:18,
+    }
 });
