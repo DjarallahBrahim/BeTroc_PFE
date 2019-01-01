@@ -1,25 +1,42 @@
 import React from 'react';
 import {
-    ScrollView,
     StyleSheet,
     Text, TouchableHighlight,
     View,
 } from 'react-native';
 import { Icon } from 'react-native-elements'
 import Colors from "../../constants/Colors";
-import Categories from "./Categories";
+import CategoriesService from "../../Services/CategoriesService";
 
 export default class Categoriebutton extends React.Component {
 
 
+    constructor(props){
+        super(props);
+        this.state={title:''};
+        this.buttonTitleHandler=this.buttonTitleHandler.bind(this);
+    }
+
+    buttonTitleHandler(categoryTitle){
+        this.setState({title: categoryTitle});
+    }
     render() {
         const {navigation} = this.props;
+        const {handlerCategory} = this.props;
 
         return (
             <TouchableHighlight style={styles.container}
-                                onPress={() => {
-                                    this.props.navigation.navigate('Categorie')
-                                }} >
+                                onPress={async () => {
+                                    const categoriesService = new  CategoriesService;
+                                    const data = await categoriesService.getCategoriesHandler();
+                                    if(data)
+                                        this.props.navigation.navigate('Categorie',{data: data, handlerCategory:handlerCategory,
+                                                                                navigation: navigation, 'buttonTitleHandler':this.buttonTitleHandler})
+                                    else
+                                        Alert('Merci d\'essayer plus tard');
+                                }}
+                                underlayColor={'transparent'}
+            >
                 <View style={styles.viewStyle}>
                 <Icon
                     name='puzzle-piece'
@@ -29,14 +46,16 @@ export default class Categoriebutton extends React.Component {
                     onPress={() => {
                         this.props.navigation.navigate('Categorie')
                     }} />
-                <Text  style={{fontSize:19,fontWeight: '500', color: Colors.grey2}}> Catégorie </Text>
+                <Text  style={{fontSize:19,fontWeight: '500', color: this.state.title?Colors.tintColor:Colors.grey2}}> {this.state.title || "Catégorie"} </Text>
                 <Icon
 
                     name='angle-right'
                     type='font-awesome'
                     color={'transparent'}
                     size={30}
-                    onPress={() => this.props.navigation.navigate('Categorie')} />
+                    onPress={() =>  this.props.navigation.navigate('Categorie',{data: data, handlerCategory:handlerCategory,
+                        navigation: navigation, 'buttonTitleHandler':this.buttonTitleHandler})
+                    }/>
 
                 </View>
             </TouchableHighlight>

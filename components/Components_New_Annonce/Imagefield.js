@@ -5,7 +5,6 @@ import {
     View,
 } from 'react-native';
 import { Icon } from 'react-native-elements'
-import renderIf from './renderif'
 import closeimg from '../../assets/images/close-icon.png'
 
 export default class Imagefield extends React.Component {
@@ -23,16 +22,16 @@ export default class Imagefield extends React.Component {
 
     returnDataFromCamera(uri) {
         if(this.state.imagesTaked.length<3) {
+            this.props.handlerImage(uri);
             this.setState({imagesTaked: [...this.state.imagesTaked, uri]});
         }if(this.state.imagesTaked.length === 2)
             this.setState({takePic:false})
     }
 
     _deleteImg(key){
+        this.props.handlerDeletImage(key);
         this.state.imagesTaked.splice(key,1);
         this.setState({takePic:true});
-        this.forceUpdate();
-
     }
     _navigateToCamera(){
         this.state.takePic ? this.props.navigation.navigate('CameraAdd',{

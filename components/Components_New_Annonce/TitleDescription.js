@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-    ScrollView,
     StyleSheet,
     Keyboard, TextInput,
     View,
@@ -9,6 +8,8 @@ import Colors from "../../constants/Colors";
 import {Divider} from "react-native-elements";
 
 export default class TitleDescription extends React.Component {
+
+
     handleKeyDown(e){
         if(e.nativeEvent.key === "Enter"){
             Keyboard.dismiss()
@@ -17,12 +18,19 @@ export default class TitleDescription extends React.Component {
 
 
 
+    _onChangeInputTitle(title){
+        this.props.handlerTitel(title);
+    }
+
+    _onChangeInputDescription(description){
+        this.props.handlerDescription(description);
+    }
     render() {
         return (
             <View style={styles.container}>
                 <TextInput
                     style={{height: 40, marginHorizontal:8}}
-                    onChangeText={() => {}}
+                    onChangeText={(text) => {this._onChangeInputTitle(text)}}
                     placeholder={"Title"}
                     placeholderTextColor={Colors.grey2}
                     returnKeyType="done"
@@ -32,7 +40,7 @@ export default class TitleDescription extends React.Component {
                 <Divider style={{ backgroundColor: Colors.grey2, height:0.5 }} />
                 <TextInput
                     style={{height: 80, margin:8}}
-                    onChangeText={() => {}}
+                    onChangeText={(text) => {this._onChangeInputDescription(text)}}
                     placeholder={"Déscription"}
                     placeholderTextColor={Colors.grey2}
                     multiline={true}

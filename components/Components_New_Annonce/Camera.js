@@ -25,7 +25,8 @@ export default class CameraAdd extends React.Component {
 
     takePic = async () => {
         if (this.camera) {
-            let photo = await this.camera.takePictureAsync();
+            let photo = await this.camera.takePictureAsync({quality:0.3});
+            await console.log(this.camera.getAvailablePictureSizesAsync());
             this.setState({takedPic: true, imageURI: photo.uri});
         }
     };
@@ -119,14 +120,14 @@ export default class CameraAdd extends React.Component {
                                     <TouchableHighlight style={styles.deleteButton}
                                                         onPress={() => this.setState({takedPic: false})}
                                     >
-                                        <Text style={{color:'white', fontWeight: '500',fontSize:18, paddingHorizontal:5}}>Supprimer</Text>
+                                        <Text style={{color:'white', fontWeight: '500',fontSize:15, paddingHorizontal:5}}>Supprimer</Text>
                                     </TouchableHighlight>
                                     <TouchableHighlight style={styles.saveButton}
                                                         onPress={() => {
                                                           this._savePic(returnDataFromCamera, navigation);
                                                         }}
                                     >
-                                        <Text style={{color:'black', fontWeight: '500',fontSize:18, paddingHorizontal:5}}>Sauvegarder</Text>
+                                        <Text style={{color:'black', fontWeight: '500',fontSize:15, paddingHorizontal:5}}>Sauvegarder</Text>
                                     </TouchableHighlight>
                                 </View>
                             </View>

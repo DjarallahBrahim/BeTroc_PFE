@@ -1,8 +1,7 @@
 import React from 'react';
-import {StyleSheet, TextInput, View} from 'react-native';
+import {StyleSheet, Text, TextInput, View} from 'react-native';
 import Colors from "../../constants/Colors";
-import ModalSelector from "react-native-modal-selector";
-import { Icon } from 'react-native-elements'
+import RadioGroup from 'react-native-radio-buttons-group';
 
 export default class EtatAnnonce extends React.Component {
 
@@ -10,66 +9,57 @@ export default class EtatAnnonce extends React.Component {
         super(props);
 
         this.state = {
-            textInputValue: ''
-        }
+            data: [
+                {
+                    label: 'Comme neuf',
+                    value: "PERFECT",
+                    color:Colors.tintColor
+                },
+                {
+                    label: 'Moyen',
+                    value: "MEDIUM",
+                    color:Colors.tintColor
+                },
+                {
+                    label: 'À bricoler',
+                    value: "BAD",
+                    color:Colors.tintColor
+
+                }
+            ],
+        };
     }
+    onPress = (data, handlerEtat)=> {
+        //this.setState({ data });
+        let selectedButton = data.find(e => e.selected === true);
+        selectedButton = selectedButton ? selectedButton.value : data[0].value;
+        handlerEtat(selectedButton);
+    };
 
     render() {
-        let index = 0;
-        const data = [
-            { key: index++, section: true, label: 'Fruits' },
-            { key: index++, label: 'Red Apples' },
-            { key: index++, label: 'Cherries' },
-            { key: index++, label: 'Cranberries', accessibilityLabel: 'Tap here for cranberries' },
-            // etc...
-            // Can also add additional custom keys which are passed to the onChange callback
-            { key: index++, label: 'Vegetable', customKey: 'Not a fruit' }
-        ];
+
 
         return (
+            <View  style={{
+                marginTop:15,
+            }} >
+                <Text style={{fontSize:15, color: Colors.grey1, marginBottom:5}}> État du produit: </Text>
             <View style={{
                 flex:1,
                 backgroundColor: '#fff',
                 padding:5,
-                marginTop:15,
+                marginTop:5,
                 borderRadius:10
             }}>
 
-                <ModalSelector
-                    data={data}
-                    onChange={(option)=>{
-                        this.setState({textInputValue:option.label});
-                    }} >
-
-                    <View style={{
-                        flexDirection:"row",
-                        justifyContent: 'space-between',
-                        backgroundColor: '#fff',
-                    }}>
-                        <Icon
-
-                            name='cubes'
-                            type='font-awesome'
-                            color={Colors.tintColor}
-                            size={25}
-                        />
-                    <TextInput
-                        style={{fontSize:18,fontWeight: '500', color: Colors.grey1}}
-                        editable={false}
-                        placeholder="État du produit"
-                        value={this.state.textInputValue}
-                        underlineColorAndroid={"transparent"}/>
-                    <Icon
-
-                        name='cubes'
-                        type='font-awesome'
-                        color={'transparent'}
-                        size={25}
-                    />
-                    </View>
-                </ModalSelector>
+                <RadioGroup
+                    radioButtons={this.state.data}
+                    onPress={data => this.onPress(data, this.props.handlerEtat)}
+                    flexDirection='row'
+                />
 
 
+            </View>
             </View>
         );
     }
