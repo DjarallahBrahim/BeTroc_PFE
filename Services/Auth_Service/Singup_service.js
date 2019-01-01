@@ -14,8 +14,8 @@ export default class Singup_service {
     static singupHandler(userName, email, password) {
 
         return new Promise((resolve, reject) => {
-                axios.post("http://192.168.1.46:5000/api/auth/signup", {
-                     name: "namename",
+                axios.post("http://vps628622.ovh.net/api/auth/signup", {
+                     name: userName,
                      username: userName,
                      email: email,
                      password: password
@@ -37,7 +37,12 @@ export default class Singup_service {
      * @private
      */
     static _loginResolve(res ){
-        alert( res.data.success ) //TODO save token
+        if(res.data.success)
+            alert("Vous êtes enregistré avec succès, s'il vous plaît confirmer votre email");
+        else
+            alert("Probléme durant l'opération");
+
+        //alert( res.data.success ) //TODO save token
         //const decodedToken = jwt_decode(res.token);
         //alert(JSON.stringify(decodedToken))
         // AsyncStorage.setItem('token', res.token);

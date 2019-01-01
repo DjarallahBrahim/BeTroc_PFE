@@ -1,11 +1,10 @@
 import React from 'react';
 import {
-    ScrollView,
     StyleSheet,
-    Text, TouchableOpacity,
+    Text,
     View,
 } from 'react-native';
-import {ButtonGroup, Icon} from 'react-native-elements'
+import {ButtonGroup} from 'react-native-elements'
 import Colors from "../../constants/Colors";
 
 export default class TypeAnnonce extends React.Component {
@@ -14,16 +13,17 @@ export default class TypeAnnonce extends React.Component {
         this.state = {
             selectedIndex: 0
         };
-        this.updateIndex = this.updateIndex.bind(this)
+        this.buttons = ['Don', 'Échange', 'Demande'];
+        this.updateIndex = this.updateIndex.bind(this);
     }
 
     updateIndex(selectedIndex) {
-        this.setState({selectedIndex})
+        this.setState({selectedIndex});
+        this.props.handlerType(this.buttons[selectedIndex]);
     }
 
     render() {
-        const buttons = ['Don', 'Échange', 'Demande']
-        const {selectedIndex} = this.state
+        const {selectedIndex} = this.state;
 
         return (
             <View style={styles.container}>
@@ -32,7 +32,7 @@ export default class TypeAnnonce extends React.Component {
                 onPress={this.updateIndex}
                 selectedIndex={selectedIndex}
                 selectedButtonStyle={{backgroundColor:Colors.tintColor}}
-                buttons={buttons}
+                buttons={this.buttons}
                 containerStyle={{height: 40,  backgroundColor:"transparent", borderColor:'transparent', marginLeft:0, marginRight:0, marginBottom:0, marginTop:0}}
                 buttonStyle={{borderRadius:10, backgroundColor:'white',  marginHorizontal:3}}
                 innerBorderStyle={{width:0, color:"transparent"}}

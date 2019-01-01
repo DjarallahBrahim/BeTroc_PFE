@@ -16,7 +16,7 @@ export default class Login_service {
     static loginHandler(userName, password) {
 
        return new Promise((resolve, reject) => {
-               axios.post("http://192.168.1.46:5000/api/auth/signin", {
+               axios.post("http://vps628622.ovh.net/api/auth/signin", {
                    usernameOrEmail: userName,
                    password: password
                })
@@ -36,11 +36,12 @@ export default class Login_service {
      * @param res
      * @private
      */
-    static _loginResolve(res ){
-        alert( res.data.accessToken ) //TODO save token
+    static async _loginResolve(res ){
+        alert( res.data.idUser );//TODO save token
         //const decodedToken = jwt_decode(res.token);
         //alert(JSON.stringify(decodedToken))
-        // AsyncStorage.setItem('token', res.token);
+        await AsyncStorage.setItem('AuthToken', res.data.jwt);
+        await AsyncStorage.setItem('userId', `${res.data.idUser}`);
         // AsyncStorage.setItem('tokendecode', decodedToken)
     }
 

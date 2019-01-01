@@ -6,35 +6,33 @@ import {
 } from 'react-native';
 import Colors from "../../constants/Colors";
 import { Icon } from 'react-native-elements'
-export default class Adresseproduct extends React.Component {
+
+export default class TitleDescription extends React.Component {
 
 
-    _onChangeInputAddress(title){
-        this.props.handlerAdress(title);
-    }
+
 
     render() {
-
+        const handlerEstimation = this.props.handlerEstimation;
         return (
             <View style={styles.container}>
                 <Icon
-
-                    name='map-marker'
+                    name='euro'
                     type='font-awesome'
                     color={Colors.tintColor}
-                    size={25}
+                    size={20}
                     iconStyle={{marginHorizontal:10, backgroundColor:'transparent'}}
                     onPress={() => this.props.navigation.navigate("MapLocation",
                         {locationHandler: this.props.handlerAdress, navigation:this.props.navigation})} />
                 <TextInput
-                    onChangeText={(text) => {this._onChangeInputAddress(text)}}
-                    placeholder={"Address"}
+                    onChangeText={(text) => {handlerEstimation(text)}}
+                    placeholder={"Estimation"}
                     placeholderTextColor={Colors.grey2}
                     returnKeyType="done"
                     onKeyPress={this.handleKeyDown}
                     underlineColorAndroid="transparent"
                     autoCapitalize = 'none'
-                    value ={this.props.address===''?'':this.props.address}
+                    keyboardType={'numeric'}
                 />
             </View>
         );
@@ -50,6 +48,6 @@ const styles = StyleSheet.create({
         paddingVertical:10,
         backgroundColor: '#fff',
         borderRadius:10,
-        marginVertical:15,
+        marginTop:15,
     }
 });

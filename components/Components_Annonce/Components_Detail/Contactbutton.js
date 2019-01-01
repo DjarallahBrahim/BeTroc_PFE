@@ -14,7 +14,7 @@ export default class Contactbutton extends React.Component {
         return (
             <View style={styles.container}>
                 <TouchableHighlight
-                    style={styles.contact}
+                    style={styles.publier}
                     onPress={()=>{alert('You will contact him soon :) ')}}
                 >
                     <View style={{flex:1,flexDirection:'row', alignItems: 'center',
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
     },
-    contact: {
+    publier: {
         alignItems: 'center',
         backgroundColor: Colors.tintColor,
         borderRadius: 5,
