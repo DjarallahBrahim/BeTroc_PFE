@@ -11,7 +11,7 @@ import {
     View,
 } from 'react-native';
 
-import spinner from '../../../assets/images/loading2.gif';
+import spinner from '../../../../assets/images/loading2.gif';
 
 const BUTTONCOLOR = '#fff';
 const BORDER_COLOR = 'rgba(32, 157, 18, 1)';

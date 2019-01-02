@@ -20,7 +20,7 @@ import SignupSection from '../components/Components_Auth/Components_Login/Signup
 import Login_service from "../Services/Auth_Service/Login_service";
 
 
-import backbuttonimg from "../assets/images/left-arrow.png";
+import backbuttonimg from "../../assets/images/left-arrow.png";
 const MIN_PASS_LENGTH = 6;
 
 export default class LoginScreen extends Component {

@@ -8,8 +8,8 @@ import {
 
 import UserInput from '../Commun/UserInput';
 
-import usernameImg from '../../../assets/images/username.png';
-import passwordImg from '../../../assets/images/password.png';
+import usernameImg from '../../../../assets/images/username.png';
+import passwordImg from '../../../../assets/images/password.png';
 
 export default class Form extends Component {
     constructor(props) {

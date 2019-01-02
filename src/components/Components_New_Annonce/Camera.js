@@ -3,7 +3,7 @@ import {Text, View, TouchableOpacity, TouchableHighlight, Image, StyleSheet} fro
 import {Camera, Permissions, ImagePicker} from 'expo';
 import Icon from '@expo/vector-icons/FontAwesome';
 import Colors from "../../constants/Colors";
-import flipImage from '../../assets/images/flipcamera.png'
+import flipImage from '../../../assets/images/flipcamera.png'
 import Layout from "../../constants/Layout";
 import renderIf from './renderif'
 export default class CameraAdd extends React.Component {

@@ -11,7 +11,7 @@ import Form from '../components/Components_Auth/Components_SingUp/Form';
 import Singup_service from "../Services/Auth_Service/Singup_service";
 
 //images
-import backbuttonimg from "../assets/images/left-arrow.png";
+import backbuttonimg from "../../assets/images/left-arrow.png";
 import SocialAuthButton from "../components/Components_Auth/Commun/SocialAuthButton";
 
 const MIN_PASS_LENGTH = 6;
