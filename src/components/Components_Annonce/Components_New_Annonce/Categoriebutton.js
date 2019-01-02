@@ -5,8 +5,8 @@ import {
     View,
 } from 'react-native';
 import { Icon } from 'react-native-elements'
-import Colors from "../../constants/Colors";
-import CategoriesService from "../../Services/CategoriesService";
+import Colors from "../../../constants/Colors";
+import CategoriesService from "../../../Services/CategoriesService";
 
 export default class Categoriebutton extends React.Component {
 

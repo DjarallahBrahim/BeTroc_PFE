@@ -5,7 +5,7 @@ import {
     View,
 } from 'react-native';
 import {ButtonGroup} from 'react-native-elements'
-import Colors from "../../constants/Colors";
+import Colors from "../../../constants/Colors";
 
 export default class TypeAnnonce extends React.Component {
     constructor() {

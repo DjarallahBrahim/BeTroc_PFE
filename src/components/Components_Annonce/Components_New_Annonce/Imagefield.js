@@ -5,7 +5,7 @@ import {
     View,
 } from 'react-native';
 import { Icon } from 'react-native-elements'
-import closeimg from '../../../assets/images/close-icon.png'
+import closeimg from '../../../../assets/images/close-icon.png'
 
 export default class Imagefield extends React.Component {
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
-import Colors from "../../constants/Colors";
+import Colors from "../../../constants/Colors";
 import RadioGroup from 'react-native-radio-buttons-group';
 
 export default class EtatAnnonce extends React.Component {

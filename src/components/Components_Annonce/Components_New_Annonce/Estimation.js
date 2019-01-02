@@ -4,7 +4,7 @@ import {
     TextInput,
     View,
 } from 'react-native';
-import Colors from "../../constants/Colors";
+import Colors from "../../../constants/Colors";
 import { Icon } from 'react-native-elements'
 
 export default class TitleDescription extends React.Component {

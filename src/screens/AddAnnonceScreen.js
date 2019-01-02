@@ -4,18 +4,18 @@ import {
     StyleSheet,Text,View,TouchableHighlight
 } from 'react-native';
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
-import Categoriebutton from "../components/Components_New_Annonce/Categoriebutton";
-import TypeAnnonce from "../components/Components_New_Annonce/TypeAnnonce";
-import EtatAnnonce from "../components/Components_New_Annonce/EtatAnnonce";
-import Imagefield from "../components/Components_New_Annonce/Imagefield";
-import TitleDescription from "../components/Components_New_Annonce/TitleDescription";
-import Adresseproduct from "../components/Components_New_Annonce/Adresseproduct";
+import Categoriebutton from "../components/Components_Annonce/Components_New_Annonce/Categoriebutton";
+import TypeAnnonce from "../components/Components_Annonce/Components_New_Annonce/TypeAnnonce";
+import EtatAnnonce from "../components/Components_Annonce/Components_New_Annonce/EtatAnnonce";
+import Imagefield from "../components/Components_Annonce/Components_New_Annonce/Imagefield";
+import TitleDescription from "../components/Components_Annonce/Components_New_Annonce/TitleDescription";
+import Adresseproduct from "../components/Components_Annonce/Components_New_Annonce/Adresseproduct";
 import Spinner from 'react-native-loading-spinner-overlay';
 import {Icon} from "react-native-elements";
 import Colors from "../constants/Colors";
 import * as UploadAnnonceService from "../Services/UploadAnnonceService";
 import {StackActions, NavigationActions} from 'react-navigation';
-import Estimation from "../components/Components_New_Annonce/Estimation";
+import Estimation from "../components/Components_Annonce/Components_New_Annonce/Estimation";
 
 export default class AddAnnonceScreen extends React.Component {
     static navigationOptions = {

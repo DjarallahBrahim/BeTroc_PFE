@@ -17,9 +17,9 @@ import Annoncedetailscreen from "../screens/Annoncedetailscreen";
 import SignupScreen from "../screens/SignupScreen";
 import LoginScreen from "../screens/LoginScreen";
 import PicDetail from "../components/Components_Annonce/Components_Detail/PicDetail";
-import Categories from "../components/Components_New_Annonce/Categories";
-import CameraAdd from "../components/Components_New_Annonce/Camera";
-import MapLocation from "../components/Components_New_Annonce/Map";
+import Categories from "../components/Components_Annonce/Components_New_Annonce/Categories";
+import CameraAdd from "../components/Components_Annonce/Components_New_Annonce/Camera";
+import MapLocation from "../components/Components_Annonce/Components_New_Annonce/Map";
 
 const BottomTransition = (index, position, height) => {
     const sceneRange = [index - 1, index, index + 1];

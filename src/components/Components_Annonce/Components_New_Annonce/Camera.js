@@ -2,9 +2,9 @@ import React from 'react';
 import {Text, View, TouchableOpacity, TouchableHighlight, Image, StyleSheet} from 'react-native';
 import {Camera, Permissions, ImagePicker} from 'expo';
 import Icon from '@expo/vector-icons/FontAwesome';
-import Colors from "../../constants/Colors";
-import flipImage from '../../../assets/images/flipcamera.png'
-import Layout from "../../constants/Layout";
+import Colors from "../../../constants/Colors";
+import flipImage from '../../../../assets/images/flipcamera.png'
+import Layout from "../../../constants/Layout";
 import renderIf from './renderif'
 export default class CameraAdd extends React.Component {
     static navigationOptions = {

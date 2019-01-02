@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {Constants, MapView, Location, Permissions} from 'expo';
 import { Icon } from 'react-native-elements'
-import Colors from "../../constants/Colors";
+import Colors from "../../../constants/Colors";
 
 export default class MapLocation  extends React.Component {
 
