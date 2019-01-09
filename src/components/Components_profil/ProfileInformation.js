@@ -22,7 +22,7 @@ export default class ProfileInformation extends React.Component {
                     <TouchableHighlight style = {
                         {
                             position:'absolute',
-                            left:'60%',
+                            left:'58%',
                             top:-5,
                             width:45,
                             height:45,
@@ -30,11 +30,12 @@ export default class ProfileInformation extends React.Component {
                             borderRadius:45/2,
                             marginVertical:5,
                             padding:5,
-                            justifyContent:'center'}}>
+                            justifyContent:'center'}}
+                                        onPress={()=> alert('update user info soon')}>
                         <Icon
                             name='pencil'
                             type='font-awesome'
-                            color='white'
+                            color='black'
                             size={22}
                         />
                     </TouchableHighlight>

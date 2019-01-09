@@ -9,11 +9,72 @@ export default class ProfileService {
         let idUser = __ret.idUser;
         const authToken = __ret.authToken;
 
-        return axios.get(`http://192.168.1.47:5000/api/user/${idUser}`, {
+        return axios.get(`http://vps628622.ovh.net/api/user/${idUser}`, {
             'headers': {'Authorization': authToken},
         })
             .then((response) =>
             {
+                handlerUserInfoSeccus(response.data)
+            } )
+            .catch((error) => {
+                handlerUserInfoField();
+                console.log("Error with getting user info request " + error.message)
+            });
+    }
+
+
+
+    static async  deleteDonAD(idAnnonce,handlerUserInfoSeccus,handlerUserInfoField) {
+
+        const __ret = await this.getUserAuth();
+        const authToken = __ret.authToken;
+
+        return axios.delete(`http://vps628622.ovh.net/api/donationAds/delete/${idAnnonce}`, {
+            'headers': {'Authorization': authToken},
+        })
+            .then((response) =>
+            {
+                console.log(idAnnonce +' '+ response.data.message);
+
+                handlerUserInfoSeccus(response.data)
+            } )
+            .catch((error) => {
+                handlerUserInfoField();
+                console.log("Error with getting user info request " + error.message)
+            });
+    }
+    static async  deleteEchangeAD(idAnnonce,handlerUserInfoSeccus,handlerUserInfoField) {
+
+        const __ret = await this.getUserAuth();
+        const authToken = __ret.authToken;
+
+        return axios.delete(`http://vps628622.ovh.net/api/exchangeAds/delete/${idAnnonce}`, {
+            'headers': {'Authorization': authToken},
+        })
+            .then((response) =>
+            {
+                console.log(idAnnonce +' '+ response.data.message);
+
+                handlerUserInfoSeccus(response.data)
+            } )
+            .catch((error) => {
+                handlerUserInfoField();
+                console.log("Error with getting user info request " + error.message)
+            });
+    }
+
+    static async  deleteDemandeAD(idAnnonce,handlerUserInfoSeccus,handlerUserInfoField) {
+
+        const __ret = await this.getUserAuth();
+        const authToken = __ret.authToken;
+
+        return axios.delete(`http://vps628622.ovh.net/api/DonationRequestAd/delete/${idAnnonce}`, {
+            'headers': {'Authorization': authToken},
+        })
+            .then((response) =>
+            {
+                console.log(idAnnonce +' '+ response.data.message);
+
                 handlerUserInfoSeccus(response.data)
             } )
             .catch((error) => {
