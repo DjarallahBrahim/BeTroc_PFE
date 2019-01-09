@@ -48,7 +48,8 @@
     "react-native-view-overflow": "0.0.3",
     "react-navigation": "^2.16.0",
     "react-navigation-material-bottom-tabs": "^0.4.0",
-    "render-if": "^0.1.1"
+    "render-if": "^0.1.1",
+    "react-native-modal-dropdown": "latest"
   },
   "devDependencies": {
     "jest-expo": "30.0.0"

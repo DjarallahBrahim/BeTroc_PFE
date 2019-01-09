@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
-import {Constants, MapView, Permissions} from 'expo';
+import {Constants, MapView, Permissions, Location} from 'expo';
 
 export default class Mapview extends React.Component {
     state = {
         mapRegion: {
-            latitude: parseFloat(this.props.location.latitude),
-            longitude: parseFloat(this.props.location.longitude),
+            latitude: 0,
+            longitude: 0,
             latitudeDelta: 0.002,
             longitudeDelta: 0.001,
         },
@@ -38,6 +38,20 @@ export default class Mapview extends React.Component {
                     </MapView>
             </View>
         );
+    }
+
+    componentDidMount(){
+        Location.geocodeAsync(this.props.location).then((location)=> {
+            this.setState({mapRegion:
+                    {
+                        latitude:location[0].latitude,
+                        longitude:location[0].longitude,
+                        latitudeDelta: 0.002,
+                        longitudeDelta: 0.001,
+                    }
+            });
+            console.log(this.state)
+        });
     }
 }
 

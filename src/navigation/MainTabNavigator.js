@@ -93,7 +93,9 @@ const AddAnnonceStack = createStackNavigator({
     Plus: AddAnnonceScreen,
     Categorie: Categories,
     CameraAdd:CameraAdd,
-    MapLocation: MapLocation
+    MapLocation: MapLocation,
+    Auth: LoginScreen,
+    Singup: SignupScreen,
 });
 
 AddAnnonceStack.navigationOptions = ({navigation}) => {
@@ -113,6 +115,8 @@ const ProfilStack = createStackNavigator({
     Profil: ProfilScreen,
     Auth: LoginScreen,
     Singup: SignupScreen,
+    AnnonceDetail: Annoncedetailscreen,
+    PicDetail: PicDetail
 }, {transitionConfig: NavigationConfig});
 
 ProfilStack.navigationOptions = ({navigation}) => {

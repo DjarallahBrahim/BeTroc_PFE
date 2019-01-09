@@ -31,3 +31,14 @@ import {AsyncStorage} from "react-native";
             console.log('AsyncStorage Error: ' + error.message);
         }
     };
+
+   export async function deleteItemFromStorage(key) {
+        try {
+            await AsyncStorage.removeItem(key);
+            return true;
+        }
+        catch(exception) {
+            return false;
+        }
+    };
+

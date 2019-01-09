@@ -20,8 +20,8 @@ export default class Login_service {
                    usernameOrEmail: userName,
                    password: password
                })
-                   .then((response) => {
-                       Login_service._loginResolve(response);
+                   .then(async (response) => {
+                       await Login_service._loginResolve(response);
                        resolve()
                    })
                    .catch((error) => {
@@ -37,7 +37,7 @@ export default class Login_service {
      * @private
      */
     static async _loginResolve(res ){
-        alert( res.data.idUser );//TODO save token
+       // alert( res.data.idUser );//TODO save token
         //const decodedToken = jwt_decode(res.token);
         //alert(JSON.stringify(decodedToken))
         await AsyncStorage.setItem('AuthToken', res.data.jwt);

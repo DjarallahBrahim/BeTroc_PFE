@@ -13,6 +13,7 @@ import Singup_service from "../Services/Auth_Service/Singup_service";
 //images
 import backbuttonimg from "../../assets/images/left-arrow.png";
 import SocialAuthButton from "../components/Components_Auth/Commun/SocialAuthButton";
+import {NavigationActions, StackActions} from "react-navigation";
 
 const MIN_PASS_LENGTH = 6;
 export default class SignupScreen extends Component {
@@ -67,7 +68,14 @@ export default class SignupScreen extends Component {
 
 
         if (SignupScreen.checkInput(userName, userMail, password, passwordConfirmation)) {
-            Singup_service.singupHandler(userName, userMail, password).then(() => doneLoading()); //TODO: create user model and save his data
+            Singup_service.singupHandler(userName, userMail, password).then(() => {
+                doneLoading();
+                const resetAction = StackActions.reset({
+                    index: 0,
+                    actions: [NavigationActions.navigate({routeName: 'Auth'})],
+                });
+                this.props.navigation.dispatch(resetAction);
+            }); //TODO: create user model and save his data
         } else {
             //alert('Veuillez saisir votre username/email et mot de passe')
             doneLoading()
@@ -139,7 +147,7 @@ export default class SignupScreen extends Component {
                             <TouchableHighlight underlayColor="transparent"
                                                 style={{flex: 1}}
                                                 onPress={() => this.navigation.navigate('Profil')}>
-                                <Image source={backbuttonimg} style={{top: 25, left: 10, width: 30, height: 30}}/>
+                                <Image source={backbuttonimg} style={{transform: [{ rotate: '-90deg'}], top: 25, left: 10, width: 30, height: 30}}/>
                             </TouchableHighlight>
                             <EmptySpace/>
                             <Form handlerUserName={this.handlerUserName}

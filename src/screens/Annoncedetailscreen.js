@@ -3,7 +3,7 @@ import {
     StyleSheet,
     View,
 } from 'react-native';
-import Main from "../components/Components_Annonce/Components_Detail/Main";
+import MainTMP from "../components/Components_Annonce/Components_Detail/MainTMP";
 
 export default class Annoncedetailscreen extends React.Component {
     static navigationOptions = {
@@ -16,7 +16,7 @@ export default class Annoncedetailscreen extends React.Component {
         const typeAnnonce = this.props.navigation.getParam("typeAnnonce", {});
         return (
             <View style={styles.container}>
-                <Main typeAnnonce={typeAnnonce} navigation={navigation} data={data}/>
+                <MainTMP typeAnnonce={typeAnnonce} navigation={navigation} data={data}/>
             </View>
         );
     }

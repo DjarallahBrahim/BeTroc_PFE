@@ -16,6 +16,9 @@ import Colors from "../constants/Colors";
 import * as UploadAnnonceService from "../Services/UploadAnnonceService";
 import {StackActions, NavigationActions} from 'react-navigation';
 import Estimation from "../components/Components_Annonce/Components_New_Annonce/Estimation";
+import * as cacheOperationService from "../Services/CacheOperationService";
+import LoginSignupScreen from "./LoginSignupScreen";
+import ProfileService from "../Services/ProfileService";
 
 export default class AddAnnonceScreen extends React.Component {
     static navigationOptions = {
@@ -34,7 +37,8 @@ export default class AddAnnonceScreen extends React.Component {
             etatProduit: "PERFECT",
             imgUrl: [],
             estimatedPrice: '',
-            spinner: false
+            spinner: false,
+            auth:null
 
 
         };
@@ -49,6 +53,8 @@ export default class AddAnnonceScreen extends React.Component {
         this.handlerEstimation = this.handlerEstimation.bind(this);
         this.uploadAnnonce = this.uploadAnnonce.bind(this);
         this.handlerSpinner = this.handlerSpinner.bind(this);
+
+        console.log('constrecteur');
     }
 
     handlerAdress(adLocation) {
@@ -158,7 +164,35 @@ export default class AddAnnonceScreen extends React.Component {
         this.props.navigation.navigate('Home');
     }
 
+    checkAuthentification(){
+        cacheOperationService.getItemFromStorage("userId")
+            .then((auth)=>{
+                    if (auth) {
+                        this.setState({auth:true})
+                    }else
+                        this.setState({auth:false})
+                }
+            );
+    }
+    componentDidMount(){
+        this.checkAuthentification();
+        console.log("DidMount")
+    }
+
+
+
     render() {
+        if(this.state.auth === null)
+            return null;
+        if(!this.state.auth)
+            return(<View style={{
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}>
+                <LoginSignupScreen routename={'Plus'} navigation={this.props.navigation}/>
+            </View>);
+        else
         return (
 
             <ScrollView style={styles.container}>

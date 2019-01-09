@@ -21,6 +21,7 @@ import Login_service from "../Services/Auth_Service/Login_service";
 
 
 import backbuttonimg from "../../assets/images/left-arrow.png";
+import {NavigationActions, StackActions} from "react-navigation";
 const MIN_PASS_LENGTH = 6;
 
 export default class LoginScreen extends Component {
@@ -59,7 +60,15 @@ export default class LoginScreen extends Component {
         const password = this.state.userPassword;
 
         if (LoginScreen.checkInput(userName, password)) {
-            Login_service.loginHandler(userName, password).then((status) => doneLoading()); //TODO: creat user model and save his data
+            Login_service.loginHandler(userName, password).then((status) => {
+                doneLoading();
+                const routename = this.props.navigation.getParam("routename", {});
+                const resetAction = StackActions.reset({
+                    index: 0,
+                    actions: [NavigationActions.navigate({routeName: routename})],
+                });
+                this.props.navigation.dispatch(resetAction);
+            }); //TODO: creat user model and save his data
         } else {
             doneLoading()
         }
@@ -98,9 +107,9 @@ export default class LoginScreen extends Component {
                     <Wallpaper typescreen="Login">
                         <KeyboardAvoidingView behavior="padding" style={styles.container}>
                             <TouchableHighlight underlayColor="transparent"
-                                                style={{flex: 1}}
+                                                style={{flex: 1, }}
                                                 onPress={() => this.navigation.navigate('Profil')}>
-                                <Image source={backbuttonimg} style={{top: 25, left: 10, width: 30, height: 30}}/>
+                                <Image source={backbuttonimg} style={{top: 25, left: 10, width: 30, height: 30, transform: [{ rotate: '-90deg'}]}}/>
                             </TouchableHighlight>
                             <EmptySpace/>
                             {/*<View style={{*/}
