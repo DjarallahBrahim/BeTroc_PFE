@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+    RefreshControl,
     ScrollView,
     StyleSheet,
     View,
@@ -23,13 +24,19 @@ export default class TabsBarView extends React.Component {
                     {
                         this.categories.map( (typeAnnonce, index)=>
                             <View key={index} title={typeAnnonce} style={styles.content}>
-                                <ScrollView>
+                                <ScrollView
+                                    refreshControl={
+                                        <RefreshControl
+                                            refreshing={this.props.refreshing}
+                                            onRefresh={this.props.onRefresh}
+                                        />
+                                    }>
                                 {Object.keys(data.type[typeAnnonce]).map((categorieX) =>
 
-                                    <Categorie typeAnnonce={typeAnnonce}
+                                    typeAnnonce !== "Demande"?<Categorie typeAnnonce={typeAnnonce}
                                                key={index}
                                                navigation={navigation}
-                                               categorie={ data.type[typeAnnonce][categorieX]} />
+                                               categorie={ data.type[typeAnnonce][categorieX]} />:null
                                 )}
                                 </ScrollView>
                             </View>
@@ -45,17 +52,14 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+
+
     },
     content: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'flex-start',
         backgroundColor: '#fff',
-    },
-    header: {
-        margin: 10,
-        color: Colors.tintColor,
-        fontSize: 26,
+
     },
     text: {
         marginHorizontal: 20,

@@ -24,10 +24,10 @@ export default class Categorie extends Component {
                 {
                     Object.keys(this.categorie).map((titel, index) =>
                         <View key={index} style={{flex:1}}>
-                            <Text key={index} style={{fontSize: 24, fontWeight: '700', marginTop:10}}>
+                            <Text key={index} style={{fontSize: 20, fontWeight: '500', marginTop:5}}>
                                 {titel}
                             </Text>
-                            <View style={{height: 130 , marginTop: 8}}>
+                            <View style={{height: 180}}>
                                 <FlatList
                                     horizontal={true}
                                     data={this.categorie[titel]}
@@ -53,12 +53,9 @@ const styles = StyleSheet.create({
             alignItems: 'flex-start',
             justifyContent: 'center',
             backgroundColor: 'white',
-            paddingTop: 10,
-            paddingBottom: 10,
-            marginBottom: 15,
-            marginRight:10,
-            marginLeft:10,
-            marginTop:5,
+            marginBottom: 10,
+            marginRight:0,
+            marginLeft:5,
             // shadowColor: '#000000',
             // shadowOffset: {
             //     width: 0,

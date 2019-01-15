@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     ScrollView,
-    StyleSheet,Text,View,TouchableHighlight
+    StyleSheet, Text, View, TouchableHighlight
 } from 'react-native';
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 import Categoriebutton from "../components/Components_Annonce/Components_New_Annonce/Categoriebutton";
@@ -29,8 +29,8 @@ export default class AddAnnonceScreen extends React.Component {
     constructor() {
         super();
         this.state = {
-            title:'',
-            description:'',
+            title: '',
+            description: '',
             adLocation: '',
             category: 0,
             typeAd: "Don",
@@ -38,7 +38,7 @@ export default class AddAnnonceScreen extends React.Component {
             imgUrl: [],
             estimatedPrice: '',
             spinner: false,
-            auth:null
+            auth: null
 
 
         };
@@ -54,7 +54,8 @@ export default class AddAnnonceScreen extends React.Component {
         this.uploadAnnonce = this.uploadAnnonce.bind(this);
         this.handlerSpinner = this.handlerSpinner.bind(this);
 
-        console.log('constrecteur');
+
+
     }
 
     handlerAdress(adLocation) {
@@ -103,7 +104,9 @@ export default class AddAnnonceScreen extends React.Component {
     }
 
     uploadAnnonce() {
-        if(UploadAnnonceService.formValidation(this.state)) {
+        if (UploadAnnonceService.formValidation(this.state)) {
+
+
             this.handlerSpinner();
             const data = {
                 "title": this.state.title,
@@ -138,15 +141,19 @@ export default class AddAnnonceScreen extends React.Component {
                                     })
                                     .catch();
                             }
-                            else
+                            else {
+                                this.handlerSpinner();
                                 alert('No type Ad to send it')
+                            }
                         }
-                        else
+                        else {
+                            this.handlerSpinner();
                             alert('Poblème avec notre serveur')
+                        }
                     }
                 )
                 .catch()
-        }else
+        } else
             alert('veuillez remplir tous les champs');
     }
 
@@ -156,36 +163,38 @@ export default class AddAnnonceScreen extends React.Component {
     }
 
     handlerUploadSeccus() {
+        this.handlerSpinner();
+
         const resetAction = StackActions.reset({
             index: 0,
             actions: [NavigationActions.navigate({routeName: 'Plus'})],
         });
         this.props.navigation.dispatch(resetAction);
         this.props.navigation.navigate('Home');
+
     }
 
-    checkAuthentification(){
+    checkAuthentification() {
         cacheOperationService.getItemFromStorage("userId")
-            .then((auth)=>{
+            .then((auth) => {
                     if (auth) {
-                        this.setState({auth:true})
-                    }else
-                        this.setState({auth:false})
+                        this.setState({auth: true})
+                    } else
+                        this.setState({auth: false})
                 }
             );
     }
-    componentDidMount(){
+
+    componentDidMount() {
         this.checkAuthentification();
-        console.log("DidMount")
     }
 
 
-
     render() {
-        if(this.state.auth === null)
+        if (this.state.auth === null)
             return null;
-        if(!this.state.auth)
-            return(<View style={{
+        if (!this.state.auth)
+            return (<View style={{
                 flex: 1,
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -193,54 +202,62 @@ export default class AddAnnonceScreen extends React.Component {
                 <LoginSignupScreen routename={'Plus'} navigation={this.props.navigation}/>
             </View>);
         else
-        return (
+            return (
 
-            <ScrollView style={styles.container}>
-                <Spinner
-                    visible={this.state.spinner}
-                    textContent={'Loading...'}
-                    textStyle={{color: "white", fontSize: 17, lineHeight: 22}}
-                />
-                <KeyboardAwareScrollView
-                    automaticallyAdjustContentInsets={false}
-                    keyboardShouldPersistTaps='always'
-                    scrollEventThrottle={10}
-                    extraHeight={200}
-                    resetScrollToCoords={{x: 0, y: 0}}
-                    contentContainerStyle={styles.container}>
-                    <Categoriebutton handlerCategory={this.handlerCategory} navigation={this.props.navigation}/>
-                    <TypeAnnonce handlerType={this.handlerType}/>
-                    {this.state.typeAd !== 'Demande' ?
-                        <EtatAnnonce handlerEtat={this.handlerEtat}/>
-                        : null
-                    }
+                <ScrollView style={styles.container}>
+                    <Spinner
+                        visible={this.state.spinner}
+                        textContent={'Loading...'}
+                        textStyle={{color: "white", fontSize: 17, lineHeight: 22}}
+                    />
+                    <KeyboardAwareScrollView
+                        automaticallyAdjustContentInsets={false}
+                        keyboardShouldPersistTaps='always'
+                        scrollEventThrottle={10}
+                        extraHeight={200}
+                        resetScrollToCoords={{x: 0, y: 0}}
+                        contentContainerStyle={styles.container}>
+                        <Categoriebutton handlerCategory={this.handlerCategory} navigation={this.props.navigation}/>
+                        <TypeAnnonce handlerType={this.handlerType}/>
+                        {this.state.typeAd !== 'Demande' ?
+                            <EtatAnnonce handlerEtat={this.handlerEtat}/>
+                            : null
+                        }
 
-                    <Imagefield handlerDeletImage={this.handlerDeletImage} handlerImage={this.handlerImage}
-                                navigation={this.props.navigation}/>
+                        <Imagefield handlerDeletImage={this.handlerDeletImage} handlerImage={this.handlerImage}
+                                    navigation={this.props.navigation}/>
 
-                    <TitleDescription handlerTitel={this.handlerTitel} handlerDescription={this.handlerDescription}/>
-                    {this.state.typeAd === 'Échange' ?
-                        <Estimation handlerEstimation={this.handlerEstimation} handlerAdress={this.handlerAdress}
-                        /> : null
-                    }
-                    {this.state.typeAd !== 'Demande' ?
-                        <Adresseproduct address={this.state.adLocation} handlerAdress={this.handlerAdress}
-                                        navigation={this.props.navigation}
-                        /> : null
-                    }
+                        <TitleDescription handlerTitel={this.handlerTitel}
+                                          handlerDescription={this.handlerDescription}/>
+                        {this.state.typeAd === 'Échange' ?
+                            <Estimation handlerEstimation={this.handlerEstimation} handlerAdress={this.handlerAdress}
+                            /> : null
+                        }
+                        {this.state.typeAd !== 'Demande' ?
+                            <Adresseproduct address={this.state.adLocation} handlerAdress={this.handlerAdress}
+                                            navigation={this.props.navigation}
+                            /> : null
+                        }
 
-                    <TouchableHighlight style={styles.publishButton} onPress={()=> this.uploadAnnonce()}>
-                        <View style={{flex:1,flexDirection:'row', alignItems: 'center', justifyContent: 'center',}}>
-                            <Icon size={26} name= 'globe' type='font-awesome' color='#eee' underlayColor={'#00000000'}
-                                iconStyle={{transform: [{ rotate: '-45deg'}]}}
-                            />
-                            <Text style={styles.textPublier}> Publier </Text>
-                        </View>
-                    </TouchableHighlight>
+                        <TouchableHighlight style={styles.publishButton} onPress={() => this.uploadAnnonce()}>
+                            <View style={{
+                                flex: 1,
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                            }}>
+                                <Icon size={26} name='globe'
+                                      type='font-awesome' color='#eee'
+                                      underlayColor={'#00000000'}
+                                      iconStyle={{transform: [{rotate: '-45deg'}]}}
+                                />
+                                <Text style={styles.textPublier}> Publier </Text>
+                            </View>
+                        </TouchableHighlight>
 
-                </KeyboardAwareScrollView>
-            </ScrollView>
-        );
+                    </KeyboardAwareScrollView>
+                </ScrollView>
+            );
     }
 }
 
@@ -256,15 +273,15 @@ const styles = StyleSheet.create({
     publishButton: {
         alignItems: 'center',
         backgroundColor: Colors.tintColor,
-        opacity:0.8,
-        borderRadius:10
+        opacity: 0.8,
+        borderRadius: 10
     },
     textPublier: {
         color: 'white',
         fontWeight: 'bold',
         backgroundColor: 'transparent',
         marginVertical: 15,
-        marginHorizontal:10
+        marginHorizontal: 10
     },
 });
 

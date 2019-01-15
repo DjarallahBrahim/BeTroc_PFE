@@ -6,7 +6,7 @@ import {
     Image, TouchableHighlight,
 
 } from 'react-native';
-
+import { Card } from "react-native-elements";
 
 export default class CardList extends React.Component {
 
@@ -15,20 +15,20 @@ export default class CardList extends React.Component {
         const {data, navigation, typeAnnonce} = this.props;
 
         return (
-            <View style={styles.container} >
-                    <TouchableHighlight  onPress={() => navigation.navigate("AnnonceDetail",
-                                                        {data: data,navigation:navigation,typeAnnonce:typeAnnonce})}
-                                                        style={{flex: 2}}>
-                        <Image source={{uri: data.imgUrl}}
-                               style={{flex: 1, width: null, height: null, resizeMode: 'cover'}}/>
-                    </TouchableHighlight>
-                <View style={{
-                    flex: 1, alignItems: 'center',
-                    justifyContent: 'center',
-                }}>
-                    <Text>{data.title}</Text>
-                </View>
-            </View>
+            <Card title={null} containerStyle={styles.container}>
+                <TouchableHighlight  onPress={() => navigation.navigate("AnnonceDetail",
+                    {data: data,navigation:navigation,typeAnnonce:typeAnnonce})}
+                                     >
+                            <View style={{ alignItems:'center'}}>
+                                <Image
+                                    style={styles.imageStyle}
+                                    resizeMode="cover"
+                                    source={{ uri: 'http://vps628622.ovh.net/api/downloadImage/'+data.images[0].name }}
+                                />
+                                <Text style={{paddingVertical:8, fontWeight:'400'}}>{data.title}</Text>
+                            </View>
+                </TouchableHighlight>
+            </Card>
 
         );
     }
@@ -40,23 +40,29 @@ export default class CardList extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        height: 130,
-        width: 130,
-        marginLeft: 10,
+        justifyContent:'center',
+        alignItems:'center',
+        padding: 0,
+        height:160,
+        width:160,
+        marginLeft: 5,
         borderWidth: 0.5,
-        borderColor: '#dddddd',
-        shadowOffset: {width: 0, height: 0},
+        borderRadius:10,
+        borderColor: 'transparent',
+        shadowOffset: {width: 1, height: 1},
         shadowColor: 'black',
         shadowOpacity: 0.2,
-        elevation: 1,
+        elevation: 2.5,
     },
     containerStyle: {
         height: 200,
         width: 200
     },
     imageStyle: {
-        height: 150,
-        width: 150
+        height: 125,
+        width: 160,
+        borderTopLeftRadius:10,
+        borderTopRightRadius:10,
     },
     textStyle: {
         alignItems: 'center',

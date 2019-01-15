@@ -25,7 +25,6 @@ export default class ProfileService {
 
 
     static async  deleteDonAD(idAnnonce,handlerUserInfoSeccus,handlerUserInfoField) {
-
         const __ret = await this.getUserAuth();
         const authToken = __ret.authToken;
 
@@ -34,7 +33,6 @@ export default class ProfileService {
         })
             .then((response) =>
             {
-                console.log(idAnnonce +' '+ response.data.message);
 
                 handlerUserInfoSeccus(response.data)
             } )
@@ -53,7 +51,6 @@ export default class ProfileService {
         })
             .then((response) =>
             {
-                console.log(idAnnonce +' '+ response.data.message);
 
                 handlerUserInfoSeccus(response.data)
             } )
@@ -73,7 +70,6 @@ export default class ProfileService {
         })
             .then((response) =>
             {
-                console.log(idAnnonce +' '+ response.data.message);
 
                 handlerUserInfoSeccus(response.data)
             } )

@@ -26,7 +26,6 @@ export async function postImages(imgUrl, data) {
                 return generateFormDataAnnonce(response, data);
             } else {
                 console.log("Error with uploading images");
-                console.log(response.data);
                 return false;
             }
         })
@@ -37,7 +36,6 @@ export async function postImages(imgUrl, data) {
 
 
 export async function uploadDonAd(data) {
-    console.log(data);
     const authToken = await cacheOperationService.getItemFromStorage("AuthToken");
     return axios.post("http://vps628622.ovh.net/api/donationAds", data, {
         'headers': {'Authorization': authToken}
@@ -54,7 +52,6 @@ export async function uploadDonAd(data) {
 }
 
 export async function uploadEchangeAd(data) {
-    console.log(data);
     const authToken = await cacheOperationService.getItemFromStorage("AuthToken");
     return axios.post("http://vps628622.ovh.net/api/exchangeAds", data, {
         'headers': {'Authorization': authToken}
@@ -71,7 +68,6 @@ export async function uploadEchangeAd(data) {
 }
 
 export async function uploadDemandeAd(data) {
-    console.log(data);
     const authToken = await cacheOperationService.getItemFromStorage("AuthToken");
     return axios.post("http://vps628622.ovh.net/api/DonationRequestAd", data, {
         'headers': {'Authorization': authToken}

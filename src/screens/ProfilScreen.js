@@ -4,7 +4,7 @@ import {
     StyleSheet,
     Text,
     View,
-    Button, TouchableHighlight, SafeAreaView, Platform
+    Button, TouchableHighlight, SafeAreaView, Platform, RefreshControl
 } from 'react-native';
 import ProfileInformation from "../components/Components_profil/ProfileInformation";
 import AdsProfile from "../components/Components_profil/AdsProfile";
@@ -47,7 +47,8 @@ export default class ProfilScreen extends React.Component {
                     data:[]
                 },
             },
-            auth:null
+            auth:null,
+            refreshing:false
         };
         this.handlerUserInfoField=this.handlerUserInfoField.bind(this);
         this.handlerUserInfoSeccus=this.handlerUserInfoSeccus.bind(this);
@@ -100,6 +101,10 @@ export default class ProfilScreen extends React.Component {
 
 
     }
+    _onRefresh = () => {
+        this.setState({refreshing: false});
+        ProfileService.getUserInfo(this.handlerUserInfoSeccus,this.handlerUserInfoField).then();
+    };
 
     async componentDidMount(){
         this.checkAuthentification();
@@ -120,8 +125,12 @@ export default class ProfilScreen extends React.Component {
                 </View>);
         else
             return (
-
-                <View style={styles.container}>
+                <ScrollView
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={this.state.refreshing}
+                            onRefresh={this._onRefresh}
+                        />}style={styles.container}>
                     <ProfileInformation userInfo={this.state.userInfo}/>
                     <AdsProfile adData={this.state.adData} navigation={this.props.navigation}/>
                     <View style={{alignItems:'center'}}>
@@ -134,7 +143,7 @@ export default class ProfilScreen extends React.Component {
                             </View>
                         </TouchableHighlight>
                      </View>
-                </View>
+                </ScrollView>
             );
     }
 }
@@ -142,7 +151,6 @@ export default class ProfilScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
         backgroundColor: 'white',
     },
     publishButton: {
