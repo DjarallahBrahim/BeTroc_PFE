@@ -23,15 +23,13 @@ export default class MainTMP extends React.Component {
     generateArrayOfPic(images){
         var imagesArr= [];
         images.map((img, idx)=>{
-          imagesArr.push('http://192.168.1.47:5000/api/downloadImage/'+img.name)
+          imagesArr.push('http://vps628622.ovh.net/api/downloadImage/'+img.name)
         })
         return imagesArr;
     }
     renderHeader(){
         const {data, typeAnnonce} = this.props;
-        console.log(data.images[0].name);
         const images = this.generateArrayOfPic(data.images);
-        console.log(images);
 
         return(
             <View key="fixed-header" style={styles.fixedSection}>
@@ -55,13 +53,19 @@ export default class MainTMP extends React.Component {
                              )}
                 />
                 <View style={{height: 50}}>
-                    <AnnonceDetailBar etat={data["state"]} type={typeAnnonce} date={data['creationDate']}/>
+
+                    {
+                    typeAnnonce !=='Demande' ?
+                        <AnnonceDetailBar etat={data["state"]} type={typeAnnonce} date={data['creationDate']}/>
+                        :
+                        null
+                    }
                 </View>
             </View>
         )
     }
     render() {
-        const {data} = this.props;
+        const {data, typeAnnonce} = this.props;
         return (
             <ParallaxScrollView
                 windowHeight={400}
@@ -78,8 +82,20 @@ export default class MainTMP extends React.Component {
                     marginBottom: 10,
                     marginTop: 10
                 }}/>
-                <Mapview location={data['address']}/>
-                <Adresselocation time='25min' adresse={data['address']}/>
+                {
+                    typeAnnonce !=='Demande' ?
+                        <Mapview location={data['address']}/>
+                        :
+                        null
+                }
+
+                {
+                    typeAnnonce !=='Demande' ?
+                        <Adresselocation time='25min' adresse={data['address']}/>
+                        :
+                        null
+                }
+
                 <Contactbutton idUser={data['user']}/>
             </ParallaxScrollView>
         )

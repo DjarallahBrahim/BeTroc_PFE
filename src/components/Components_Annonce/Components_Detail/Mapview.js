@@ -20,8 +20,8 @@ export default class Mapview extends React.Component {
 
                     <MapView
                         zoomEnabled={true}
-                        zoomControlEnabled={false}
-                        scrollEnabled={false}
+                        zoomControlEnabled={true}
+                        scrollEnabled={true}
                         style={{alignSelf: 'stretch', height: 300}}
                         region={this.state.mapRegion}
                     >
@@ -50,7 +50,6 @@ export default class Mapview extends React.Component {
                         longitudeDelta: 0.001,
                     }
             });
-            console.log(this.state)
         });
     }
 }
