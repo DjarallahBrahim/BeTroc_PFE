@@ -26,14 +26,9 @@ export default class Categoriebutton extends React.Component {
 
         return (
             <TouchableHighlight style={styles.container}
-                                onPress={async () => {
-                                    const categoriesService = new  CategoriesService;
-                                    const data = await categoriesService.getCategoriesHandler();
-                                    if(data)
-                                        this.props.navigation.navigate('Categorie',{data: data, handlerCategory:handlerCategory,
+                                onPress={() => {
+                                      this.props.navigation.navigate('Categorie',{handlerCategory:handlerCategory,
                                                                                 navigation: navigation, 'buttonTitleHandler':this.buttonTitleHandler})
-                                    else
-                                        Alert('Merci d\'essayer plus tard');
                                 }}
                                 underlayColor={'transparent'}
             >

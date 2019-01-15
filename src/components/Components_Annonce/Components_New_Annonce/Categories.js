@@ -6,13 +6,14 @@ import {
     View,
     Image, ScrollView
 } from 'react-native';
+import CategoriesService from "../../../Services/CategoriesService";
 
 export default class Categories extends React.Component {
 
 
     constructor(props){
         super(props);
-        this.state={}
+        this.state={categoriesAreReady:false}
     }
 
     _handlerCategory(buttonTitleHandler,handlerCategory, id, category, subCategory){
@@ -25,15 +26,20 @@ export default class Categories extends React.Component {
 
     }
 
+    componentDidMount(){
+        const categoriesService = new  CategoriesService;
+        categoriesService.getCategoriesHandler()
+            .then((categories)=> this.setState({categoriesAreReady:1,dataCategories:categories }));
+    }
+
     render() {
-        const dataCategories = this.props.navigation.getParam("data", {});
         const handlerCategory = this.props.navigation.getParam("handlerCategory", {});
         const navigation = this.props.navigation.getParam("navigation", {});
         const buttonTitleHandler = this.props.navigation.getParam("buttonTitleHandler", {});
         return (
             <ScrollView>
-                {dataCategories.length > 0 ?
-                    dataCategories.map((category, key)=>
+                {this.state.categoriesAreReady>0 ?
+                    this.state.dataCategories.map((category, key)=>
                         <View key={key} style={styles.container}>
                             <View style={styles.categorietitle}>
                                 <View style={{borderBottomWidth: 1, borderBottomColor: "#b1b1b1", width: 15, marginBottom: 8}}/>
@@ -43,7 +49,6 @@ export default class Categories extends React.Component {
                             {
                                 category.subCategories.map((subCategory, index)=>
                                 {
-                                    console.log(subCategory.imgName);
                                     return(
                                     <View key={index} style={styles.subCategories}>
                                         <TouchableOpacity
@@ -74,7 +79,7 @@ export default class Categories extends React.Component {
                                 })
                             }
                         </View>
-                    ): <View> <Text> No Internet Connection </Text></View>
+                    ): null
                 }
 
             </ScrollView>

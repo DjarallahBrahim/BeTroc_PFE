@@ -27,6 +27,7 @@ export default class Adresseproduct extends React.Component {
                     onPress={() => this.props.navigation.navigate("MapLocation",
                         {locationHandler: this.props.handlerAdress, navigation:this.props.navigation})} />
                 <TextInput
+                    style={{flex:1}}
                     onChangeText={(text) => {this._onChangeInputAddress(text)}}
                     placeholder={"Address"}
                     placeholderTextColor={Colors.grey2}

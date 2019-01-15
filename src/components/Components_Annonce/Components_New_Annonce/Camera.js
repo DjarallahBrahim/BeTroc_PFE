@@ -25,8 +25,7 @@ export default class CameraAdd extends React.Component {
 
     takePic = async () => {
         if (this.camera) {
-            let photo = await this.camera.takePictureAsync({quality:0.3});
-            await console.log(this.camera.getAvailablePictureSizesAsync());
+            let photo = await this.camera.takePictureAsync({quality:0.9});
             this.setState({takedPic: true, imageURI: photo.uri});
         }
     };
