@@ -62,7 +62,8 @@ export default class LoginScreen extends Component {
         if (LoginScreen.checkInput(userName, password)) {
             Login_service.loginHandler(userName, password).then((status) => {
                 doneLoading();
-                const routename = this.props.navigation.getParam("routename", {});
+                var routename = this.props.navigation.getParam("routename", 'Profil');
+
                 const resetAction = StackActions.reset({
                     index: 0,
                     actions: [NavigationActions.navigate({routeName: routename})],

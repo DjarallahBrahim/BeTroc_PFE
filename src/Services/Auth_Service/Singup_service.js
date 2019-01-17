@@ -14,7 +14,7 @@ export default class Singup_service {
     static singupHandler(userName, email, password) {
 
         return new Promise((resolve, reject) => {
-                axios.post("http://vps628622.ovh.net/api/auth/signup", {
+                axios.post("http://vps628622.ovh.net:16233/api/auth/signup", {
                      name: userName,
                      username: userName,
                      email: email,

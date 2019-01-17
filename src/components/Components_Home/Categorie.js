@@ -23,8 +23,9 @@ export default class Categorie extends Component {
             <View style={styles.container}>
                 {
                     Object.keys(this.categorie).map((titel, index) =>
-                        <View key={index} style={{flex:1}}>
-                            <Text key={index} style={{fontSize: 20, fontWeight: '500', marginTop:5}}>
+                        this.categorie[titel].length>0?
+                            <View key={index} style={{flex:1}}>
+                            <Text key={index} style={{fontSize: 20, fontWeight: '500', marginTop:5, color:'#9a9c9e'}}>
                                 {titel}
                             </Text>
                             <View style={{height: 180}}>
@@ -37,6 +38,8 @@ export default class Categorie extends Component {
                                 </FlatList>
                             </View>
                         </View>
+                            :
+                            null
 
                     )
                 }

@@ -17,7 +17,7 @@ export async function postImages(imgUrl, data) {
     data.user = parseInt(idUser);
 
     const authToken = await cacheOperationService.getItemFromStorage("AuthToken");
-    return axios.post("http://vps628622.ovh.net/api/uploadMultipleFiles", images, {
+    return axios.post("http://vps628622.ovh.net:16233/api/uploadMultipleFiles", images, {
         'headers': {'Authorization': authToken, 'Content-Type': 'multipart/form-data'},
     })
         .then((response) => {
@@ -37,7 +37,7 @@ export async function postImages(imgUrl, data) {
 
 export async function uploadDonAd(data) {
     const authToken = await cacheOperationService.getItemFromStorage("AuthToken");
-    return axios.post("http://vps628622.ovh.net/api/donationAds", data, {
+    return axios.post("http://vps628622.ovh.net:16233/api/donationAds", data, {
         'headers': {'Authorization': authToken}
     })
         .then((response) => {
@@ -53,7 +53,7 @@ export async function uploadDonAd(data) {
 
 export async function uploadEchangeAd(data) {
     const authToken = await cacheOperationService.getItemFromStorage("AuthToken");
-    return axios.post("http://vps628622.ovh.net/api/exchangeAds", data, {
+    return axios.post("http://vps628622.ovh.net:16233/api/exchangeAds", data, {
         'headers': {'Authorization': authToken}
     })
         .then((response) => {
@@ -69,7 +69,7 @@ export async function uploadEchangeAd(data) {
 
 export async function uploadDemandeAd(data) {
     const authToken = await cacheOperationService.getItemFromStorage("AuthToken");
-    return axios.post("http://vps628622.ovh.net/api/DonationRequestAd", data, {
+    return axios.post("http://vps628622.ovh.net:16233/api/DonationRequestAd", data, {
         'headers': {'Authorization': authToken}
     })
         .then((response) => {

@@ -7,7 +7,6 @@ import {
 import Searchbar from "../components/Components_Home/SearchBar";
 import { Divider } from 'react-native-elements'
 import TabsBarView from "../components/Components_Home/TabsBarView";
-import * as apiData from "../ApiData/AnnonceData"
 import Colors from "../constants/Colors";
 import * as ApiData from "../ApiData/ApiData";
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -61,8 +60,6 @@ export default class HomeScreen extends React.Component {
 
 
     render() {
-        const data =  this.props.navigation.getParam("tyga", {});
-        console.log(data);
         return (
             <View style={styles.container}>
 

@@ -9,7 +9,7 @@ export default class ProfileService {
         let idUser = __ret.idUser;
         const authToken = __ret.authToken;
 
-        return axios.get(`http://vps628622.ovh.net/api/user/${idUser}`, {
+        return axios.get(`http://vps628622.ovh.net:16233/api/user/${idUser}`, {
             'headers': {'Authorization': authToken},
         })
             .then((response) =>
@@ -28,7 +28,7 @@ export default class ProfileService {
         const __ret = await this.getUserAuth();
         const authToken = __ret.authToken;
 
-        return axios.delete(`http://vps628622.ovh.net/api/donationAds/delete/${idAnnonce}`, {
+        return axios.delete(`http://vps628622.ovh.net:16233/api/donationAds/delete/${idAnnonce}`, {
             'headers': {'Authorization': authToken},
         })
             .then((response) =>
@@ -46,7 +46,7 @@ export default class ProfileService {
         const __ret = await this.getUserAuth();
         const authToken = __ret.authToken;
 
-        return axios.delete(`http://vps628622.ovh.net/api/exchangeAds/delete/${idAnnonce}`, {
+        return axios.delete(`http://vps628622.ovh.net:16233/api/exchangeAds/delete/${idAnnonce}`, {
             'headers': {'Authorization': authToken},
         })
             .then((response) =>
@@ -65,7 +65,7 @@ export default class ProfileService {
         const __ret = await this.getUserAuth();
         const authToken = __ret.authToken;
 
-        return axios.delete(`http://vps628622.ovh.net/api/DonationRequestAd/delete/${idAnnonce}`, {
+        return axios.delete(`http://vps628622.ovh.net:16233/api/DonationRequestAd/delete/${idAnnonce}`, {
             'headers': {'Authorization': authToken},
         })
             .then((response) =>

@@ -58,6 +58,7 @@ export default class Categories extends React.Component {
                                             navigation.pop();
                                         }}>
                                             <Image
+
                                                 source={{uri:subCategory.imgName}}
                                                 style={{width: 30, height: 30}}
                                             />

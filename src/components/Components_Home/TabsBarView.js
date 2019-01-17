@@ -8,11 +8,13 @@ import {
 import Tabs from './tabs';
 import Categorie from "./Categorie";
 import Colors from "../../constants/Colors";
+import DemandeAdType from "./DemandeAdType";
 
 export default class TabsBarView extends React.Component {
     constructor(props) {
         super(props);
         this.categories = ["Echange", "Demande", "Don"]
+
     }
 
     render() {
@@ -33,10 +35,15 @@ export default class TabsBarView extends React.Component {
                                     }>
                                 {Object.keys(data.type[typeAnnonce]).map((categorieX) =>
 
-                                    typeAnnonce !== "Demande"?<Categorie typeAnnonce={typeAnnonce}
+                                    typeAnnonce !== "Demande"?
+                                        <Categorie typeAnnonce={typeAnnonce}
                                                key={index}
                                                navigation={navigation}
-                                               categorie={ data.type[typeAnnonce][categorieX]} />:null
+                                               categorie={ data.type[typeAnnonce][categorieX]} />
+                                        :
+                                        <DemandeAdType  navigation={navigation}
+                                                        categorie={ data.type[typeAnnonce][categorieX]}
+                                                        key={index}/>
                                 )}
                                 </ScrollView>
                             </View>

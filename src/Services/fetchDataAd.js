@@ -8,7 +8,7 @@ export default class fetchDataAd {
         const __ret = await this.getUserAuth();
         const authToken = __ret.authToken;
 
-        return axios.get(`http://vps628622.ovh.net/api/donationAds?sort=${sortArg},desc&size=${size}&page=${page}`, {
+        return axios.get(`http://vps628622.ovh.net:16233/api/donationAds?sort=${sortArg},desc&size=${size}&page=${page}`, {
             'headers': {'Authorization': authToken},
         })
             .then((response) =>
@@ -29,7 +29,7 @@ export default class fetchDataAd {
         const __ret = await this.getUserAuth();
         const authToken = __ret.authToken;
 
-        return axios.get(`http://vps628622.ovh.net/api/exchangeAds?sort=${sortArg},desc&size=${size}&page=${page}`, {
+        return axios.get(`http://vps628622.ovh.net:16233/api/exchangeAds?sort=${sortArg},desc&size=${size}&page=${page}`, {
             'headers': {'Authorization': authToken},
         })
             .then((response) =>
@@ -49,7 +49,7 @@ export default class fetchDataAd {
         const __ret = await this.getUserAuth();
         const authToken = __ret.authToken;
 
-        return axios.get(`http://vps628622.ovh.net/api/DonationRequestAd?sort=${sortArg},desc&size=${size}&page=${page}`, {
+        return axios.get(`http://vps628622.ovh.net:16233/api/DonationRequestAd?sort=${sortArg},desc&size=${size}&page=${page}`, {
             'headers': {'Authorization': authToken},
         })
             .then((response) =>

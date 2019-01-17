@@ -1,43 +1,42 @@
 import fetchDataAdApi from "../Services/fetchDataAd";
 
+const annonceDataReadyTest = {
+    "type": {
+        "Echange": {
+            "Categories": {
+                "Animaux":[],
+                "Bricolage": [],
+                "Habits":[],
+                "Maison":[],
+                "Multimédia": [],
+                "Loisir":[],
+            }
+        },
+        "Don": {
+            "Categories": {
+                "Animaux":[],
+                "Bricolage": [],
+                "Habits":[],
+                "Maison":[],
+                "Multimédia": [],
+                "Loisir":[],
+            }
+        },
+        "Demande": {
+            "Categories": {
+                "Animaux":[],
+                "Bricolage": [],
+                "Habits":[],
+                "Maison":[],
+                "Multimédia": [],
+                "Loisir":[],
 
-export async function generateData(){
-    var annonceDataReady = {
-        "type": {
-            "Echange": {
-                "Categories": {
-                    "Multimédia": [],
-                    "bricolage": [],
-                    "animaux":[],
-                    "Habits":[],
-                    "Loisir":[],
-                    "Maison":[],
-                }
-            },
-            "Don": {
-                "Categories": {
-                    "Multimédia": [],
-                    "bricolage": [],
-                    "animaux":[],
-                    "Habits":[],
-                    "Loisir":[],
-                    "Maison":[],
-
-                }
-            },
-            "Demande": {
-                "Categories": {
-                    "Multimédia": [],
-                    "bricolage": [],
-                    "animaux":[],
-                    "Habits":[],
-                    "Loisir":[],
-                    "Maison":[],
-
-                }
             }
         }
-    };
+    }
+};
+export async function generateData(){
+    let annonceDataReady = annonceDataReadyTest;
 
     var donationData = await fetchDataAdApi.getDonationAds();
     var exchangeReqData = await fetchDataAdApi.getExchageAds();
@@ -62,6 +61,7 @@ export async function generateData(){
             annonceDataReady.type.Demande.Categories[currentcategory].push(item);
 
         });
+
         return annonceDataReady;
 
     }

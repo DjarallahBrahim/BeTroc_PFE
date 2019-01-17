@@ -23,8 +23,9 @@ export default class MainTMP extends React.Component {
     generateArrayOfPic(images){
         var imagesArr= [];
         images.map((img, idx)=>{
-          imagesArr.push('http://vps628622.ovh.net/api/downloadImage/'+img.name)
-        })
+          imagesArr.push('http://vps628622.ovh.net:16233/api/downloadImage/'+img.name)
+
+        });
         return imagesArr;
     }
     renderHeader(){

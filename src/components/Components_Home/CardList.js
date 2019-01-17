@@ -20,11 +20,13 @@ export default class CardList extends React.Component {
                     {data: data,navigation:navigation,typeAnnonce:typeAnnonce})}
                                      >
                             <View style={{ alignItems:'center'}}>
-                                <Image
-                                    style={styles.imageStyle}
-                                    resizeMode="cover"
-                                    source={{ uri: 'http://vps628622.ovh.net/api/downloadImage/'+data.images[0].name }}
-                                />
+                                <View style={styles.imageContainer}>
+                                    <Image
+                                        style={styles.imageStyle}
+                                        resizeMode="cover"
+                                        source={{ uri: 'http://vps628622.ovh.net:16233/api/downloadImage/'+data.images[0].name }}
+                                    />
+                                </View>
                                 <Text style={{paddingVertical:8, fontWeight:'400'}}>{data.title}</Text>
                             </View>
                 </TouchableHighlight>
@@ -46,12 +48,10 @@ const styles = StyleSheet.create({
         height:160,
         width:160,
         marginLeft: 5,
-        borderWidth: 0.5,
         borderRadius:10,
         borderColor: 'transparent',
-        shadowOffset: {width: 1, height: 1},
+        shadowOffset: {width: 0.5, height: 0.5},
         shadowColor: 'black',
-        shadowOpacity: 0.2,
         elevation: 2.5,
     },
     containerStyle: {
@@ -59,10 +59,14 @@ const styles = StyleSheet.create({
         width: 200
     },
     imageStyle: {
-        height: 125,
-        width: 160,
+        height: 126,
+        width: 159,
+
+
+    },imageContainer: {
         borderTopLeftRadius:10,
         borderTopRightRadius:10,
+        overflow: 'hidden',
     },
     textStyle: {
         alignItems: 'center',
