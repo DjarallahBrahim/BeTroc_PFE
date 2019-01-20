@@ -6,6 +6,7 @@ import Colors from "../../../constants/Colors";
 import flipImage from '../../../../assets/images/flipcamera.png'
 import Layout from "../../../constants/Layout";
 import renderIf from './renderif'
+import Spinner from "react-native-loading-spinner-overlay";
 export default class CameraAdd extends React.Component {
     static navigationOptions = {
         header: null,
@@ -18,15 +19,23 @@ export default class CameraAdd extends React.Component {
             hasCameraPermission: null,
             type: Camera.Constants.Type.back,
             imageURI : '',
-            takedPic: false
-        };
+            takedPic: false,
+            spinner:false
+        }
     }
 
+
+    handlerSpinner() {
+        this.setState({
+            spinner: !this.state.spinner
+        });
+
+    }
 
     takePic = async () => {
         if (this.camera) {
             let photo = await this.camera.takePictureAsync({quality:0.9});
-            this.setState({takedPic: true, imageURI: photo.uri});
+            this.setState({takedPic: true, imageURI: photo.uri}, this.handlerSpinner);
         }
     };
 
@@ -65,6 +74,11 @@ export default class CameraAdd extends React.Component {
         } else {
             return (
                 <View style={{flex: 1}}>
+                    <Spinner
+                        visible={this.state.spinner}
+                        textContent={'Loading...'}
+                        textStyle={{color: "white", fontSize: 17, lineHeight: 22}}
+                    />
                     {
                     renderIf(!this.state.takedPic)(
                         <Camera style={{flex: 1}}
@@ -88,7 +102,10 @@ export default class CameraAdd extends React.Component {
                                 <TouchableHighlight
                                     activeOpacity={1}
                                     underlayColor={'transparent'}
-                                    onPress={() => this.takePic(!this.state.focused)}
+                                    onPress={() => {
+                                        this.handlerSpinner();
+                                        this.takePic(!this.state.focused)
+                                    }}
 
                                 >
                                     <Icon name="plus-square-o" size={50}

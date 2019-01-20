@@ -7,27 +7,29 @@ import {
 
 } from 'react-native';
 import { Card } from "react-native-elements";
+import ShowMoreScreen from "./ShowMoreScreen";
 
-export default class CardList extends React.Component {
+export default class ShowMoreButton extends React.Component {
+
 
 
     renderCategorie() {
-        const {data, navigation, typeAnnonce} = this.props;
+        const {dataImg,dataTitle, navigation, typeAnnonce, category} = this.props;
 
         return (
             <Card title={null} containerStyle={styles.container}>
-                <TouchableHighlight  onPress={() => navigation.navigate("AnnonceDetail",
-                    {data: data,navigation:navigation,typeAnnonce:typeAnnonce})}>
+                <TouchableHighlight  onPress={() => navigation.navigate("ShowMoreScreen",
+                    {category:category,typeAnnonce:typeAnnonce,navigation:navigation})}
+                                     >
                             <View style={{ alignItems:'center'}}>
                                 <View style={styles.imageContainer}>
                                     <Image
                                         style={styles.imageStyle}
                                         resizeMode="cover"
-                                        resizeMethod={'resize'}
-                                        source={{ uri: 'http://vps628622.ovh.net:16233/api/downloadImage/'+data.images[0].name }}
+                                        source={{ uri: 'http://vps628622.ovh.net:16233/api/downloadImage/'+dataImg }}
                                     />
                                 </View>
-                                <Text style={{paddingVertical:8, fontWeight:'400'}}>{data.title}</Text>
+                                <Text style={{paddingVertical:8, fontWeight:'400'}}>{dataTitle}</Text>
                             </View>
                 </TouchableHighlight>
             </Card>
@@ -59,8 +61,8 @@ const styles = StyleSheet.create({
         width: 200
     },
     imageStyle: {
-        height: 126,
-        width: 159,
+        height: 80,
+        width: 80,
 
 
     },imageContainer: {

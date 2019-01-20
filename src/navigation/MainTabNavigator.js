@@ -20,6 +20,8 @@ import PicDetail from "../components/Components_Annonce/Components_Detail/PicDet
 import Categories from "../components/Components_Annonce/Components_New_Annonce/Categories";
 import CameraAdd from "../components/Components_Annonce/Components_New_Annonce/Camera";
 import MapLocation from "../components/Components_Annonce/Components_New_Annonce/Map";
+import ShowMoreScreen from "../components/Components_Home/ShowMoreScreen";
+import ChatScreen from "../components/Components_Chat/ChatScreen";
 
 const BottomTransition = (index, position, height) => {
     const sceneRange = [index - 1, index, index + 1];
@@ -52,7 +54,8 @@ const NavigationConfig = () => {
 const HomeStack = createStackNavigator({
     Home: HomeScreen,
     AnnonceDetail: Annoncedetailscreen,
-    PicDetail: PicDetail
+    PicDetail: PicDetail,
+    ShowMoreScreen:ShowMoreScreen
 
 
 });
@@ -77,6 +80,7 @@ HomeStack.navigationOptions = ({navigation}) => {
 
 const MessageStack = createStackNavigator({
     Message: MessageScreen,
+    ChatScreen: ChatScreen
 });
 
 MessageStack.navigationOptions = {

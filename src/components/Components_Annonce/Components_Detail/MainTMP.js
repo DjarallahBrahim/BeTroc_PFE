@@ -47,8 +47,9 @@ export default class MainTMP extends React.Component {
                                              flex: 1,
                                              width: null,
                                              height: null,
-                                             resizeMode: 'cover'
-                                         }}/>
+                                         }}
+                                                resizeMode="cover"
+                                                resizeMethod={'resize'}/>
                                      </View>
                                  </TouchableHighlight>
                              )}

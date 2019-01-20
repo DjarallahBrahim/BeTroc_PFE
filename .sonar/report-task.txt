@@ -1,0 +1,5 @@
+projectKey=fil:platine
+serverUrl=http://localhost:9000
+dashboardUrl=http://localhost:9000/dashboard/index/fil:platine
+ceTaskId=AWhbNRFxF_Kc5g1tcTaS
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AWhbNRFxF_Kc5g1tcTaS

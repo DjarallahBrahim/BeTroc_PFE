@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.2,
          elevation: 3
     },
-    tabContainerActive: {
+    tabContainerActive : {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',

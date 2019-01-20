@@ -69,7 +69,7 @@ export default class LoginScreen extends Component {
                     actions: [NavigationActions.navigate({routeName: routename})],
                 });
                 this.props.navigation.dispatch(resetAction);
-            }); //TODO: creat user model and save his data
+            });
         } else {
             doneLoading()
         }

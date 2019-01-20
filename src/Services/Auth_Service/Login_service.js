@@ -2,6 +2,8 @@ import axios from 'axios';
 import {AsyncStorage} from "react-native";
 import jwt_decode from "jwt-decode";
 
+import SendBirdService from "../chatService/SendBirdService";
+
 
 export default class Login_service {
 
@@ -37,7 +39,8 @@ export default class Login_service {
      * @private
      */
     static async _loginResolve(res ){
-       // alert( res.data.idUser );//TODO save token
+        SendBirdService.connectUser(res.data.idUser);
+        // alert( res.data.idUser );//TODO save token
         //const decodedToken = jwt_decode(res.token);
         //alert(JSON.stringify(decodedToken))
         await AsyncStorage.setItem('AuthToken', res.data.jwt);

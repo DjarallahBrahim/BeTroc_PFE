@@ -14,6 +14,7 @@ import Colors from "../constants/Colors";
 import * as cacheOperationService from "../Services/CacheOperationService";
 import LoginSignupScreen from "./LoginSignupScreen";
 import {NavigationActions, StackActions} from "react-navigation";
+import SendBirdService from "../Services/chatService/SendBirdService";
 
 export default class ProfilScreen extends React.Component {
     static navigationOptions = {
@@ -56,7 +57,7 @@ export default class ProfilScreen extends React.Component {
     }
 
     handlerUserInfoField() {
-        return this.setState({userInfo: this.state.userInfoProblem});
+        return this.setState({userInfo: this.state.userInfoProblem, refreshing:false});
     }
 
     handlerUserInfoSeccus(result) {
@@ -64,7 +65,7 @@ export default class ProfilScreen extends React.Component {
         let donationRequestAds = {size : result.donationRequestAds.length, data: result.donationRequestAds};
         let donationAds = {size : result.donationAds.length, data: result.donationAds};
         let adData = {exchangeAds,donationRequestAds,donationAds};
-        this.setState({userInfo: result,adData});
+        this.setState({userInfo: result,adData, refreshing:false});
     }
 
     checkAuthentification(){
@@ -85,6 +86,7 @@ export default class ProfilScreen extends React.Component {
                         cacheOperationService.deleteItemFromStorage("profileInformation")
                             .then((result)=>{
                                     if (result) {
+                                        SendBirdService.disconnectUser();
                                         const resetAction = StackActions.reset({
                                             index: 0,
                                             actions: [NavigationActions.navigate({routeName: 'Profil'})],
@@ -102,7 +104,7 @@ export default class ProfilScreen extends React.Component {
 
     }
     _onRefresh = () => {
-        this.setState({refreshing: false});
+        this.setState({refreshing: true});
         ProfileService.getUserInfo(this.handlerUserInfoSeccus,this.handlerUserInfoField).then();
     };
 

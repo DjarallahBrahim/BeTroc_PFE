@@ -111,15 +111,15 @@ function createFormDataAnnonceDon(data) {
 export function formValidation(state){
     if (state.typeAd === 'Don')
         return state.title !== '' && state.description !== ''
-                && state.categorie !== 0 && state.etatProduit !== '' &&
+                && state.category !== 0 && state.etatProduit !== '' &&
                 state.adLocation !== '' && state.imgUrl.length > 0 ;
     else if(state.typeAd === 'Échange')
             return state.title !== '' && state.description !== ''
-                    && state.categorie !== 0 && state.etatProduit !== '' &&
+                    && state.category !== 0 && state.etatProduit !== '' &&
                     state.adLocation !== '' && state.imgUrl.length > 0 &&
                     state.estimatedPrice !== '' ;
     else
         return state.title !== '' && state.description !== ''
-                && state.categorie !== 0;
+                && state.category !== 0;
 }
 

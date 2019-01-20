@@ -3,48 +3,95 @@ import {
     View,
     Text,
     StyleSheet,
-    FlatList,
+    FlatList, TouchableHighlight,
 } from "react-native";
 import CardList from "./CardList";
 import {Divider} from "react-native-elements";
 import Colors from "../../constants/Colors";
-import { Dimensions } from 'react-native';
+import {Dimensions} from 'react-native';
+import ShowMoreButton from "./ShowMoreButton";
+import {OptimizedFlatList} from 'react-native-optimized-flatlist'
 
 export default class Categorie extends Component {
     constructor(props) {
         super(props);
-        this.categorie = this.props.categorie;
-
+        this.state = {
+            categorie: this.props.categorie
+        };
     }
 
+
+
     render() {
-        const {navigation,typeAnnonce} = this.props;
+        console.log("Categories Render");
+        const {navigation, typeAnnonce} = this.props;
+        const categorie = this.props.categorie;
         return (
             <View style={styles.container}>
                 {
-                    Object.keys(this.categorie).map((titel, index) =>
-                        this.categorie[titel].length>0?
-                            <View key={index} style={{flex:1}}>
-                            <Text key={index} style={{fontSize: 20, fontWeight: '500', marginTop:5, color:'#9a9c9e'}}>
-                                {titel}
-                            </Text>
-                            <View style={{height: 180}}>
-                                <FlatList
-                                    horizontal={true}
-                                    data={this.categorie[titel]}
-                                    renderItem={({item,index}) => <CardList typeAnnonce={typeAnnonce} navigation={navigation} data={item}/>}
-                                    keyExtractor={(item, index) => index.toString()}
-                                    showsHorizontalScrollIndicator={false}>
-                                </FlatList>
+                    Object.keys(categorie).map((title, index) =>
+                        categorie[title].length > 0 ?
+                            <View key={index} style={{flex: 1}}>
+                                <View style={{
+                                    flex: 1,
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                    alignItems:'center'
+
+                                }}>
+                                    <Text style={{fontSize: 20, fontWeight: '500', color: '#9a9c9e'}}>
+                                        {title}
+                                    </Text>
+                                    <TouchableHighlight style={{
+                                                            borderRadius: 8,
+                                                            paddingHorizontal: 15,
+                                                            backgroundColor: Colors.tintColor,
+                                                            marginTop: 5,
+                                                            marginRight: 5,
+                                                            justifyContent: 'center',
+                                                            alignItems:'center'
+                                                        }}
+                                                        onPress={() => navigation.navigate("ShowMoreScreen",
+                                                            {
+                                                                category: title,
+                                                                typeAnnonce: typeAnnonce,
+                                                                navigation: navigation
+                                                            })}>
+                                        <Text
+                                            style={{
+                                                textAlign: 'center',
+                                                color: 'white',
+                                                fontSize: 16,
+                                                fontWeight: '400',
+
+                                            }}>
+                                            Plus
+                                        </Text>
+                                    </TouchableHighlight>
+                                </View>
+                                <View style={{height: 180, width:'100%'}}>
+                                    <FlatList
+                                        style={{flex:1}}
+                                        horizontal={true}
+                                        data={categorie[title]}
+                                        renderItem={({item, index}) => this.renderCardList(typeAnnonce, navigation, item, index)}
+                                        keyExtractor={(item, index) => index.toString()}
+                                        showsHorizontalScrollIndicator={false}
+                                    />
+                                    </View>
                             </View>
-                        </View>
                             :
                             null
-
                     )
                 }
             </View>
         );
+    }
+
+    renderCardList(typeAnnonce, navigation, item, index) {
+        return <CardList key={index}
+                         typeAnnonce={typeAnnonce}
+                         navigation={navigation} data={item}/>;
     }
 }
 
@@ -53,12 +100,11 @@ const styles = StyleSheet.create({
     container:
         {
             flex: 1,
-            alignItems: 'flex-start',
             justifyContent: 'center',
             backgroundColor: 'white',
             marginBottom: 10,
-            marginRight:0,
-            marginLeft:5,
+            marginRight: 0,
+            marginLeft: 5,
             // shadowColor: '#000000',
             // shadowOffset: {
             //     width: 0,
