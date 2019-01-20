@@ -1,6 +1,6 @@
 import React from 'react';
-import {Text, View, TouchableOpacity, TouchableHighlight, Image, StyleSheet} from 'react-native';
-import {Camera, Permissions, ImagePicker} from 'expo';
+import {Text, View, TouchableOpacity, TouchableHighlight, Image, StyleSheet,Platform} from 'react-native';
+import {Camera, Permissions, ImagePicker, ImageManipulator} from 'expo';
 import Icon from '@expo/vector-icons/FontAwesome';
 import Colors from "../../../constants/Colors";
 import flipImage from '../../../../assets/images/flipcamera.png'
@@ -26,34 +26,64 @@ export default class CameraAdd extends React.Component {
 
 
     handlerSpinner() {
+        console.log('SPINNNEEERR')
         this.setState({
             spinner: !this.state.spinner
         });
 
     }
+     cropImage(pickedImage){
+        console.log(pickedImage.height,pickedImage.width);
+         let resizeObj = {};
+         if (pickedImage.height > pickedImage.width) {
+             resizeObj = { height: 2048, width:1024  };
+         } else {
+             resizeObj = { height: 1836 , width: 2048 };
+         }
+         ImageManipulator.manipulate(
+             pickedImage.uri,
+             [{ resize: resizeObj }],
+             {
+                 format: 'jpeg', compress: 0.5
+             }
+         ).then((manipResult) => {
 
-    takePic = async () => {
+             if (Platform.OS === 'android' && manipResult.width > 640) {
+                  ImageManipulator.manipulate(
+                     pickedImage.uri,
+                     [{ rotate: 90 }, { resize: resizeObj }],
+                     {
+                         format: 'jpeg', compress: 0.5,
+                     }
+                 ).then((manipResult)=>  this.setState({takedPic: true, imageURI: manipResult.uri}, this.handlerSpinner));
+             }
+             else
+                 this.setState({takedPic: true, imageURI: manipResult.uri}, this.handlerSpinner)
+         });
+    }
+
+    takePic = () => {
         if (this.camera) {
-            let photo = await this.camera.takePictureAsync({quality:0.9});
-            this.setState({takedPic: true, imageURI: photo.uri}, this.handlerSpinner);
+            this.camera.takePictureAsync({quality:1,skipProcessing: true}).then((photo)=>this.cropImage(photo));
         }
     };
 
-    async choosePic(){
-        await Permissions.askAsync(Permissions.CAMERA_ROLL);
-
-        let photo = await ImagePicker.launchImageLibraryAsync({
-            allowsEditing: true,
-            aspect: [4, 3],
+     choosePic(){
+         Permissions.askAsync(Permissions.CAMERA_ROLL).then(()=>{
+            ImagePicker.launchImageLibraryAsync({
+                allowsEditing: true,
+                aspect: [4, 3],
+            }).then((photo)=>{
+                if (!photo.cancelled) {
+                    this.setState({takedPic: true, imageURI: photo.uri});
+                }
+            });
         });
 
-        if (!photo.cancelled) {
-            this.setState({takedPic: true, imageURI: photo.uri});
-        }
+
     };
-    async componentDidMount() {
-        const {status} = await Permissions.askAsync(Permissions.CAMERA);
-        this.setState({hasCameraPermission: status === 'granted'});
+    componentDidMount() {
+        Permissions.askAsync(Permissions.CAMERA).then(({status})=> this.setState({hasCameraPermission: status === 'granted'}))
     }
 
     _savePic(returnDataFromCamera, navigation) {
@@ -80,7 +110,7 @@ export default class CameraAdd extends React.Component {
                         textStyle={{color: "white", fontSize: 17, lineHeight: 22}}
                     />
                     {
-                    renderIf(!this.state.takedPic)(
+                    !this.state.takedPic?
                         <Camera style={{flex: 1}}
                                 type={this.state.type}
                                 ref={ref => {
@@ -121,36 +151,31 @@ export default class CameraAdd extends React.Component {
                                           color={this.state.focused ? Colors.tabIconSelected : Colors.tabIconDefault}/>
                                 </TouchableHighlight>
                             </View>
-                        </Camera>
-                        )
-                    }
-                    {
-                        renderIf(this.state.takedPic)(
-                            <View  style={{
-                                flex:1,
-                                position: 'relative'}}>
-                                <Image resizeMode={"contain"}
-                                       style={{width: Layout.window.width, height: Layout.window.height}}
-                                       source={{uri: this.state.imageURI}}/>
-                                <View style={styles.buttonAction}>
-                                    <TouchableHighlight style={styles.deleteButton}
-                                                        onPress={() => this.setState({takedPic: false})}
-                                    >
-                                        <Text style={{color:'white', fontWeight: '500',fontSize:15, paddingHorizontal:5}}>Supprimer</Text>
-                                    </TouchableHighlight>
-                                    <TouchableHighlight style={styles.saveButton}
-                                                        onPress={() => {
-                                                          this._savePic(returnDataFromCamera, navigation);
-                                                        }}
-                                    >
-                                        <Text style={{color:'black', fontWeight: '500',fontSize:15, paddingHorizontal:5}}>Sauvegarder</Text>
-                                    </TouchableHighlight>
-                                </View>
+                        </Camera>:
+                        <View  style={{
+                            flex:1,
+                            position: 'relative'}}>
+                            <Image resizeMode={"contain"}
+                                   style={{width: Layout.window.width, height: Layout.window.height}}
+                                   source={{uri: this.state.imageURI}}/>
+                            <View style={styles.buttonAction}>
+                                <TouchableHighlight style={styles.deleteButton}
+                                                    onPress={() => this.setState({takedPic: false})}
+                                >
+                                    <Text style={{color:'white', fontWeight: '500',fontSize:15, paddingHorizontal:5}}>Supprimer</Text>
+                                </TouchableHighlight>
+                                <TouchableHighlight style={styles.saveButton}
+                                                    onPress={() => {
+                                                        this._savePic(returnDataFromCamera, navigation);
+                                                    }}
+                                >
+                                    <Text style={{color:'black', fontWeight: '500',fontSize:15, paddingHorizontal:5}}>Sauvegarder</Text>
+                                </TouchableHighlight>
                             </View>
-                        )
-                    }
+                        </View>
 
-                </View>
+                    }
+                 </View>
             );
         }
     }
