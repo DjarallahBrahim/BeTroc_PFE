@@ -13,11 +13,12 @@ export default class CategoriesService {
      */
 
     async getCategoriesHandler() {
-        // const categoriesCache = await cacheOperationService.getItemFromStorage('categoriesCache');
-        // if (categoriesCache) {
-        //     const result = categoriesCache.substr(7, categoriesCache.length - 1);
-        //     return await JSON.parse(result);
-        // }
+        const categoriesCache = await cacheOperationService.getItemFromStorage('categoriesCache');
+        if (categoriesCache) {
+            const result = categoriesCache.substr(7, categoriesCache.length - 1);
+            const cat = await JSON.parse(result);
+            return cat;
+        }
 
         const authToken = await cacheOperationService.getItemFromStorage("AuthToken");
         return axios.get("http://vps628622.ovh.net:16233/api/getCategories", {
