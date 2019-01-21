@@ -19,7 +19,6 @@ export default class CategoriesService {
             const cat = await JSON.parse(result);
             return cat;
         }
-
         const authToken = await cacheOperationService.getItemFromStorage("AuthToken");
         return axios.get("http://vps628622.ovh.net:16233/api/getCategories", {
             'headers': {'Authorization': authToken}

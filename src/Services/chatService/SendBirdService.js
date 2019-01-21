@@ -4,6 +4,10 @@ import fetchDataAd from "../fetchDataAd";
 
 export default class SendBirdService{
 
+    static getInstance(){
+        return sendBird;
+    }
+
     static connectUser(idUser){
         sendBird.connect(idUser, (user, error) => {
             if (error) {
@@ -62,8 +66,12 @@ export default class SendBirdService{
                                 userToContact);
                             resolve(createdChannel);
                         }
-            })
+            });
     })
     }
 
+
+    static setForegroundState(){
+        sendBird.setForegroundState();
+    }
 }
