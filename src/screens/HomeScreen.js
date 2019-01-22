@@ -61,7 +61,8 @@ export default class HomeScreen extends React.Component {
                 }
             },
             page:0,
-            idUser:0
+            idUser:0,
+          currentUser:0
         };
     }
 
@@ -102,8 +103,9 @@ export default class HomeScreen extends React.Component {
     connectToChat() {
 
         return fetchDataAd.getUserAuth().then((idUser) => {
-            if (idUser)
-                SendBirdService.connectUser(idUser);
+            if (idUser){
+                this.setState({currentUser:idUser}, ()=> SendBirdService.connectUser(idUser))
+            }
         });
     }
 
@@ -144,7 +146,7 @@ export default class HomeScreen extends React.Component {
                     textStyle={{color: "white", fontSize: 17, lineHeight: 22}}
                 />
                 {this.state.data?
-                    <TabsBarView navigation={this.props.navigation} demandeData={this.state.demandeData} echangeData={this.state.echangeData} donData={this.state.donData}/>:null
+                    <TabsBarView currentUser={this.state.currentUser} navigation={this.props.navigation} demandeData={this.state.demandeData} echangeData={this.state.echangeData} donData={this.state.donData}/>:null
 
                 }
 

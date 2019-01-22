@@ -6,6 +6,7 @@ import {
     Text, TouchableOpacity,
     View,
 } from 'react-native';
+import SendBirdService from "../../Services/chatService/SendBirdService";
 
 export default class RowDemandeAd extends React.Component {
 
@@ -20,6 +21,12 @@ export default class RowDemandeAd extends React.Component {
     {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
+
+    handlerStartChat(item){
+        if(item)
+            this.props.navigation.navigate('ChatScreen', {channelUrl: item.url, currentUser:this.props.currentUser})
+    }
+
     render() {
         const data = this.props.data;
         return (
@@ -58,7 +65,12 @@ export default class RowDemandeAd extends React.Component {
                             alignItems: 'center'
                         }}
                         onPress={() => {
-                            alert("category")
+                            if (this.props.currentUser>0) {
+                                SendBirdService.createGroupOneToOne(this.props.currentUser, data.user.id, `${this.props.typeAnnonce}_${data.id}`)
+                                    .then((result)=> this.handlerStartChat(result));
+                            }else{
+                                console.log(this.props.currentUser)
+                            }
                         }}>
                         <Image
                             source={{uri: 'http://vps628622.ovh.net:16233/api/downloadImage/man.png_eafefe17-19dc-11e9-887c-f1d2369b0d9e.png'}}

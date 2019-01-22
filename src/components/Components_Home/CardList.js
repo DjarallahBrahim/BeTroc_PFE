@@ -12,12 +12,12 @@ export default class CardList extends React.Component {
 
 
     renderCategorie() {
-        const {data, navigation, typeAnnonce} = this.props;
+        const {data, navigation, typeAnnonce, currentUser} = this.props;
 
         return (
             <Card title={null} containerStyle={styles.container}>
                 <TouchableHighlight  onPress={() => navigation.navigate("AnnonceDetail",
-                    {data: data,navigation:navigation,typeAnnonce:typeAnnonce})}>
+                    {data: data,navigation:navigation,typeAnnonce:typeAnnonce, currentUser:currentUser})}>
                             <View style={{ alignItems:'center'}}>
                                 <View style={styles.imageContainer}>
                                     <Image

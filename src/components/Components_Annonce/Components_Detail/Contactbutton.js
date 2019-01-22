@@ -6,16 +6,31 @@ import {
 } from 'react-native';
 import {Icon} from "react-native-elements";
 import Colors from "../../../constants/Colors";
+import SendBirdService from "../../../Services/chatService/SendBirdService";
 
 export default class Contactbutton extends React.Component {
 
+
+    handlerStartChat(result){
+        if(result)
+            this.props.navigation.navigate('ChatScreen', {channelUrl: result.url, currentUser:this.props.currentUser})
+    }
 
     render() {
         return (
             <View style={styles.container}>
                 <TouchableHighlight
                     style={styles.publier}
-                    onPress={()=>{alert('You will contact him soon :) ')}}
+                    onPress={()=>{
+                        if (this.props.currentUser>0) {
+                            console.log(this.props.currentUser, this.props.user.id);
+                            SendBirdService.createGroupOneToOne(this.props.currentUser, this.props.user.id, `${this.props.typeAnnonce}_${this.props.user.id}`)
+                                .then((result)=> this.handlerStartChat(result));
+                        }else{
+                            console.log(this.props.currentUser)
+                        }
+                    }
+                    }
                 >
                     <View style={{flex:1,flexDirection:'row', alignItems: 'center',
                         justifyContent: 'center',

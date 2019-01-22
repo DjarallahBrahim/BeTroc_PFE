@@ -55,7 +55,8 @@ export default class Categorie extends Component {
                                                             {
                                                                 category: title,
                                                                 typeAnnonce: typeAnnonce,
-                                                                navigation: navigation
+                                                                navigation: navigation,
+                                                                currentUser:this.props.currentUser
                                                             })}>
                                         <Text
                                             style={{
@@ -90,6 +91,7 @@ export default class Categorie extends Component {
 
     renderCardList(typeAnnonce, navigation, item, index) {
         return <CardList key={index}
+                         currentUser={this.props.currentUser}
                          typeAnnonce={typeAnnonce}
                          navigation={navigation} data={item}/>;
     }

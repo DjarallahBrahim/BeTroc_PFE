@@ -85,11 +85,14 @@ export default class TabsBarView extends React.Component {
     renderTabBarContent(typeAnnonce, navigation, data, item, index) {
         return typeAnnonce !== "Demande" ?
             <Categorie typeAnnonce={typeAnnonce}
+                       currentUser={this.props.currentUser}
                        key={index}
                        navigation={navigation}
                        categorie={data.type[typeAnnonce][item]}/>
             :
             <DemandeAdType navigation={navigation}
+                           currentUser={this.props.currentUser}
+                           typeAnnonce={typeAnnonce}
                            key={index}
                            categorie={data.type[typeAnnonce][item]}/>;
     }

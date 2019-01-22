@@ -28,14 +28,14 @@ export default class DemandeAdType extends React.Component {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    componentDidMount(){
-        fetchDataAd.getUserAuth().then((idUser)=> {
-            this.setState({idUser:idUser})
-        })
-    }
+    // componentDidMount(){
+    //     fetchDataAd.getUserAuth().then((idUser)=> {
+    //         this.setState({idUser:idUser})
+    //     })
+    // }
 
     handlerStartChat(item){
-        this.props.navigation.navigate('ChatScreen', {channelUrl: item.url, currentUser:this.state.idUser})
+        this.props.navigation.navigate('ChatScreen', {channelUrl: item.url, currentUser:this.props.currentUser})
     }
     render() {
         const categorie = this.props.categorie;
@@ -77,7 +77,8 @@ export default class DemandeAdType extends React.Component {
                                     {
                                         category: title,
                                         typeAnnonce: typeAnnonce,
-                                        navigation: navigation
+                                        navigation: navigation,
+                                        currentUser:this.props.currentUser
                                     })}>
                 <Text
                     style={{
@@ -129,8 +130,8 @@ export default class DemandeAdType extends React.Component {
                         alignItems: 'center'
                     }}
                     onPress={() => {
-                        if (this.state.idUser) {
-                            SendBirdService.createGroupOneToOne(this.state.idUser, item.user.id, `${typeAnnonce}_${item.id}`).then(this.handlerStartChat);
+                        if (this.props.currentUser>0) {
+                            SendBirdService.createGroupOneToOne(this.props.currentUser, item.user.id, `${typeAnnonce}_${item.id}`).then(this.handlerStartChat);
 
                         }
                     }}>

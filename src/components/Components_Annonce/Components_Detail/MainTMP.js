@@ -58,7 +58,7 @@ export default class MainTMP extends React.Component {
 
                     {
                     typeAnnonce !=='Demande' ?
-                        <AnnonceDetailBar etat={data["state"]} type={typeAnnonce} date={data['creationDate']}/>
+                        <AnnonceDetailBar etat={data["state"]} user={data['user'].name} type={typeAnnonce} date={data['creationDate']}/>
                         :
                         null
                     }
@@ -98,7 +98,7 @@ export default class MainTMP extends React.Component {
                         null
                 }
 
-                <Contactbutton idUser={data['user']}/>
+                <Contactbutton navigation={this.props.navigation} typeAnnonce={this.props.typeAnnonce} currentUser={this.props.currentUser} user={data['user']}/>
             </ParallaxScrollView>
         )
     }

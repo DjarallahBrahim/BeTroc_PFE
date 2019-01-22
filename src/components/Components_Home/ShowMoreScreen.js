@@ -19,6 +19,7 @@ export default class ShowMoreScreen extends React.Component {
         this.category='';
         this.typeAnnonce='';
         this.navigation='';
+        this.currentUser=0;
 
         this.onEndReached = this.onEndReached.bind(this);
         this.overThreshold=true
@@ -39,7 +40,8 @@ export default class ShowMoreScreen extends React.Component {
 
     componentDidMount(){
         fetchDataAdApi.getAdsByTypeAndCategory(this.typeAnnonce,this.category).then((result)=> {
-           this.setState({categories:[...result.content], maxPage:result.totalPages})
+            if(result)
+                this.setState({categories:[...result.content], maxPage:result.totalPages})
        })
     }
 
@@ -49,8 +51,8 @@ export default class ShowMoreScreen extends React.Component {
         this.category = this.props.navigation.getParam("category", {});
         this.typeAnnonce = this.props.navigation.getParam("typeAnnonce", {});
         this.navigation = this.props.navigation.getParam("navigation", {});
+        this.currentUser = this.props.navigation.getParam("currentUser", 0);
         const data = this.state.categories;
-
         return (
             this.state.categories.length>0 ?
                 <FlatList numColumns={this.typeAnnonce !== 'Demande'?2:1}
@@ -79,8 +81,8 @@ export default class ShowMoreScreen extends React.Component {
     }
 
     renderAdItem(index, item) {
-        return this.typeAnnonce !== 'Demande' ? <CardList key={index} typeAnnonce={this.typeAnnonce}
+        return this.typeAnnonce !== 'Demande' ? <CardList currentUser={this.currentUser} key={index} typeAnnonce={this.typeAnnonce}
                                                           navigation={this.navigation} data={item}/>
-            : <RowDemandeAd navigation={this.navigation} data={item}/>;
+            : <RowDemandeAd currentUser={this.currentUser} typeAnnonce={this.typeAnnonce} navigation={this.navigation} data={item}/>;
     }
 }

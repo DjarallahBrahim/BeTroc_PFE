@@ -1,12 +1,12 @@
 import React from 'react';
 import {
-    Image,
+    Image, Modal,
     StyleSheet,
-    Text, TouchableHighlight,
+    Text, TextInput, TouchableHighlight, TouchableOpacity,
     View,
 } from 'react-native';
 import {Icon} from 'react-native-elements'
-
+import Colors from "../../constants/Colors";
 
 export default class ProfileInformation extends React.Component {
     static navigationOptions = {
@@ -14,6 +14,10 @@ export default class ProfileInformation extends React.Component {
     };
 
 
+    state={
+        usernamepPomptVisible:false,
+        emailPomptVisible:false
+    }
     render() {
         return (
             <View
@@ -31,7 +35,9 @@ export default class ProfileInformation extends React.Component {
                             marginVertical:5,
                             padding:5,
                             justifyContent:'center'}}
-                                        onPress={()=> alert('update user info soon')}>
+                                        onPress={()=> this.props.navigation.navigate('updateUserProfilInfo',
+                                            {dataUser:this.props.userInfo, navigation:this.props.navigation})}
+                                        >
                         <Icon
                             name='pencil'
                             type='font-awesome'
@@ -44,16 +50,17 @@ export default class ProfileInformation extends React.Component {
                            style={{width:150, height:150, marginHorizontal:5, marginVertical:5, borderRadius:150/2}}/>
                 </View>
                 <View style={styles.containerInformation}>
+
                     <Text style={{fontSize:17, color:'#000', fontWeight:'bold',paddingHorizontal:5, marginVertical:3}} >
                         {this.props.userInfo.username} </Text>
-
-
-                    <Text style={{fontSize:16, color:'#000', fontWeight:'500',paddingHorizontal:5, marginVertical:3}} >
+                   <Text style={{fontSize:17, color:'#000', fontWeight:'bold',paddingHorizontal:5, marginVertical:3}} >
                         {this.props.userInfo.email} </Text>
+
+
                     <Text style={{fontSize:15, color:'#c0c0c0', fontWeight:'400',paddingHorizontal:5, marginVertical:3}} >
                         annonces: {this.props.userInfo.nb_annonce} </Text>
-
                 </View>
+
             </View>
         );
     }
@@ -64,7 +71,5 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         marginHorizontal:5,
-
-
-    }
+    },
 });

@@ -169,14 +169,6 @@ export default class ChatScreen extends Component {
     render () {
         return (
             <View style={styles.viewContainer}>
-                {/* Header */}
-                <View style={styles.toolbar}>
-                    <TouchableOpacity onPress={() => this.handleBackPress()}>
-                        <Image style={styles.icBack} source={ic_back}/>
-                    </TouchableOpacity>
-                    <Text style={styles.titleToolbar}>CHAT</Text>
-                </View>
-
                 {Platform.OS === 'android' ?
                     this.renderBody() :
                     <KeyboardAvoidingView style={styles.viewContainer} behavior="padding">

@@ -13,13 +13,20 @@ import {
 import * as ExpoNotificationToken from "./src/Services/NotificationService/ExpoNotificationToken";
 import * as SendbirdNotification from "./src/Services/NotificationService/SendbirdNotification";
 import SendBirdService from "./src/Services/chatService/SendBirdService";
+import fetchDataAd from "./src/Services/fetchDataAd";
 
 export default class App extends React.Component {
     state = {
         notification: {},
+        currentUser:0
     };
 
     componentDidMount() {
+        fetchDataAd.getUserAuth().then((idUser) => {
+            if (idUser)
+                this.setState({currentUser:idUser})
+        });
+
         ExpoNotificationToken.registerForPushNotificationsAsync().then((token)=>{
             SendbirdNotification.registerForPushNotificationsAsync(SendBirdService.getInstance(),token)
                 .then()

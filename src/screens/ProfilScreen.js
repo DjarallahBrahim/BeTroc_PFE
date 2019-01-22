@@ -133,7 +133,7 @@ export default class ProfilScreen extends React.Component {
                             refreshing={this.state.refreshing}
                             onRefresh={this._onRefresh}
                         />}style={styles.container}>
-                    <ProfileInformation userInfo={this.state.userInfo}/>
+                    <ProfileInformation navigation={this.props.navigation} userInfo={this.state.userInfo}/>
                     <AdsProfile adData={this.state.adData} navigation={this.props.navigation}/>
                     <View style={{alignItems:'center'}}>
                         <TouchableHighlight style={styles.publishButton} onPress={()=> this.logout()}>

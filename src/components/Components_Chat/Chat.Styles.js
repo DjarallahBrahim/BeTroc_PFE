@@ -10,12 +10,10 @@ export default StyleSheet.create({
   // Input
   viewWrapInput: {
     flexDirection: 'row',
-    width: '100%',
-    height: 50,
+
     backgroundColor: 'white',
     alignItems: 'center',
-    paddingLeft: 20,
-    paddingRight: 10
+
   },
   viewTextInput: {
     flex: 1,

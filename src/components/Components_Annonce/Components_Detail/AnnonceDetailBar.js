@@ -17,11 +17,30 @@ export default class AnnonceDetailBar extends React.Component {
                             style={[
                                 styles.tabContainer,
                             ]}
+                        >
+
+                            <Icon
+                                size={26}
+                                name= 'user-circle-o'
+                                type='font-awesome'
+                                color={Colors.tintColor}
+                                underlayColor={'#00000000'}
+
+                            />
+                            <Text  style={styles.tabText}>
+                                {this.props.user}
+                            </Text>
+                        </View>
+                        <View
+                            style={[
+                                styles.tabContainer,
+                            ]}
                             >
                             <Icon
                                 size={26}
-                                name= 'subdirectory-arrow-right'
+                                name= 'check'
                                 color={Colors.tintColor}
+                                type='font-awesome'
                                 underlayColor={'#00000000'}
 
                             />
@@ -47,23 +66,7 @@ export default class AnnonceDetailBar extends React.Component {
                             </Text>
 
                         </View>
-                        <View
-                            style={[
-                                styles.tabContainer,
-                            ]}
-                            >
 
-                            <Icon
-                                size={26}
-                                name= 'access-time'
-                                color={Colors.tintColor}
-                                underlayColor={'#00000000'}
-
-                            />
-                            <Text  style={styles.tabText}>
-                                20min
-                            </Text>
-                        </View>
                     </View>
                 </View>
         );

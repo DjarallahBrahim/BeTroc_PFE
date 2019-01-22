@@ -22,6 +22,7 @@ import CameraAdd from "../components/Components_Annonce/Components_New_Annonce/C
 import MapLocation from "../components/Components_Annonce/Components_New_Annonce/Map";
 import ShowMoreScreen from "../components/Components_Home/ShowMoreScreen";
 import ChatScreen from "../components/Components_Chat/ChatScreen";
+import updateUserProfilInfo from "../screens/updateUserProfilInfo";
 
 const BottomTransition = (index, position, height) => {
     const sceneRange = [index - 1, index, index + 1];
@@ -55,7 +56,8 @@ const HomeStack = createStackNavigator({
     Home: HomeScreen,
     AnnonceDetail: Annoncedetailscreen,
     PicDetail: PicDetail,
-    ShowMoreScreen:ShowMoreScreen
+    ShowMoreScreen:ShowMoreScreen,
+    ChatScreen: ChatScreen
 
 
 });
@@ -120,7 +122,8 @@ const ProfilStack = createStackNavigator({
     Auth: LoginScreen,
     Singup: SignupScreen,
     AnnonceDetail: Annoncedetailscreen,
-    PicDetail: PicDetail
+    PicDetail: PicDetail,
+    updateUserProfilInfo:updateUserProfilInfo
 }, {transitionConfig: NavigationConfig});
 
 ProfilStack.navigationOptions = ({navigation}) => {
