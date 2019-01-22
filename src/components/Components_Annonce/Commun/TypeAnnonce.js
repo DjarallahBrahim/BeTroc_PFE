@@ -26,7 +26,13 @@ export default class TypeAnnonce extends React.Component {
         const {selectedIndex} = this.state;
 
         return (
-            <View style={styles.container}>
+            <View style={
+                            {
+                            marginTop:this.props.marginTop || 15,
+                            marginBottom:this.props.marginBottom,
+                            marginHorizontal:this.props.marginHorizontal
+                            }
+                        }>
                 <Text style={{fontSize:15, color: Colors.grey1, marginBottom:5}}> Type: </Text>
                 <ButtonGroup
                 onPress={this.updateIndex}
@@ -43,7 +49,6 @@ export default class TypeAnnonce extends React.Component {
 }
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         marginTop:15,
     },
 

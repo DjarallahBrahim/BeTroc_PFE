@@ -4,9 +4,9 @@ import {
     StyleSheet, Text, View, TouchableHighlight
 } from 'react-native';
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
-import Categoriebutton from "../components/Components_Annonce/Components_New_Annonce/Categoriebutton";
-import TypeAnnonce from "../components/Components_Annonce/Components_New_Annonce/TypeAnnonce";
-import EtatAnnonce from "../components/Components_Annonce/Components_New_Annonce/EtatAnnonce";
+import Categoriebutton from "../components/Components_Annonce/Commun/Categoriebutton";
+import TypeAnnonce from "../components/Components_Annonce/Commun/TypeAnnonce";
+import EtatAnnonce from "../components/Components_Annonce/Commun/EtatAnnonce";
 import Imagefield from "../components/Components_Annonce/Components_New_Annonce/Imagefield";
 import TitleDescription from "../components/Components_Annonce/Components_New_Annonce/TitleDescription";
 import Adresseproduct from "../components/Components_Annonce/Components_New_Annonce/Adresseproduct";

@@ -5,16 +5,20 @@ import fetchDataAd from "../fetchDataAd";
 export default class SendBirdService{
 
     static getInstance(){
+        sendBird.setForegroundState();
+        //sendBird.setBackgroundState();
         return sendBird;
     }
 
-    static connectUser(idUser){
+    static connectUser(idUser, callback){
+        console.log('[SendBirdService] start to connect user to sendBird')
         sendBird.connect(idUser, (user, error) => {
             if (error) {
-                alert(error.message)
+                console.log('[SendBirdService] currentUser could not connecte not sendbird service ', error.message, error.code)
             } else {
-                const profileUrl = user.profileUrl;
-                console.log('userConnecter with url: ' + profileUrl);
+                console.log('[SendBirdService] currentUser is connected to sendbird service with url: ' + user.profileUrl);
+                if(callback)
+                    callback()
             }
         })
     }

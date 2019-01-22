@@ -16,33 +16,71 @@ import SendBirdService from "./src/Services/chatService/SendBirdService";
 import fetchDataAd from "./src/Services/fetchDataAd";
 
 export default class App extends React.Component {
-    state = {
-        notification: {},
-        currentUser:0
-    };
+
+    constructor(){
+        super();
+        this.state = {
+            notification: {},
+            currentUser:0
+        };
+        this._handleNotification=this._handleNotification.bind(this);
+        this.handlerConnectToChat=this.handlerConnectToChat.bind(this);
+        this.getExpoNotificationToken=this.getExpoNotificationToken.bind(this);
+        this.connectToSendbirdNotification=this.connectToSendbirdNotification.bind(this);
+    }
+
+
+    async startConnecteNotificationOperation(){
+        await this.connectToChat()
+
+    }
+
+    connectToChat() {
+        if (this.state.currentUser>0){
+            SendBirdService.connectUser(this.state.currentUser, this.handlerConnectToChat)
+        }else
+            console.log('[App.js] no user login , the currentUser is ' + this.state.currentUser)
+    }
+
+    async getExpoNotificationToken(){
+        //Get expo Token and return Promise with Token
+        const token = await ExpoNotificationToken.registerForPushNotificationsAsync();
+
+        return token;
+    }
+
 
     componentDidMount() {
         fetchDataAd.getUserAuth().then((idUser) => {
             if (idUser)
-                this.setState({currentUser:idUser})
-        });
+                this.setState({currentUser:idUser}, this.startConnecteNotificationOperation)
+            else
+                console.log(`[App.js] no user founded`);
 
-        ExpoNotificationToken.registerForPushNotificationsAsync().then((token)=>{
-            SendbirdNotification.registerForPushNotificationsAsync(SendBirdService.getInstance(),token)
-                .then()
         });
+    }
 
-        // Handle notifications that are received or selected while the app
-        // is open. If the app was closed and then opened by tapping the
-        // notification (rather than just tapping the app icon to open it),
-        // this function will fire on the next tick after the app starts
-        // with the notification data.
-        this._notificationSubscription = Notifications.addListener(this._handleNotification);
+    async connectToSendbirdNotification(TOKEN) {
+        //must called after connect and getting TOKEN
+       await SendbirdNotification.registerForPushNotificationsAsync(SendBirdService.getInstance(), TOKEN);
+
     }
 
     _handleNotification = (notification) => {
-        alert(notification);
+        console.log(`[App.js] notification received: ${notification} `);
     };
+
+    handlerConnectToChat = async () => {
+        console.log(`[App.js] user is connected to chatService`);
+        const token = await this.getExpoNotificationToken();
+        const stateOfOperation = await this.connectToSendbirdNotification(token);
+        Notifications.addListener(this._handleNotification);
+        console.log('[App.js] resulte of connecting to notification is:', stateOfOperation);
+
+    };
+
+
+
 
     render() {
         return (
@@ -52,14 +90,7 @@ export default class App extends React.Component {
         );
     }
 }
-//   render() {
-//       return (
-//         <View style={styles.container}>
-//           <AppNavigator />
-//         </View>
-//       );
-//     }
-// }
+
 
 
 

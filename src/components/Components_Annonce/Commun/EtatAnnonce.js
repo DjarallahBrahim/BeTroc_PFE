@@ -42,10 +42,10 @@ export default class EtatAnnonce extends React.Component {
         return (
             <View  style={{
                 marginTop:15,
+                marginHorizontal:this.props.marginHorizontal
             }} >
                 <Text style={{fontSize:15, color: Colors.grey1, marginBottom:5}}> État du produit: </Text>
             <View style={{
-                flex:1,
                 backgroundColor: '#fff',
                 padding:5,
                 marginTop:5,

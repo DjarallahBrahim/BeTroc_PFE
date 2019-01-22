@@ -3,20 +3,12 @@ import {
     View,
     Text, StyleSheet, Button
 } from "react-native";
-import {Platform} from "react-native";
 import Searchbar from "../components/Components_Home/SearchBar";
-import { Divider } from 'react-native-elements'
 import TabsBarView from "../components/Components_Home/TabsBarView";
 import Colors from "../constants/Colors";
 import * as ApiData from "../ApiData/ApiData";
 import Spinner from 'react-native-loading-spinner-overlay';
-import ProfileService from "../Services/ProfileService";
-import TabsBarViewV2 from "../components/Components_Home/TabsBarViewV2";
-import fetchDataAd from "../Services/fetchDataAd";
-import SendBirdService from "../Services/chatService/SendBirdService";
-import * as ExpoNotificationToken from "../Services/NotificationService/ExpoNotificationToken";
-import * as SendbirdNotification from "../Services/NotificationService/SendbirdNotification";
-import {Notifications} from "expo";
+
 
 export default class HomeScreen extends React.Component {
     static navigationOptions = {
@@ -72,45 +64,9 @@ export default class HomeScreen extends React.Component {
 
     componentDidMount(){
         this.fetchDataAd();
-        this.connectToChat()
-            .then(()=> ExpoNotificationToken.registerForPushNotificationsAsync()
-                .then((token)=> {
-                    console.log('Token received');
-                    SendbirdNotification.registerForPushNotificationsAsync(SendBirdService.getInstance(),token)
-                        .then(()=> {
-                            console.log("start notif listener");
-                            SendBirdService.setForegroundState();
-                            Notifications.addListener(this._handleNotification);
-                           // SendbirdNotification.setPushNotification(SendBirdService.getInstance(),token,true,Platform.OS).then()
-                        })
-                }));
-
-
-
-        // Handle notifications that are received or selected while the app
-        // is open. If the app registerForPushNotificationsAsyncwas closed and then opened by tapping the
-        // notification (rather than just tapping the app icon to open it),
-        // this function will fire on the next tick after the app starts
-        // with the notification data.
-
-    }
-
-    _handleNotification = (notification) => {
-        console.log('Notification');
-       alert(notification);
-    };
-
-    connectToChat() {
-
-        return fetchDataAd.getUserAuth().then((idUser) => {
-            if (idUser){
-                this.setState({currentUser:idUser}, ()=> SendBirdService.connectUser(idUser))
-            }
-        });
     }
 
     fetchDataAd() {
-        console.log('Fetchin data HomeScreen');
         ApiData.generateData(undefined,undefined ,this.state.page).then((result) => {
             if (result) {
                 let demandeData = result.type["Demande"];
@@ -132,12 +88,11 @@ export default class HomeScreen extends React.Component {
     }
 
     render() {
-        console.log("HomeScreen Render")
         return (
             <View style={styles.container}>
 
                 <View style={{backgroundColor: Colors.tintColor}}>
-                    <Searchbar submitSearch={this.getInput}/>
+                    <Searchbar navigation={this.props.navigation} submitSearch={this.getInput}/>
                 </View>
 
                 <Spinner
@@ -146,8 +101,11 @@ export default class HomeScreen extends React.Component {
                     textStyle={{color: "white", fontSize: 17, lineHeight: 22}}
                 />
                 {this.state.data?
-                    <TabsBarView currentUser={this.state.currentUser} navigation={this.props.navigation} demandeData={this.state.demandeData} echangeData={this.state.echangeData} donData={this.state.donData}/>:null
-
+                    <TabsBarView currentUser={this.state.currentUser}
+                                 navigation={this.props.navigation}
+                                 demandeData={this.state.demandeData}
+                                 echangeData={this.state.echangeData}
+                                 donData={this.state.donData}/>:null
                 }
 
             </View>
