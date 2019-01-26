@@ -17,8 +17,33 @@ import {NavigationActions, StackActions} from "react-navigation";
 import SendBirdService from "../Services/chatService/SendBirdService";
 
 export default class ProfilScreen extends React.Component {
-    static navigationOptions = {
-        title:'Profil'
+    static navigationOptions = ({navigation}) => {
+        return {
+            title: 'Profil',
+            headerRight: (
+                <TouchableHighlight
+                    style={{flexDirection: 'row'}}
+                    onPress={() => {
+                        const resetAction = StackActions.reset({
+                            index: 0,
+                            actions: [NavigationActions.navigate({routeName: 'Profil'})],
+                        });
+                        navigation.dispatch(resetAction);
+                    }}
+                >
+                    <View style={{flexDirection: 'row'}}>
+                        <Text style={{fontSize: 13, marginHorizontal: 5, color: Colors.tintColor}}>Actualiser</Text>
+                        <Icon size={18}
+                              iconStyle={{marginRight: 8}}
+                              name='refresh'
+                              type='font-awesome'
+                              color={Colors.tintColor}
+                              underlayColor={'#00000000'}
+                        />
+                    </View>
+                </TouchableHighlight>
+            ),
+        }
     };
 
     constructor(){
@@ -127,12 +152,8 @@ export default class ProfilScreen extends React.Component {
                 </View>);
         else
             return (
-                <ScrollView
-                    refreshControl={
-                        <RefreshControl
-                            refreshing={this.state.refreshing}
-                            onRefresh={this._onRefresh}
-                        />}style={styles.container}>
+                <View
+                   style={styles.container}>
                     <ProfileInformation navigation={this.props.navigation} userInfo={this.state.userInfo}/>
                     <AdsProfile adData={this.state.adData} navigation={this.props.navigation}/>
                     <View style={{alignItems:'center'}}>
@@ -145,7 +166,7 @@ export default class ProfilScreen extends React.Component {
                             </View>
                         </TouchableHighlight>
                      </View>
-                </ScrollView>
+                </View>
             );
     }
 }

@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { Card } from "react-native-elements";
 import ShowMoreScreen from "./ShowMoreScreen";
-
+import serverURL from '../../Services/ServerURL';
 export default class ShowMoreButton extends React.Component {
 
 
@@ -26,7 +26,7 @@ export default class ShowMoreButton extends React.Component {
                                     <Image
                                         style={styles.imageStyle}
                                         resizeMode="cover"
-                                        source={{ uri: 'http://vps628622.ovh.net:16233/api/downloadImage/'+dataImg }}
+                                        source={{ uri: `${serverURL}/api/downloadImage/`+dataImg }}
                                     />
                                 </View>
                                 <Text style={{paddingVertical:8, fontWeight:'400'}}>{dataTitle}</Text>

@@ -19,9 +19,10 @@ import Wallpaper from '../components/Components_Auth/Commun/Wallpaper';
 import SignupSection from '../components/Components_Auth/Components_Login/SignupSection';
 import Login_service from "../Services/Auth_Service/Login_service";
 
-
+import { Icon } from 'react-native-elements'
 import backbuttonimg from "../../assets/images/left-arrow.png";
 import {NavigationActions, StackActions} from "react-navigation";
+import Colors from "../constants/Colors";
 const MIN_PASS_LENGTH = 6;
 
 export default class LoginScreen extends Component {
@@ -81,7 +82,7 @@ export default class LoginScreen extends Component {
 
     static checkInput(...argument) {
         if(argument.includes(""))
-            alert('Veuillez saisir votre identifiants')
+            alert('Veuillez saisir votre identifiants');
         else if(!LoginScreen.checkPasswordLength(argument[1]))
             alert("Password must have at least 6 caracters");
         else
@@ -110,7 +111,12 @@ export default class LoginScreen extends Component {
                             <TouchableHighlight underlayColor="transparent"
                                                 style={{flex: 1, }}
                                                 onPress={() => this.navigation.navigate('Profil')}>
-                                <Image source={backbuttonimg} style={{top: 25, left: 10, width: 30, height: 30, transform: [{ rotate: '-90deg'}]}}/>
+                                <Icon
+                                    iconStyle={{top: 25, right: '43%',}}
+                                    name='close'
+                                    type='font-awesome'
+                                    size={40}
+                                    color={Colors.tintColor}/>
                             </TouchableHighlight>
                             <EmptySpace/>
                             {/*<View style={{*/}

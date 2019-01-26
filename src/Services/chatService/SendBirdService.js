@@ -66,6 +66,12 @@ export default class SendBirdService{
                             );
                             return false;
                         } else {
+                            createdChannel.setPushPreference(true, function(response, error) {
+                                if (error)
+                                    console.log(error.message);
+                                else
+                                    console.log(response);
+                                })
                             console.log('Create chat room successful with ' + curentUser + ' and ' +
                                 userToContact);
                             resolve(createdChannel);

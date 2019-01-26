@@ -6,6 +6,7 @@ const annonceDataReadyTest = {
         "Echange": {
             "Categories": {
                 "Animaux": [],
+                "Autre":[],
                 "Bricolage": [],
                 "Habits": [],
                 "Maison": [],
@@ -16,6 +17,7 @@ const annonceDataReadyTest = {
         "Don": {
             "Categories": {
                 "Animaux": [],
+                "Autre":[],
                 "Bricolage": [],
                 "Habits": [],
                 "Maison": [],
@@ -26,6 +28,7 @@ const annonceDataReadyTest = {
         "Demande": {
             "Categories": {
                 "Animaux": [],
+                "Autre":[],
                 "Bricolage": [],
                 "Habits": [],
                 "Maison": [],
@@ -45,6 +48,7 @@ export async function generateData(sortArg = 'modificationDate', size = 20, page
             "Echange": {
                 "Categories": {
                     "Animaux": [],
+                    "Autre":[],
                     "Bricolage": [],
                     "Habits": [],
                     "Maison": [],
@@ -55,6 +59,7 @@ export async function generateData(sortArg = 'modificationDate', size = 20, page
             "Don": {
                 "Categories": {
                     "Animaux": [],
+                    "Autre":[],
                     "Bricolage": [],
                     "Habits": [],
                     "Maison": [],
@@ -65,6 +70,7 @@ export async function generateData(sortArg = 'modificationDate', size = 20, page
             "Demande": {
                 "Categories": {
                     "Animaux": [],
+                    "Autre":[],
                     "Bricolage": [],
                     "Habits": [],
                     "Maison": [],

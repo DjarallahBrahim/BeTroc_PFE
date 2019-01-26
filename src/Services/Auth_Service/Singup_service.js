@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {AsyncStorage} from "react-native";
-import jwt_decode from "jwt-decode";
+import serverURL from "../ServerURL";
 
 
 export default class Singup_service {
@@ -14,7 +14,7 @@ export default class Singup_service {
     static singupHandler(userName, email, password) {
 
         return new Promise((resolve, reject) => {
-                axios.post("http://vps628622.ovh.net:16233/api/auth/signup", {
+                axios.post(`${serverURL}/api/auth/signup`, {
                      name: userName,
                      username: userName,
                      email: email,

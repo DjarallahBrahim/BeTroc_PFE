@@ -12,6 +12,8 @@ import TypeAnnonce from "../Commun/TypeAnnonce";
 import EtatAnnonce from "../Commun/EtatAnnonce";
 import Colors from "../../../constants/Colors";
 import {Divider} from "react-native-elements";
+import SearchService from "../../../Services/SearchService";
+import DonationExchangeResult from "../../Components_Home/SearchComponents/DonationExchangeResult";
 
 export default class Main extends React.Component {
     static navigationOptions = {
@@ -22,36 +24,79 @@ export default class Main extends React.Component {
         super();
 
         this.state={
-            keyword:''
-        }
+            keyword:'',
+            etat:'PERFECT',
+            category:'',
+            typeAnnonce:'Don'
+        };
 
         this.handlerKeyWord = this.handlerKeyWord.bind(this);
         this.handlerCategory = this.handlerCategory.bind(this);
         this.handlerType = this.handlerType.bind(this);
-        this.handlerEtat = this.handlerType.bind(this);
+        this.handlerEtat = this.handlerEtat.bind(this);
     }
 
     handlerKeyWord(text){
         console.log(text);
         this.setState({keyword:text})
     }
-    handlerCategory(category){
-        console.log(category.id);
-        this.setState({category:category.id})
+
+    handlerCategory(category) {
+        this.setState({category: category.subCategory})
     }
+
     handlerType(type){
         console.log(type);
         this.setState({typeAnnonce:type})
     }
     handlerEtat(etat){
         console.log(etat);
-        this.setState({etat:etat})
+        this.setState({etat:etat},()=> console.log(this.state.etat))
     }
 
+    lancheSearch(){
+        console.log(this.state.typeAnnonce,this.state.keyword,this.state.etat, this.state.category);
+
+        if(this.state.typeAnnonce ==='Don') {
+            SearchService.getDonationAds(this.state.keyword, this.state.etat, this.state.category).then((data) => {
+                if (data) {
+                    this.props.navigation.navigate('DonationExchangeResult',
+                        {
+                            'navigation': this.props.navigation,
+                            'data': data
+                        })
+                }
+            })
+        }
+        else if(this.state.typeAnnonce ==='Demande'){
+            SearchService.getDonationRequestAds(this.state.keyword, this.state.category).then((data) => {
+                if (data) {
+                    this.props.navigation.navigate('DonationExchangeResult',
+                        {
+                            'navigation': this.props.navigation,
+                            'data': data,
+                            'typeAnnonce': this.state.typeAnnonce
+                        })
+                }
+            })
+        }else if(this.state.typeAnnonce ==='Échange'){
+            SearchService.getExchangeAds(this.state.keyword, this.state.etat, this.state.category).then((data) => {
+                if (data) {
+                    this.props.navigation.navigate('DonationExchangeResult',
+                        {
+                            'navigation': this.props.navigation,
+                            'data': data,
+                            'currentUser': this.props.currentUser
+                        })
+                }
+            })
+        }else
+            alert('Selectionner un type !')
+    }
     render() {
         return (
-            <ScrollView>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+            <ScrollView>
             <View style={styles.container}>
                 <KeyWord handlerKeyWord={this.handlerKeyWord}/>
                 <Divider style={{ backgroundColor: '#c0c0c0', marginTop:10, height:2 }} />
@@ -62,25 +107,32 @@ export default class Main extends React.Component {
                     backgroundColor: 'transparent',
                     marginTop: 10,
                     marginHorizontal: 10}}> Filtrage avancé  </Text>
-                <Categoriebutton handlerCategory={this.handlerCategory} navigation={this.props.navigation} marginHorizontal={20} marginTop={50} />
+                <Categoriebutton handlerCategory={this.handlerCategory} navigation={this.props.navigation} marginHorizontal={20} marginTop={30} />
                 <TypeAnnonce marginTop={30} marginBottom={20} handlerType={this.handlerType} marginHorizontal={20}/>
-                <EtatAnnonce marginHorizontal={20} handlerEtat={this.handlerEtat}/>
+                {
+                    this.state.typeAnnonce !=='Demande' ?<EtatAnnonce marginHorizontal={20} handlerEtat={this.handlerEtat}/>
+                        :
+                        null
+                }
                 <Divider style={{ backgroundColor: '#c0c0c0', marginTop:50, height:2}} marginHorizontal={20}/>
                 <TouchableHighlight style={{
+                    flex:1,
                     backgroundColor: Colors.tintColor,
-                    marginTop:80,
+                    marginTop:30,
                     alignItems:'center',
                     marginHorizontal:20,
-                    borderRadius: 10}} onPress={() => {}}>
+                    borderRadius: 10}} onPress={() => this.lancheSearch()}>
                     <Text style={{color: 'white',
                         fontWeight: 'bold',
                         backgroundColor: 'transparent',
-                        marginVertical: 10,
+                        marginVertical: 5,
+                        fontSize:18,
                         marginHorizontal: 10}}> Lancer </Text>
                 </TouchableHighlight>
             </View>
-            </TouchableWithoutFeedback>
             </ScrollView>
+            </TouchableWithoutFeedback>
+
         );
     }
 }
@@ -89,6 +141,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#e8e8e8',
+        justifyContent:'center',
 
     }
 });

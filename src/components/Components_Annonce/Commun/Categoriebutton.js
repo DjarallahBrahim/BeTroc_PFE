@@ -47,9 +47,7 @@ export default class Categoriebutton extends React.Component {
                         type='font-awesome'
                         color={Colors.tintColor}
                         size={25}
-                        onPress={() => {
-                            this.props.navigation.navigate('Categorie')
-                        }}/>
+                        />
                     <Text style={{
                         fontSize: 19,
                         fontWeight: '500',
@@ -61,11 +59,7 @@ export default class Categoriebutton extends React.Component {
                         type='font-awesome'
                         color={Colors.tintColor}
                         size={30}
-                        onPress={() => this.props.navigation.navigate('Categorie', {
-                            data: data, handlerCategory: handlerCategory,
-                            navigation: navigation, 'buttonTitleHandler': this.buttonTitleHandler
-                        })
-                        }/>
+                      />
 
                 </View>
             </TouchableHighlight>

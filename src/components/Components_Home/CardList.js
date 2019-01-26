@@ -7,6 +7,7 @@ import {
 
 } from 'react-native';
 import { Card } from "react-native-elements";
+import serverURL from '../../Services/ServerURL';
 
 export default class CardList extends React.Component {
 
@@ -24,7 +25,7 @@ export default class CardList extends React.Component {
                                         style={styles.imageStyle}
                                         resizeMode="cover"
                                         resizeMethod={'resize'}
-                                        source={{ uri: 'http://vps628622.ovh.net:16233/api/downloadImage/'+data.images[0].name }}
+                                        source={{ uri: `${serverURL}/api/downloadImage/`+data.images[0].name }}
                                     />
                                 </View>
                                 <Text style={{paddingVertical:8, fontWeight:'400'}}>{data.title}</Text>

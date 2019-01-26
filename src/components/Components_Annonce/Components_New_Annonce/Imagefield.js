@@ -61,13 +61,14 @@ export default class Imagefield extends React.Component {
 
                 }
 
-                <TouchableHighlight style={this.state.takePic ? styles.viewStyle : styles.viewStyleDisable } onPress={()=>this._navigateToCamera()} >
+                {this.state.imagesTaked.length < 3 ?
+                    <TouchableHighlight style={styles.viewStyle} onPress={()=>this._navigateToCamera()} >
                         <Icon
                             name='camera'
                             type='evilicon'
                             size={60}
                             color='#000'/>
-                </TouchableHighlight>
+                </TouchableHighlight>:null}
             </View>
         );
     }
@@ -114,11 +115,11 @@ const styles = StyleSheet.create({
         height:18,
         width:18,
         position: 'absolute',
-        right: 1,
-        bottom: 69,
+        right: 8,
+        bottom: 59,
         borderRadius:15},
     iconCloseStyle:{
-        height:18,
-        width:18,
+        height:21,
+        width:21,
     }
 });

@@ -24,6 +24,7 @@ import ShowMoreScreen from "../components/Components_Home/ShowMoreScreen";
 import ChatScreen from "../components/Components_Chat/ChatScreen";
 import updateUserProfilInfo from "../screens/updateUserProfilInfo";
 import SearcheScreen from "../screens/SearcheScreen";
+import DonationExchangeResult from "../components/Components_Home/SearchComponents/DonationExchangeResult";
 
 const BottomTransition = (index, position, height) => {
     const sceneRange = [index - 1, index, index + 1];
@@ -61,6 +62,7 @@ const HomeStack = createStackNavigator({
     ChatScreen: ChatScreen,
     SearcheScreen:SearcheScreen,
     Categorie: Categories,
+    DonationExchangeResult:DonationExchangeResult
 
 
 });
@@ -69,7 +71,7 @@ HomeStack.navigationOptions = ({navigation}) => {
     let {routeName} = navigation.state.routes[navigation.state.index];
     let navigationOptions = {};
 
-    if (routeName !== 'Home') {
+    if (routeName !== 'Home' && routeName !=='SearcheScreen') {
         navigationOptions.tabBarVisible = false;
     }
     navigationOptions.tabBarIcon = ({focused}) => (
@@ -148,6 +150,8 @@ ProfilStack.navigationOptions = ({navigation}) => {
 
 const MapScreenStack = createStackNavigator({
     Map: MapScreen,
+    AnnonceDetail: Annoncedetailscreen,
+
 });
 
 MapScreenStack.navigationOptions = {

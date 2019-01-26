@@ -2,22 +2,48 @@ import React from 'react';
 import {
     ScrollView,
     StyleSheet,
-    Text,
+    Text, TouchableHighlight,
     View,
 } from 'react-native';
+import Main from "../components/Components_MapScreen/Main";
+import Colors from "../constants/Colors";
+import {NavigationActions, StackActions} from "react-navigation";
+import {Icon} from "react-native-elements";
 
 export default class MapScreen extends React.Component {
-    static navigationOptions = {
-        title: 'Map',
+    static navigationOptions = ({navigation}) => {
+        return {
+            title: 'Map',
+            headerRight: (
+                <TouchableHighlight
+                    style={{flexDirection: 'row'}}
+                    onPress={() => {
+                        const resetAction = StackActions.reset({
+                            index: 0,
+                            actions: [NavigationActions.navigate({routeName: 'Map'})],
+                        });
+                        navigation.dispatch(resetAction);
+                    }}>
+
+                    <View style={{flexDirection: 'row'}}>
+                        <Text style={{fontSize: 13, marginHorizontal: 5, color: Colors.tintColor}}>Actualiser</Text>
+                        <Icon size={18}
+                              iconStyle={{marginRight: 8}}
+                              name='refresh'
+                              type='font-awesome'
+                              color={Colors.tintColor}
+                              underlayColor={'#00000000'}
+                        />
+                    </View>
+                </TouchableHighlight>
+            ),
+        }
     };
 
     render() {
         return (
             <View style={styles.container}>
-                {/*<ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>*/}
-                    {/*<Text> this is Map Screen </Text>*/}
-                {/*</ScrollView>*/}
-                <Text> this is Map Screen </Text>
+               <Main navigation={this.props.navigation}/>
             </View>
         );
     }

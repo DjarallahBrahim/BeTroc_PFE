@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import Colors from "../../constants/Colors";
 import SendBirdService from "../../Services/chatService/SendBirdService";
-import fetchDataAd from "../../Services/fetchDataAd";
 
 export default class DemandeAdType extends React.Component {
 
@@ -133,10 +132,11 @@ export default class DemandeAdType extends React.Component {
                         if (this.props.currentUser>0) {
                             SendBirdService.createGroupOneToOne(this.props.currentUser, item.user.id, `${typeAnnonce}_${item.id}`).then(this.handlerStartChat);
 
-                        }
+                        }else
+                            console.log('[DemandeAdType] currente user is null', this.props.currentUser)
                     }}>
                     <Image
-                        source={{uri: 'http://vps628622.ovh.net:16233/api/downloadImage/man.png_eafefe17-19dc-11e9-887c-f1d2369b0d9e.png'}}
+                        source={{uri: `${serverURL}/api/downloadImage/man.png_7094e36a-1f6e-11e9-b724-91cc08b93fd6.png`}}
                         style={{width: 45, height: 45}}
                         resizeMode="cover"
                         resizeMethod={'resize'}

@@ -14,6 +14,8 @@ import Singup_service from "../Services/Auth_Service/Singup_service";
 import backbuttonimg from "../../assets/images/left-arrow.png";
 import SocialAuthButton from "../components/Components_Auth/Commun/SocialAuthButton";
 import {NavigationActions, StackActions} from "react-navigation";
+import Colors from "../constants/Colors";
+import {Icon} from "react-native-elements";
 
 const MIN_PASS_LENGTH = 6;
 export default class SignupScreen extends Component {
@@ -147,7 +149,12 @@ export default class SignupScreen extends Component {
                             <TouchableHighlight underlayColor="transparent"
                                                 style={{flex: 1}}
                                                 onPress={() => this.navigation.navigate('Profil')}>
-                                <Image source={backbuttonimg} style={{transform: [{ rotate: '-90deg'}], top: 25, left: 10, width: 30, height: 30}}/>
+                                <Icon
+                                    iconStyle={{top: 25, right: '43%',}}
+                                    name='close'
+                                    type='font-awesome'
+                                    size={40}
+                                    color={Colors.tintColor}/>
                             </TouchableHighlight>
                             <EmptySpace/>
                             <Form handlerUserName={this.handlerUserName}

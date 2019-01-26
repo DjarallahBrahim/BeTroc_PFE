@@ -117,7 +117,7 @@ export default class AdPanel extends React.Component {
                                     if (item !== 'Aucune annonce')
                                         this.props.navigation.navigate('AnnonceDetail',
                                             {
-                                                'navigation': this.props.navigation, 'typeAnnonce': 'Demande',
+                                                'navigation': this.props.navigation, 'typeAnnonce': this.props.type,
                                                 'data': this.props.data[index]
                                             })
                                 }}

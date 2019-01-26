@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import {Keyboard} from 'react-native'
 import Colors from "../constants/Colors";
+import ProfileService from "../Services/ProfileService";
 
 export default class updateUserProfilInfo extends React.Component {
     static navigationOptions = {
@@ -28,11 +29,24 @@ export default class updateUserProfilInfo extends React.Component {
     }
 
 
-
+    handlerEmailUpdate(oldEmail, email){
+        if(oldEmail !== email)
+             if(email)
+                ProfileService.updateEmail(email).then((result)=> alert(result))
+             else
+                 alert('Remplire un email valide')
+        else
+            alert("Vous n'avez utilisé le même email")
+    }
+    handlerPasswordUpdate(oldPassword, newPassword) {
+        if(oldPassword !== newPassword && newPassword.length>5)
+             ProfileService.updatePassword(newPassword,oldPassword).then((result)=> alert(result));
+        else
+            alert('Remplire un code valide (plus de 6 charcartères)')
+    }
     render() {
        const data = this.props.navigation.getParam("dataUser", {});
         const navigation = this.props.navigation.getParam("navigation", {});
-
         return (
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
             <View
@@ -45,21 +59,39 @@ export default class updateUserProfilInfo extends React.Component {
                 <View style={{marginTop:20}}>
                     <TextInput
                         textAlign={'center'}
-                        style={{borderWidth:1, borderColor:Colors.tintColor,borderRadius: 10,
-                            fontSize:17, color:'#000', fontWeight:'bold',paddingHorizontal:10,paddingVertical:5, marginVertical:3}}
+                        style={{borderWidth:1, borderColor:Colors.grey2,borderRadius: 10,
+                            fontSize:15, color:'#000',paddingHorizontal:10,paddingVertical:5, marginVertical:3}}
                         onChangeText={(text) => {this.setState({username: text})}}
                         placeholder={data.username}
-                        placeholderTextColor={'black'}
                         underlineColorAndroid="transparent"
                         autoCapitalize = 'none'
                     />
                     <TextInput
                         textAlign={'center'}
-                        style={{borderWidth:1, borderColor:Colors.tintColor,borderRadius: 10,
-                            fontSize:17, color:'#000', fontWeight:'bold',paddingHorizontal:10,paddingVertical:5, marginVertical:3}}
+                        style={{borderWidth:1, borderColor:Colors.grey2,borderRadius: 10,
+                            fontSize:15, color:'#000',paddingHorizontal:10,paddingVertical:5, marginVertical:3}}
                         onChangeText={(text) => {this.setState({email: text})}}
                         placeholder={data.email}
-                        placeholderTextColor={'black'}
+                        underlineColorAndroid="transparent"
+                        autoCapitalize = 'none'
+                    />
+                    <TextInput
+                        textAlign={'center'}
+                        secureTextEntry={true}
+                        style={{borderWidth:1, borderColor:Colors.tintColor,borderRadius: 10,
+                            fontSize:15, color:'#000',paddingHorizontal:10,paddingVertical:5, marginVertical:3}}
+                        onChangeText={(text) => {this.setState({oldPassword: text})}}
+                        placeholder={"l'ancien mot de passe"}
+                        underlineColorAndroid="transparent"
+                        autoCapitalize = 'none'
+                    />
+                    <TextInput
+                        textAlign={'center'}
+                        secureTextEntry={true}
+                        style={{borderWidth:1, borderColor:Colors.tintColor,borderRadius: 10,
+                            fontSize:15, color:'#000',paddingHorizontal:10,paddingVertical:5, marginVertical:3}}
+                        onChangeText={(text) => {this.setState({newPassword: text})}}
+                        placeholder={'Nouveau mot de passe'}
                         underlineColorAndroid="transparent"
                         autoCapitalize = 'none'
                     />
@@ -69,7 +101,7 @@ export default class updateUserProfilInfo extends React.Component {
                     <TouchableHighlight style={{
                         backgroundColor: Colors.tintColor,
                         opacity: 0.8,
-                        borderRadius: 10}} onPress={() => navigation.goBack()}>
+                        borderRadius: 10}} onPress={() => navigation.pop()}>
 
                         <Text style={{color: 'white',
                             fontWeight: 'bold',
@@ -81,7 +113,13 @@ export default class updateUserProfilInfo extends React.Component {
                         backgroundColor: 'white',
                         opacity: 0.8,
                         borderRadius: 10}}
-                                        onPress={() => this.handlerUserName()}>
+                                        onPress={() => {
+                                            if(data.email){
+                                                this.handlerEmailUpdate(data.email, this.state.email)
+                                            }
+                                            if(this.state.newPassword)
+                                                this.handlerPasswordUpdate(this.state.oldPassword, this.state.newPassword)
+                                        }}>
 
                         <Text style={{color: 'black',
                             fontWeight: 'bold',
@@ -94,6 +132,8 @@ export default class updateUserProfilInfo extends React.Component {
             </TouchableWithoutFeedback>
         );
     }
+
+
 }
 
 const styles = StyleSheet.create({

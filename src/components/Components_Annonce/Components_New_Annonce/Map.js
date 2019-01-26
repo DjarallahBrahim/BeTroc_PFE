@@ -163,7 +163,7 @@ export default class MapLocation  extends React.Component {
                                     if(this.state.status){
                                         const geoLocationRevers = await Location.reverseGeocodeAsync(this.state.adLocation);
                                         const address = `${geoLocationRevers[0].street}, ${geoLocationRevers[0].city},${geoLocationRevers[0].postalCode}, ${geoLocationRevers[0].region},${geoLocationRevers[0].country}`
-                                        locationHandler(address);
+                                        locationHandler(address, this.state.adLocation);
                                         navigation.pop();
                                     }else
                                         alert('Aucune adresse sélectionnée')

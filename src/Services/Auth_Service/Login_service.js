@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {AsyncStorage} from "react-native";
-import jwt_decode from "jwt-decode";
+import serverURL from "../ServerURL";
 
 import SendBirdService from "../chatService/SendBirdService";
 
@@ -18,7 +18,7 @@ export default class Login_service {
     static loginHandler(userName, password) {
 
        return new Promise((resolve, reject) => {
-               axios.post("http://vps628622.ovh.net:16233/api/auth/signin", {
+               axios.post(`${serverURL}/api/auth/signin`, {
                    usernameOrEmail: userName,
                    password: password
                })

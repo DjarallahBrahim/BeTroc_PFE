@@ -70,7 +70,11 @@ export default class Searchbar extends React.Component {
                               size={18}
                               color={"rgba(225,225,225,0.8)"}
                               onPress={()=>{
-                                    this.props.navigation.navigate('SearcheScreen',{navigation:this.props.navigation})
+                                    this.props.navigation.navigate('SearcheScreen',
+                                        {
+                                            navigation:this.props.navigation,
+                                            currentUser:this.state.currentUser
+                                        })
                                    }
                               } //TODO add filter Screen
                          />

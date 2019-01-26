@@ -16,11 +16,11 @@ export default class Categories extends React.Component {
         this.state={categoriesAreReady:false}
     }
 
-    _handlerCategory(buttonTitleHandler,handlerCategory, id, category, subCategory){
+    _handlerCategory(buttonTitleHandler,handlerCategory, idCategory,idSubCategory, subCategory){
         const catg={};
-        catg.title= category;
-        catg.subCategory = subCategory;
-        catg.id=id;
+        catg.title= subCategory;
+        catg.subCategory = idSubCategory;
+        catg.category=idCategory;
         handlerCategory(catg);
         buttonTitleHandler(subCategory);
 
@@ -54,7 +54,7 @@ export default class Categories extends React.Component {
                                         <TouchableOpacity
                                             style={styles.iconContainer}
                                         onPress={()=>{
-                                            this._handlerCategory(buttonTitleHandler,handlerCategory,category.id, category.title,subCategory.title);
+                                            this._handlerCategory(buttonTitleHandler,handlerCategory,category.id,subCategory.id,subCategory.title);
                                             navigation.pop();
                                         }}>
                                             <Image
@@ -66,7 +66,7 @@ export default class Categories extends React.Component {
                                         </TouchableOpacity>
                                         <Text
                                             onPress={()=>{
-                                                this._handlerCategory(buttonTitleHandler,handlerCategory,category.id,category.title,subCategory.title);
+                                                this._handlerCategory(buttonTitleHandler,handlerCategory,category.id,subCategory.id,subCategory.title);
                                                 navigation.pop();
                                             }}
                                             style={{

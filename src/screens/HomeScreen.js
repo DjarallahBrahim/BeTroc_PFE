@@ -8,11 +8,13 @@ import TabsBarView from "../components/Components_Home/TabsBarView";
 import Colors from "../constants/Colors";
 import * as ApiData from "../ApiData/ApiData";
 import Spinner from 'react-native-loading-spinner-overlay';
+import fetchDataAd from "../Services/fetchDataAd";
 
 
 export default class HomeScreen extends React.Component {
     static navigationOptions = {
         header: null,
+
     };
 
 
@@ -59,11 +61,22 @@ export default class HomeScreen extends React.Component {
     }
 
     getInput = (query) => {
+      console.log(query);
         this.setState(state => ({ ...state, query: query || "" }));
     };
 
     componentDidMount(){
         this.fetchDataAd();
+        this.getCurrentUSer();
+    }
+
+    getCurrentUSer() {
+        fetchDataAd.getUserAuth().then((idUser) => {
+            if (idUser)
+                this.setState({currentUser: idUser});
+            else
+                console.log(`[HomeScreen.js] no user founded`);
+        });
     }
 
     fetchDataAd() {
@@ -92,7 +105,7 @@ export default class HomeScreen extends React.Component {
             <View style={styles.container}>
 
                 <View style={{backgroundColor: Colors.tintColor}}>
-                    <Searchbar navigation={this.props.navigation} submitSearch={this.getInput}/>
+                    <Searchbar currentUser={this.state.currentUser} navigation={this.props.navigation} submitSearch={this.getInput}/>
                 </View>
 
                 <Spinner

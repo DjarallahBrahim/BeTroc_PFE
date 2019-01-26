@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as cacheOperationService from "./CacheOperationService";
-
+import serverURL from './ServerURL';
 
 function generateFormDataAnnonce(response, data) {
     const imgId = [];
@@ -10,20 +10,22 @@ function generateFormDataAnnonce(response, data) {
 }
 
 
-export async function postImages(imgUrl, data) {
-    const images = storePicture(imgUrl);
-    let idUser = await cacheOperationService.getItemFromStorage("userId");
-    idUser = idUser.substr(7, idUser.length - 1);
-    data.user = parseInt(idUser);
 
+
+
+export async function uploadDonAd(imgUrl, data) {
+    const images = storePicture(imgUrl);
     const authToken = await cacheOperationService.getItemFromStorage("AuthToken");
-    return axios.post("http://vps628622.ovh.net:16233/api/uploadMultipleFiles", images, {
+
+    return axios.post(`${serverURL}/api/uploadMultipleFiles`, images, {
         'headers': {'Authorization': authToken, 'Content-Type': 'multipart/form-data'},
     })
-        .then((response) => {
+        .then(async (response) => {
             if (response.data) {
                 console.log("Uploaded images");
-                return generateFormDataAnnonce(response, data);
+                const annonceCordData= await generateFormDataAnnonce(response, data);
+                await uploadDonatonAdPart2(annonceCordData, authToken);
+                return true;
             } else {
                 console.log("Error with uploading images");
                 return false;
@@ -35,9 +37,51 @@ export async function postImages(imgUrl, data) {
 }
 
 
-export async function uploadDonAd(data) {
+export async function uploadEchangeAd(imgUrl, data) {
+    const images = storePicture(imgUrl);
     const authToken = await cacheOperationService.getItemFromStorage("AuthToken");
-    return axios.post("http://vps628622.ovh.net:16233/api/donationAds", data, {
+
+    return axios.post(`${serverURL}/api/uploadMultipleFiles`, images, {
+        'headers': {'Authorization': authToken, 'Content-Type': 'multipart/form-data'},
+    })
+        .then(async (response) => {
+            if (response.data) {
+                console.log("Uploaded images");
+                const annonceCordData= await generateFormDataAnnonce(response, data);
+                await uploadExchangeAdParte2(annonceCordData, authToken);
+                return true;
+            } else {
+                console.log("Error with uploading images");
+                return false;
+            }
+        })
+        .catch((error) => {
+            console.log("Error with Uploade images request" + error.message)
+        });
+}
+
+
+export async function uploadDemandeAd(data) {
+    const authToken = await cacheOperationService.getItemFromStorage("AuthToken");
+    const corpRequest = createFormDataAnnonceDemande(data);
+    return axios.post(`${serverURL}/api/DonationRequestAd`, corpRequest, {
+        'headers': {'Authorization': authToken}
+    })
+        .then((response) => {
+            if (response.data){
+                console.log("[UploadAnnonceService] Annonce demande uploaded");
+                return response.data.success;
+            }
+            else
+                return false;
+        })
+        .catch((error) => {
+            console.log("[UploadAnnonceService] Error with uploadDemandeAd request" + error.message)
+        });
+}
+
+function uploadDonatonAdPart2(annonceCordData, authToken) {
+    axios.post(`${serverURL}/api/donationAds`, annonceCordData, {
         'headers': {'Authorization': authToken}
     })
         .then((response) => {
@@ -51,9 +95,8 @@ export async function uploadDonAd(data) {
         });
 }
 
-export async function uploadEchangeAd(data) {
-    const authToken = await cacheOperationService.getItemFromStorage("AuthToken");
-    return axios.post("http://vps628622.ovh.net:16233/api/exchangeAds", data, {
+function uploadExchangeAdParte2(annonceCordData, authToken) {
+    axios.post(`${serverURL}/api/exchangeAds`, annonceCordData, {
         'headers': {'Authorization': authToken}
     })
         .then((response) => {
@@ -64,22 +107,6 @@ export async function uploadEchangeAd(data) {
         })
         .catch((error) => {
             console.log("Error with uploadEchangeAd request" + error.message)
-        });
-}
-
-export async function uploadDemandeAd(data) {
-    const authToken = await cacheOperationService.getItemFromStorage("AuthToken");
-    return axios.post("http://vps628622.ovh.net:16233/api/DonationRequestAd", data, {
-        'headers': {'Authorization': authToken}
-    })
-        .then((response) => {
-            if (response.data)
-                return response.data.success;
-            else
-                return false;
-        })
-        .catch((error) => {
-            console.log("Error with uploadDemandeAd request" + error.message)
         });
 }
 
@@ -100,14 +127,24 @@ function createFormDataAnnonceDon(data) {
     const formData = new FormData();
     formData.append('title', data.title);
     formData.append('description', data.description);
-    formData.append('user', data.user);
     formData.append('address', data.address);
     formData.append('category', data.category);
+    formData.append('subCategory', data.subCategory);
     formData.append('state', data.state);
-    data.images.forEach((photo, index) => formData.append(`images[${index}]`, photo))
+    formData.append('latitude', data.latitude);
+    formData.append('longitude', data.longitude);
+    data.images.forEach((photo, index) => formData.append(`images[${index}]`, photo));
+    console.log(formData);
     return formData;
 }
-
+function createFormDataAnnonceDemande(data) {
+    const formData = new FormData();
+    formData.append('title', data.title);
+    formData.append('description', data.description);
+    formData.append('category', data.category);
+    formData.append('subCategory', data.subCategory);
+    return formData;
+}
 export function formValidation(state){
     if (state.typeAd === 'Don')
         return state.title !== '' && state.description !== ''

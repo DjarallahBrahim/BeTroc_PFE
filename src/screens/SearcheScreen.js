@@ -14,9 +14,10 @@ export default class SearcheScreen extends React.Component {
 
     render() {
         const navigation = this.props.navigation.getParam("navigation", {});
+        const currentUser = this.props.navigation.getParam("currentUser", 0);
         return (
             <View style={styles.container}>
-               <Main navigation={navigation}/>
+               <Main currentUser={currentUser} navigation={navigation}/>
 
             </View>
         );

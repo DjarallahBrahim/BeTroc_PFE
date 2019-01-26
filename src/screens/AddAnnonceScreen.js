@@ -18,12 +18,38 @@ import {StackActions, NavigationActions} from 'react-navigation';
 import Estimation from "../components/Components_Annonce/Components_New_Annonce/Estimation";
 import * as cacheOperationService from "../Services/CacheOperationService";
 import LoginSignupScreen from "./LoginSignupScreen";
-import ProfileService from "../Services/ProfileService";
 
 export default class AddAnnonceScreen extends React.Component {
-    static navigationOptions = {
-        title: 'Nouvelle annonce',
-    };
+    static navigationOptions =({ navigation }) => {
+        return {
+            title: 'Nouvelle annonce',
+            headerRight: (
+                <TouchableHighlight
+                    style={{flexDirection: 'row'}}
+                    onPress={()=>{
+                        const resetAction = StackActions.reset({
+                            index: 0,
+                            actions: [NavigationActions.navigate({routeName: 'Plus'})],
+                        });
+                        navigation.dispatch(resetAction);
+                    }}
+                >
+                    <View style={{flexDirection: 'row'}}>
+                        <Text style={{fontSize: 13, marginHorizontal: 5, color: Colors.tintColor}}>Actualiser</Text>
+                        <Icon size={18}
+                              iconStyle={{marginRight: 8}}
+                              name='refresh'
+                              type='font-awesome'
+                              color={Colors.tintColor}
+                              underlayColor={'#00000000'}
+                        />
+                    </View>
+                </TouchableHighlight>
+            ),
+        };
+    }
+
+
 
 
     constructor() {
@@ -33,6 +59,9 @@ export default class AddAnnonceScreen extends React.Component {
             description: '',
             adLocation: '',
             category: 0,
+            subCategory:0,
+            latitude: '',
+            longitude: '',
             typeAd: "Don",
             etatProduit: "PERFECT",
             imgUrl: [],
@@ -55,15 +84,14 @@ export default class AddAnnonceScreen extends React.Component {
         this.handlerSpinner = this.handlerSpinner.bind(this);
 
 
-
     }
 
-    handlerAdress(adLocation) {
-        this.setState({adLocation: adLocation})
+    handlerAdress(adLocation, lagLat) {
+        this.setState({adLocation: adLocation, latitude: lagLat.latitude, longitude: lagLat.longitude})
     }
 
     handlerCategory(category) {
-        this.setState({category: category.id})
+        this.setState({category: category.category, subCategory: category.subCategory})
     }
 
     handlerType(typeAd) {
@@ -105,56 +133,58 @@ export default class AddAnnonceScreen extends React.Component {
 
     uploadAnnonce() {
         if (UploadAnnonceService.formValidation(this.state)) {
-
-
             this.handlerSpinner();
-            const data = {
-                "title": this.state.title,
-                "description": this.state.description,
-                "category": this.state.category,
-                "state": this.state.etatProduit,
-                "address": this.state.adLocation
-            };
-            UploadAnnonceService.postImages(this.state.imgUrl, data)
-                .then(
-                    result => {
-                        if (result) {
-                            if (this.state.typeAd === 'Don') {
-                                UploadAnnonceService.uploadDonAd(result)
-                                    .then((status) => {
-                                        status ? this.handlerUploadSeccus() : this.handlerUploadField();
-                                    })
-                                    .catch();
-                            }
-                            else if (this.state.typeAd === 'Échange') {
-                                result.estimatedPrice = this.state.estimatedPrice;
-                                UploadAnnonceService.uploadEchangeAd(result)
-                                    .then((status) => {
-                                        status ? this.handlerUploadSeccus() : this.handlerUploadField();
-                                    })
-                                    .catch();
-                            }
-                            else if (this.state.typeAd === 'Demande') {
-                                UploadAnnonceService.uploadDemandeAd(result)
-                                    .then((status) => {
-                                        status ? this.handlerUploadSeccus() : this.handlerUploadField();
-                                    })
-                                    .catch();
-                            }
-                            else {
-                                this.handlerSpinner();
-                                alert('No type Ad to send it')
-                            }
-                        }
-                        else {
-                            this.handlerSpinner();
-                            alert('Poblème avec notre serveur')
-                        }
-                    }
-                )
-                .catch()
-        } else
-            alert('veuillez remplir tous les champs');
+            if (this.state.typeAd.toString() === "Demande") {
+                const data = {
+                    "title": this.state.title,
+                    "description": this.state.description,
+                    "category": this.state.category,
+                    "subCategory": this.state.subCategory,
+                };
+                UploadAnnonceService.uploadDemandeAd(data).then()
+                    .then((status) => {
+                        status ? this.handlerUploadSeccus() : this.handlerUploadField();
+                    })
+                    .catch();
+            }
+            else if (this.state.typeAd.toString() === 'Don') {
+                const data = {
+                    "title": this.state.title,
+                    "description": this.state.description,
+                    "category": this.state.category,
+                    "subCategory": this.state.subCategory,
+                    "state": this.state.etatProduit,
+                    "address": this.state.adLocation,
+                    "latitude": this.state.latitude,
+                    "longitude": this.state.longitude
+                };
+                UploadAnnonceService.uploadDonAd(this.state.imgUrl, data)
+                    .then((status) => {
+                        status ? this.handlerUploadSeccus() : this.handlerUploadField();
+                    })
+                    .catch();
+            } else if (this.state.typeAd.toString() === 'Échange') {
+                const data = {
+                    "title": this.state.title,
+                    "description": this.state.description,
+                    "category": this.state.category,
+                    "subCategory": this.state.subCategory,
+                    "state": this.state.etatProduit,
+                    "address": this.state.adLocation,
+                    "latitude": this.state.latitude,
+                    "longitude": this.state.longitude,
+                    "estimatedPrice": this.state.estimatedPrice
+                };
+                UploadAnnonceService.uploadEchangeAd(this.state.imgUrl, data)
+                    .then((status) => {
+                        status ? this.handlerUploadSeccus() : this.handlerUploadField();
+                    })
+                    .catch();
+            } else {
+                this.handlerSpinner();
+                alert('Nous considirons un problème avec notre serveur !')
+            }
+        }
     }
 
     handlerUploadField() {
@@ -185,8 +215,19 @@ export default class AddAnnonceScreen extends React.Component {
             );
     }
 
+
+    reflesh(navigation) {
+        const resetAction = StackActions.reset({
+            index: 0,
+            actions: [NavigationActions.navigate({routeName: 'Plus'})],
+        });
+        navigation.dispatch(resetAction);
+    }
+
     componentDidMount() {
         this.checkAuthentification();
+        this.props.navigation.setParams({ reflesh: this.reflesh });
+
     }
 
 
@@ -273,7 +314,7 @@ const styles = StyleSheet.create({
     publishButton: {
         alignItems: 'center',
         backgroundColor: Colors.tintColor,
-        opacity: 0.8,
+        opacity: 1,
         borderRadius: 10
     },
     textPublier: {

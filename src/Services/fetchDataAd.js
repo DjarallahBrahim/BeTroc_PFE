@@ -1,13 +1,11 @@
 import axios from 'axios';
 import * as cacheOperationService from "./CacheOperationService";
-
+import serverURL from './ServerURL'
 export default class fetchDataAd {
 
     static async  getDonationAds(sortArg='modificationDate', size=10, page=0) {
 
-
-
-        return axios.get(`http://vps628622.ovh.net:16233/api/donationAds?sort=${sortArg},desc&size=${size}&page=${page}`)
+        return axios.get(`${serverURL}/api/donationAds?sort=${sortArg},desc&size=${size}&page=${page}`)
             .then((response) =>
             {
                 if(response.data)
@@ -23,7 +21,7 @@ export default class fetchDataAd {
     static async  getExchageAds(sortArg='modificationDate', size=10, page=0) {
 
 
-        return axios.get(`http://vps628622.ovh.net:16233/api/exchangeAds?sort=${sortArg},desc&size=${size}&page=${page}`)
+        return axios.get(`${serverURL}/api/exchangeAds?sort=${sortArg},desc&size=${size}&page=${page}`)
             .then((response) =>
             {
                 if(response.data)
@@ -38,7 +36,7 @@ export default class fetchDataAd {
 
     static getDonationRequestAds(sortArg='modificationDate', size=10, page=0) {
 
-        return axios.get(`http://vps628622.ovh.net:16233/api/DonationRequestAd?sort=${sortArg},desc&size=${size}&page=${page}`)
+        return axios.get(`${serverURL}/api/DonationRequestAd?sort=${sortArg},desc&size=${size}&page=${page}`)
             .then((response) =>
             {
                 if(response.data)
@@ -64,7 +62,7 @@ export default class fetchDataAd {
             return false;
         uri +=`/category/${category}`;
 
-        return axios.get(`http://vps628622.ovh.net:16233/api${uri}?size=7&page=${page}`)
+        return axios.get(`${serverURL}/api${uri}?size=7&page=${page}`)
             .then((response) =>
             {
                 if(response.data){

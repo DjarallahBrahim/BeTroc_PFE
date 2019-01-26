@@ -17,13 +17,13 @@ import Contactbutton from "./Contactbutton";
 import Colors from "../../../constants/Colors";
 import ImageSlider from "react-native-image-slider";
 import ParallaxScrollView from "react-native-scrollviewtouchable-expo-paralaex";
-
+import serverURL from '../../../Services/ServerURL';
 export default class MainTMP extends React.Component {
 
     generateArrayOfPic(images){
         var imagesArr= [];
         images.map((img, idx)=>{
-          imagesArr.push('http://vps628622.ovh.net:16233/api/downloadImage/'+img.name)
+          imagesArr.push(`${serverURL}/api/downloadImage/`+img.name)
 
         });
         return imagesArr;

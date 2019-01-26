@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as cacheOperationService from "./CacheOperationService";
-
+import serverURL from './ServerURL'
 
 export default class CategoriesService {
 
@@ -13,14 +13,14 @@ export default class CategoriesService {
      */
 
     async getCategoriesHandler() {
-        const categoriesCache = await cacheOperationService.getItemFromStorage('categoriesCache');
-        if (categoriesCache) {
-            const result = categoriesCache.substr(7, categoriesCache.length - 1);
-            const cat = await JSON.parse(result);
-            return cat;
-        }
+        // const categoriesCache = await cacheOperationService.getItemFromStorage('categoriesCache');
+        // if (categoriesCache) {
+        //     const result = categoriesCache.substr(7, categoriesCache.length - 1);
+        //     const cat = await JSON.parse(result);
+        //     return cat;
+        // }
         const authToken = await cacheOperationService.getItemFromStorage("AuthToken");
-        return axios.get("http://vps628622.ovh.net:16233/api/getCategories", {
+        return axios.get(`${serverURL}/api/getCategories`, {
             'headers': {'Authorization': authToken}
         })
             .then(async (response) => {

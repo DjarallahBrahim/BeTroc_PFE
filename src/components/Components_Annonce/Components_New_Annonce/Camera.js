@@ -1,12 +1,8 @@
 import React from 'react';
-import {Text, View, TouchableOpacity, TouchableHighlight, Image, StyleSheet,Platform} from 'react-native';
-import {Camera, Permissions, ImagePicker, ImageManipulator} from 'expo';
-import Icon from '@expo/vector-icons/FontAwesome';
+import {Text, View, TouchableHighlight, Image, StyleSheet} from 'react-native';
+import {Camera, Permissions, ImagePicker} from 'expo';
 import Colors from "../../../constants/Colors";
-import flipImage from '../../../../assets/images/flipcamera.png'
 import Layout from "../../../constants/Layout";
-import renderIf from './renderif'
-import Spinner from "react-native-loading-spinner-overlay";
 export default class CameraAdd extends React.Component {
     static navigationOptions = {
         header: null,
@@ -25,51 +21,23 @@ export default class CameraAdd extends React.Component {
     }
 
 
-    handlerSpinner() {
-        console.log('SPINNNEEERR')
-        this.setState({
-            spinner: !this.state.spinner
+
+
+    openCamera(){
+        Permissions.askAsync(Permissions.CAMERA_ROLL).then(()=>{
+            ImagePicker.launchCameraAsync({
+                allowsEditing: true,
+                aspect: [4, 3],
+            }).then((photo)=>{
+                if (!photo.cancelled) {
+                    this.setState({takedPic: true, imageURI: photo.uri});
+                }
+            });
         });
-
-    }
-     cropImage(pickedImage){
-        console.log(pickedImage.height,pickedImage.width);
-         let resizeObj = {};
-         if (pickedImage.height > pickedImage.width) {
-             resizeObj = { height: 2048, width:1024  };
-         } else {
-             resizeObj = { height: 1836 , width: 2048 };
-         }
-         ImageManipulator.manipulate(
-             pickedImage.uri,
-             [{ resize: resizeObj }],
-             {
-                 format: 'jpeg', compress: 0.5
-             }
-         ).then((manipResult) => {
-
-             if (Platform.OS === 'android' && manipResult.width > 640) {
-                  ImageManipulator.manipulate(
-                     pickedImage.uri,
-                     [{ rotate: 90 }, { resize: resizeObj }],
-                     {
-                         format: 'jpeg', compress: 0.5,
-                     }
-                 ).then((manipResult)=>  this.setState({takedPic: true, imageURI: manipResult.uri}, this.handlerSpinner));
-             }
-             else
-                 this.setState({takedPic: true, imageURI: manipResult.uri}, this.handlerSpinner)
-         });
     }
 
-    takePic = () => {
-        if (this.camera) {
-            this.camera.takePictureAsync({quality:1,skipProcessing: true}).then((photo)=>this.cropImage(photo));
-        }
-    };
-
-     choosePic(){
-         Permissions.askAsync(Permissions.CAMERA_ROLL).then(()=>{
+    openGallery(){
+        Permissions.askAsync(Permissions.CAMERA_ROLL).then(()=>{
             ImagePicker.launchImageLibraryAsync({
                 allowsEditing: true,
                 aspect: [4, 3],
@@ -79,9 +47,8 @@ export default class CameraAdd extends React.Component {
                 }
             });
         });
+    }
 
-
-    };
     componentDidMount() {
         Permissions.askAsync(Permissions.CAMERA).then(({status})=> this.setState({hasCameraPermission: status === 'granted'}))
     }
@@ -103,55 +70,9 @@ export default class CameraAdd extends React.Component {
             return <Text>No access to camera</Text>;
         } else {
             return (
-                <View style={{flex: 1}}>
-                    <Spinner
-                        visible={this.state.spinner}
-                        textContent={'Loading...'}
-                        textStyle={{color: "white", fontSize: 17, lineHeight: 22}}
-                    />
+                <View style={{flex: 1, justifyContent: 'center', alignItems:'center' }}>
                     {
-                    !this.state.takedPic?
-                        <Camera style={{flex: 1}}
-                                type={this.state.type}
-                                ref={ref => {
-                                    this.camera = ref;
-                                }}>
-                            <View
-                                style={styles.cameraView}>
-                                <TouchableOpacity
-                                    style={{}}
-                                    onPress={() => {
-                                        this.setState({
-                                            type: this.state.type === Camera.Constants.Type.back
-                                                ? Camera.Constants.Type.front
-                                                : Camera.Constants.Type.back,
-                                        });
-                                    }}>
-                                    <Image source={flipImage} style={{width: 30, height: 30}}/>
-                                </TouchableOpacity>
-                                <TouchableHighlight
-                                    activeOpacity={1}
-                                    underlayColor={'transparent'}
-                                    onPress={() => {
-                                        this.handlerSpinner();
-                                        this.takePic(!this.state.focused)
-                                    }}
-
-                                >
-                                    <Icon name="plus-square-o" size={50}
-                                          color={this.state.focused ? Colors.tabIconSelected : Colors.tabIconDefault}/>
-                                </TouchableHighlight>
-                                <TouchableHighlight
-                                    activeOpacity={1}
-                                    underlayColor={'transparent'}
-                                    onPress={() => this.choosePic(!this.state.focused)}
-
-                                >
-                                    <Icon name="picture-o" size={30}
-                                          color={this.state.focused ? Colors.tabIconSelected : Colors.tabIconDefault}/>
-                                </TouchableHighlight>
-                            </View>
-                        </Camera>:
+                    this.state.takedPic?
                         <View  style={{
                             flex:1,
                             position: 'relative'}}>
@@ -173,7 +94,37 @@ export default class CameraAdd extends React.Component {
                                 </TouchableHighlight>
                             </View>
                         </View>
+                        :
+                        <View style={{flexDirection:'row', justifyContent:'space-between', marginTop:20, marginHorizontal:20}}>
 
+                            <TouchableHighlight style={{
+                                flex:0.5,
+                                alignItems:'center',
+                                backgroundColor: Colors.tintColor,
+                                opacity: 0.8,
+                                borderRadius: 10}} onPress={() => this.openCamera()}>
+
+                                <Text style={{color: 'white',
+                                    fontWeight: 'bold',
+                                    backgroundColor: 'transparent',
+                                    marginVertical: 15,
+                                    marginHorizontal: 10}}> Camera </Text>
+                            </TouchableHighlight>
+                            <TouchableHighlight style={{
+                                flex:0.5,
+                                alignItems:'center',
+                                backgroundColor: 'white',
+                                opacity: 0.8,
+                                borderRadius: 10}}
+                                                onPress={() => this.openGallery()}>
+
+                                <Text style={{color: 'black',
+                                    fontWeight: 'bold',
+                                    backgroundColor: 'transparent',
+                                    marginVertical: 15,
+                                    marginHorizontal: 10}}> Vos photos </Text>
+                            </TouchableHighlight>
+                        </View>
                     }
                  </View>
             );

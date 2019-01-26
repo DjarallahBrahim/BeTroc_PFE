@@ -7,7 +7,7 @@ import {
     View,
 } from 'react-native';
 import SendBirdService from "../../Services/chatService/SendBirdService";
-
+import serverURL from '../../Services/ServerURL'
 export default class RowDemandeAd extends React.Component {
 
     constructor(){
@@ -73,7 +73,7 @@ export default class RowDemandeAd extends React.Component {
                             }
                         }}>
                         <Image
-                            source={{uri: 'http://vps628622.ovh.net:16233/api/downloadImage/man.png_eafefe17-19dc-11e9-887c-f1d2369b0d9e.png'}}
+                            source={{uri: `${serverURL}/api/downloadImage/man.png_7094e36a-1f6e-11e9-b724-91cc08b93fd6.png`}}
                             style={{width: 45, height: 45}}
                         />
                     </TouchableOpacity>
