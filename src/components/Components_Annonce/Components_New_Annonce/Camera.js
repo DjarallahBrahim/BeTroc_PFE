@@ -3,6 +3,7 @@ import {Text, View, TouchableHighlight, Image, StyleSheet} from 'react-native';
 import {Camera, Permissions, ImagePicker} from 'expo';
 import Colors from "../../../constants/Colors";
 import Layout from "../../../constants/Layout";
+import {Icon} from "react-native-elements";
 export default class CameraAdd extends React.Component {
     static navigationOptions = {
         header: null,
@@ -70,8 +71,7 @@ export default class CameraAdd extends React.Component {
             return <Text>No access to camera</Text>;
         } else {
             return (
-                <View style={{flex: 1, justifyContent: 'center', alignItems:'center' }}>
-                    {
+
                     this.state.takedPic?
                         <View  style={{
                             flex:1,
@@ -95,13 +95,18 @@ export default class CameraAdd extends React.Component {
                             </View>
                         </View>
                         :
-                        <View style={{flexDirection:'row', justifyContent:'space-between', marginTop:20, marginHorizontal:20}}>
-
+                        <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+                            <Icon
+                                name='camera'
+                                type='evilicon'
+                                size={180}
+                                color='#000'/>
+                        <View style={{flexDirection:'row',  marginTop:20, marginHorizontal:10}}>
                             <TouchableHighlight style={{
                                 flex:0.5,
                                 alignItems:'center',
                                 backgroundColor: Colors.tintColor,
-                                opacity: 0.8,
+                                marginHorizontal:5,
                                 borderRadius: 10}} onPress={() => this.openCamera()}>
 
                                 <Text style={{color: 'white',
@@ -110,11 +115,12 @@ export default class CameraAdd extends React.Component {
                                     marginVertical: 15,
                                     marginHorizontal: 10}}> Camera </Text>
                             </TouchableHighlight>
+
                             <TouchableHighlight style={{
                                 flex:0.5,
                                 alignItems:'center',
                                 backgroundColor: 'white',
-                                opacity: 0.8,
+                                marginHorizontal:5,
                                 borderRadius: 10}}
                                                 onPress={() => this.openGallery()}>
 
@@ -125,8 +131,8 @@ export default class CameraAdd extends React.Component {
                                     marginHorizontal: 10}}> Vos photos </Text>
                             </TouchableHighlight>
                         </View>
-                    }
-                 </View>
+                        </View>
+
             );
         }
     }

@@ -136,7 +136,7 @@ export default class DemandeAdType extends React.Component {
                             console.log('[DemandeAdType] currente user is null', this.props.currentUser)
                     }}>
                     <Image
-                        source={{uri: `${serverURL}/api/downloadImage/man.png_7094e36a-1f6e-11e9-b724-91cc08b93fd6.png`}}
+                        source={{uri: `${serverURL}/api/downloadImage/${item.subCategory.imgName}`}}
                         style={{width: 45, height: 45}}
                         resizeMode="cover"
                         resizeMethod={'resize'}

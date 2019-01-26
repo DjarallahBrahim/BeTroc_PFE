@@ -105,7 +105,10 @@ export default class HomeScreen extends React.Component {
             <View style={styles.container}>
 
                 <View style={{backgroundColor: Colors.tintColor}}>
-                    <Searchbar currentUser={this.state.currentUser} navigation={this.props.navigation} submitSearch={this.getInput}/>
+                    <Searchbar backButton={false}
+                               currentUser={this.state.currentUser}
+                               navigation={this.props.navigation}
+                               submitSearch={this.getInput}/>
                 </View>
 
                 <Spinner

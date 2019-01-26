@@ -14,11 +14,10 @@ import Colors from "../../../constants/Colors";
 import {Divider} from "react-native-elements";
 import SearchService from "../../../Services/SearchService";
 import DonationExchangeResult from "../../Components_Home/SearchComponents/DonationExchangeResult";
+import Searchbar from "../../Components_Home/SearchBar";
 
 export default class Main extends React.Component {
-    static navigationOptions = {
-        title: 'Main',
-    };
+
 
     constructor(){
         super();
@@ -34,6 +33,7 @@ export default class Main extends React.Component {
         this.handlerCategory = this.handlerCategory.bind(this);
         this.handlerType = this.handlerType.bind(this);
         this.handlerEtat = this.handlerEtat.bind(this);
+        this.lancheSearch = this.lancheSearch.bind(this);
     }
 
     handlerKeyWord(text){
@@ -93,13 +93,21 @@ export default class Main extends React.Component {
         }else
             alert('Selectionner un type !')
     }
+
+
     render() {
         return (
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
             <ScrollView>
             <View style={styles.container}>
-                <KeyWord handlerKeyWord={this.handlerKeyWord}/>
-                <Divider style={{ backgroundColor: '#c0c0c0', marginTop:10, height:2 }} />
+                <View style={{backgroundColor: Colors.tintColor}}>
+                    <Searchbar backButton={true}
+                               currentUser={this.state.currentUser}
+                               navigation={this.props.navigation}
+                               getKeyword={this.handlerKeyWord}
+                               search={this.lancheSearch}/>
+                </View>
+
                 <Text style={{
                     textAlign:'center',
                     color: Colors.tintColor,
@@ -121,11 +129,12 @@ export default class Main extends React.Component {
                     marginTop:30,
                     alignItems:'center',
                     marginHorizontal:20,
+                    marginVertical:20,
                     borderRadius: 10}} onPress={() => this.lancheSearch()}>
                     <Text style={{color: 'white',
                         fontWeight: 'bold',
                         backgroundColor: 'transparent',
-                        marginVertical: 5,
+                        marginVertical: 10,
                         fontSize:18,
                         marginHorizontal: 10}}> Lancer </Text>
                 </TouchableHighlight>

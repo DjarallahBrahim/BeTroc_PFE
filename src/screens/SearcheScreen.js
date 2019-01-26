@@ -9,7 +9,7 @@ import Main from "../components/Components_Annonce/Components_Search_Annonce/Mai
 
 export default class SearcheScreen extends React.Component {
     static navigationOptions = {
-        title: 'Recherche',
+        header: null,
     };
 
     render() {

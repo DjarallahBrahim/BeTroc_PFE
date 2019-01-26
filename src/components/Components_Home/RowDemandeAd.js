@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import SendBirdService from "../../Services/chatService/SendBirdService";
 import serverURL from '../../Services/ServerURL'
+import CategoriesService from "../../Services/CategoriesService";
 export default class RowDemandeAd extends React.Component {
 
     constructor(){
@@ -26,6 +27,8 @@ export default class RowDemandeAd extends React.Component {
         if(item)
             this.props.navigation.navigate('ChatScreen', {channelUrl: item.url, currentUser:this.props.currentUser})
     }
+
+
 
     render() {
         const data = this.props.data;
@@ -73,7 +76,7 @@ export default class RowDemandeAd extends React.Component {
                             }
                         }}>
                         <Image
-                            source={{uri: `${serverURL}/api/downloadImage/man.png_7094e36a-1f6e-11e9-b724-91cc08b93fd6.png`}}
+                            source={{uri: `${serverURL}/api/downloadImage/${data.subCategory.imgName}`}}
                             style={{width: 45, height: 45}}
                         />
                     </TouchableOpacity>

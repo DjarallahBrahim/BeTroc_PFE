@@ -14,6 +14,100 @@ import * as ExpoNotificationToken from "./src/Services/NotificationService/ExpoN
 import * as SendbirdNotification from "./src/Services/NotificationService/SendbirdNotification";
 import SendBirdService from "./src/Services/chatService/SendBirdService";
 import fetchDataAd from "./src/Services/fetchDataAd";
+import AppIntroSlider from 'react-native-app-intro-slider';
+
+
+const slides = [
+
+    {
+        key: 'somethun-dos',
+        title: 'Dans votre Accueil',
+        text: 'Naviguer dans les différents type d\'annonce !',
+        image: require('./assets/images/home.jpg'),
+        imageStyle: {
+            width: 320,
+            height: 320,
+            borderRadius:20,
+
+        },
+        titleStyle:{
+          color:'white',
+            fontWeight:'500'
+        },
+        textStyle:{
+          color:'white',
+            fontSize:19
+        },
+        backgroundColor: '#2792b6',
+    },
+
+    {
+        title: 'Autour de vous ?',
+        key: 'somethun-tree',
+        text: 'Visualiser les annonces sur votre map !',
+        image: require('./assets/images/map.jpg'),
+        imageStyle: {
+            width: 320,
+            height: 320,
+            borderRadius:20,
+            resizeMode:"cover",
+        },
+        titleStyle:{
+            color:'white',
+            fontWeight:'500'
+        },
+        textStyle:{
+            color:'white',
+            fontWeight:'400',
+            fontSize:19
+        },
+        backgroundColor: '#22bcb5',
+    },
+    {
+        key: 'somethun',
+        title: 'Vous avez un besoin ?',
+        text: 'Trouvez votre besoin à travers les trois types',
+        image: require('./assets/images/ajouterAnnonce.jpg'),
+        imageStyle: {
+            width: 320,
+            height: 340,
+            resizeMode:'stretch',
+            borderRadius:20,
+        },
+        titleStyle:{
+            color:'white',
+            fontWeight:'500'
+        },
+        textStyle:{
+            color:'white',
+            fontWeight:'400',
+            fontSize:19
+        },
+        backgroundColor: '#fb6d53',
+    },
+    {
+        key: 'somethun2',
+        title: 'Vous êtes prêt ?',
+        text: 'Découvrez les autres fonctionnalités avec beTroc',
+        image: require('./assets/images/logo.png'),
+        imageStyle: {
+            width: 320,
+            height: 200,
+            resizeMode:'stretch',
+            borderRadius:20,
+        },
+        titleStyle:{
+            color:'white',
+            fontWeight:'500'
+        },
+        textStyle:{
+            color:'white',
+            fontWeight:'400',
+            fontSize:19
+        },
+        backgroundColor: '#1d1d1d',
+    }
+];
 
 export default class App extends React.Component {
 
@@ -21,7 +115,8 @@ export default class App extends React.Component {
         super();
         this.state = {
             notification: {},
-            currentUser:0
+            currentUser:0,
+            showRealApp:false
         };
         this._handleNotification=this._handleNotification.bind(this);
         this.handlerConnectToChat=this.handlerConnectToChat.bind(this);
@@ -29,6 +124,12 @@ export default class App extends React.Component {
         this.connectToSendbirdNotification=this.connectToSendbirdNotification.bind(this);
     }
 
+
+    _onDone = () => {
+        // User finished the introduction. Show real app through
+        // navigation or simply by controlling state
+        this.setState({ showRealApp: true });
+    }
 
     async startConnecteNotificationOperation(){
         await this.connectToChat()
@@ -80,14 +181,13 @@ export default class App extends React.Component {
     };
 
 
-
-
     render() {
-        return (
-            <View style={styles.container}>
-                <AppNavigator />
-            </View>
-        );
+            if (this.state.showRealApp) {
+                return <AppNavigator />;
+            } else {
+                return <AppIntroSlider showSkipButton={true} slides={slides} onSkip={this._onDone} onDone={this._onDone}/>;
+            }
+
     }
 }
 
@@ -99,4 +199,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+    image: {
+        width: 320,
+        height: 320,
+    }
 });
