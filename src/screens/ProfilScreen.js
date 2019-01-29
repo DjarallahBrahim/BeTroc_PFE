@@ -15,6 +15,9 @@ import * as cacheOperationService from "../Services/CacheOperationService";
 import LoginSignupScreen from "./LoginSignupScreen";
 import {NavigationActions, StackActions} from "react-navigation";
 import SendBirdService from "../Services/chatService/SendBirdService";
+import ActionSheet from "react-native-actionsheet";
+import {Permissions, ImagePicker} from 'expo';
+import DialogInput from "react-native-dialog-input";
 
 export default class ProfilScreen extends React.Component {
     static navigationOptions = ({navigation}) => {
@@ -52,7 +55,8 @@ export default class ProfilScreen extends React.Component {
             userInfo: {
                 username: 'Please wait...',
                 email: 'Please wait...',
-                nb_annonce: 'Please wait...'
+                nb_annonce: 'Please wait...',
+                profileImage: ''
             },
             userInfoProblem: {
                 username: 'Please try later',
@@ -74,10 +78,13 @@ export default class ProfilScreen extends React.Component {
                 },
             },
             auth:null,
-            refreshing:false
+            refreshing:false,
+            isDialogVisible:false
         };
         this.handlerUserInfoField=this.handlerUserInfoField.bind(this);
         this.handlerUserInfoSeccus=this.handlerUserInfoSeccus.bind(this);
+        this.showActionSheet=this.showActionSheet.bind(this);
+        this.refrshScreen=this.refrshScreen.bind(this);
 
     }
 
@@ -86,6 +93,7 @@ export default class ProfilScreen extends React.Component {
     }
 
     handlerUserInfoSeccus(result) {
+        console.log(result);
         let exchangeAds = {size : result.exchangeAds.length, data: result.exchangeAds};
         let donationRequestAds = {size : result.donationRequestAds.length, data: result.donationRequestAds};
         let donationAds = {size : result.donationAds.length, data: result.donationAds};
@@ -128,10 +136,54 @@ export default class ProfilScreen extends React.Component {
 
 
     }
+
     _onRefresh = () => {
         this.setState({refreshing: true});
         ProfileService.getUserInfo(this.handlerUserInfoSeccus,this.handlerUserInfoField).then();
     };
+
+    openGallery(){
+        Permissions.askAsync(Permissions.CAMERA_ROLL).then(()=>{
+            ImagePicker.launchImageLibraryAsync({
+                allowsEditing: true,
+                aspect: [4, 3],
+            }).then((photo)=>{
+                if (!photo.cancelled) {
+                    ProfileService.uploadImageProfile(photo.uri).then(()=>this.refrshScreen());
+                    //this.setState({takedPic: true, imageURI: photo.uri});
+                }
+            });
+        });
+    }
+
+    openCamera(){
+        Permissions.askAsync(Permissions.CAMERA_ROLL).then(()=>{
+            ImagePicker.launchCameraAsync({
+                allowsEditing: true,
+                aspect: [4, 3],
+            }).then((photo)=>{
+                if (!photo.cancelled) {
+                    console.log(photo.uri);
+                    ProfileService.uploadImageProfile(photo.uri).then(()=>this.refrshScreen());
+                    //this.setState({takedPic: true, imageURI: photo.uri});
+                }
+            });
+        });
+    }
+
+    refrshScreen(){
+        const resetAction = StackActions.reset({
+            index: 0,
+            actions: [NavigationActions.navigate({routeName: 'Profil'})],
+        });
+        this.props.navigation.dispatch(resetAction);
+    }
+
+    showActionSheet = () => {
+        //To show the Bottom ActionSheet
+        this.ActionSheet.show();
+    };
+
 
     async componentDidMount(){
         this.checkAuthentification();
@@ -140,6 +192,11 @@ export default class ProfilScreen extends React.Component {
     }
 
     render() {
+        const optionArray = [
+            'Camera',
+            'Gallery',
+            'Cancel',
+        ];
         if(this.state.auth === null)
             return null;
         if(!this.state.auth)
@@ -152,11 +209,21 @@ export default class ProfilScreen extends React.Component {
                 </View>);
         else
             return (
-                <View
+                <ScrollView
                    style={styles.container}>
-                    <ProfileInformation navigation={this.props.navigation} userInfo={this.state.userInfo}/>
+                    <ProfileInformation showActionSheet={this.showActionSheet} navigation={this.props.navigation} userInfo={this.state.userInfo}/>
                     <AdsProfile adData={this.state.adData} navigation={this.props.navigation}/>
-                    <View style={{alignItems:'center'}}>
+                    <View style={{alignItems:'center', flexDirection:'row', flex:1, justifyContent:'center'}}>
+
+                        <TouchableHighlight style={styles.deleteButton} onPress={()=> this.handlerDeleteAccpount()}>
+                            <View style={{flexDirection:'row', alignItems: 'center', justifyContent: 'center',}}>
+                                <Icon size={26} name= 'trash-o' type='font-awesome' color='#eee' underlayColor={'#00000000'}
+
+                                />
+                                <Text style={styles.textDelete}> Supprimer Compte </Text>
+                            </View>
+                        </TouchableHighlight>
+
                         <TouchableHighlight style={styles.publishButton} onPress={()=> this.logout()}>
                             <View style={{flexDirection:'row', alignItems: 'center', justifyContent: 'center',}}>
                                 <Icon size={26} name= 'sign-out' type='font-awesome' color='#eee' underlayColor={'#00000000'}
@@ -165,9 +232,43 @@ export default class ProfilScreen extends React.Component {
                                 <Text style={styles.textPublier}> Déconnexion </Text>
                             </View>
                         </TouchableHighlight>
+
                      </View>
-                </View>
+                    <ActionSheet
+                        ref={o => (this.ActionSheet = o)}
+                        title={'Changement photo de profile'}
+                        options={optionArray}
+                        cancelButtonIndex={2}
+                        onPress={index => {
+                            if(index === 0){
+                                this.openCamera()
+                            }else if(index === 1){
+                               this.openGallery()
+                            }else
+                                return;
+                        }}
+                    />
+                    <DialogInput isDialogVisible={this.state.isDialogVisible}
+                                 title={"Supprimer votre compte ?"}
+                                 message={"Êtes-vous sure ?"}
+                                 hintInput ={"Entrez votre password"}
+                                 submitInput={ (inputText) => {this.setState({isDialogVisible:false},()=>this.fetchDeletAccount(inputText))} }
+                                 closeDialog={ () => {this.setState({isDialogVisible:false})}}>
+                    </DialogInput>
+                </ScrollView>
             );
+    }
+
+    handlerDeleteAccpount() {
+        this.setState({isDialogVisible:true})
+    }
+
+    fetchDeletAccount(inputText) {
+        ProfileService.deleteAccount(inputText).then((result)=>{
+            if(result){
+                this.logout();
+            }
+        })
     }
 }
 
@@ -182,10 +283,27 @@ const styles = StyleSheet.create({
         borderRadius:10,
         paddingHorizontal:8,
         marginVertical: 10,
+        marginHorizontal:5
+
+    },
+    deleteButton: {
+        alignItems: 'center',
+        backgroundColor: 'transparent',
+        borderRadius:10,
+        paddingHorizontal:8,
+        marginVertical: 10,
+        marginHorizontal:5
 
     },
     textPublier: {
         color: 'white',
+        fontWeight: 'bold',
+        backgroundColor: 'transparent',
+        marginVertical: 10,
+        marginHorizontal:10
+    },
+    textDelete: {
+        color: "#b0b0b0",
         fontWeight: 'bold',
         backgroundColor: 'transparent',
         marginVertical: 10,

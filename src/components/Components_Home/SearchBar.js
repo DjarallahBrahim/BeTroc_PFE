@@ -97,6 +97,7 @@ export default class Searchbar extends React.Component {
                             borderRadius: 20,
                             marginHorizontal: 7,
                             marginVertical: 5}}
+                                            underlayColor="transparent"
                                             onPress={() => {
                             this.props.navigation.navigate('SearcheScreen',
                                 {

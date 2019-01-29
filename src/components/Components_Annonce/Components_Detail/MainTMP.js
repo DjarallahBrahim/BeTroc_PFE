@@ -3,7 +3,7 @@ import {
     Image,
     StyleSheet,
     TouchableHighlight,
-    View,
+    View,Linking
 } from 'react-native';
 import Hr from "react-native-hr-component";
 
@@ -18,8 +18,15 @@ import Colors from "../../../constants/Colors";
 import ImageSlider from "react-native-image-slider";
 import ParallaxScrollView from "react-native-scrollviewtouchable-expo-paralaex";
 import serverURL from '../../../Services/ServerURL';
+import SendBirdService from "../../../Services/chatService/SendBirdService";
+import ActionSheet from "react-native-actionsheet";
+import ProfileService from "../../../Services/ProfileService";
 export default class MainTMP extends React.Component {
 
+    constructor(){
+        super();
+        this.showActionSheet=this.showActionSheet.bind(this)
+    }
     generateArrayOfPic(images){
         var imagesArr= [];
         images.map((img, idx)=>{
@@ -28,6 +35,27 @@ export default class MainTMP extends React.Component {
         });
         return imagesArr;
     }
+
+    fetchEmailToContact(id){
+        ProfileService.getUserEmail(id).then((email)=>{
+            if(email)
+                Linking.openURL(`mailto:${email}?subject=Betroc operation`)
+            else
+                alert("Problème avec notre service de contact")
+        })
+    }
+
+    handlerStartChat(item){
+        console.log('handlerStartChat');
+        if(item)
+            this.props.navigation.navigate('ChatScreen', {channelUrl: item.url, currentUser:this.props.currentUser})
+    }
+
+    showActionSheet = () => {
+        //To show the Bottom ActionSheet
+        this.ActionSheet.show();
+    };
+
     renderHeader(){
         const {data, typeAnnonce} = this.props;
         const images = this.generateArrayOfPic(data.images);
@@ -66,7 +94,15 @@ export default class MainTMP extends React.Component {
             </View>
         )
     }
+
+
     render() {
+        const optionArray = [
+            'Email',
+            'Messagerie (Non stable)',
+            'Cancel',
+        ];
+
         const {data, typeAnnonce} = this.props;
         return (
             <ParallaxScrollView
@@ -98,7 +134,28 @@ export default class MainTMP extends React.Component {
                         null
                 }
 
-                <Contactbutton navigation={this.props.navigation} typeAnnonce={this.props.typeAnnonce} currentUser={this.props.currentUser} user={data['user']}/>
+                <Contactbutton showActionSheet={this.showActionSheet} navigation={this.props.navigation} typeAnnonce={this.props.typeAnnonce} currentUser={this.props.currentUser} user={data['user']}/>
+                <ActionSheet
+                    ref={o => (this.ActionSheet = o)}
+                    title={'Moyen de contact'}
+                    options={optionArray}
+                    cancelButtonIndex={2}
+                    destructiveButtonIndex={1}
+                    onPress={index => {
+                        if(index === 0){
+                            this.fetchEmailToContact(data['user'].id);
+                        }else if(index === 1){
+                            if (this.props.currentUser>0) {
+                                SendBirdService.createGroupOneToOne(this.props.currentUser, data['user'].id, `${typeAnnonce}_${data['user'].id}`).then((result)=> this.handlerStartChat(result));
+
+                            }else{
+                                console.log('[DemandeAdType] currente user is null', this.props.currentUser);
+                                alert('Vous n\'êtes connecté au service de messagerie')
+                            }
+                        }else
+                            return;
+                    }}
+                />
             </ParallaxScrollView>
         )
     }

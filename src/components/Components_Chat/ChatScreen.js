@@ -15,6 +15,7 @@ import ic_back from '../../../assets/images/ic_back.png'
 import ic_send from '../../../assets/images/ic_send.png'
 import sendBird from '../../Services/chatService/SendBridConst'
 import fetchDataAd from "../../Services/fetchDataAd";
+import KeyboardSpacer from "react-native-keyboard-spacer";
 
 const UNIQUE_HANDLER_ID = 123;
 
@@ -169,12 +170,12 @@ export default class ChatScreen extends Component {
     render () {
         return (
             <View style={styles.viewContainer}>
-                {Platform.OS === 'android' ?
-                    this.renderBody() :
-                    <KeyboardAvoidingView style={styles.viewContainer} behavior="padding">
-                        {this.renderBody()}
-                    </KeyboardAvoidingView>
-                }
+
+
+                {this.renderBody()}
+
+
+
 
             </View>
         )
@@ -211,6 +212,7 @@ export default class ChatScreen extends Component {
                         <Image source={ic_send} style={styles.icSend}/>
                     </TouchableOpacity>
                 </View>
+                <KeyboardSpacer/>
             </View>
         )
     }

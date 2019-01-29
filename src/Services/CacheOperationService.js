@@ -32,7 +32,12 @@ import {AsyncStorage} from "react-native";
         }
     };
 
-   export async function deleteItemFromStorage(key) {
+/**
+ * function to delete item from the cache application
+ * @param key
+ * @returns {Promise<boolean>}
+ */
+export async function deleteItemFromStorage(key) {
         try {
             await AsyncStorage.removeItem(key);
             return true;

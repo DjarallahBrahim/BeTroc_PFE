@@ -9,6 +9,8 @@ import {
 import {Keyboard} from 'react-native'
 import Colors from "../constants/Colors";
 import ProfileService from "../Services/ProfileService";
+import {NavigationActions, StackActions} from "react-navigation";
+import serverURL from "../Services/ServerURL";
 
 export default class updateUserProfilInfo extends React.Component {
     static navigationOptions = {
@@ -20,9 +22,11 @@ export default class updateUserProfilInfo extends React.Component {
         email:''
     };
 
-    handlerUserName(){
-        if(this.state.username.trim().length>0)
-             console.log(this.state.username.trim());
+    handlerUserName(oldUserName){
+        if(this.state.username === oldUserName)
+            alert("Vous n'avez pas changer votre user name")
+        else if(this.state.username.trim().length>0)
+             ProfileService.updateEUserName(this.state.username).then((message)=>alert(message));
 
         if(this.state.email.trim().length>0)
             console.log(this.state.email.trim());
@@ -38,12 +42,16 @@ export default class updateUserProfilInfo extends React.Component {
         else
             alert("Vous n'avez utilisé le même email")
     }
+
+
     handlerPasswordUpdate(oldPassword, newPassword) {
         if(oldPassword !== newPassword && newPassword.length>5)
              ProfileService.updatePassword(newPassword,oldPassword).then((result)=> alert(result));
         else
             alert('Remplire un code valide (plus de 6 charcartères)')
     }
+
+
     render() {
        const data = this.props.navigation.getParam("dataUser", {});
         const navigation = this.props.navigation.getParam("navigation", {});
@@ -52,7 +60,10 @@ export default class updateUserProfilInfo extends React.Component {
             <View
                 style={{flexDirection:'column',paddingHorizontal:10, marginTop:50}}>
                 <View style={{flexDirection:'column', justifyContent:'center', alignItems:'center' }}>
-                    <Image source={{uri:'https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/43680926_1910295159059259_1909104016655122432_n.jpg?_nc_cat=111&_nc_ht=scontent-cdg2-1.xx&oh=cb1ba20a0686e058eb0cd5ba6113e547&oe=5C8BEA24'}}
+                    <Image source={{uri: data.profileImage ?
+                            `${serverURL}/api/downloadImage/${data.profileImage.name}`
+                            :
+                            'http://chittagongit.com//images/person-png-icon/person-png-icon-29.jpg'}}
                            resizeMode="cover"
                            style={{width:150, height:150, marginHorizontal:5, marginVertical:5, borderRadius:150/2}}/>
                 </View>
@@ -100,7 +111,6 @@ export default class updateUserProfilInfo extends React.Component {
 
                     <TouchableHighlight style={{
                         backgroundColor: Colors.tintColor,
-                        opacity: 0.8,
                         borderRadius: 10}} onPress={() => navigation.pop()}>
 
                         <Text style={{color: 'white',
@@ -114,11 +124,20 @@ export default class updateUserProfilInfo extends React.Component {
                         opacity: 0.8,
                         borderRadius: 10}}
                                         onPress={() => {
-                                            if(data.email){
+                                            if(this.state.username && data.username)
+                                                this.handlerUserName(data.username);
+
+                                            if(data.email && this.state.email){
                                                 this.handlerEmailUpdate(data.email, this.state.email)
                                             }
                                             if(this.state.newPassword)
                                                 this.handlerPasswordUpdate(this.state.oldPassword, this.state.newPassword)
+
+                                            const resetAction = StackActions.reset({
+                                                index: 0,
+                                                actions: [NavigationActions.navigate({routeName: 'Profil'})],
+                                            });
+                                            navigation.dispatch(resetAction);
                                         }}>
 
                         <Text style={{color: 'black',

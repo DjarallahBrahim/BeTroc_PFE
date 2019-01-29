@@ -30,7 +30,7 @@ export default class DonationExchangeResult extends React.Component {
 
                     />
                 :
-                <View style={{flex:1, alignItems:'center', justifyContent:'flex-start'}}>
+                <View style={{flex:1, alignItems:'center', justifyContent:'flex-start', padding:10}}>
                     <Image source={emoji} style={{width:150, height:150, marginVertical:50}}/>
                     <Text style={{fontSize:18, fontWeight:'400'}}>Opps aucun résultat correspondant à votre recherche</Text>
                 </View>

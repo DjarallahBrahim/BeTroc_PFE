@@ -3,6 +3,14 @@ import axios from 'axios';
 
 export default class MapAdService {
 
+    /**
+     * get donation ads for the map screen
+     * @param lat
+     * @param lng
+     * @param size
+     * @param page
+     * @returns {Promise<AxiosResponse<any>>}
+     */
     static async getDonationAds(lat=0, lng=0, size = 10, page = 0) {
 
         return axios.get(`${serverURL}/api/donationAds/closet/lat/${lat}/long/${lng}?size=${size}&page=${page}`)
@@ -17,6 +25,11 @@ export default class MapAdService {
             });
     }
 
+    /**
+     * get donation ads by id for screen map
+     * @param id
+     * @returns {Promise<AxiosResponse<any>>}
+     */
     static async getDonationAdsByID(id=0) {
 
         return axios.get(`${serverURL}/api/donationAds/${id}`)
@@ -31,6 +44,11 @@ export default class MapAdService {
             });
     }
 
+    /**
+     * get exchange adds by id for map screen
+     * @param id
+     * @returns {Promise<AxiosResponse<any>>}
+     */
     static async getExchangeAdsByID(id=0) {
 
         return axios.get(`${serverURL}/api/exchangeAds/${id}`)
@@ -45,6 +63,11 @@ export default class MapAdService {
             });
     }
 
+    /**
+     * generate marker list
+     * @param data
+     * @returns {Promise<Array>}
+     */
     static async generateMarkersList(data) {
         let markerList = [];
         if(data.content){
@@ -62,6 +85,14 @@ export default class MapAdService {
         }
     }
 
+    /**
+     * get exchange ads for map screen
+     * @param lat
+     * @param lng
+     * @param size
+     * @param page
+     * @returns {Promise<AxiosResponse<any>>}
+     */
     static async getExchageAds(lat=0, lng=0, size = 10, page = 0) {
 
 
@@ -78,7 +109,4 @@ export default class MapAdService {
     }
 
 
-    generateDonationMarker(data){
-
-    }
 }

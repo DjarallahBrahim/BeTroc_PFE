@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     StyleSheet,
-    TextInput,
+    TextInput, TouchableHighlight,
     View,
 } from 'react-native';
 import Colors from "../../../constants/Colors";
@@ -26,8 +26,13 @@ export default class Adresseproduct extends React.Component {
                     iconStyle={{marginHorizontal:10, backgroundColor:'transparent'}}
                     onPress={() => this.props.navigation.navigate("MapLocation",
                         {locationHandler: this.props.handlerAdress, navigation:this.props.navigation})} />
+
+                <TouchableHighlight  style={{flex:1}} onPress={()=>{this.props.navigation.navigate("MapLocation",
+                    {locationHandler: this.props.handlerAdress, navigation:this.props.navigation})}} underlayColor="white">
+
                 <TextInput
                     style={{flex:1}}
+                    editable={false}
                     onChangeText={(text) => {this._onChangeInputAddress(text)}}
                     placeholder={"Address"}
                     placeholderTextColor={Colors.grey2}
@@ -37,6 +42,7 @@ export default class Adresseproduct extends React.Component {
                     autoCapitalize = 'none'
                     value ={this.props.address===''?'':this.props.address}
                 />
+                </TouchableHighlight>
             </View>
         );
     }

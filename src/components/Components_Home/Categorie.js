@@ -6,11 +6,8 @@ import {
     FlatList, TouchableHighlight,
 } from "react-native";
 import CardList from "./CardList";
-import {Divider} from "react-native-elements";
 import Colors from "../../constants/Colors";
-import {Dimensions} from 'react-native';
-import ShowMoreButton from "./ShowMoreButton";
-import {OptimizedFlatList} from 'react-native-optimized-flatlist'
+
 
 export default class Categorie extends Component {
     constructor(props) {
@@ -77,7 +74,7 @@ export default class Categorie extends Component {
                                         data={categorie[title]}
                                         renderItem={({item, index}) => this.renderCardList(typeAnnonce, navigation, item, index)}
                                         keyExtractor={(item, index) => index.toString()}
-                                        showsHorizontalScrollIndicator={false}
+                                        showsHorizontalScrollIndicator={true}
                                     />
                                     </View>
                             </View>

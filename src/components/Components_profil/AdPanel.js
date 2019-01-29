@@ -3,7 +3,7 @@ import {
     Dimensions, FlatList,
     StyleSheet,
     Text, TouchableHighlight,
-    View, Animated,Alert
+    View, Animated, Alert, ScrollView
 } from 'react-native';
 import {Icon} from 'react-native-elements'
 import ProfileService from "../../Services/ProfileService";
@@ -104,45 +104,61 @@ export default class AdPanel extends React.Component {
                     </TouchableHighlight>
                 </View>
 
-                <View style={{
+                <View>
+                <ScrollView style={{
                     padding: 10,
-                    paddingTop: 0
+                    borderColor:'#9a9c9e',
+                    borderWidth:1,
+                    borderTopWidth:0
                 }}
                       onLayout={(event) => this._setMaxHeight(event, this.props.data.length)}>
                     <FlatList
                         data={this.generateTitleArray(this.props.data)}
+                        ListHeaderComponent={()=> <Text style={{color:'#b0b0b0'}}>titre</Text>}
                         renderItem={({item, index}) =>
-                            <View style={{justifyContent: 'space-between', flex: 1, flexDirection: 'row'}}>
-                                <TouchableHighlight onPress={() => {
-                                    if (item !== 'Aucune annonce')
-                                        this.props.navigation.navigate('AnnonceDetail',
-                                            {
-                                                'navigation': this.props.navigation, 'typeAnnonce': this.props.type,
-                                                'data': this.props.data[index]
-                                            })
-                                }}
-                                                    style={{marginVertical: 5, paddingHorizontal: 5,}}
-                                                    underlayColor="#ede">
-
-                                    <Text style={{fontSize: 13, color: '#000'}}>{item}</Text>
-                                </TouchableHighlight>
-                                <TouchableHighlight onPress={()=> {
-                                    this.deleteAnnonceRequest(index, this.props.type);
-                                }}
-                                                    style={{marginVertical: 5, paddingHorizontal: 5,}}
-                                                    underlayColor="#ede">
-                                    {item !== 'Aucune annonce' ?
-                                        <Text style={{color: '#ff3e33'}}>supprimer</Text> : <View/>
-                                    }
-
-                                </TouchableHighlight>
-                            </View>
+                            this.itemRender(item, index)
                         }
                         keyExtractor={this._keyExtractor}
                     />
+                </ScrollView>
                 </View>
             </Animated.View>
         );
+    }
+
+    itemRender(item, index) {
+        return <View style={{
+            justifyContent: 'space-between',
+            flex: 1,
+            flexDirection: 'row',
+            marginBottom:5,
+            borderWidth:1,
+            borderRadius:10,
+            borderColor:'black'}}>
+            <TouchableHighlight onPress={() => {
+                if (item !== 'Aucune annonce')
+                    this.props.navigation.navigate('AnnonceDetail',
+                        {
+                            'navigation': this.props.navigation, 'typeAnnonce': this.props.type,
+                            'data': this.props.data[index]
+                        })
+            }}
+                                style={{marginVertical: 5, paddingHorizontal: 5,}}
+                                underlayColor="#ede">
+
+                <Text style={{fontSize: 13, color: '#000'}}>{item}</Text>
+            </TouchableHighlight>
+            <TouchableHighlight onPress={() => {
+                this.deleteAnnonceRequest(index, this.props.type);
+            }}
+                                style={{marginVertical: 5, paddingHorizontal: 5,}}
+                                underlayColor="#ede">
+                {item !== 'Aucune annonce' ?
+                    <Text style={{color: '#ff3e33'}}>supprimer</Text> : <View/>
+                }
+
+            </TouchableHighlight>
+        </View>;
     }
 
     deleteAnnonceRequest(index, type) {

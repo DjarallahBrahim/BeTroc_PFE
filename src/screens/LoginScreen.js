@@ -109,14 +109,13 @@ export default class LoginScreen extends Component {
                     <Wallpaper typescreen="Login">
                         <KeyboardAvoidingView behavior="padding" style={styles.container}>
                             <TouchableHighlight underlayColor="transparent"
-                                                style={{flex: 1, }}
+                                                style={{flex: 1, alignItems:'flex-start', marginTop:20, marginLeft:10 }}
                                                 onPress={() => this.navigation.navigate('Profil')}>
                                 <Icon
-                                    iconStyle={{top: 25, right: '43%',}}
                                     name='close'
                                     type='font-awesome'
-                                    size={40}
-                                    color={Colors.tintColor}/>
+                                    size={30}
+                                    color={'white'}/>
                             </TouchableHighlight>
                             <EmptySpace/>
                             {/*<View style={{*/}
@@ -132,7 +131,7 @@ export default class LoginScreen extends Component {
                                 <Form handlerUserName={this.handlerUserName}
                                       handlerUserPassword={this.handlerUserPassword}/>
                                 <SignupSection navigation={this.props.navigation}/>
-                                <SocialAuthButton service={Login_service}/>
+                                {/*<SocialAuthButton service={Login_service}/>*/}
                             {/*</View>*/}
                             <ButtonSubmit text="Login" handleSubmit={this.handleSubmit} />
                         </KeyboardAvoidingView>

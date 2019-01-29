@@ -15,14 +15,15 @@ import * as SendbirdNotification from "./src/Services/NotificationService/Sendbi
 import SendBirdService from "./src/Services/chatService/SendBirdService";
 import fetchDataAd from "./src/Services/fetchDataAd";
 import AppIntroSlider from 'react-native-app-intro-slider';
+import Colors from "./src/constants/Colors";
 
 
 const slides = [
 
     {
         key: 'somethun-dos',
-        title: 'Dans votre Accueil',
-        text: 'Naviguer dans les différents type d\'annonce !',
+        title: 'Dans votre accueil',
+        text: 'Naviguer dans les différents types d\'annonce ! \n Échange, Don et Demande !',
         image: require('./assets/images/home.jpg'),
         imageStyle: {
             width: 320,
@@ -38,7 +39,7 @@ const slides = [
           color:'white',
             fontSize:19
         },
-        backgroundColor: '#2792b6',
+        backgroundColor: '#22bcb5',
     },
 
     {
@@ -61,12 +62,12 @@ const slides = [
             fontWeight:'400',
             fontSize:19
         },
-        backgroundColor: '#22bcb5',
+        backgroundColor: '#2792b6',
     },
     {
         key: 'somethun',
         title: 'Vous avez un besoin ?',
-        text: 'Trouvez votre besoin à travers les trois types',
+        text: 'Trouvez votre besoin à travers les trois types d\'annonces',
         image: require('./assets/images/ajouterAnnonce.jpg'),
         imageStyle: {
             width: 320,
@@ -89,10 +90,10 @@ const slides = [
         key: 'somethun2',
         title: 'Vous êtes prêt ?',
         text: 'Découvrez les autres fonctionnalités avec beTroc',
-        image: require('./assets/images/logo.png'),
+        image: require('./assets/images/logoAndImage2.png'),
         imageStyle: {
             width: 320,
-            height: 200,
+            height: 320,
             resizeMode:'stretch',
             borderRadius:20,
         },
@@ -105,7 +106,7 @@ const slides = [
             fontWeight:'400',
             fontSize:19
         },
-        backgroundColor: '#1d1d1d',
+        backgroundColor: Colors.tintColor,
     }
 ];
 

@@ -17,7 +17,7 @@ export default class CardList extends React.Component {
 
         return (
             <Card title={null} containerStyle={styles.container}>
-                <TouchableHighlight  onPress={() => navigation.navigate("AnnonceDetail",
+                <TouchableHighlight underlayColor="transparent"  onPress={() => navigation.navigate("AnnonceDetail",
                     {data: data,navigation:navigation,typeAnnonce:typeAnnonce, currentUser:currentUser})}>
                             <View style={{ alignItems:'center'}}>
                                 <View style={styles.imageContainer}>
@@ -28,7 +28,7 @@ export default class CardList extends React.Component {
                                         source={{ uri: `${serverURL}/api/downloadImage/`+data.images[0].name }}
                                     />
                                 </View>
-                                <Text style={{paddingVertical:8, fontWeight:'400'}}>{data.title}</Text>
+                                <Text style={{paddingVertical:8, fontWeight:'500', color:'#8d8f91'}}>{data.title}</Text>
                             </View>
                 </TouchableHighlight>
             </Card>

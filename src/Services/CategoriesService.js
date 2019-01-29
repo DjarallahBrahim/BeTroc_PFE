@@ -13,12 +13,12 @@ export default class CategoriesService {
      */
 
     async getCategoriesHandler() {
-        // const categoriesCache = await cacheOperationService.getItemFromStorage('categoriesCache');
-        // if (categoriesCache) {
-        //     const result = categoriesCache.substr(7, categoriesCache.length - 1);
-        //     const cat = await JSON.parse(result);
-        //     return cat;
-        // }
+        const categoriesCache = await cacheOperationService.getItemFromStorage('categoriesCache');
+        if (categoriesCache) {
+            const result = categoriesCache.substr(7, categoriesCache.length - 1);
+            const cat = await JSON.parse(result);
+            return cat;
+        }
         const authToken = await cacheOperationService.getItemFromStorage("AuthToken");
         return axios.get(`${serverURL}/api/getCategories`, {
             'headers': {'Authorization': authToken}

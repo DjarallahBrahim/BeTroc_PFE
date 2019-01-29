@@ -22,9 +22,9 @@ export default class TitleDescription extends React.Component {
                     color={Colors.tintColor}
                     size={20}
                     iconStyle={{marginHorizontal:10, backgroundColor:'transparent'}}
-                    onPress={() => this.props.navigation.navigate("MapLocation",
-                        {locationHandler: this.props.handlerAdress, navigation:this.props.navigation})} />
+                     />
                 <TextInput
+                    style={{flex:1}}
                     onChangeText={(text) => {handlerEstimation(text)}}
                     placeholder={"Estimation"}
                     placeholderTextColor={Colors.grey2}

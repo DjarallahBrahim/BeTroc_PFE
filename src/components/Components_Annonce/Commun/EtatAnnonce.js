@@ -41,6 +41,7 @@ export default class EtatAnnonce extends React.Component {
 
         return (
             <View  style={{
+                flex:1,
                 marginTop:15,
                 marginHorizontal:this.props.marginHorizontal
             }} >

@@ -27,9 +27,6 @@ export default class Adresselocation extends React.Component {
                     color={Colors.tintColor}
                     underlayColor={'#00000000'}
                 />
-                <Text  style={styles.tabText}>
-                    {time}
-                </Text>
             <View style={styles.location}>
                 <Text
                     style={styles.input}> {adresse}

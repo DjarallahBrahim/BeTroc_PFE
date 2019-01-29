@@ -3,6 +3,13 @@ import * as cacheOperationService from "./CacheOperationService";
 import serverURL from './ServerURL'
 export default class fetchDataAd {
 
+    /**
+     * get donation ad by pages
+     * @param sortArg
+     * @param size
+     * @param page
+     * @returns {Promise<AxiosResponse<any>>}
+     */
     static async  getDonationAds(sortArg='modificationDate', size=10, page=0) {
 
         return axios.get(`${serverURL}/api/donationAds?sort=${sortArg},desc&size=${size}&page=${page}`)
@@ -18,6 +25,13 @@ export default class fetchDataAd {
             });
     }
 
+    /**
+     * get echange ads by pages
+     * @param sortArg
+     * @param size
+     * @param page
+     * @returns {Promise<AxiosResponse<any>>}
+     */
     static async  getExchageAds(sortArg='modificationDate', size=10, page=0) {
 
 
@@ -34,6 +48,13 @@ export default class fetchDataAd {
             });
     }
 
+    /**
+     * get donation request ads by pages
+     * @param sortArg
+     * @param size
+     * @param page
+     * @returns {Promise<AxiosResponse<any>>}
+     */
     static getDonationRequestAds(sortArg='modificationDate', size=10, page=0) {
 
         return axios.get(`${serverURL}/api/DonationRequestAd?sort=${sortArg},desc&size=${size}&page=${page}`)
@@ -49,6 +70,13 @@ export default class fetchDataAd {
             });
     }
 
+    /**
+     * get ads by type and Category
+     * @param type
+     * @param category
+     * @param page
+     * @returns {Promise<*>}
+     */
     static async  getAdsByTypeAndCategory(type, category, page=0) {
 
         var uri='';
@@ -77,6 +105,10 @@ export default class fetchDataAd {
             });
     }
 
+    /**
+     * get all data
+     * @returns {Promise<any[]>}
+     */
     static async  getAllData() {
 
         return  axios.all([fetchDataAd.getExchageAds(), fetchDataAd.getDonationRequestAds(),fetchDataAd.getDonationAds()])
@@ -85,6 +117,10 @@ export default class fetchDataAd {
             }));
     }
 
+    /**
+     * get user authentification info token and id
+     * @returns {Promise<*>}
+     */
     static async  getUserAuth() {
         let id =  await cacheOperationService.getItemFromStorage("userId");
         if(id){

@@ -1,46 +1,14 @@
 import fetchDataAdApi from "../Services/fetchDataAd";
 import * as cacheOperationService from "../Services/CacheOperationService";
 
-const annonceDataReadyTest = {
-    "type": {
-        "Echange": {
-            "Categories": {
-                "Animaux": [],
-                "Autre":[],
-                "Bricolage": [],
-                "Habits": [],
-                "Maison": [],
-                "Multimédia": [],
-                "Loisir": [],
-            }
-        },
-        "Don": {
-            "Categories": {
-                "Animaux": [],
-                "Autre":[],
-                "Bricolage": [],
-                "Habits": [],
-                "Maison": [],
-                "Multimédia": [],
-                "Loisir": [],
-            }
-        },
-        "Demande": {
-            "Categories": {
-                "Animaux": [],
-                "Autre":[],
-                "Bricolage": [],
-                "Habits": [],
-                "Maison": [],
-                "Multimédia": [],
-                "Loisir": [],
 
-            }
-        }
-    }
-};
-
-
+/**
+ * generate  the format of data
+ * @param sortArg
+ * @param size
+ * @param page
+ * @returns {Promise<*>}
+ */
 export async function generateData(sortArg = 'modificationDate', size = 20, page = 0) {
     let annonceDataReady = '';
     annonceDataReady = {
@@ -134,23 +102,6 @@ export async function generateData(sortArg = 'modificationDate', size = 20, page
 
 }
 
-export async function askMoreData(oldData, newData) {
-    Object.keys(oldData.Categories).map((categori, index) => {
-        oldData.Categories[categori] = [...oldData.Categories[categori], ...newData.Categories[categori]]
-    });
-    return oldData;
 
-}
-
-
-export async function getUserAuth() {
-    let id =  await cacheOperationService.getItemFromStorage("userId");
-    if(id)
-        var idUser = id.substr(7, id.length - 1);
-
-    // const authToken =
-    //     await cacheOperationService.getItemFromStorage("AuthToken");
-    return idUser;
-}
 
 

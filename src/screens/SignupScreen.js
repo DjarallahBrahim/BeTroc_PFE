@@ -31,7 +31,7 @@ export default class SignupScreen extends Component {
             userMail: "",
             userPassword: "",
             userPasswordConfirmation: "",
-            socialAuthButtonStatu: true
+            socialAuthButtonStatu: false
         };
         this.handlerUserName = this.handlerUserName.bind(this);
         this.handlerUserMail = this.handlerUserMail.bind(this);
@@ -147,14 +147,13 @@ export default class SignupScreen extends Component {
                     <Wallpaper typescreen="Singup">
                         <KeyboardAvoidingView behavior="padding" style={styles.container}>
                             <TouchableHighlight underlayColor="transparent"
-                                                style={{flex: 1}}
+                                                style={{flex: 1, alignItems:'flex-start', marginTop:20, marginLeft:10 }}
                                                 onPress={() => this.navigation.navigate('Profil')}>
                                 <Icon
-                                    iconStyle={{top: 25, right: '43%',}}
                                     name='close'
                                     type='font-awesome'
-                                    size={40}
-                                    color={Colors.tintColor}/>
+                                    size={30}
+                                    color={'white'}/>
                             </TouchableHighlight>
                             <EmptySpace/>
                             <Form handlerUserName={this.handlerUserName}

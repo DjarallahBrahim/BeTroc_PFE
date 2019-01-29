@@ -71,7 +71,7 @@ HomeStack.navigationOptions = ({navigation}) => {
     let {routeName} = navigation.state.routes[navigation.state.index];
     let navigationOptions = {};
 
-    if (routeName !== 'Home' && routeName !=='SearcheScreen') {
+    if (routeName !== 'Home' && routeName !=='SearcheScreen'&& routeName !=='ChatScreen') {
         navigationOptions.tabBarVisible = false;
     }
     navigationOptions.tabBarIcon = ({focused}) => (
@@ -153,15 +153,23 @@ const MapScreenStack = createStackNavigator({
     AnnonceDetail: Annoncedetailscreen,
 
 });
+MapScreenStack.navigationOptions = ({navigation}) => {
+    let {routeName} = navigation.state.routes[navigation.state.index];
+    let navigationOptions = {};
 
-MapScreenStack.navigationOptions = {
-    tabBarIcon: ({focused}) => (
+    if (routeName !== 'Map') {
+        navigationOptions.tabBarVisible = false;
+    }
+    navigationOptions.tabBarIcon = ({focused}) => (
         <TabBarIcon
             focused={focused}
             name={Platform.OS === 'ios' ? `ios-map${focused ? '' : '-outline'}` : 'md-map'}
         />
-    ),
+    );
+
+    return navigationOptions;
 };
+
 
 //Creation of Bottom tab navigator and push to it our Stack
 export default createBottomTabNavigator(

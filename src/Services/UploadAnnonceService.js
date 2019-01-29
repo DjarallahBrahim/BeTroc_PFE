@@ -10,9 +10,12 @@ function generateFormDataAnnonce(response, data) {
 }
 
 
-
-
-
+/**
+ * send donation ad to server
+ * @param imgUrl
+ * @param data
+ * @returns {Promise<AxiosResponse<any>>}
+ */
 export async function uploadDonAd(imgUrl, data) {
     const images = storePicture(imgUrl);
     const authToken = await cacheOperationService.getItemFromStorage("AuthToken");
@@ -23,7 +26,7 @@ export async function uploadDonAd(imgUrl, data) {
         .then(async (response) => {
             if (response.data) {
                 console.log("Uploaded images");
-                const annonceCordData= await generateFormDataAnnonce(response, data);
+                const annonceCordData = await generateFormDataAnnonce(response, data);
                 await uploadDonatonAdPart2(annonceCordData, authToken);
                 return true;
             } else {
@@ -36,7 +39,12 @@ export async function uploadDonAd(imgUrl, data) {
         });
 }
 
-
+/**
+ *
+ * @param imgUrl
+ * @param data
+ * @returns {Promise<AxiosResponse<any>>}
+ */
 export async function uploadEchangeAd(imgUrl, data) {
     const images = storePicture(imgUrl);
     const authToken = await cacheOperationService.getItemFromStorage("AuthToken");
@@ -47,7 +55,7 @@ export async function uploadEchangeAd(imgUrl, data) {
         .then(async (response) => {
             if (response.data) {
                 console.log("Uploaded images");
-                const annonceCordData= await generateFormDataAnnonce(response, data);
+                const annonceCordData = await generateFormDataAnnonce(response, data);
                 await uploadExchangeAdParte2(annonceCordData, authToken);
                 return true;
             } else {
@@ -60,7 +68,11 @@ export async function uploadEchangeAd(imgUrl, data) {
         });
 }
 
-
+/**
+ *
+ * @param data
+ * @returns {Promise<AxiosResponse<any>>}
+ */
 export async function uploadDemandeAd(data) {
     const authToken = await cacheOperationService.getItemFromStorage("AuthToken");
     const corpRequest = createFormDataAnnonceDemande(data);
@@ -68,7 +80,7 @@ export async function uploadDemandeAd(data) {
         'headers': {'Authorization': authToken}
     })
         .then((response) => {
-            if (response.data){
+            if (response.data) {
                 console.log("[UploadAnnonceService] Annonce demande uploaded");
                 return response.data.success;
             }
@@ -80,6 +92,11 @@ export async function uploadDemandeAd(data) {
         });
 }
 
+/**
+ *
+ * @param annonceCordData
+ * @param authToken
+ */
 function uploadDonatonAdPart2(annonceCordData, authToken) {
     axios.post(`${serverURL}/api/donationAds`, annonceCordData, {
         'headers': {'Authorization': authToken}
@@ -95,6 +112,11 @@ function uploadDonatonAdPart2(annonceCordData, authToken) {
         });
 }
 
+/**
+ *
+ * @param annonceCordData
+ * @param authToken
+ */
 function uploadExchangeAdParte2(annonceCordData, authToken) {
     axios.post(`${serverURL}/api/exchangeAds`, annonceCordData, {
         'headers': {'Authorization': authToken}
@@ -110,7 +132,11 @@ function uploadExchangeAdParte2(annonceCordData, authToken) {
         });
 }
 
-
+/**
+ *
+ * @param imgUrls
+ * @returns {FormData}
+ */
 function storePicture(imgUrls) {
     const data = new FormData();
     imgUrls.forEach((photo) => {
@@ -123,6 +149,11 @@ function storePicture(imgUrls) {
     return data;
 }
 
+/**
+ *
+ * @param data
+ * @returns {FormData}
+ */
 function createFormDataAnnonceDon(data) {
     const formData = new FormData();
     formData.append('title', data.title);
@@ -137,6 +168,7 @@ function createFormDataAnnonceDon(data) {
     console.log(formData);
     return formData;
 }
+
 function createFormDataAnnonceDemande(data) {
     const formData = new FormData();
     formData.append('title', data.title);
@@ -145,18 +177,19 @@ function createFormDataAnnonceDemande(data) {
     formData.append('subCategory', data.subCategory);
     return formData;
 }
-export function formValidation(state){
+
+export function formValidation(state) {
     if (state.typeAd === 'Don')
         return state.title !== '' && state.description !== ''
-                && state.category !== 0 && state.etatProduit !== '' &&
-                state.adLocation !== '' && state.imgUrl.length > 0 ;
-    else if(state.typeAd === 'Échange')
-            return state.title !== '' && state.description !== ''
-                    && state.category !== 0 && state.etatProduit !== '' &&
-                    state.adLocation !== '' && state.imgUrl.length > 0 &&
-                    state.estimatedPrice !== '' ;
+            && state.category !== 0 && state.etatProduit !== '' &&
+            state.adLocation !== '' && state.imgUrl.length > 0;
+    else if (state.typeAd === 'Échange')
+        return state.title !== '' && state.description !== ''
+            && state.category !== 0 && state.etatProduit !== '' &&
+            state.adLocation !== '' && state.imgUrl.length > 0 &&
+            state.estimatedPrice !== '';
     else
         return state.title !== '' && state.description !== ''
-                && state.category !== 0;
+            && state.category !== 0;
 }
 

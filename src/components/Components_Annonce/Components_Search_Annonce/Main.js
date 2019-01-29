@@ -123,14 +123,17 @@ export default class Main extends React.Component {
                         null
                 }
                 <Divider style={{ backgroundColor: '#c0c0c0', marginTop:50, height:2}} marginHorizontal={20}/>
-                <TouchableHighlight style={{
+                <TouchableHighlight
+                    underlayColor="transparent"
+                    style={{
                     flex:1,
                     backgroundColor: Colors.tintColor,
                     marginTop:30,
                     alignItems:'center',
                     marginHorizontal:20,
                     marginVertical:20,
-                    borderRadius: 10}} onPress={() => this.lancheSearch()}>
+                    borderRadius: 10}}
+                                    onPress={() => this.lancheSearch()}>
                     <Text style={{color: 'white',
                         fontWeight: 'bold',
                         backgroundColor: 'transparent',

@@ -4,7 +4,6 @@ import {
     View,
 } from 'react-native';
 import MainTMP from "../components/Components_Annonce/Components_Detail/MainTMP";
-import SendBirdService from "../Services/chatService/SendBirdService";
 import fetchDataAd from "../Services/fetchDataAd";
 
 export default class Annoncedetailscreen extends React.Component {
@@ -20,13 +19,12 @@ export default class Annoncedetailscreen extends React.Component {
             if (idUser){
                 this.setState({currentUser:idUser})
             }else
-                consol.log('no user available')
+                console.log('no user available')
         });
     }
 
     render() {
         const data = this.props.navigation.getParam("data", {});
-        console.log(data);
         const navigation = this.props.navigation.getParam("navigation", {});
         const typeAnnonce = this.props.navigation.getParam("typeAnnonce", {});
         return (

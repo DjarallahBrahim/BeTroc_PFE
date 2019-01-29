@@ -6,7 +6,7 @@ import {
     View,
 } from 'react-native';
 import {Icon} from 'react-native-elements'
-import Colors from "../../constants/Colors";
+import serverURL from '../../Services/ServerURL'
 
 export default class ProfileInformation extends React.Component {
     static navigationOptions = {
@@ -45,7 +45,31 @@ export default class ProfileInformation extends React.Component {
                             size={22}
                         />
                     </TouchableHighlight>
-                    <Image source={{uri:'https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/43680926_1910295159059259_1909104016655122432_n.jpg?_nc_cat=111&_nc_ht=scontent-cdg2-1.xx&oh=cb1ba20a0686e058eb0cd5ba6113e547&oe=5C8BEA24'}}
+                    <TouchableHighlight style = {
+                        {
+                            position:'absolute',
+                            left:'40%',
+                            bottom:0,
+                            width:45,
+                            height:45,
+                            alignItems:'center',
+                            borderRadius:45/2,
+                            marginVertical:5,
+                            padding:5,
+                            justifyContent:'center'}}
+                                        onPress={()=> this.props.showActionSheet()}
+                    >
+                        <Icon
+                            name='camera'
+                            type='font-awesome'
+                            color='black'
+                            size={22}
+                        />
+                    </TouchableHighlight>
+                    <Image source={{uri: this.props.userInfo.profileImage ?
+                            `${serverURL}/api/downloadImage/${this.props.userInfo.profileImage.name}`
+                                :
+                            'http://chittagongit.com//images/person-png-icon/person-png-icon-29.jpg'}}
                            resizeMode="cover"
                            style={{width:150, height:150, marginHorizontal:5, marginVertical:5, borderRadius:150/2}}/>
                 </View>

@@ -22,13 +22,14 @@ export default class Contactbutton extends React.Component {
                 <TouchableHighlight
                     style={styles.publier}
                     onPress={()=>{
-                        if (this.props.currentUser>0) {
-                            console.log(this.props.currentUser, this.props.user.id);
-                            SendBirdService.createGroupOneToOne(this.props.currentUser, this.props.user.id, `${this.props.typeAnnonce}_${this.props.user.id}`)
-                                .then((result)=> this.handlerStartChat(result));
-                        }else{
-                            console.log(this.props.currentUser)
-                        }
+                        // if (this.props.currentUser>0) {
+                        //     console.log(this.props.currentUser, this.props.user.id);
+                        //     SendBirdService.createGroupOneToOne(this.props.currentUser, this.props.user.id, `${this.props.typeAnnonce}_${this.props.user.id}`)
+                        //         .then((result)=> this.handlerStartChat(result));
+                        // }else{
+                        //     console.log(this.props.currentUser)
+                        // }
+                        this.props.showActionSheet()
                     }
                     }
                 >
@@ -64,7 +65,6 @@ const styles = StyleSheet.create({
         marginBottom:20,
         marginLeft:10,
         marginRight:10,
-        opacity:0.8
     },
     text: {
         color: 'white',

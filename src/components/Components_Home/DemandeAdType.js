@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     FlatList,
-    Image,
+    Image, Linking,
     ScrollView,
     StyleSheet,
     Text, TouchableHighlight, TouchableOpacity,
@@ -9,6 +9,10 @@ import {
 } from 'react-native';
 import Colors from "../../constants/Colors";
 import SendBirdService from "../../Services/chatService/SendBirdService";
+import ActionSheet from "react-native-actionsheet";
+import serverURL from '../../Services/ServerURL'
+import ProfileService from "../../Services/ProfileService";
+
 
 export default class DemandeAdType extends React.Component {
 
@@ -33,9 +37,24 @@ export default class DemandeAdType extends React.Component {
     //     })
     // }
 
+    fetchEmailToContact(id){
+        ProfileService.getUserEmail(id).then((email)=>{
+            if(email)
+                Linking.openURL(`mailto:${email}?subject=Betroc operation`)
+            else
+                alert("Problème avec notre service de contact")
+        })
+    }
+
     handlerStartChat(item){
         this.props.navigation.navigate('ChatScreen', {channelUrl: item.url, currentUser:this.props.currentUser})
     }
+
+    showActionSheet = () => {
+        //To show the Bottom ActionSheet
+        this.ActionSheet.show();
+    };
+
     render() {
         const categorie = this.props.categorie;
         const {navigation,typeAnnonce} = this.props;
@@ -94,6 +113,11 @@ export default class DemandeAdType extends React.Component {
     }
 
     renderDemandeAdTypeView(index, item, typeAnnonce) {
+        var optionArray = [
+            'Email',
+            'Messagerie (Non stable)',
+            'Cancel',
+        ];
         return <View style={styles.container} key={index}>
             <View style={{flex: 3}}>
                 <Text style={{
@@ -128,13 +152,7 @@ export default class DemandeAdType extends React.Component {
                         justifyContent: 'center',
                         alignItems: 'center'
                     }}
-                    onPress={() => {
-                        if (this.props.currentUser>0) {
-                            SendBirdService.createGroupOneToOne(this.props.currentUser, item.user.id, `${typeAnnonce}_${item.id}`).then(this.handlerStartChat);
-
-                        }else
-                            console.log('[DemandeAdType] currente user is null', this.props.currentUser)
-                    }}>
+                    onPress={this.showActionSheet}>
                     <Image
                         source={{uri: `${serverURL}/api/downloadImage/${item.subCategory.imgName}`}}
                         style={{width: 45, height: 45}}
@@ -143,6 +161,27 @@ export default class DemandeAdType extends React.Component {
                     />
                 </TouchableOpacity>
             </View>
+            <ActionSheet
+                ref={o => (this.ActionSheet = o)}
+                title={'Moyen de contact'}
+                options={optionArray}
+                cancelButtonIndex={2}
+                destructiveButtonIndex={1}
+                onPress={index => {
+                    if(index === 0){
+                       this.fetchEmailToContact(item.user.id)
+                    }else if(index === 1){
+                        if (this.props.currentUser>0) {
+                            SendBirdService.createGroupOneToOne(this.props.currentUser, item.user.id, `${typeAnnonce}_${item.id}`).then(this.handlerStartChat);
+
+                        }else{
+                            console.log('[DemandeAdType] currente user is null', this.props.currentUser)
+                            alert('Vous n\'êtes connecté au service de messagerie')
+                        }
+                    }else
+                        return;
+                }}
+            />
         </View>;
     }
 }

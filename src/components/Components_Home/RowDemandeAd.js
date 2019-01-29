@@ -1,14 +1,14 @@
 import React from 'react';
 import {
-    Image,
-    ScrollView,
-    StyleSheet,
+    Image, Linking, StyleSheet,
     Text, TouchableOpacity,
     View,
 } from 'react-native';
 import SendBirdService from "../../Services/chatService/SendBirdService";
 import serverURL from '../../Services/ServerURL'
-import CategoriesService from "../../Services/CategoriesService";
+import ActionSheet from 'react-native-actionsheet';
+import ProfileService from "../../Services/ProfileService";
+
 export default class RowDemandeAd extends React.Component {
 
     constructor(){
@@ -16,6 +16,7 @@ export default class RowDemandeAd extends React.Component {
 
         this.state={
             //data:this.props.data || null
+            picker:false
         }
     }
     jsUcfirst(string)
@@ -29,8 +30,22 @@ export default class RowDemandeAd extends React.Component {
     }
 
 
+    fetchEmailToContact(id){
+        ProfileService.getUserEmail(id).then((email)=>{
+            if(email)
+                 Linking.openURL(`mailto:${email}?subject=Betroc operation`)
+            else
+                alert("Problème avec notre service de contact")
+        })
+    }
 
     render() {
+        const optionArray = [
+            'Email',
+            'Messagerie (Non stable)',
+            'Cancel',
+        ];
+
         const data = this.props.data;
         return (
             <View style={styles.container}>
@@ -67,23 +82,51 @@ export default class RowDemandeAd extends React.Component {
                             justifyContent: 'center',
                             alignItems: 'center'
                         }}
-                        onPress={() => {
-                            if (this.props.currentUser>0) {
-                                SendBirdService.createGroupOneToOne(this.props.currentUser, data.user.id, `${this.props.typeAnnonce}_${data.id}`)
-                                    .then((result)=> this.handlerStartChat(result));
-                            }else{
-                                console.log(this.props.currentUser)
-                            }
-                        }}>
+                        onPress={()=>
+                            // if (this.props.currentUser>0) {
+                            //     SendBirdService.createGroupOneToOne(this.props.currentUser, data.user.id, `${this.props.typeAnnonce}_${data.id}`)
+                            //         .then((result)=> this.handlerStartChat(result));
+                            // }else{
+                            //     console.log(this.props.currentUser)
+                            // }
+                            this.showActionSheet(this.props.currentUser, data.user.id)
+                        }>
                         <Image
                             source={{uri: `${serverURL}/api/downloadImage/${data.subCategory.imgName}`}}
                             style={{width: 45, height: 45}}
                         />
                     </TouchableOpacity>
+
                 </View>
+                <ActionSheet
+                    ref={o => (this.ActionSheet = o)}
+                    title={'Moyen de contact'}
+                    options={optionArray}
+                    cancelButtonIndex={2}
+                    destructiveButtonIndex={1}
+                    onPress={index => {
+                        if(index === 0){
+                            this.fetchEmailToContact(data.user.id);
+                        }else if(index === 1){
+                            if (this.props.currentUser>0) {
+                                SendBirdService.createGroupOneToOne(this.props.currentUser, data.user.id, `${this.props.typeAnnonce}_${data.id}`)
+                                    .then((result)=> this.handlerStartChat(result));
+                            }else{
+                                alert('Vous n\'êtes connecté au service de messagerie')
+                            }
+                        }else
+                            return;
+                    }}
+                />
             </View>
         );
     }
+
+    showActionSheet = () => {
+        //To show the Bottom ActionSheet
+        this.ActionSheet.show();
+    };
+
 }
 
 const styles = StyleSheet.create({
@@ -102,5 +145,17 @@ const styles = StyleSheet.create({
         shadowColor: 'black',
         elevation: 2.5,
 
-    }
+    },
+    modalContent: {
+        backgroundColor: 'white',
+        padding: 22,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 4,
+        borderColor: 'rgba(0, 0, 0, 0.1)',
+    },
+    bottomModal: {
+        justifyContent: 'flex-end',
+        margin: 0,
+    },
 });

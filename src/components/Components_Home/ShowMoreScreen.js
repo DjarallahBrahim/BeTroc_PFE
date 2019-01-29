@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import {FlatList, ScrollView} from 'react-native';
 import fetchDataAdApi from "../../Services/fetchDataAd";
 import CardList from "./CardList";
 import RowDemandeAd from "./RowDemandeAd";
@@ -14,7 +14,7 @@ export default class ShowMoreScreen extends React.Component {
         this.state={
             categories:[],
             maxPage:0,
-            page:0
+            page:0,
         };
         this.category='';
         this.typeAnnonce='';
@@ -55,6 +55,7 @@ export default class ShowMoreScreen extends React.Component {
         const data = this.state.categories;
         return (
             this.state.categories.length>0 ?
+                <ScrollView>
                 <FlatList numColumns={this.typeAnnonce !== 'Demande'?2:1}
                           data={data}
                           renderItem={({item, index})=>
@@ -64,10 +65,13 @@ export default class ShowMoreScreen extends React.Component {
                           onScroll={(e) => this.onScrollHandler(e)}
 
                 />
+                </ScrollView>
                 :
                 null
         );
     }
+
+
 
     onScrollHandler(e) {
         if (e.nativeEvent.contentOffset.y + e.nativeEvent.layoutMeasurement.height + 20 > e.nativeEvent.contentSize.height) {

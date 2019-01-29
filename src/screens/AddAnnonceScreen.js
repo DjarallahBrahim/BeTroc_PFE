@@ -184,7 +184,8 @@ export default class AddAnnonceScreen extends React.Component {
                 this.handlerSpinner();
                 alert('Nous considirons un problème avec notre serveur !')
             }
-        }
+        }else
+            alert('Vérifier que vous avez rempli tous les champs')
     }
 
     handlerUploadField() {
@@ -252,6 +253,7 @@ export default class AddAnnonceScreen extends React.Component {
                         textStyle={{color: "white", fontSize: 17, lineHeight: 22}}
                     />
                     <KeyboardAwareScrollView
+                        enableOnAndroid={true}
                         automaticallyAdjustContentInsets={false}
                         keyboardShouldPersistTaps='always'
                         scrollEventThrottle={10}
@@ -265,8 +267,10 @@ export default class AddAnnonceScreen extends React.Component {
                             : null
                         }
 
-                        <Imagefield handlerDeletImage={this.handlerDeletImage} handlerImage={this.handlerImage}
-                                    navigation={this.props.navigation}/>
+                        {this.state.typeAd !== 'Demande' ?
+                            <Imagefield handlerDeletImage={this.handlerDeletImage} handlerImage={this.handlerImage}
+                                        navigation={this.props.navigation}/> : null
+                        }
 
                         <TitleDescription handlerTitel={this.handlerTitel}
                                           handlerDescription={this.handlerDescription}/>
@@ -286,6 +290,7 @@ export default class AddAnnonceScreen extends React.Component {
                                 flexDirection: 'row',
                                 alignItems: 'center',
                                 justifyContent: 'center',
+
                             }}>
                                 <Icon size={26} name='globe'
                                       type='font-awesome' color='#eee'
@@ -315,7 +320,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: Colors.tintColor,
         opacity: 1,
-        borderRadius: 10
+        borderRadius: 10,
+        marginTop:10
     },
     textPublier: {
         color: 'white',

@@ -113,8 +113,10 @@ export default class MapViewScreen extends React.Component {
         NetInfo.getConnectionInfo().then(async (connectionInfo) => {
             if (connectionInfo.type !== "none") {
                 this.setState({deviceIsOffLine: false}, this._getLocationAsync);
-            } else
-                this.setState({deviceIsOffLine: true})
+            } else{
+
+                this.setState({deviceIsOffLine: true}, ()=>alert('Vous êtes hors ligne !'))
+            }
         });
     };
 
@@ -189,11 +191,11 @@ export default class MapViewScreen extends React.Component {
     render() {
         let regions = {};
         return (
-            <View style={{flex: 1}}>
+            <View style={{flex: 1, justifyContent:'center'}}>
                 {
                     this.state.deviceIsOffLine ?
                         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                            <Text>Your device is offline</Text>
+                            <Text>Vous êtes hors ligne !</Text>
                         </View>
                         :
                         this.state.showsUserLocation ?
@@ -251,7 +253,10 @@ export default class MapViewScreen extends React.Component {
                                     />
                                 </View>
                             </View> :
-                            <Text>Please allow your GPS</Text>
+                            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                                <Text>Téléchargement ...</Text>
+                            </View>
+
                 }
             </View>
 

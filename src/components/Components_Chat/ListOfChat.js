@@ -117,12 +117,6 @@ export default class ListOfChat extends Component {
                     <Text style={styles.viewTextNameGroup}>
                         Group name: {item.name}
                     </Text>
-                    <Text style={styles.viewTextMail}>
-                        Email: {peerInfo.userId}
-                    </Text>
-                    <Text style={styles.viewTextMail}>
-                        Nickname: {peerInfo.nickname ? peerInfo.nickname : 'Not available'}
-                    </Text>
                 </View>
             </TouchableOpacity>
         )
