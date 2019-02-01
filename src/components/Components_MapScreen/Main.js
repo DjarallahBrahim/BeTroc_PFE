@@ -1,31 +1,33 @@
 import React from 'react';
 import {
-    ScrollView,
-    StyleSheet,
-    Text,
     View,
 } from 'react-native';
 import MapViewScreen from "./mapView";
-import MapAdService from "../../Services/MapAdService";
+
+const SLIDER_1_FIRST_ITEM = 1;
 
 export default class Main extends React.Component {
     static navigationOptions = {
         title: 'Main',
     };
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            slider1ActiveSlide: SLIDER_1_FIRST_ITEM,
+            slider1Ref: null,
+        };
+    }
 
     render() {
         return (
-            <View style={styles.container}>
-                <MapViewScreen navigation={this.props.navigation}/>
+            <View style={{
+                flex: 1,
+                backgroundColor: '#fff',
+            }}>
+                     <MapViewScreen navigation={this.props.navigation}/>
             </View>
         );
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-    }
-});

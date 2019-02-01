@@ -13,9 +13,9 @@
     "facebookScheme":"fb255796728390540",
     "facebookDisplayName":"facebookDisplayName",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/logoAndImage2.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#fb6d53"
     },
     "assetBundlePatterns": [
       "**/*"

@@ -11,11 +11,24 @@ import CategoriesService from "../../../Services/CategoriesService";
 export default class Categories extends React.Component {
 
 
+    /**
+     *
+     * @param props
+     */
     constructor(props){
         super(props);
         this.state={categoriesAreReady:false}
     }
 
+    /**
+     *
+     * @param buttonTitleHandler
+     * @param handlerCategory
+     * @param idCategory
+     * @param idSubCategory
+     * @param subCategory
+     * @private
+     */
     _handlerCategory(buttonTitleHandler,handlerCategory, idCategory,idSubCategory, subCategory){
         const catg={};
         catg.title= subCategory;
@@ -26,12 +39,19 @@ export default class Categories extends React.Component {
 
     }
 
+    /**
+     *
+     */
     componentDidMount(){
         const categoriesService = new  CategoriesService;
         categoriesService.getCategoriesHandler()
             .then((categories)=> this.setState({categoriesAreReady:1,dataCategories:categories }));
     }
 
+    /**
+     *
+     * @returns {*}
+     */
     render() {
         const handlerCategory = this.props.navigation.getParam("handlerCategory", {});
         const navigation = this.props.navigation.getParam("navigation", {});

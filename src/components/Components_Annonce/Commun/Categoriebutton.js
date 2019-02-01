@@ -11,16 +11,28 @@ import CategoriesService from "../../../Services/CategoriesService";
 export default class Categoriebutton extends React.Component {
 
 
+    /**
+     *
+     * @param props
+     */
     constructor(props) {
         super(props);
         this.state = {title: ''};
         this.buttonTitleHandler = this.buttonTitleHandler.bind(this);
     }
 
+    /**
+     *
+     * @param categoryTitle
+     */
     buttonTitleHandler(categoryTitle) {
         this.setState({title: categoryTitle});
     }
 
+    /**
+     *
+     * @returns {*}
+     */
     render() {
         const {navigation} = this.props;
         const {handlerCategory} = this.props;

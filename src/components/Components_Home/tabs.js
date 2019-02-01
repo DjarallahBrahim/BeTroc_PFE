@@ -57,7 +57,7 @@ export default class Tabs extends Component {
 }
 
 const styles = StyleSheet.create({
-    // Component container
+    // components container
     container: {
         flex: 1,                            // Take up all available space
 

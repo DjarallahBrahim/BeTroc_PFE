@@ -72,13 +72,15 @@ export default class MapAdService {
         let markerList = [];
         if(data.content){
             data.content.forEach((item) => {
-                //console.log(item.id);
+
                 let mkmodel = {};
                 mkmodel.category = item.category.title;
                 mkmodel.id = item.id;
                 mkmodel.latlng = {latitude: item.latitude, longitude: item.longitude};
                 mkmodel.title = item.title;
+                mkmodel.description = item.description;
                 mkmodel.state = item.state;
+                mkmodel.image = item.images[0].name;
                 markerList.push(mkmodel);
             });
             return markerList

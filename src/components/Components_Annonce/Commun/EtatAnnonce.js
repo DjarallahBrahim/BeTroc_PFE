@@ -29,6 +29,12 @@ export default class EtatAnnonce extends React.Component {
             ],
         };
     }
+
+    /**
+     *
+     * @param data
+     * @param handlerEtat
+     */
     onPress = (data, handlerEtat)=> {
         //this.setState({ data });
         let selectedButton = data.find(e => e.selected === true);
@@ -36,6 +42,10 @@ export default class EtatAnnonce extends React.Component {
         handlerEtat(selectedButton);
     };
 
+    /**
+     *
+     * @returns {*}
+     */
     render() {
 
 

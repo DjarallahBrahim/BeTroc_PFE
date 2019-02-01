@@ -11,6 +11,7 @@ import {Icon} from 'react-native-elements'
 import Colors from "../../constants/Colors";
 import MapAdService from "../../Services/MapAdService";
 import RadioGroup from 'react-native-radio-buttons-group';
+import SliderAdsComponent from "./SliderAdsComponent";
 
 export default class MapViewScreen extends React.Component {
 
@@ -57,7 +58,7 @@ export default class MapViewScreen extends React.Component {
                     color: Colors.tintColor
                 },
 
-            ],
+            ]
 
         }
 
@@ -188,6 +189,12 @@ export default class MapViewScreen extends React.Component {
         })
     }
 
+
+
+
+
+
+
     render() {
         let regions = {};
         return (
@@ -224,7 +231,7 @@ export default class MapViewScreen extends React.Component {
                                 </MapView>
                                 <TouchableHighlight
                                     underlayColor={'transparent'}
-                                    style={styles.locationButton}
+                                    style={styless.locationButton}
                                     onPress={() => this._getLocationAsync()}>
                                     <Icon
                                         name='location-arrow'
@@ -233,18 +240,19 @@ export default class MapViewScreen extends React.Component {
                                         color='#4f90f7'/>
                                 </TouchableHighlight>
                                 <TouchableHighlight
-                                    style={this.state.status ? styles.valideButtonEnabled : styles.valideButtonDisabled}
-                                    underlayColor={'transparent'}>
+                                    style={!this.state.sliderAds ? styless.valideButtonEnabled : styless.valideButtonDisabled}
+                                    underlayColor={'transparent'}
+                                    onPress={()=> this.setState({sliderAds: !this.state.sliderAds})}>
                                     <Text style={{
-                                        fontSize: 20,
+                                        fontSize: 18,
                                         fontWeight: '500',
-                                        paddingHorizontal: 25,
+                                        paddingHorizontal: 22,
                                         paddingVertical: 8,
                                         color: 'white'
-                                    }}> Plus </Text>
+                                    }}> {this.state.sliderAds ? "Cacher la list" : "Afficher une liste"} </Text>
                                 </TouchableHighlight>
                                 <View
-                                    style={styles.indication}
+                                    style={styless.indication}
                                     underlayColor={'transparent'}>
                                     <RadioGroup
                                         radioButtons={this.state.typeAnnonce}
@@ -252,6 +260,10 @@ export default class MapViewScreen extends React.Component {
                                         flexDirection='row'
                                     />
                                 </View>
+                                {this.state.sliderAds ?
+                                    <SliderAdsComponent exchangeMarker={this.state.exchangeMarker}
+                                                        exchangeMarkerList={this.state.exchangeMarkerList}
+                                                        donationMarkerList={this.state.donationMarkerList} />: null}
                             </View> :
                             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                                 <Text>Téléchargement ...</Text>
@@ -295,7 +307,7 @@ export default class MapViewScreen extends React.Component {
 
 }
 
-const styles = StyleSheet.create({
+const styless = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
@@ -329,7 +341,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         alignSelf: 'center',
         bottom: 12,
-        backgroundColor: Colors.tintColor,
+        backgroundColor: '#2792b6',
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 10,

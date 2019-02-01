@@ -150,6 +150,7 @@ export default class Searchbar extends React.Component {
 
 }
 
+
 const styles = StyleSheet.create({
     container: {
         marginTop: Platform.OS === 'android' ? 30 : null,
