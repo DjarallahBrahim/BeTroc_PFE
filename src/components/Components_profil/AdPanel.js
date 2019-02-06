@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    Dimensions, FlatList,
+    FlatList,
     StyleSheet,
     Text, TouchableHighlight,
     View, Animated, Alert, ScrollView
@@ -81,7 +81,15 @@ export default class AdPanel extends React.Component {
             <Animated.View style={[styles.container2, {height: this.state.animation}]}>
 
                 <View style={styles.titleContainer} onLayout={this._setMinHeight.bind(this)}>
-                    <TouchableHighlight onPress={this.toggle.bind(this)}
+                    <TouchableHighlight
+                                        // onPress={this.toggle.bind(this)}
+                                        onPress={()=>{
+                                            this.props.navigation.navigate("UserAnnonceSubScreen",
+                                                {
+                                                    data: this.props.data,
+                                                    typeAd:this.props.type
+                                                })
+                                        }}
                                         style={{
                                             flex: 1, backgroundColor: 'white', borderRadius: 5,
                                             borderWidth: 0.7, borderColor: '#c0c0c0',
@@ -104,24 +112,24 @@ export default class AdPanel extends React.Component {
                     </TouchableHighlight>
                 </View>
 
-                <View>
-                <ScrollView style={{
-                    padding: 10,
-                    borderColor:'#9a9c9e',
-                    borderWidth:1,
-                    borderTopWidth:0
-                }}
-                      onLayout={(event) => this._setMaxHeight(event, this.props.data.length)}>
-                    <FlatList
-                        data={this.generateTitleArray(this.props.data)}
-                        ListHeaderComponent={()=> <Text style={{color:'#b0b0b0'}}>titre</Text>}
-                        renderItem={({item, index}) =>
-                            this.itemRender(item, index)
-                        }
-                        keyExtractor={this._keyExtractor}
-                    />
-                </ScrollView>
-                </View>
+                {/*<View>*/}
+                {/*<ScrollView style={{*/}
+                    {/*padding: 10,*/}
+                    {/*borderColor:'#9a9c9e',*/}
+                    {/*borderWidth:1,*/}
+                    {/*borderTopWidth:0*/}
+                {/*}}*/}
+                      {/*onLayout={(event) => this._setMaxHeight(event, this.props.data.length)}>*/}
+                    {/*<FlatList*/}
+                        {/*data={this.generateTitleArray(this.props.data)}*/}
+                        {/*ListHeaderComponent={()=> <Text style={{color:'#b0b0b0'}}>titre</Text>}*/}
+                        {/*renderItem={({item, index}) =>*/}
+                            {/*this.itemRender(item, index)*/}
+                        {/*}*/}
+                        {/*keyExtractor={this._keyExtractor}*/}
+                    {/*/>*/}
+                {/*</ScrollView>*/}
+                {/*</View>*/}
             </Animated.View>
         );
     }

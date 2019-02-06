@@ -42,30 +42,41 @@ export default class RowDemandeAd extends React.Component {
     render() {
         const optionArray = [
             'Email',
-            'Messagerie (Non stable)',
+            'Messagerie (bientôt disponible)',
             'Cancel',
         ];
 
         const data = this.props.data;
         return (
             <View style={styles.container}>
+                <TouchableOpacity
+                    style={{flex: 3}}
+                    onPress={()=>
+                    // if (this.props.currentUser>0) {
+                    //     SendBirdService.createGroupOneToOne(this.props.currentUser, data.user.id, `${this.props.typeAnnonce}_${data.id}`)
+                    //         .then((result)=> this.handlerStartChat(result));
+                    // }else{
+                    //     console.log(this.props.currentUser)
+                    // }
+                    this.showActionSheet(this.props.currentUser, data.user.id)}>
                 <View style={{flex: 3}}>
                     <Text style={{
                         fontSize: 17,
                         fontWeight: '500',
                         color: '#1c1c1c'
-                    }}>{this.jsUcfirst(data.user.name)}</Text>
+                    }}>{data.title.toLowerCase()}</Text>
                     <Text style={{
-                        fontSize: 18,
+                        fontSize: 17,
                         fontWeight: '400',
                         color: '#b0b0b0'
-                    }}>{data.title.toLowerCase()}</Text>
+                    }}>{this.jsUcfirst(data.user.name)}</Text>
                     <Text style={{
                         fontSize: 14,
                         fontWeight: '300',
                         color: '#c3c3c3'
                     }}>{data.description}</Text>
                 </View>
+                </TouchableOpacity>
                 <View style={{
                     flex: 1,
                     justifyContent: 'space-between',
@@ -103,17 +114,17 @@ export default class RowDemandeAd extends React.Component {
                     title={'Moyen de contact'}
                     options={optionArray}
                     cancelButtonIndex={2}
-                    destructiveButtonIndex={1}
                     onPress={index => {
                         if(index === 0){
                             this.fetchEmailToContact(data.user.id);
                         }else if(index === 1){
-                            if (this.props.currentUser>0) {
-                                SendBirdService.createGroupOneToOne(this.props.currentUser, data.user.id, `${this.props.typeAnnonce}_${data.id}`)
-                                    .then((result)=> this.handlerStartChat(result));
-                            }else{
-                                alert('Vous n\'êtes connecté au service de messagerie')
-                            }
+                            alert("Ce service sera bientôt disponible !");
+                            // if (this.props.currentUser>0) {
+                            //     SendBirdService.createGroupOneToOne(this.props.currentUser, data.user.id, `${this.props.typeAnnonce}_${data.id}`)
+                            //         .then((result)=> this.handlerStartChat(result));
+                            // }else{
+                            //     alert('Vous n\'êtes connecté au service de messagerie')
+                            // }
                         }else
                             return;
                     }}

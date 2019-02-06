@@ -99,7 +99,7 @@ export default class MainTMP extends React.Component {
     render() {
         const optionArray = [
             'Email',
-            'Messagerie (Non stable)',
+            'Messagerie (bientôt disponible)',
             'Cancel',
         ];
 
@@ -140,18 +140,19 @@ export default class MainTMP extends React.Component {
                     title={'Moyen de contact'}
                     options={optionArray}
                     cancelButtonIndex={2}
-                    destructiveButtonIndex={1}
                     onPress={index => {
                         if(index === 0){
                             this.fetchEmailToContact(data['user'].id);
                         }else if(index === 1){
-                            if (this.props.currentUser>0) {
-                                SendBirdService.createGroupOneToOne(this.props.currentUser, data['user'].id, `${typeAnnonce}_${data['user'].id}`).then((result)=> this.handlerStartChat(result));
+                            alert("Ce service sera bientôt disponible !");
 
-                            }else{
-                                console.log('[DemandeAdType] currente user is null', this.props.currentUser);
-                                alert('Vous n\'êtes connecté au service de messagerie')
-                            }
+                            // if (this.props.currentUser>0) {
+                            //     SendBirdService.createGroupOneToOne(this.props.currentUser, data['user'].id, `${typeAnnonce}_${data['user'].id}`).then((result)=> this.handlerStartChat(result));
+                            //
+                            // }else{
+                            //     console.log('[DemandeAdType] currente user is null', this.props.currentUser);
+                            //     alert('Vous n\'êtes connecté au service de messagerie')
+                            // }
                         }else
                             return;
                     }}

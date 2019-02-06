@@ -16,16 +16,19 @@ import LoginSignupScreen from "./LoginSignupScreen";
 import {NavigationActions, StackActions} from "react-navigation";
 import SendBirdService from "../Services/chatService/SendBirdService";
 import ActionSheet from "react-native-actionsheet";
-import {Permissions, ImagePicker} from 'expo';
+import {Permissions, ImagePicker, MailComposer} from 'expo';
 import DialogInput from "react-native-dialog-input";
+import Spinner from "react-native-loading-spinner-overlay";
+import ContactUsScreen from "./ContactUsScreen";
 
 export default class ProfilScreen extends React.Component {
     static navigationOptions = ({navigation}) => {
         return {
             title: 'Profil',
             headerRight: (
+                <View style={{flexDirection:'row'}}>
                 <TouchableHighlight
-                    style={{flexDirection: 'row'}}
+                    style={{marginHorizontal:3}}
                     onPress={() => {
                         const resetAction = StackActions.reset({
                             index: 0,
@@ -35,16 +38,32 @@ export default class ProfilScreen extends React.Component {
                     }}
                 >
                     <View style={{flexDirection: 'row'}}>
-                        <Text style={{fontSize: 13, marginHorizontal: 5, color: Colors.tintColor}}>Actualiser</Text>
                         <Icon size={18}
                               iconStyle={{marginRight: 8}}
-                              name='refresh'
+                              name='envelope-o'
                               type='font-awesome'
                               color={Colors.tintColor}
                               underlayColor={'#00000000'}
                         />
                     </View>
                 </TouchableHighlight>
+                    <TouchableHighlight
+                        style={{marginHorizontal:3}}
+                        onPress={() => {
+                            navigation.navigate("ContactUsScreen");
+                        }}
+                    >
+                        <View style={{flexDirection: 'row'}}>
+                            <Icon size={18}
+                                  iconStyle={{marginRight: 8}}
+                                  name='refresh'
+                                  type='font-awesome'
+                                  color={Colors.tintColor}
+                                  underlayColor={'#00000000'}
+                            />
+                        </View>
+                    </TouchableHighlight>
+                </View>
             ),
         }
     };
@@ -79,7 +98,8 @@ export default class ProfilScreen extends React.Component {
             },
             auth:null,
             refreshing:false,
-            isDialogVisible:false
+            isDialogVisible:false,
+            spinner:false
         };
         this.handlerUserInfoField=this.handlerUserInfoField.bind(this);
         this.handlerUserInfoSeccus=this.handlerUserInfoSeccus.bind(this);
@@ -93,7 +113,6 @@ export default class ProfilScreen extends React.Component {
     }
 
     handlerUserInfoSeccus(result) {
-        console.log(result);
         let exchangeAds = {size : result.exchangeAds.length, data: result.exchangeAds};
         let donationRequestAds = {size : result.donationRequestAds.length, data: result.donationRequestAds};
         let donationAds = {size : result.donationAds.length, data: result.donationAds};
@@ -112,6 +131,7 @@ export default class ProfilScreen extends React.Component {
             );
     }
 
+    //TODO Reade it hahah
     logout() {
         cacheOperationService.deleteItemFromStorage("userId")
             .then((result)=>{
@@ -149,8 +169,14 @@ export default class ProfilScreen extends React.Component {
                 aspect: [4, 3],
             }).then((photo)=>{
                 if (!photo.cancelled) {
-                    ProfileService.uploadImageProfile(photo.uri).then(()=>this.refrshScreen());
-                    //this.setState({takedPic: true, imageURI: photo.uri});
+                    this.handlerSpinner();
+                    ProfileService.uploadImageProfile(photo.uri).then(()=>{
+                        this.handlerSpinner();
+                        this.refrshScreen()
+                    }).catch((err)=> {
+                        this.handlerSpinner();
+                        alert(err);
+                    });
                 }
             });
         });
@@ -163,9 +189,14 @@ export default class ProfilScreen extends React.Component {
                 aspect: [4, 3],
             }).then((photo)=>{
                 if (!photo.cancelled) {
-                    console.log(photo.uri);
-                    ProfileService.uploadImageProfile(photo.uri).then(()=>this.refrshScreen());
-                    //this.setState({takedPic: true, imageURI: photo.uri});
+                    this.handlerSpinner();
+                    ProfileService.uploadImageProfile(photo.uri).then(()=>{
+                        this.handlerSpinner();
+                        this.refrshScreen()
+                    }).catch((err)=> {
+                        this.handlerSpinner();
+                        alert(err);
+                    });
                 }
             });
         });
@@ -179,11 +210,25 @@ export default class ProfilScreen extends React.Component {
         this.props.navigation.dispatch(resetAction);
     }
 
+
+    sendEmail(){
+        MailComposer.composeAsync({
+            recipients: ['djarallah.brahim@gmail.com'],
+            subject: 'Attachment Test',
+            body: 'Testing multiple Attachments',
+        })
+    }
     showActionSheet = () => {
         //To show the Bottom ActionSheet
         this.ActionSheet.show();
     };
 
+    handlerSpinner() {
+        this.setState({
+            spinner: !this.state.spinner
+        });
+
+    }
 
     async componentDidMount(){
         this.checkAuthentification();
@@ -211,10 +256,14 @@ export default class ProfilScreen extends React.Component {
             return (
                 <ScrollView
                    style={styles.container}>
+                    <Spinner
+                        visible={this.state.spinner}
+                        textContent={'Loading...'}
+                        textStyle={{color: "white", fontSize: 17, lineHeight: 22}}
+                    />
                     <ProfileInformation showActionSheet={this.showActionSheet} navigation={this.props.navigation} userInfo={this.state.userInfo}/>
                     <AdsProfile adData={this.state.adData} navigation={this.props.navigation}/>
                     <View style={{alignItems:'center', flexDirection:'row', flex:1, justifyContent:'center'}}>
-
                         <TouchableHighlight style={styles.deleteButton} onPress={()=> this.handlerDeleteAccpount()}>
                             <View style={{flexDirection:'row', alignItems: 'center', justifyContent: 'center',}}>
                                 <Icon size={26} name= 'trash-o' type='font-awesome' color='#eee' underlayColor={'#00000000'}

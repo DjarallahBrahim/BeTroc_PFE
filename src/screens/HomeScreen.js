@@ -116,13 +116,13 @@ export default class HomeScreen extends React.Component {
                     textContent={'Loading...'}
                     textStyle={{color: "white", fontSize: 17, lineHeight: 22}}
                 />
-                {this.state.data?
+
                     <TabsBarView currentUser={this.state.currentUser}
                                  navigation={this.props.navigation}
                                  demandeData={this.state.demandeData}
                                  echangeData={this.state.echangeData}
-                                 donData={this.state.donData}/>:null
-                }
+                                 donData={this.state.donData}/>
+
 
             </View>
         );

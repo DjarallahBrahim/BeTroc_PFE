@@ -202,7 +202,7 @@ export default class AddAnnonceScreen extends React.Component {
         });
         this.props.navigation.dispatch(resetAction);
         this.props.navigation.navigate('Home');
-
+        setTimeout(() => alert('Votre annonce sera publiée bientôt'), 500);
     }
 
     checkAuthentification() {

@@ -115,27 +115,31 @@ export default class DemandeAdType extends React.Component {
     renderDemandeAdTypeView(index, item, typeAnnonce) {
         var optionArray = [
             'Email',
-            'Messagerie (Non stable)',
+            'Messagerie (bientôt disponible)',
             'Cancel',
         ];
         return <View style={styles.container} key={index}>
+            <TouchableOpacity
+                style={{flex: 3}}
+                onPress={this.showActionSheet}>
             <View style={{flex: 3}}>
                 <Text style={{
                     fontSize: 17,
                     fontWeight: '500',
                     color: '#1c1c1c'
-                }}>{DemandeAdType.jsUcfirst(item.user.name)}</Text>
+                }}>{item.title.toLowerCase()}</Text>
                 <Text style={{
-                    fontSize: 18,
+                    fontSize: 17,
                     fontWeight: '400',
                     color: '#b0b0b0'
-                }}>{item.title.toLowerCase()}</Text>
+                }}>{DemandeAdType.jsUcfirst(item.user.name)}</Text>
                 <Text style={{
                     fontSize: 14,
                     fontWeight: '300',
                     color: '#c3c3c3'
                 }}>{item.description}</Text>
             </View>
+            </TouchableOpacity>
             <View style={{
                 flex: 1,
                 justifyContent: 'space-between',
@@ -166,18 +170,18 @@ export default class DemandeAdType extends React.Component {
                 title={'Moyen de contact'}
                 options={optionArray}
                 cancelButtonIndex={2}
-                destructiveButtonIndex={1}
                 onPress={index => {
                     if(index === 0){
                        this.fetchEmailToContact(item.user.id)
                     }else if(index === 1){
-                        if (this.props.currentUser>0) {
-                            SendBirdService.createGroupOneToOne(this.props.currentUser, item.user.id, `${typeAnnonce}_${item.id}`).then(this.handlerStartChat);
-
-                        }else{
-                            console.log('[DemandeAdType] currente user is null', this.props.currentUser)
-                            alert('Vous n\'êtes connecté au service de messagerie')
-                        }
+                        alert("Ce service sera bientôt disponible !")
+                        // if (this.props.currentUser>0) {
+                        //     SendBirdService.createGroupOneToOne(this.props.currentUser, item.user.id, `${typeAnnonce}_${item.id}`).then(this.handlerStartChat);
+                        //
+                        // }else{
+                        //     console.log('[DemandeAdType] currente user is null', this.props.currentUser)
+                        //     alert('Vous n\'êtes connecté au service de messagerie')
+                        // }
                     }else
                         return;
                 }}

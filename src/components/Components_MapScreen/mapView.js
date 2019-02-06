@@ -50,7 +50,7 @@ export default class MapViewScreen extends React.Component {
                 {
                     label: 'Don',
                     value: "Don",
-                    color: 'blue'
+                    color: '#2792b6'
                 },
                 {
                     label: 'Echange',
@@ -60,7 +60,9 @@ export default class MapViewScreen extends React.Component {
 
             ]
 
-        }
+        };
+        this.openAnnonceEchange=this.openAnnonceEchange.bind(this);
+        this.openAnnonceDon=this.openAnnonceDon.bind(this);
 
     };
 
@@ -261,7 +263,9 @@ export default class MapViewScreen extends React.Component {
                                     />
                                 </View>
                                 {this.state.sliderAds ?
-                                    <SliderAdsComponent exchangeMarker={this.state.exchangeMarker}
+                                    <SliderAdsComponent openAnnonceDon={this.openAnnonceDon}
+                                                        openAnnonceEchange={this.openAnnonceEchange}
+                                                        exchangeMarker={this.state.exchangeMarker}
                                                         exchangeMarkerList={this.state.exchangeMarkerList}
                                                         donationMarkerList={this.state.donationMarkerList} />: null}
                             </View> :
@@ -282,7 +286,7 @@ export default class MapViewScreen extends React.Component {
                 coordinate={marker.latlng}
                 title={marker.title}
                 description={marker.category}
-                pinColor={'blue'}
+                pinColor={'#2792b6'}
                 onCalloutPress={() => {
                     this.openAnnonceDon(marker.id);
                 }}

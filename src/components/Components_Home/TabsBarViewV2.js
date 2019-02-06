@@ -70,11 +70,20 @@ export default class TabsBarViewV2 extends React.Component {
     _renderScene= ({ route }) => {
     switch (route.key) {
         case 'first':
-            return <ExchageDonationAdType askmoreData={this.props.askmoreData} navigation={this.props.navigation}  typeAnnonce={'Echange'} data={this.props.echangeData}/>;
+            return <ExchageDonationAdType askmoreData={this.props.askmoreData}
+                                          navigation={this.props.navigation}
+                                          typeAnnonce={'Echange'}
+                                          data={this.props.echangeData}/>;
         case 'second':
-            return <ExchageDonationAdType askmoreData={this.props.askmoreData} navigation={this.props.navigation} typeAnnonce={'Demande'}   data={this.props.demandeData}/>;
+            return <ExchageDonationAdType askmoreData={this.props.askmoreData}
+                                          navigation={this.props.navigation}
+                                          typeAnnonce={'Demande'}
+                                          data={this.props.demandeData}/>;
         case 'third':
-            return <ExchageDonationAdType askmoreData={this.props.askmoreData} navigation={this.props.navigation}  typeAnnonce={'Don'} data={this.props.donData}/>;
+            return <ExchageDonationAdType askmoreData={this.props.askmoreData}
+                                          navigation={this.props.navigation}
+                                          typeAnnonce={'Don'}
+                                          data={this.props.donData}/>;
         default:
             return null;
     }

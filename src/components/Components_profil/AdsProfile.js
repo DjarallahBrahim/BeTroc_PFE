@@ -3,7 +3,7 @@ import {
     Dimensions, FlatList,
     StyleSheet,
     Text, TouchableHighlight,
-    View,Animated
+    View, Animated, Button
 } from 'react-native';
 
 import * as cacheOperationService from "../../Services/CacheOperationService";
@@ -14,20 +14,19 @@ export default class AdsProfile extends React.Component {
 
 
     render() {
-
          return (
              <View style={styles.container}>
                 <AdPanel size={this.props.adData.exchangeAds.size}
-                         data={this.props.adData.exchangeAds.data}
+                         data={this.props.adData.exchangeAds}
                          navigation={this.props.navigation}
                         type={'Echange'}/>
                  <AdPanel size={this.props.adData.donationAds.size}
                           type={'Don'}
-                          data={this.props.adData.donationAds.data}
+                          data={this.props.adData.donationAds}
                           navigation={this.props.navigation}/>
                  <AdPanel size={this.props.adData.donationRequestAds.size}
                           type={'Demande'}
-                          data={this.props.adData.donationRequestAds.data}
+                          data={this.props.adData.donationRequestAds}
                           navigation={this.props.navigation}/>
              </View>
 

@@ -39,7 +39,7 @@ export default class TitleDescription extends React.Component {
                 />
                 <Divider style={{ backgroundColor: Colors.grey2, height:0.5 }} />
                 <TextInput
-                    style={{height: 80, margin:8}}
+                    style={{height: 80, margin:8, textAlignVertical: 'top'}}
                     onChangeText={(text) => {this._onChangeInputDescription(text)}}
                     placeholder={"Déscription"}
                     placeholderTextColor={Colors.grey2}

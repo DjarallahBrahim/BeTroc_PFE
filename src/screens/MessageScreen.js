@@ -62,24 +62,28 @@ export default class MessageScreen extends React.Component {
 
     render() {
         return (
-            <ScrollView style={styles.container}>
-                <Spinner
-                    visible={this.state.spinner}
-                    textContent={'Loading...'}
-                    textStyle={{color: "white", fontSize: 17, lineHeight: 22}}
-                />
-                {this.state.currentUser ?
-                    <ListOfChat currentUser={this.state.currentUser} navigation={this.props.navigation}/>
-                    :
-                    <View style={{
-                        flex: 1,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                    }}>
-                        <LoginSignupScreen routename={'Profil'} navigation={this.props.navigation}/>
-                    </View>
-                }
-            </ScrollView>
+
+            <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+                {/*<ScrollView style={styles.container}>*/}
+                {/*<Spinner*/}
+                {/*visible={this.state.spinner}*/}
+                {/*textContent={'Loading...'}*/}
+                {/*textStyle={{color: "white", fontSize: 17, lineHeight: 22}}*/}
+                {/*/>*/}
+                {/*{this.state.currentUser ?*/}
+                {/*<ListOfChat currentUser={this.state.currentUser} navigation={this.props.navigation}/>*/}
+                {/*:*/}
+                {/*<View style={{*/}
+                {/*flex: 1,*/}
+                {/*alignItems: 'center',*/}
+                {/*justifyContent: 'center',*/}
+                {/*}}>*/}
+                {/*<LoginSignupScreen routename={'Profil'} navigation={this.props.navigation}/>*/}
+                {/*</View>*/}
+                {/*}*/}
+                {/*</ScrollView>*/}
+                <Text style={{fontSize:20, color:'black', fontWeight:'bold'}}> Ce service sera bientôt disponible !</Text>
+            </View>
         );
     }
 }

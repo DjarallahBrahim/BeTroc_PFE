@@ -71,8 +71,8 @@ export default class ProfileService {
         })
             .then((response) =>
             {
-
-                handlerUserInfoSeccus(response.data)
+                handlerUserInfoSeccus(response.data);
+                return(response.data.success);
             } )
             .catch((error) => {
                 handlerUserInfoField();

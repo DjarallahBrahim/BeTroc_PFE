@@ -9,7 +9,6 @@ import {itemWidth, sliderWidth} from "./styles/SliderEntry";
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import SliderEntry from './components/SliderEntry';
 import styles, { colors } from './styles/index';
-import { ENTRIES1 } from './static/entries';
 
 const SLIDER_1_FIRST_ITEM = 0;
 
@@ -25,9 +24,10 @@ export default class SliderAdsComponent extends React.Component {
     };
 
 
-    _renderItemWithParallax({ item, index }, parallaxProps) {
+    _renderItemWithParallax({ item, index }, parallaxProps, exchangeMarker) {
         return (
             <SliderEntry
+                openAd = {exchangeMarker ? this.props.openAnnonceEchange: this.props.openAnnonceDon}
                 data={item}
                 even={(index + 1) % 2 === 0}
                 parallax={false}
@@ -48,7 +48,7 @@ export default class SliderAdsComponent extends React.Component {
                         }
                     }}
                     data={this.props.exchangeMarker ? this.props.exchangeMarkerList: this.props.donationMarkerList}
-                    renderItem={this._renderItemWithParallax}
+                    renderItem={({ item, index }, parallaxProps)=>this._renderItemWithParallax({ item, index }, parallaxProps,this.props.exchangeMarker)}
                     sliderWidth={sliderWidth}
                     itemWidth={itemWidth}
                     hasParallaxImages={false}
@@ -66,7 +66,7 @@ export default class SliderAdsComponent extends React.Component {
                     onSnapToItem={index => this.setState({ slider1ActiveSlide: index })}
                 />
                 <Pagination
-                    dotsLength={ENTRIES1.length}
+                    dotsLength={this.props.exchangeMarker ? this.props.exchangeMarkerList.length: this.props.donationMarkerList.length}
                     activeDotIndex={slider1ActiveSlide}
                     containerStyle={styles.paginationContainer}
                     dotColor={'rgba(255, 255, 255, 0.92)'}

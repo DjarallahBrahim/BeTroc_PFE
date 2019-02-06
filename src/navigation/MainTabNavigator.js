@@ -25,6 +25,8 @@ import ChatScreen from "../components/Components_Chat/ChatScreen";
 import updateUserProfilInfo from "../screens/updateUserProfilInfo";
 import SearcheScreen from "../screens/SearcheScreen";
 import DonationExchangeResult from "../components/Components_Home/SearchComponents/DonationExchangeResult";
+import UserAnnonceSubScreen from "../screens/UserAnnonceSubScreen";
+import ContactUsScreen from "../screens/ContactUsScreen";
 
 const BottomTransition = (index, position, height) => {
     const sceneRange = [index - 1, index, index + 1];
@@ -128,7 +130,9 @@ const ProfilStack = createStackNavigator({
     Singup: SignupScreen,
     AnnonceDetail: Annoncedetailscreen,
     PicDetail: PicDetail,
-    updateUserProfilInfo:updateUserProfilInfo
+    updateUserProfilInfo:updateUserProfilInfo,
+    UserAnnonceSubScreen:UserAnnonceSubScreen,
+    ContactUsScreen:ContactUsScreen
 }, {transitionConfig: NavigationConfig});
 
 ProfilStack.navigationOptions = ({navigation}) => {

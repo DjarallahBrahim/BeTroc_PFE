@@ -164,6 +164,7 @@ function createFormDataAnnonceDon(data) {
     formData.append('state', data.state);
     formData.append('latitude', data.latitude);
     formData.append('longitude', data.longitude);
+    formData.append('validated', "0");
     data.images.forEach((photo, index) => formData.append(`images[${index}]`, photo));
     console.log(formData);
     return formData;
